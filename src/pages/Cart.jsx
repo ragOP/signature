@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { ShoppingCart } from 'lucide-react';
 
 function Cart() {
   const [cartItems, setCartItems] = useState([
@@ -40,7 +41,7 @@ function Cart() {
       <nav className="relative z-50 bg-black/80 backdrop-blur-xl border-b border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16 sm:h-20">
-            <div className="flex items-center space-x-2 sm:space-x-4">
+            <Link to="/home" className="flex items-center space-x-2 sm:space-x-4 hover:opacity-80 transition-opacity">
               <div className="relative">
                 <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-amber-400 to-orange-500 rounded-xl flex items-center justify-center">
                   <span className="text-lg sm:text-xl">✨</span>
@@ -53,7 +54,7 @@ function Cart() {
                 </h1>
                 <p className="text-xs text-white/50 -mt-1 hidden sm:block">Cosmic Guidance</p>
               </div>
-            </div>
+            </Link>
             
             <div className="hidden lg:flex items-center space-x-8">
               <Link to="/home" className="text-white/70 hover:text-amber-400 transition-all duration-300 font-medium relative group">
@@ -66,12 +67,11 @@ function Cart() {
               </Link>
             </div>
 
-            {/* Mobile menu button */}
-            <button className="lg:hidden text-white/70 hover:text-amber-400 transition-colors">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            </button>
+            {/* Mobile cart button */}
+            <Link to="/cart" className="lg:hidden text-amber-400 transition-colors relative">
+              <ShoppingCart className="w-6 h-6" />
+              <span className="absolute -top-2 -right-2 bg-amber-400 text-black text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">1</span>
+            </Link>
           </div>
         </div>
       </nav>
