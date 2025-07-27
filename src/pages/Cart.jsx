@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import { ShoppingCart, X, Shield, Sparkles, Check } from 'lucide-react';
+import { X, Shield, Sparkles, Check } from 'lucide-react';
+import Navbar from '../components/Navbar';
 
 function Cart() {
   const [cartItems, setCartItems] = useState([
@@ -36,45 +37,9 @@ function Cart() {
   };
 
   return (
-    <div className="min-h-screen bg-black selection:bg-amber-500/20 selection:text-white">
+    <div className="min-h-screen bg-black selection:bg-red-500/20 selection:text-white">
       {/* Navigation */}
-      <nav className="relative z-50 bg-black/80 backdrop-blur-xl border-b border-white/5">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16 sm:h-20">
-            <Link to="/home" className="flex items-center space-x-2 sm:space-x-4 hover:opacity-80 transition-opacity">
-              <div className="relative">
-                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-amber-400 to-orange-500 rounded-xl flex items-center justify-center">
-                  <span className="text-lg sm:text-xl">✨</span>
-                </div>
-                <div className="absolute -inset-1 bg-gradient-to-br from-amber-400 to-orange-500 rounded-xl blur opacity-30"></div>
-              </div>
-              <div>
-                <h1 className="text-lg sm:text-xl lg:text-2xl font-bold bg-gradient-to-r from-amber-400 via-orange-400 to-purple-400 bg-clip-text text-transparent">
-                  Easy Soul
-                </h1>
-                <p className="text-xs text-white/50 -mt-1 hidden sm:block">Cosmic Guidance</p>
-              </div>
-            </Link>
-            
-            <div className="hidden lg:flex items-center space-x-8">
-              <Link to="/home" className="text-white/70 hover:text-amber-400 transition-all duration-300 font-medium relative group">
-                Home
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-400 to-orange-400 transition-all duration-300 group-hover:w-full"></span>
-              </Link>
-              <Link to="/cart" className="text-amber-400 font-medium relative group">
-                Cart
-                <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-amber-400 to-orange-400"></span>
-              </Link>
-            </div>
-
-            {/* Mobile cart button */}
-            <Link to="/cart" className="lg:hidden text-amber-400 transition-colors relative">
-              <ShoppingCart className="w-6 h-6" />
-              <span className="absolute -top-2 -right-2 bg-amber-400 text-black text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">1</span>
-            </Link>
-          </div>
-        </div>
-      </nav>
+      <Navbar />
 
       {/* Animated Background */}
       <div className="absolute inset-0">
@@ -104,7 +69,7 @@ function Cart() {
           {/* Header */}
           <div className="text-center mb-12">
             <h1 className="text-4xl lg:text-5xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-amber-400 via-orange-400 to-purple-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-red-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">
                 Your Cosmic Cart
               </span>
             </h1>
