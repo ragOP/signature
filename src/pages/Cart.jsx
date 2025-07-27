@@ -100,7 +100,7 @@ function Cart() {
 
       {/* Cart Content */}
       <section className="relative pt-0 sm:pt-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           {/* Header */}
           <div className="text-center mb-12">
             <h1 className="text-4xl lg:text-5xl font-bold mb-6">
