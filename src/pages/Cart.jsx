@@ -82,13 +82,13 @@ function Cart() {
             /* Empty Cart */
             <div className="max-w-2xl mx-auto">
               <div className="relative group">
-                <div className="absolute -inset-1 bg-gradient-to-r from-amber-500/20 via-purple-500/20 to-orange-500/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+                <div className="absolute -inset-1 bg-gradient-to-r from-red-500/20 via-pink-500/20 to-purple-500/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
                 <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl p-8 border border-white/20">
                   <div className="text-center space-y-6">
                     <div className="text-6xl mb-4 animate-bounce">✨</div>
                     <h3 className="text-2xl font-bold text-white">Your Cart is Empty</h3>
                     <p className="text-white/70">Ready to unlock your cosmic potential? Browse our premium services!</p>
-                    <Link to="/home" className="inline-block bg-gradient-to-r from-amber-500 to-orange-500 text-white px-8 py-3 rounded-full font-semibold hover:from-amber-600 hover:to-orange-600 transition-all duration-300 transform hover:scale-105 buy-now-shimmer">
+                    <Link to="/home" className="inline-block bg-gradient-to-r from-red-500 to-pink-500 text-white px-8 py-3 rounded-full font-semibold hover:from-red-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105 buy-now-shimmer">
                       <span>Explore Services</span>
                     </Link>
                   </div>
@@ -102,7 +102,7 @@ function Cart() {
               <div className="lg:col-span-2 space-y-6">
                 {cartItems.map((item) => (
                   <div key={item.id} className="relative group">
-                    <div className="absolute -inset-1 bg-gradient-to-r from-amber-500/20 via-purple-500/20 to-orange-500/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+                    <div className="absolute -inset-1 bg-gradient-to-r from-red-500/20 via-pink-500/20 to-purple-500/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
                     <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl p-6 border border-white/20">
                       <div className="flex flex-col gap-4 sm:gap-6">
                         {/* Top Stack: Image + Title/Subtitle */}
@@ -110,7 +110,7 @@ function Cart() {
                           {/* Item Image */}
                           <div className="flex-shrink-0">
                             <div className="relative group">
-                              <div className="absolute -inset-2 bg-gradient-to-r from-amber-500/20 via-purple-500/20 to-orange-500/20 rounded-2xl blur-lg group-hover:blur-xl transition-all duration-500"></div>
+                              <div className="absolute -inset-2 bg-gradient-to-r from-red-500/20 via-pink-500/20 to-purple-500/20 rounded-2xl blur-lg group-hover:blur-xl transition-all duration-500"></div>
                               <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-2 border border-white/20">
                                 <img
                                   src={item.image}
@@ -134,18 +134,18 @@ function Cart() {
                             </div>
                             <p className="text-white/70 text-xs sm:text-sm mb-2 sm:mb-3 line-clamp-2">{item.description}</p>
                             <div className="flex items-center space-x-2">
-                              <span className="text-amber-400 text-xs sm:text-sm font-medium">⏱️ {item.duration}</span>
+                              <span className="text-red-300 text-xs sm:text-sm font-medium">⏱️ {item.duration}</span>
                             </div>
                           </div>
                         </div>
 
                         {/* Middle Stack: What's Included (starts from left) */}
                         <div className="space-y-2">
-                          <h4 className="text-xs sm:text-sm font-semibold text-amber-400">What's Included:</h4>
+                          <h4 className="text-xs sm:text-sm font-semibold text-red-300">What's Included:</h4>
                           <div className="grid grid-cols-1 gap-1 sm:gap-2">
                             {item.features.map((feature, index) => (
                               <div key={index} className="flex items-center space-x-2">
-                                <div className="w-4 h-4 sm:w-5 sm:h-5 bg-amber-400 rounded-full flex items-center justify-center flex-shrink-0">
+                                <div className="w-4 h-4 sm:w-5 sm:h-5 bg-red-400 rounded-full flex items-center justify-center flex-shrink-0">
                                   <Check className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-white" />
                                 </div>
                                 <span className="text-white/80 text-xs sm:text-sm">{feature}</span>
@@ -172,7 +172,7 @@ function Cart() {
               <div className="lg:col-span-1">
                 <div className="sticky top-8">
                   <div className="relative group">
-                    <div className="absolute -inset-1 bg-gradient-to-r from-amber-500/20 via-purple-500/20 to-orange-500/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+                    <div className="absolute -inset-1 bg-gradient-to-r from-red-500/20 via-pink-500/20 to-purple-500/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
                     <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl p-6 border border-white/20">
                       <h3 className="text-xl font-bold text-white mb-6">Order Summary</h3>
                       
@@ -189,7 +189,7 @@ function Cart() {
                         <div className="border-t border-white/10 pt-4">
                           <div className="flex justify-between items-center">
                             <span className="text-lg font-semibold text-white">Total</span>
-                            <span className="text-2xl font-bold text-amber-400">₹{total.toLocaleString()}</span>
+                            <span className="text-2xl font-bold text-red-300">₹{total.toLocaleString()}</span>
                           </div>
                         </div>
                       </div>
@@ -198,7 +198,7 @@ function Cart() {
                       <button
                         onClick={handleCheckout}
                         disabled={isCheckingOut}
-                        className="w-full bg-gradient-to-r from-amber-500 to-orange-500 text-white py-4 rounded-full font-semibold hover:from-amber-600 hover:to-orange-600 transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-amber-500/25 buy-now-shimmer disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="w-full bg-gradient-to-r from-red-500 to-pink-500 text-white py-4 rounded-full font-semibold hover:from-red-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-red-500/25 buy-now-shimmer disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         {isCheckingOut ? (
                           <span className="flex items-center justify-center space-x-2">

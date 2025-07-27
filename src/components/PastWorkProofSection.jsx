@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight, Camera, Image, Mic, Plus, Check } from 'lucide-react';
 import PrimaryButton from './PrimaryButton';
 
 const PastWorkProofSection = () => {
   const [currentChatIndex, setCurrentChatIndex] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [currentX, setCurrentX] = useState(0);
+  const carouselRef = useRef(null);
 
   const chatTestimonials = [
     {
@@ -23,11 +27,13 @@ const PastWorkProofSection = () => {
   // Auto scroll for mobile
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentChatIndex((prevIndex) => (prevIndex + 1) % chatTestimonials.length);
+      if (!isDragging) {
+        setCurrentChatIndex((prevIndex) => (prevIndex + 1) % chatTestimonials.length);
+      }
     }, 6000); // Change every 6 seconds
 
     return () => clearInterval(interval);
-  }, [chatTestimonials.length]);
+  }, [chatTestimonials.length, isDragging]);
 
   const nextChat = () => {
     setCurrentChatIndex((prevIndex) => (prevIndex + 1) % chatTestimonials.length);
@@ -35,6 +41,40 @@ const PastWorkProofSection = () => {
 
   const prevChat = () => {
     setCurrentChatIndex((prevIndex) => (prevIndex - 1 + chatTestimonials.length) % chatTestimonials.length);
+  };
+
+  // Touch/Swipe handlers
+  const handleTouchStart = (e) => {
+    setIsDragging(true);
+    setStartX(e.touches[0].clientX);
+    setCurrentX(e.touches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    if (isDragging) {
+      setCurrentX(e.touches[0].clientX);
+    }
+  };
+
+  const handleTouchEnd = () => {
+    if (isDragging) {
+      const diff = startX - currentX;
+      const threshold = 50; // Minimum swipe distance
+
+      if (Math.abs(diff) > threshold) {
+        if (diff > 0) {
+          // Swiped left - next slide
+          nextChat();
+        } else {
+          // Swiped right - previous slide
+          prevChat();
+        }
+      }
+      
+      setIsDragging(false);
+      setStartX(0);
+      setCurrentX(0);
+    }
   };
 
   return (
@@ -80,7 +120,14 @@ const PastWorkProofSection = () => {
 
             {/* Mobile Layout - Carousel */}
             <div className="lg:hidden relative">
-              <div className="overflow-hidden">
+              <div 
+                className="overflow-hidden"
+                ref={carouselRef}
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
+                style={{ touchAction: 'pan-y' }}
+              >
                 <div 
                   className="flex transition-transform duration-500 ease-in-out"
                   style={{ transform: `translateX(-${currentChatIndex * 100}%)` }}

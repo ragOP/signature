@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Star, ChevronLeft, ChevronRight, PhoneCall } from 'lucide-react';
 import PrimaryButton from './PrimaryButton';
 
 const ClientTestimonialsSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [currentX, setCurrentX] = useState(0);
+  const carouselRef = useRef(null);
 
   const testimonials = [
     {
@@ -29,11 +33,13 @@ const ClientTestimonialsSection = () => {
   // Auto carousel for mobile
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
+      if (!isDragging) {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
+      }
     }, 5000); // Change every 5 seconds
 
     return () => clearInterval(interval);
-  }, [testimonials.length]);
+  }, [testimonials.length, isDragging]);
 
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
@@ -41,6 +47,40 @@ const ClientTestimonialsSection = () => {
 
   const prevSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + testimonials.length) % testimonials.length);
+  };
+
+  // Touch/Swipe handlers
+  const handleTouchStart = (e) => {
+    setIsDragging(true);
+    setStartX(e.touches[0].clientX);
+    setCurrentX(e.touches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    if (isDragging) {
+      setCurrentX(e.touches[0].clientX);
+    }
+  };
+
+  const handleTouchEnd = () => {
+    if (isDragging) {
+      const diff = startX - currentX;
+      const threshold = 50; // Minimum swipe distance
+
+      if (Math.abs(diff) > threshold) {
+        if (diff > 0) {
+          // Swiped left - next slide
+          nextSlide();
+        } else {
+          // Swiped right - previous slide
+          prevSlide();
+        }
+      }
+      
+      setIsDragging(false);
+      setStartX(0);
+      setCurrentX(0);
+    }
   };
 
   return (
@@ -64,7 +104,14 @@ const ClientTestimonialsSection = () => {
 
           {/* Mobile Layout - Carousel */}
           <div className="lg:hidden relative">
-            <div className="overflow-hidden">
+            <div 
+              className="overflow-hidden"
+              ref={carouselRef}
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
+              style={{ touchAction: 'pan-y' }}
+            >
               <div 
                 className="flex transition-transform duration-500 ease-in-out"
                 style={{ transform: `translateX(-${currentIndex * 100}%)` }}
