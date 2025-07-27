@@ -1,4 +1,6 @@
 import React from 'react';
+import PrimaryButton from './PrimaryButton';
+import { PhoneCall } from 'lucide-react';
 
 // Data configuration for testimonials
 const TESTIMONIALS_DATA = [
@@ -29,7 +31,7 @@ const TestimonialCard = ({ name, quote, rating }) => (
       <blockquote className="text-white/90 text-base sm:text-lg leading-relaxed italic font-medium">
         "{quote}"
       </blockquote>
-      
+
       {/* Name and Rating */}
       <div className="flex items-center justify-between">
         <div>
@@ -41,7 +43,7 @@ const TestimonialCard = ({ name, quote, rating }) => (
           </div>
         </div>
       </div>
-      
+
       {/* Decorative Line */}
       <div className="flex items-center space-x-2">
         <div className="flex-1 h-0.5 bg-gradient-to-r from-amber-400 via-purple-400 to-orange-400 rounded-full" />
@@ -60,21 +62,21 @@ const SocialProofItem = ({ text }) => (
 
 function TestimonialsSection() {
   return (
-    <section className="py-12 sm:py-16 bg-gradient-to-b from-black via-slate-900/50 to-black">
+    <section className="py-6 sm:py-16 bg-gradient-to-b from-black via-slate-900/50 to-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto">
-          
+
           {/* Header */}
           <div className="text-center mb-12 sm:mb-16">
             <div className="inline-flex items-center space-x-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full px-4 sm:px-6 py-2 sm:py-3 mb-4 sm:mb-6">
               <div className="w-2 h-2 bg-amber-400 rounded-full animate-pulse"></div>
               <span className="text-white/70 text-sm sm:text-base font-medium">Client Success Stories</span>
             </div>
-            
+
             <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight mb-4 sm:mb-6">
               <span className="block text-white">Why People Love This</span>
             </h2>
-            
+
             <p className="text-lg sm:text-xl text-white/80 font-medium max-w-3xl mx-auto">
               Real stories from real people who transformed their lives
             </p>
@@ -86,6 +88,14 @@ function TestimonialsSection() {
               <TestimonialCard key={index} {...testimonial} />
             ))}
           </div>
+
+          <PrimaryButton
+            text="Book Your Call"
+            icon={
+              <PhoneCall className='h-5 w-5' />
+            }
+            className='mb-6'
+          />
 
           {/* Social Proof */}
           <div className="space-y-3 sm:space-y-6 max-w-4xl mx-auto">

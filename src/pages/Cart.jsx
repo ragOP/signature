@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import { ShoppingCart } from 'lucide-react';
+import { ShoppingCart, X, Shield, Sparkles, Check } from 'lucide-react';
 
 function Cart() {
   const [cartItems, setCartItems] = useState([
@@ -164,9 +164,7 @@ function Cart() {
                                 onClick={() => removeItem(item.id)}
                                 className="text-white/50 hover:text-red-400 transition-colors p-1 sm:p-2 flex-shrink-0"
                               >
-                                <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                                </svg>
+                                <X className="w-4 h-4 sm:w-5 sm:h-5" />
                               </button>
                             </div>
                             <p className="text-white/70 text-xs sm:text-sm mb-2 sm:mb-3 line-clamp-2">{item.description}</p>
@@ -182,7 +180,9 @@ function Cart() {
                           <div className="grid grid-cols-1 gap-1 sm:gap-2">
                             {item.features.map((feature, index) => (
                               <div key={index} className="flex items-center space-x-2">
-                                <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-amber-400 rounded-full flex-shrink-0"></div>
+                                <div className="w-4 h-4 sm:w-5 sm:h-5 bg-amber-400 rounded-full flex items-center justify-center flex-shrink-0">
+                                  <Check className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-white" />
+                                </div>
                                 <span className="text-white/80 text-xs sm:text-sm">{feature}</span>
                               </div>
                             ))}
@@ -242,9 +242,9 @@ function Cart() {
                           </span>
                         ) : (
                           <span className="flex items-center justify-center space-x-2">
-                            <span>✨</span>
+                            <Sparkles className="w-5 h-5" />
                             <span>Complete Purchase</span>
-                            <span>✨</span>
+                            <Sparkles className="w-5 h-5" />
                           </span>
                         )}
                       </button>
@@ -252,9 +252,7 @@ function Cart() {
                       {/* Security Badge */}
                       <div className="mt-6 text-center">
                         <div className="flex items-center justify-center space-x-2 text-white/50 text-sm">
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                          </svg>
+                          <Shield className="w-4 h-4" />
                           <span>Secure Payment</span>
                         </div>
                       </div>

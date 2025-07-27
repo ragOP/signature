@@ -1,5 +1,6 @@
 import React from 'react';
 import { Phone } from 'lucide-react';
+import PrimaryButton from './PrimaryButton';
 
 // Data configuration for easy maintenance
 const SERVICES_DATA = [
@@ -53,14 +54,14 @@ const ServiceCard = ({ title, description, icon }) => (
     </div>
 );
 
-const CTAButton = () => (
-  <button className="bg-gradient-to-r from-amber-500 to-orange-500 text-white px-8 sm:px-10 py-4 sm:py-5 rounded-full font-semibold hover:from-amber-600 hover:to-orange-600 transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-amber-500/25 flex items-center justify-center">
-    <span className="flex items-center justify-center gap-2">
-      <Phone className="w-5 h-5" />
-      Get Your Mega Bundle
-    </span>
-  </button>
-);
+// const CTAButton = () => (
+//   <button className="bg-gradient-to-r from-amber-500 to-orange-500 text-white px-8 sm:px-10 py-4 sm:py-5 rounded-full font-semibold hover:from-amber-600 hover:to-orange-600 transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-amber-500/25 flex items-center justify-center">
+//     <span className="flex items-center justify-center gap-2">
+//       <Phone className="w-5 h-5" />
+//       Get Your Mega Bundle
+//     </span>
+//   </button>
+// );
 
 function WhatsIncludedSection() {
     return (
@@ -93,9 +94,9 @@ function WhatsIncludedSection() {
                     {/* Call Button Section */}
                     <div className="text-left sm:mb-12">
                         <div className="flex flex-col ">
-                            <h3 className="text-xl sm:text-2xl font-bold text-white">Ready to Transform Your Life?</h3>
-                            <p className="text-white/80 text-base sm:text-lg mb-4 mt-1 italic">Ye call sirf astrology nahi — yeh aapka realignment hai.</p>
-                            <CTAButton />
+                            <h3 className="text-xl sm:text-2xl font-bold text-white px-4">Ready to Transform Your Life?</h3>
+                            <p className="text-white/80 text-base sm:text-lg mb-4 mt-1 italic px-4">Ye call sirf astrology nahi — yeh aapka realignment hai.</p>
+                            <PrimaryButton text='Get Your Mega Bundle' icon={<Phone className='h-5 w-5' />} />
                         </div>
                     </div>
                 </div>
@@ -126,9 +127,9 @@ const ringAnimation = `
 
 // Inject the CSS
 if (typeof document !== 'undefined') {
-  const style = document.createElement('style');
-  style.textContent = ringAnimation;
-  document.head.appendChild(style);
+    const style = document.createElement('style');
+    style.textContent = ringAnimation;
+    document.head.appendChild(style);
 }
 
 export default WhatsIncludedSection; 

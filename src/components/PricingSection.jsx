@@ -1,5 +1,6 @@
 import React from 'react';
-import { PhoneCall } from 'lucide-react';
+import { PhoneCall, Check } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 // FOMO features data
 const FOMO_FEATURES_DATA = [
@@ -16,9 +17,7 @@ const FOMOFeatureItem = ({ text }) => (
     <div className="absolute -inset-1 bg-gradient-to-r from-green-500/20 to-emerald-500/20 rounded-xl blur-lg group-hover:blur-xl transition-all duration-500 opacity-0 group-hover:opacity-100" />
     <div className="relative flex items-center space-x-4 p-4 rounded-xl bg-white/5 border border-white/10 hover:border-green-400/50 transition-all duration-300 hover:transform hover:scale-105">
       <div className="w-8 h-8 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center shadow-lg">
-        <svg className="w-5 h-5 text-white animate-pulse" fill="currentColor" viewBox="0 0 20 20">
-          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-        </svg>
+        <Check className="w-5 h-5 text-white animate-pulse" />
       </div>
       <p className="text-white/90 text-base sm:text-lg font-bold">{text}</p>
     </div>
@@ -49,23 +48,34 @@ const PricingCard = () => (
   </div>
 );
 
-const CTAButton = () => (
-  <div className="relative group">
-    <div className="absolute -inset-1 bg-gradient-to-r from-green-500 via-blue-500 to-purple-500 rounded-full blur-lg group-hover:blur-xl transition-all duration-500 opacity-75 group-hover:opacity-100" />
-    <button className="relative bg-gradient-to-r from-green-500 to-blue-500 text-white px-12 sm:px-16 py-6 sm:py-8 rounded-full font-black text-xl sm:text-2xl hover:from-green-600 hover:to-blue-600 transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-green-500/50 flex items-center justify-center overflow-hidden">
-      <span className="relative z-10 flex items-center justify-center gap-4">
-        <PhoneCall className="w-7 h-7 animate-phone-ring" />
-        Book My 1-on-1 Session Now
-        <span className="text-3xl animate-bounce">👆</span>
-      </span>
-      <div className="absolute inset-0 bg-gradient-to-r from-green-600 to-blue-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-    </button>
-  </div>
-);
+const CTAButton = () => {
+  const navigate = useNavigate();
+  
+  const handleClick = () => {
+    navigate('/cart');
+  };
+
+  return (
+    <div className="relative group">
+      <div className="absolute -inset-1 bg-gradient-to-r from-green-500 via-blue-500 to-purple-500 rounded-full blur-lg group-hover:blur-xl transition-all duration-500 opacity-75 group-hover:opacity-100" />
+      <button 
+        onClick={handleClick}
+        className="relative bg-gradient-to-r from-green-500 to-blue-500 text-white px-12 sm:px-16 py-6 sm:py-8 rounded-full font-black text-xl sm:text-2xl hover:from-green-600 hover:to-blue-600 transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-green-500/50 flex items-center justify-center overflow-hidden"
+      >
+        <span className="relative z-10 flex items-center justify-center gap-4">
+          <PhoneCall className="w-7 h-7 animate-phone-ring" />
+          Book My 1-on-1 Session Now
+          <span className="text-3xl animate-bounce">👆</span>
+        </span>
+        <div className="absolute inset-0 bg-gradient-to-r from-green-600 to-blue-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+      </button>
+    </div>
+  );
+};
 
 function PricingSection() {
   return (
-    <section className="py-12 sm:py-16 bg-gradient-to-b from-black via-slate-900/50 to-black">
+    <section className="py-6 sm:py-16 bg-gradient-to-b from-black via-slate-900/50 to-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto">
           

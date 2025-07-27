@@ -1,6 +1,6 @@
 import React from 'react';
 import { Phone } from 'lucide-react';
-
+import PrimaryButton from './PrimaryButton';
 // Data configuration for easy maintenance
 const PROBLEMS_DATA = [
   { emoji: '💔', text: 'Pyaar toh hota hai... par sahi insaan se nahi.' },
@@ -40,12 +40,13 @@ const CTAButton = () => (
 
 function LifeDecodedSection() {
   return (
-    <section className="relative py-12 sm:py-16 bg-gradient-to-b from-black via-slate-900/50 to-black">
+    <section className="relative py-8 sm:py-16 bg-gradient-to-b from-black via-slate-900/50 to-black">
+
       {/* Animated Background - Matching Hero Section */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900/20 to-slate-900"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(120,119,198,0.1),transparent_50%)]"></div>
-        
+
         {/* Floating Elements - Matching Hero Section */}
         {[...Array(20)].map((_, i) => (
           <div
@@ -115,18 +116,18 @@ function LifeDecodedSection() {
           <div className="relative group">
             {/* Background glow effect - Matching Hero Section */}
             <div className="absolute -inset-2 sm:-inset-4 bg-gradient-to-r from-amber-500/20 via-purple-500/20 to-orange-500/20 rounded-3xl blur-2xl group-hover:blur-3xl transition-all duration-500" />
-            
+
             {/* Main content container - Matching Hero Section */}
             <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl p-6 sm:p-8 lg:p-12 border border-white/20 shadow-2xl">
               <div className="text-center space-y-6 sm:space-y-12">
-                
+
                 {/* Header Section - Matching Hero Section Style */}
                 <header className="space-y-4 sm:space-y-6">
                   <div className="inline-flex items-center space-x-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full px-4 sm:px-6 py-2 sm:py-3">
                     <div className="w-2 h-2 bg-amber-400 rounded-full animate-pulse"></div>
                     <span className="text-white/70 text-sm sm:text-base font-medium">Life Transformation</span>
                   </div>
-                  
+
                   <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight">
                     <span className="block text-white">Let's be honest...</span>
                   </h2>
@@ -152,7 +153,7 @@ function LifeDecodedSection() {
                     </h3>
                     <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-amber-400 to-orange-400 rounded-full" />
                   </div>
-                  
+
                   <div className="space-y-3 sm:space-y-6 max-w-3xl mx-auto">
                     {BENEFITS_DATA.map((benefit, index) => (
                       <BenefitItem key={index} text={benefit} />
@@ -168,10 +169,11 @@ function LifeDecodedSection() {
                     </p>
                     <div className="absolute -inset-4 bg-gradient-to-r from-amber-500/10 to-purple-500/10 rounded-2xl blur-xl" />
                   </div>
-                  
-                  <div className="flex justify-center">
-                    <CTAButton />
-                  </div>
+
+                  <PrimaryButton
+                    text='Book Your Personal Session'
+                    icon={<Phone className='h-5 w-5' />}
+                  />
                 </section>
               </div>
             </div>
