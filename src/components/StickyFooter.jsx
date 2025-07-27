@@ -25,14 +25,14 @@ function StickyFooter() {
       <div className="max-w-7xl mx-auto px-3 sm:px-4 py-2 sm:py-3">
         {/* Mobile Layout - Horizontal */}
         <div className="block sm:hidden">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between space-x-2">
             {/* Left Side - Timer and Pricing */}
-            <div className="flex items-center space-x-4">
-              <div className="flex flex-col items-start space-y-1">
+            <div className="flex items-center space-x-2 min-w-0 flex-1">
+              <div className="flex flex-col items-start space-y-0.5">
                 <span className="text-red-300 font-semibold text-xs">Offer</span>
                 <span className="text-red-300 font-semibold text-xs">Ends:</span>
               </div>
-              <div className="bg-white/10 backdrop-blur-sm rounded-lg px-2 py-0.5 flex items-center space-x-1 border border-red-400/20">
+              <div className="bg-white/10 backdrop-blur-sm rounded-lg px-1.5 py-0.5 flex items-center space-x-1 border border-red-400/20">
                 <div className="text-center">
                   <div className="text-white font-bold text-xs">{String(timeLeft.hours).padStart(2, '0')}</div>
                   <div className="text-red-300 text-xs uppercase">Hr</div>
@@ -45,15 +45,15 @@ function StickyFooter() {
               </div>
               
               {/* Pricing */}
-              <div className="flex items-center space-x-1">
-                <span className="text-red-300/60 line-through text-sm">₹9999</span>
-                <span className="text-white font-bold text-lg">₹1499</span>
+              <div className="flex items-center space-x-1 ml-2">
+                <span className="text-red-300/60 line-through text-xs">₹9999</span>
+                <span className="text-white font-bold text-base">₹1499</span>
               </div>
             </div>
 
             {/* Right Side - CTA Button */}
-            <div className="w-32">
-              <PrimaryButton text="Buy Now" />
+            <div className="w-28 flex-shrink-0">
+              <PrimaryButton text="Buy Now" className='whitespace-nowrap' />
             </div>
           </div>
         </div>
@@ -87,7 +87,7 @@ function StickyFooter() {
 
           {/* Right Side - CTA Button */}
           <div className="w-40">
-            <PrimaryButton text="Buy Now" />
+            <PrimaryButton text="Buy Now" className="whitespace-nowrap" />
           </div>
         </div>
       </div>

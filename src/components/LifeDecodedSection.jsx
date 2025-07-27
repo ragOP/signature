@@ -136,11 +136,11 @@ function LifeDecodedSection() {
                 {/* Problems Section */}
                 <section className="space-y-4 sm:space-y-8">
                   {PROBLEMS_DATA.map((problem, index) => (
-                    <div key={index} className="flex items-center space-x-2 sm:space-x-6">
-                      <div className="flex-shrink-0">
+                    <div key={index} className="flex items-start space-x-2 sm:space-x-6">
+                      <div className="flex-shrink-0 mt-1">
                         <span className="text-2xl sm:text-2xl">{problem.emoji}</span>
                       </div>
-                      <p className="text-white/90 text-sm sm:text-lg font-medium flex-shrink-0 whitespace-nowrap">{problem.text}</p>
+                      <p className="text-white/90 text-sm sm:text-lg font-medium break-words">{problem.text}</p>
                     </div>
                   ))}
                 </section>
