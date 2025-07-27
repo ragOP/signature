@@ -140,7 +140,7 @@ function LifeDecodedSection() {
                       <div className="flex-shrink-0">
                         <span className="text-2xl sm:text-2xl">{problem.emoji}</span>
                       </div>
-                      <p className="text-white/90 text-base sm:text-lg font-medium flex-shrink-0 whitespace-nowrap">{problem.text}</p>
+                      <p className="text-white/90 text-sm sm:text-lg font-medium flex-shrink-0 whitespace-nowrap">{problem.text}</p>
                     </div>
                   ))}
                 </section>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Phone } from 'lucide-react';
+import { Phone, ShoppingCart } from 'lucide-react';
 import PrimaryButton from './PrimaryButton';
 
 // Data configuration for easy maintenance
@@ -96,7 +96,7 @@ function WhatsIncludedSection() {
                         <div className="flex flex-col ">
                             <h3 className="text-xl sm:text-2xl font-bold text-white px-4">Ready to Transform Your Life?</h3>
                             <p className="text-white/80 text-base sm:text-lg mb-4 mt-1 italic px-4">Ye call sirf astrology nahi — yeh aapka realignment hai.</p>
-                            <PrimaryButton text='Get Your Mega Bundle' icon={<Phone className='h-5 w-5' />} />
+                            <PrimaryButton text='Get Your Mega Bundle' icon={<ShoppingCart className='h-5 w-5' />} />
                         </div>
                     </div>
                 </div>

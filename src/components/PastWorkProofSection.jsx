@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ChevronLeft, ChevronRight, Camera, Image, Mic, Plus, Check } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Camera, Image, Mic, Plus, Check, PhoneCall } from 'lucide-react';
 import PrimaryButton from './PrimaryButton';
 
 const PastWorkProofSection = () => {
@@ -178,7 +178,8 @@ const PastWorkProofSection = () => {
         <div className="text-center mt-16 sm:mt-20">
           <div className="max-w-md mx-auto">
             <PrimaryButton 
-              text="Reveal My Soulmate Now" 
+              text="Buy Now" 
+              icon={<PhoneCall className="w-4 h-4" />}
               className="mb-4"
             />
           </div>
