@@ -158,13 +158,13 @@ function Cart() {
       <section className="relative pt-0 sm:pt-12">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
-          <div className={`text-center mb-8 px-4 mt-6 transition-all duration-1000 transform ${animateElements ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
-            <h1 className="text-4xl lg:text-5xl font-bold mb-4">
+          <div className={`text-center mb-6 sm:mb-8 px-4 mt-4 sm:mt-6 transition-all duration-1000 transform ${animateElements ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold mb-3 sm:mb-4">
               <span className="bg-gradient-to-r from-red-400 via-pink-400 to-purple-400 bg-clip-text text-transparent animate-pulse">
                 Your Cosmic Cart
               </span>
             </h1>
-            <p className="text-xl text-white/70 max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg lg:text-xl text-white/70 max-w-2xl mx-auto px-2">
               Review your selected services and prepare for your transformative journey
             </p>
           </div>
@@ -174,12 +174,12 @@ function Cart() {
             <div className={`max-w-2xl px-4 mx-auto transition-all duration-1000 delay-300 transform ${animateElements ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-8 opacity-0 scale-95'}`}>
               <div className="relative group">
                 <div className="absolute -inset-1 bg-gradient-to-r from-red-500/20 via-pink-500/20 to-purple-500/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-                <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl p-8 border border-white/20">
-                  <div className="text-center space-y-6">
-                    <div className="text-6xl mb-4 animate-bounce">✨</div>
-                    <h3 className="text-2xl font-bold text-white">Your Cart is Empty</h3>
-                    <p className="text-white/70">Ready to unlock your cosmic potential? Browse our premium services!</p>
-                    <Link to="/home" className="inline-block bg-gradient-to-r from-red-500 to-pink-500 text-white px-8 py-3 rounded-full font-semibold hover:from-red-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105 buy-now-shimmer">
+                <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl p-6 sm:p-8 border border-white/20">
+                  <div className="text-center space-y-4 sm:space-y-6">
+                    <div className="text-4xl sm:text-6xl mb-3 sm:mb-4 animate-bounce">✨</div>
+                    <h3 className="text-xl sm:text-2xl font-bold text-white">Your Cart is Empty</h3>
+                    <p className="text-sm sm:text-base text-white/70 px-2">Ready to unlock your cosmic potential? Browse our premium services!</p>
+                    <Link to="/home" className="inline-block bg-gradient-to-r from-red-500 to-pink-500 text-white px-6 sm:px-8 py-2 sm:py-3 rounded-full font-semibold hover:from-red-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105 buy-now-shimmer text-sm sm:text-base">
                       <span>Explore Services</span>
                     </Link>
                   </div>
