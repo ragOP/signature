@@ -96,11 +96,11 @@ const ServicesSection = () => {
           </div>
         </div>
 
-      <PrimaryButton
+      {/* <PrimaryButton
         text='Book Your Call'
         className='mt-8'
         icon={<PhoneCall className='h-5 w-5 mb-' />}
-      />
+      /> */}
       </div>
     </section>
   );

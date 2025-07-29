@@ -156,7 +156,7 @@ const ClientTestimonialsSection = () => {
         </div>
 
         {/* Call to Action Button */}
-        <div className="text-center mt-12 sm:mt-16">
+        {/* <div className="text-center mt-12 sm:mt-16">
           <div className="max-w-md mx-auto">
             <PrimaryButton 
               text="Book Your Call" 
@@ -165,11 +165,10 @@ const ClientTestimonialsSection = () => {
             />
           </div>
           
-          {/* Disclaimer */}
           <p className="text-sm sm:text-base text-red-400/80 font-medium">
             Only a few spots left! Hurry before the special offer ends.
           </p>
-        </div>
+        </div> */}
       </div>
     </section>
   );

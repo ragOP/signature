@@ -204,13 +204,13 @@ function TestimonialsSection() {
             </div>
           </div>
 
-          <PrimaryButton
+          {/* <PrimaryButton
             text="Book Your Call"
             icon={
               <PhoneCall className='h-5 w-5' />
             }
             className='mb-6'
-          />
+          /> */}
 
           {/* Social Proof */}
           <div className="space-y-3 sm:space-y-6 max-w-4xl mx-auto">

@@ -98,14 +98,14 @@ const Hero = () => {
                             </div>
                         </div>
 
-                        <div className="flex flex-col sm:flex-row gap-2 sm:gap-6 justify-center pt-4">
+                        {/* <div className="flex flex-col sm:flex-row gap-2 sm:gap-6 justify-center pt-4">
                             <PrimaryButton
                                 text="Book Your Call"
                                 icon={
                                     <PhoneCall className='h-5 w-5' />
                                 }
                             />
-                        </div>
+                        </div> */}
                     </div>
                 </div>
 
