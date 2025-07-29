@@ -188,9 +188,9 @@ function Cart() {
             </div>
           ) : (
             /* Cart Items */
-            <div className={`grid lg:grid-cols-3 px-4 gap-8 transition-all duration-1000 delay-500 transform ${animateElements ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
+            <div className={`grid grid-cols-1 lg:grid-cols-3 px-4 gap-4 sm:gap-6 lg:gap-8 transition-all duration-1000 delay-500 transform ${animateElements ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
               {/* Cart Items List */}
-              <div className="lg:col-span-2 space-y-6">
+              <div className="lg:col-span-2 space-y-4 sm:space-y-6">
                 {cartItems.map((item, index) => (
                   <div
                     key={item.id}
@@ -201,9 +201,8 @@ function Cart() {
                 ))}
               </div>
 
-
-              {/* Order Summary */}
-              <div className="lg:col-span-1 space-y-6">
+              {/* Order Summary and Forms - Mobile: Stacked, Desktop: Sidebar */}
+              <div className="lg:col-span-1 space-y-4 sm:space-y-6">
                 {/* Additional Products Section - Above Order Summary */}
                 <div className={`transition-all duration-700 delay-700 transform ${animateElements ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
                   <AdditionalProducts
@@ -211,11 +210,14 @@ function Cart() {
                     selectedProducts={selectedProducts}
                     onProductToggle={onProductToggle}
                   />
-
-                  <ConsultationForm onSubmit={handleConsultationFormSubmit} />
-
                 </div>
 
+                {/* Consultation Form */}
+                <div className={`transition-all duration-700 delay-800 transform ${animateElements ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
+                  <ConsultationForm onSubmit={handleConsultationFormSubmit} />
+                </div>
+
+                {/* Order Summary */}
                 <div className={`transition-all duration-700 delay-900 transform ${animateElements ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
                   <OrderSummary
                     subtotal={subtotal}

@@ -8,7 +8,7 @@ const AdditionalProducts = ({ products, selectedProducts, onProductToggle }) => 
   };
 
   return (
-    <div className="relative group">
+    <div className="relative group ">
       <div className="absolute -inset-1 bg-gradient-to-r from-red-500/20 via-pink-500/20 to-purple-500/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
       <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl p-4 border border-white/20">
         <div className="space-y-3">
