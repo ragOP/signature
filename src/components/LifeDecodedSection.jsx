@@ -1,6 +1,7 @@
 import React from 'react';
 import { Phone } from 'lucide-react';
 import PrimaryButton from './PrimaryButton';
+import { useNavigate } from 'react-router-dom';
 // Data configuration for easy maintenance
 const PROBLEMS_DATA = [
   { emoji: '💔', text: 'Pyaar toh hota hai... par sahi insaan se nahi.' },
@@ -28,15 +29,26 @@ const BenefitItem = ({ text }) => (
   </div>
 );
 
-const CTAButton = () => (
-  <button className="group relative bg-gradient-to-r from-amber-500 to-orange-500 text-white px-8 sm:px-10 py-4 sm:py-5 rounded-full font-semibold hover:from-amber-600 hover:to-orange-600 transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-amber-500/25 flex items-center justify-center">
-    <span className="relative z-10 flex items-center justify-center gap-2">
-      <Phone className="w-5 h-5" />
-      Book Your Personal Session
-    </span>
-    <div className="absolute inset-0 bg-gradient-to-r from-amber-600 to-orange-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-  </button>
-);
+const CTAButton = () => {
+  const navigate = useNavigate();
+  
+  const handleClick = () => {
+    navigate('/cart');
+  };
+
+  return (
+    <button 
+      onClick={handleClick}
+      className="group relative bg-gradient-to-r from-amber-500 to-orange-500 text-white px-8 sm:px-10 py-4 sm:py-5 rounded-full font-semibold hover:from-amber-600 hover:to-orange-600 transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-amber-500/25 flex items-center justify-center"
+    >
+      <span className="relative z-10 flex items-center justify-center gap-2">
+        <Phone className="w-5 h-5" />
+        Book Your Personal Session
+      </span>
+      <div className="absolute inset-0 bg-gradient-to-r from-amber-600 to-orange-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+    </button>
+  );
+};
 
 function LifeDecodedSection() {
   return (

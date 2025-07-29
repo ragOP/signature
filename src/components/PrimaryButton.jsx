@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const PrimaryButton = ({ 
   text = "Book Your Call", 
@@ -9,12 +9,18 @@ const PrimaryButton = ({
   disabled = false 
 }) => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleClick = () => {
     if (onClick) {
       onClick();
     } else {
-      navigate('/cart');
+      // If already on cart page, scroll to top
+      if (location.pathname === '/cart') {
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+      } else {
+        navigate('/cart');
+      }
     }
   };
 

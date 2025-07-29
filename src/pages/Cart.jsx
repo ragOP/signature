@@ -77,7 +77,8 @@ function Cart() {
   ];
 
   useEffect(() => {
-    // Trigger animations after component mounts
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    
     const timer = setTimeout(() => {
       setAnimateElements(true);
     }, 100);
@@ -118,6 +119,9 @@ function Cart() {
   const total = subtotal;
 
   const handleCheckout = () => {
+    // Scroll to top when checkout button is clicked (immediate, no animation)
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    
     setIsCheckingOut(true);
     // Simulate checkout process
     setTimeout(() => {

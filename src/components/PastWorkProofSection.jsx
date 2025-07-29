@@ -87,17 +87,17 @@ const PastWorkProofSection = () => {
   };
 
   return (
-    <section className="py-8 sm:py-20 bg-gradient-to-br from-white/5 via-pink-50/10 to-white/5">
+    <section className="py-8 px-2 sm:py-20 bg-gradient-to-br from-white/5 via-pink-50/10 to-white/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
           {/* Left Column - Past Work / Proof */}
-          <div className="space-y-8">
+          <div className="space-y-6">
             <div>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-red-400 via-pink-400 to-purple-400 bg-clip-text text-transparent mb-6">
                 Past Work / Proof
               </h2>
-              <p className="text-white/90 text-lg sm:text-xl leading-relaxed mb-8">
+              <p className="text-white/90 text-lg sm:text-xl leading-relaxed">
                 Imagine seeing the detailed features of the person you're destined for. Our previous sketches have amazed thousands with their accuracy, beauty, and personal resonance.
               </p>
             </div>
@@ -143,7 +143,7 @@ const PastWorkProofSection = () => {
                 >
                   {chatTestimonials.map((chat) => (
                     <div key={chat.id} className="w-full flex-shrink-0">
-                      <div className="px-4">
+                      <div className="">
                         <MobileChatInterface chat={chat} />
                       </div>
                     </div>

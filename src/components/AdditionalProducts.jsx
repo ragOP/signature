@@ -27,13 +27,41 @@ const AdditionalProducts = ({ products, selectedProducts, onProductToggle }) => 
             {products.map((product) => (
               <div key={product.id} className="space-y-2">
                 <div className="flex items-start space-x-3 p-2 rounded-lg hover:bg-white/5 transition-all duration-300">
-                  <input
-                    type="checkbox"
-                    id={`product-${product.id}`}
-                    checked={selectedProducts.includes(product.id)}
-                    onChange={() => onProductToggle(product.id)}
-                    className="w-4 h-4 text-red-500 bg-white/10 border-white/20 rounded focus:ring-red-500 focus:ring-2 mt-2"
-                  />
+                  <div className="relative mt-2">
+                    <input
+                      type="checkbox"
+                      id={`product-${product.id}`}
+                      checked={selectedProducts.includes(product.id)}
+                      onChange={() => onProductToggle(product.id)}
+                      className="sr-only"
+                    />
+                    <label 
+                      htmlFor={`product-${product.id}`}
+                      className={`relative flex items-center justify-center w-6 h-6 rounded-lg border-2 cursor-pointer transition-all duration-300 transform hover:scale-125 hover:rotate-3 ${
+                        selectedProducts.includes(product.id)
+                          ? 'bg-gradient-to-r from-red-500 to-pink-500 border-red-400 shadow-xl shadow-red-500/40'
+                          : 'bg-gradient-to-r from-white/5 to-white/10 border-white/40 hover:border-red-400/60 hover:bg-gradient-to-r hover:from-red-500/20 hover:to-pink-500/20 hover:shadow-lg hover:shadow-red-500/20'
+                      }`}
+                    >
+                      {selectedProducts.includes(product.id) && (
+                        <svg 
+                          className="w-4 h-4 text-white animate-pulse" 
+                          fill="currentColor" 
+                          viewBox="0 0 20 20"
+                        >
+                          <path 
+                            fillRule="evenodd" 
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" 
+                            clipRule="evenodd" 
+                          />
+                        </svg>
+                      )}
+                      {/* Glow effect when checked */}
+                      {selectedProducts.includes(product.id) && (
+                        <div className="absolute -inset-1 bg-gradient-to-r from-red-500/50 to-pink-500/50 rounded-lg blur-sm animate-pulse"></div>
+                      )}
+                    </label>
+                  </div>
 
                   <div className="flex-1">
                     <div className="flex items-start justify-between">
