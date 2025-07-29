@@ -56,6 +56,12 @@ const ConsultationForm = ({ onSubmit }) => {
 
             const minAllowedDate = new Date(today.getTime() + 2 * 24 * 60 * 60 * 1000);
 
+            // Debug logging
+            console.log('Selected date:', selectedDate.toDateString());
+            console.log('Today:', today.toDateString());
+            console.log('Min allowed:', minAllowedDate.toDateString());
+            console.log('Is selected before min?', selectedDate < minAllowedDate);
+
             if (selectedDate < minAllowedDate) {
                 newErrors.preferredDateTime = 'Please select a date from ' + minAllowedDate.toLocaleDateString() + ' onwards';
             }
@@ -190,7 +196,12 @@ const ConsultationForm = ({ onSubmit }) => {
                                     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
                                     // Calculate minimum allowed date (current day + 2 days)
-                                    const minAllowedDate = new Date(today.getTime() + 2 * 24 * 60 * 60 * 1000);
+                                    const minAllowedDate = new Date(today.getTime() + 3 * 24 * 60 * 60 * 1000);
+                                    
+                                    // For debugging - you can check the console
+                                    console.log('Today:', today.toDateString());
+                                    console.log('Min allowed date:', minAllowedDate.toDateString());
+                                    
                                     return minAllowedDate.toISOString().slice(0, 16);
                                 })()}
                                 className={`w-full px-4 py-3 bg-gradient-to-r from-white/15 to-white/5 border rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-red-400 transition-all duration-300 shadow-lg ${errors.preferredDateTime ? 'border-red-400' : 'border-white/20'
