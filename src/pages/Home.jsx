@@ -34,10 +34,7 @@ function Home() {
 
       <PricingSection />
 
-
       <ClientTestimonialsSection />
-
-
 
       {/* Footer */}
       {/* <footer className="bg-black/60 border-t border-white/10 py-8 sm:py-12">

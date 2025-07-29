@@ -5,13 +5,28 @@ import { PhoneCall } from 'lucide-react';
 // Data configuration for testimonials
 const TESTIMONIALS_DATA = [
   {
-    name: 'Riya, Mumbai',
-    quote: 'Mujhe laga yeh ek aur generic call hogi, but Mr. X literally explained my past relationship patterns so clearly, I cried. I now know why things happened the way they did.',
+    name: 'Aanya M., New Delhi',
+    quote: 'Honestly, this session gave me clarity I’ve been needing for years. She explained my chart in such a calm, personal way. Loved the experience.',
     rating: 5
   },
   {
-    name: 'Ankur, Delhi',
-    quote: 'I had 3 major questions. Career, marriage and peace. I got timelines, clarity, and even a name suggestion. Best ₹1499 I ever spent.',
+    name: 'Pratik G., Hyderabad',
+    quote: 'Didn’t expect much, but was honestly surprised. Got clear answers about my career path and some patterns I didn’t even notice before. Totally worth it.',
+    rating: 4
+  },
+  {
+    name: 'Ritika S., Mumbai',
+    quote: 'Pichle 2 saal se love life mein bas problems hi problems thi. Har baar galat insaan. Ye session ne mujhe samjhaya ki problem mere stars mein thi, mujh mein nahi. Bohot relief mila yeh jaanke.',
+    rating: 5
+  },
+  {
+    name: 'Varun T., Chandigarh',
+    quote: 'Bhai honestly, main soch raha tha timepass hoga… par call ke 10 minute baad hi laga yeh toh sach bol rahe hain. Numerology mein mera naam tak decode kar diya. Maza aa gaya.',
+    rating: 4
+  },
+  {
+    name: 'Simran K., Jaipur',
+    quote: 'Mujhe laga yeh bhi ek generic astrology call hoga… but unhone mere questions itne calmly liye. Even meri shaadi ke leke jo confusion tha, woh clear kiya with proper timelines. Thank you so much.',
     rating: 5
   }
 ];

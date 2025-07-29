@@ -1,7 +1,13 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
-import { X, Shield, Sparkles, Check } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { X, Shield, Sparkles, Check, Star } from 'lucide-react';
 import Navbar from '../components/Navbar';
+import TestimonialsSection from '../components/TestimonialsSection';
+import ClientTestimonialsSection from '../components/ClientTestimonialsSection';
+import CartItem from '../components/CartItem';
+import OrderSummary from '../components/OrderSummary';
+import AdditionalProducts from '../components/AdditionalProducts';
+import ConsultationForm from '../components/ConsultationForm';
 
 function Cart() {
   const [cartItems, setCartItems] = useState([
@@ -17,14 +23,98 @@ function Cart() {
     }
   ]);
 
+  const [selectedProducts, setSelectedProducts] = useState([]);
   const [isCheckingOut, setIsCheckingOut] = useState(false);
+  const [animateElements, setAnimateElements] = useState(false);
+  const [consultationFormData, setConsultationFormData] = useState({
+    name: '',
+    dateOfBirth: '',
+    placeOfBirth: '',
+    gender: '',
+    preferredDateTime: ''
+  });
 
-  const removeItem = (id) => {
-    setCartItems(cartItems.filter(item => item.id !== id));
+  // Additional products data
+  const additionalProducts = [
+    {
+      id: 2,
+      title: "Plan Your Future — Month by Month!",
+      description: "Wondering what 2025 and 2026 hold for your love life, finances, and growth? This detailed month-by-month astrological forecast gives you the clarity you need to plan ahead with confidence!",
+      features: [
+        "Key dates for love, wealth & career",
+        "Monthly guidance for 24 months",
+        "Easy-to-follow format",
+        "Based 100% on your birth chart"
+      ],
+      price: 999,
+      originalPrice: 2999,
+      icon: "🔮",
+      color: {
+        from: "from-purple-500/20",
+        via: "via-pink-500/20",
+        to: "to-indigo-500/20"
+      }
+    },
+    {
+      id: 3,
+      title: "Discover Your Soul's Purpose",
+      description: "Your soul carries a journey, lessons, and unresolved karma. This deep-dive report reveals your true life path and what you must overcome to feel fulfilled and in flow.",
+      features: [
+        "Your core life purpose",
+        "Past life karma & spiritual blocks",
+        "How to break karmic cycles",
+        "Personalized healing path & action steps"
+      ],
+      price: 799,
+      originalPrice: 2499,
+      icon: "🪷",
+      color: {
+        from: "from-emerald-500/20",
+        via: "via-teal-500/20",
+        to: "to-cyan-500/20"
+      }
+    }
+  ];
+
+  useEffect(() => {
+    // Trigger animations after component mounts
+    const timer = setTimeout(() => {
+      setAnimateElements(true);
+    }, 100);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const onProductToggle = (productId) => {
+    setSelectedProducts(prev =>
+      prev.includes(productId)
+        ? prev.filter(id => id !== productId)
+        : [...prev, productId]
+    );
   };
 
-  const subtotal = cartItems.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0);
-  const discount = cartItems.reduce((sum, item) => sum + ((item.originalPrice - item.price) * (item.quantity || 1)), 0);
+  const handleConsultationFormSubmit = (formData) => {
+    setConsultationFormData(formData);
+    console.log('Consultation form submitted:', formData);
+    // You can add additional logic here like API calls, validation, etc.
+  };
+
+  const removeItem = (itemId) => {
+    setCartItems(prev => prev.filter(item => item.id !== itemId));
+  };
+
+  // Calculate cart totals including selected additional products
+  const selectedAdditionalProducts = additionalProducts.filter(product =>
+    selectedProducts.includes(product.id)
+  );
+
+  const cartSubtotal = cartItems.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0);
+  const additionalSubtotal = selectedAdditionalProducts.reduce((sum, product) => sum + product.price, 0);
+  const subtotal = cartSubtotal + additionalSubtotal;
+
+  const cartDiscount = cartItems.reduce((sum, item) => sum + ((item.originalPrice - item.price) * (item.quantity || 1)), 0);
+  const additionalDiscount = selectedAdditionalProducts.reduce((sum, product) => sum + (product.originalPrice - product.price), 0);
+  const discount = cartDiscount + additionalDiscount;
+
   const total = subtotal;
 
   const handleCheckout = () => {
@@ -32,6 +122,7 @@ function Cart() {
     // Simulate checkout process
     setTimeout(() => {
       setIsCheckingOut(false);
+      console.log('Checkout completed with consultation data:', consultationFormData);
       alert('Thank you for your purchase! You will receive a confirmation email shortly.');
     }, 2000);
   };
@@ -45,7 +136,7 @@ function Cart() {
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900/20 to-slate-900"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(120,119,198,0.1),transparent_50%)]"></div>
-        
+
         {/* Floating Elements */}
         {[...Array(15)].map((_, i) => (
           <div
@@ -65,11 +156,11 @@ function Cart() {
 
       {/* Cart Content */}
       <section className="relative pt-0 sm:pt-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div className="max-w-7xl mx-auto">
           {/* Header */}
-          <div className="text-center mb-12">
-            <h1 className="text-4xl lg:text-5xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-red-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">
+          <div className={`text-center mb-8 px-4 mt-6 transition-all duration-1000 transform ${animateElements ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
+            <h1 className="text-4xl lg:text-5xl font-bold mb-4">
+              <span className="bg-gradient-to-r from-red-400 via-pink-400 to-purple-400 bg-clip-text text-transparent animate-pulse">
                 Your Cosmic Cart
               </span>
             </h1>
@@ -80,7 +171,7 @@ function Cart() {
 
           {cartItems.length === 0 ? (
             /* Empty Cart */
-            <div className="max-w-2xl mx-auto">
+            <div className={`max-w-2xl px-4 mx-auto transition-all duration-1000 delay-300 transform ${animateElements ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-8 opacity-0 scale-95'}`}>
               <div className="relative group">
                 <div className="absolute -inset-1 bg-gradient-to-r from-red-500/20 via-pink-500/20 to-purple-500/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
                 <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl p-8 border border-white/20">
@@ -97,136 +188,53 @@ function Cart() {
             </div>
           ) : (
             /* Cart Items */
-            <div className="grid lg:grid-cols-3 gap-8">
+            <div className={`grid lg:grid-cols-3 px-4 gap-8 transition-all duration-1000 delay-500 transform ${animateElements ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
               {/* Cart Items List */}
               <div className="lg:col-span-2 space-y-6">
-                {cartItems.map((item) => (
-                  <div key={item.id} className="relative group">
-                    <div className="absolute -inset-1 bg-gradient-to-r from-red-500/20 via-pink-500/20 to-purple-500/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-                    <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl p-6 border border-white/20">
-                      <div className="flex flex-col gap-4 sm:gap-6">
-                        {/* Top Stack: Image + Title/Subtitle */}
-                        <div className="flex flex-row gap-4 sm:gap-6">
-                          {/* Item Image */}
-                          <div className="flex-shrink-0">
-                            <div className="relative group">
-                              <div className="absolute -inset-2 bg-gradient-to-r from-red-500/20 via-pink-500/20 to-purple-500/20 rounded-2xl blur-lg group-hover:blur-xl transition-all duration-500"></div>
-                              <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-2 border border-white/20">
-                                <img
-                                  src={item.image}
-                                  alt={item.name}
-                                  className="w-16 h-16 sm:w-24 sm:h-24 object-cover rounded-xl"
-                                />
-                              </div>
-                            </div>
-                          </div>
-
-                          {/* Title and Subtitle */}
-                          <div className="flex-1 flex flex-col min-w-0">
-                            <div className="flex justify-between items-start mb-2 sm:mb-3">
-                              <h3 className="text-lg sm:text-xl font-bold text-white pr-2" style={{ display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{item.name}</h3>
-                              <button
-                                onClick={() => removeItem(item.id)}
-                                className="text-white/50 hover:text-red-400 transition-colors p-1 sm:p-2 flex-shrink-0"
-                              >
-                                <X className="w-4 h-4 sm:w-5 sm:h-5" />
-                              </button>
-                            </div>
-                            <p className="text-white/70 text-xs sm:text-sm mb-2 sm:mb-3 line-clamp-2">{item.description}</p>
-                            <div className="flex items-center space-x-2">
-                              <span className="text-red-300 text-xs sm:text-sm font-medium">⏱️ {item.duration}</span>
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Middle Stack: What's Included (starts from left) */}
-                        <div className="space-y-2">
-                          <h4 className="text-xs sm:text-sm font-semibold text-red-300">What's Included:</h4>
-                          <div className="grid grid-cols-1 gap-1 sm:gap-2">
-                            {item.features.map((feature, index) => (
-                              <div key={index} className="flex items-center space-x-2">
-                                <div className="w-4 h-4 sm:w-5 sm:h-5 bg-red-400 rounded-full flex items-center justify-center flex-shrink-0">
-                                  <Check className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-white" />
-                                </div>
-                                <span className="text-white/80 text-xs sm:text-sm">{feature}</span>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-
-                        {/* Bottom Stack: Price */}
-                        <div className="flex items-center justify-between pt-3 sm:pt-4 border-t border-white/10">
-                          <div className="flex items-center space-x-3">
-                            <span className="text-2xl font-bold text-white">₹{item.price.toLocaleString()}</span>
-                            <span className="text-lg text-white/50 line-through">₹{item.originalPrice.toLocaleString()}</span>
-                            <span className="text-sm text-green-400 font-medium">Save ₹{(item.originalPrice - item.price).toLocaleString()}</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                {cartItems.map((item, index) => (
+                  <div
+                    key={item.id}
+                    className={`transition-all duration-700 delay-${index * 200} transform ${animateElements ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'}`}
+                  >
+                    <CartItem item={item} onRemove={removeItem} />
                   </div>
                 ))}
               </div>
 
+
               {/* Order Summary */}
-              <div className="lg:col-span-1">
-                <div className="sticky top-8">
-                  <div className="relative group">
-                    <div className="absolute -inset-1 bg-gradient-to-r from-red-500/20 via-pink-500/20 to-purple-500/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-                    <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl p-6 border border-white/20">
-                      <h3 className="text-xl font-bold text-white mb-6">Order Summary</h3>
-                      
-                      {/* Summary Items */}
-                      <div className="space-y-4 mb-6">
-                        <div className="flex justify-between items-center">
-                          <span className="text-white/70">Subtotal</span>
-                          <span className="text-white">₹{subtotal.toLocaleString()}</span>
-                        </div>
-                        <div className="flex justify-between items-center">
-                          <span className="text-green-400">Discount</span>
-                          <span className="text-green-400">-₹{discount.toLocaleString()}</span>
-                        </div>
-                        <div className="border-t border-white/10 pt-4">
-                          <div className="flex justify-between items-center">
-                            <span className="text-lg font-semibold text-white">Total</span>
-                            <span className="text-2xl font-bold text-red-300">₹{total.toLocaleString()}</span>
-                          </div>
-                        </div>
-                      </div>
+              <div className="lg:col-span-1 space-y-6">
+                {/* Additional Products Section - Above Order Summary */}
+                <div className={`transition-all duration-700 delay-700 transform ${animateElements ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
+                  <AdditionalProducts
+                    products={additionalProducts}
+                    selectedProducts={selectedProducts}
+                    onProductToggle={onProductToggle}
+                  />
 
-                      {/* Checkout Button */}
-                      <button
-                        onClick={handleCheckout}
-                        disabled={isCheckingOut}
-                        className="w-full bg-gradient-to-r from-red-500 to-pink-500 text-white py-4 rounded-full font-semibold hover:from-red-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-red-500/25 buy-now-shimmer disabled:opacity-50 disabled:cursor-not-allowed"
-                      >
-                        {isCheckingOut ? (
-                          <span className="flex items-center justify-center space-x-2">
-                            <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                            <span>Processing...</span>
-                          </span>
-                        ) : (
-                          <span className="flex items-center justify-center space-x-2">
-                            <Sparkles className="w-5 h-5" />
-                            <span>Complete Purchase</span>
-                            <Sparkles className="w-5 h-5" />
-                          </span>
-                        )}
-                      </button>
+                  <ConsultationForm onSubmit={handleConsultationFormSubmit} />
 
-                      {/* Security Badge */}
-                      <div className="mt-6 text-center">
-                        <div className="flex items-center justify-center space-x-2 text-white/50 text-sm">
-                          <Shield className="w-4 h-4" />
-                          <span>Secure Payment</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                </div>
+
+                <div className={`transition-all duration-700 delay-900 transform ${animateElements ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
+                  <OrderSummary
+                    subtotal={subtotal}
+                    discount={discount}
+                    total={total}
+                    isCheckingOut={isCheckingOut}
+                    onCheckout={handleCheckout}
+                  />
                 </div>
               </div>
             </div>
           )}
+
+
+          <TestimonialsSection />
+
+          <ClientTestimonialsSection />
+
+
         </div>
       </section>
     </div>

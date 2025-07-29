@@ -2,8 +2,8 @@ import React from 'react';
 
 const MainContent = () => {
     return (
-        < div className="max-w-5xl mx-auto mb-8 mt-8 p-4" >
-            <div className="relative group">
+        <div className="max-w-5xl mx-auto mb-8 p-4" >
+            <div className="relative group z-100">
                 <div className="absolute -inset-1 bg-gradient-to-r from-amber-500/20 via-purple-500/20 to-orange-500/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
                 <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl p-4 sm:p-6 lg:p-8 border border-white/20 shadow-2xl">
                     <div className="text-center space-y-6 sm:space-y-8">

@@ -12,15 +12,24 @@ const PastWorkProofSection = () => {
   const chatTestimonials = [
     {
       id: 1,
-      image: '/past-proof-1.webp'
+      image: '/past-proof-1.png'
     },
     {
       id: 2,
-      image: '/past-proof-2.webp'
+      image: '/past-proof-2.png'
     },
     {
       id: 3,
-      image: '/past-proof-3.webp'
+      image: '/past-proof-3.png'
+    }
+    ,
+    {
+      id: 4,
+      image: '/past-proof-4.png'
+    },
+    {
+      id: 5,
+      image: '/past-proof-5.png'
     }
   ];
 
@@ -70,7 +79,7 @@ const PastWorkProofSection = () => {
           prevChat();
         }
       }
-      
+
       setIsDragging(false);
       setStartX(0);
       setCurrentX(0);
@@ -78,10 +87,10 @@ const PastWorkProofSection = () => {
   };
 
   return (
-    <section className="py-16 sm:py-20 bg-gradient-to-br from-white/5 via-pink-50/10 to-white/5">
+    <section className="py-8 sm:py-20 bg-gradient-to-br from-white/5 via-pink-50/10 to-white/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          
+
           {/* Left Column - Past Work / Proof */}
           <div className="space-y-8">
             <div>
@@ -111,16 +120,16 @@ const PastWorkProofSection = () => {
 
           {/* Right Column - Mobile Chat Interface */}
           <div className="relative">
-                         {/* Desktop Layout - Show all chats */}
-             <div className="hidden lg:grid lg:grid-cols-3 lg:gap-4">
-               {chatTestimonials.map((chat) => (
-                 <MobileChatInterface key={chat.id} chat={chat} />
-               ))}
-             </div>
+            {/* Desktop Layout - Show all chats */}
+            <div className="hidden lg:grid lg:grid-cols-3 lg:gap-4">
+              {chatTestimonials.map((chat) => (
+                <MobileChatInterface key={chat.id} chat={chat} />
+              ))}
+            </div>
 
             {/* Mobile Layout - Carousel */}
             <div className="lg:hidden relative">
-              <div 
+              <div
                 className="overflow-hidden"
                 ref={carouselRef}
                 onTouchStart={handleTouchStart}
@@ -128,7 +137,7 @@ const PastWorkProofSection = () => {
                 onTouchEnd={handleTouchEnd}
                 style={{ touchAction: 'pan-y' }}
               >
-                <div 
+                <div
                   className="flex transition-transform duration-500 ease-in-out"
                   style={{ transform: `translateX(-${currentChatIndex * 100}%)` }}
                 >
@@ -162,11 +171,10 @@ const PastWorkProofSection = () => {
                   <button
                     key={index}
                     onClick={() => setCurrentChatIndex(index)}
-                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                      index === currentChatIndex 
-                        ? 'bg-gradient-to-r from-red-400 to-pink-400 w-6' 
+                    className={`w-2 h-2 rounded-full transition-all duration-300 ${index === currentChatIndex
+                        ? 'bg-gradient-to-r from-red-400 to-pink-400 w-6'
                         : 'bg-red-400/30'
-                    }`}
+                      }`}
                   />
                 ))}
               </div>
@@ -177,13 +185,13 @@ const PastWorkProofSection = () => {
         {/* Call to Action Button */}
         <div className="text-center mt-16 sm:mt-20">
           <div className="max-w-md mx-auto">
-            <PrimaryButton 
-              text="Buy Now" 
+            <PrimaryButton
+              text="Buy Now"
               icon={<PhoneCall className="w-4 h-4" />}
               className="mb-4"
             />
           </div>
-          
+
           {/* Disclaimer */}
           <p className="text-sm sm:text-base text-red-400/80 font-medium">
             Only a few spots left! Hurry before the special offer ends.
@@ -195,12 +203,12 @@ const PastWorkProofSection = () => {
 };
 
 const MobileChatInterface = ({ chat }) => {
-  
+
   return (
     <div className="bg-white rounded-2xl p-4 border border-red-400/20 shadow-xl w-full mx-auto">
       {/* Past Work Image */}
-      <img 
-        src={chat.image} 
+      <img
+        src={chat.image}
         alt={`Past work sketch ${chat.id}`}
         className="w-full object-cover rounded-xl"
         onLoad={() => console.log('Image loaded successfully:', chat.image)}
