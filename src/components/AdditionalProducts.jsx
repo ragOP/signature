@@ -11,7 +11,18 @@ const AdditionalProducts = ({ products, selectedProducts, onProductToggle }) => 
     <div className="relative group ">
       <div className="absolute -inset-1 bg-gradient-to-r from-red-500/20 via-pink-500/20 to-purple-500/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
       <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl p-4 border border-white/20">
-        <div className="space-y-3">
+        <div>
+          {/* Title */}
+          <div className="text-left mb-4">
+            <div className="flex items-center space-x-2">
+              <div className="w-2 h-2 bg-gradient-to-r from-red-400 to-pink-400 rounded-full animate-pulse"></div>
+              <span className="text-lg font-bold bg-gradient-to-r from-red-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">
+                Supercharge Your Destiny
+              </span>
+            </div>
+            <p className="text-sm text-white/60 ml-4">Discover deeper cosmic guidance for your life path</p>
+          </div>
+
           <div className="space-y-2">
             {products.map((product) => (
               <div key={product.id} className="space-y-2">
@@ -23,7 +34,7 @@ const AdditionalProducts = ({ products, selectedProducts, onProductToggle }) => 
                     onChange={() => onProductToggle(product.id)}
                     className="w-4 h-4 text-red-500 bg-white/10 border-white/20 rounded focus:ring-red-500 focus:ring-2 mt-2"
                   />
-                  
+
                   <div className="flex-1">
                     <div className="flex items-start justify-between">
                       <div>
@@ -53,7 +64,7 @@ const AdditionalProducts = ({ products, selectedProducts, onProductToggle }) => 
                     </div>
                   </div>
                 </div>
-                
+
                 {/* Expanded Content - Only Key Points */}
                 {expandedProduct === product.id && (
                   <>

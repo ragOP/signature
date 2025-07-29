@@ -47,6 +47,18 @@ const ConsultationForm = ({ onSubmit }) => {
 
         if (!formData.preferredDateTime) {
             newErrors.preferredDateTime = 'Preferred date and time is required';
+        } else {
+            // Validate consultation time
+            const selectedDateTime = new Date(formData.preferredDateTime);
+            const now = new Date();
+            const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+            const selectedDate = new Date(selectedDateTime.getFullYear(), selectedDateTime.getMonth(), selectedDateTime.getDate());
+
+            const minAllowedDate = new Date(today.getTime() + 2 * 24 * 60 * 60 * 1000);
+
+            if (selectedDate < minAllowedDate) {
+                newErrors.preferredDateTime = 'Please select a date from ' + minAllowedDate.toLocaleDateString() + ' onwards';
+            }
         }
 
         setErrors(newErrors);
@@ -173,9 +185,20 @@ const ConsultationForm = ({ onSubmit }) => {
                                 name="preferredDateTime"
                                 value={formData.preferredDateTime}
                                 onChange={handleChange}
-                                min={new Date().toISOString().slice(0, 16)}
+                                min={(() => {
+                                    const now = new Date();
+                                    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+                                    // Calculate minimum allowed date (current day + 2 days)
+                                    const minAllowedDate = new Date(today.getTime() + 2 * 24 * 60 * 60 * 1000);
+                                    return minAllowedDate.toISOString().slice(0, 16);
+                                })()}
                                 className={`w-full px-4 py-3 bg-gradient-to-r from-white/15 to-white/5 border rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-red-400 transition-all duration-300 shadow-lg ${errors.preferredDateTime ? 'border-red-400' : 'border-white/20'
                                     }`}
+                                style={{
+                                    '--webkit-calendar-picker-indicator': 'none',
+                                    '--moz-calendar-picker-indicator': 'none'
+                                }}
                             />
                             <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
                                 <svg className="w-5 h-5 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -183,6 +206,7 @@ const ConsultationForm = ({ onSubmit }) => {
                                 </svg>
                             </div>
                         </div>
+
                         {errors.preferredDateTime && (
                             <p className="text-red-400 text-xs mt-1">{errors.preferredDateTime}</p>
                         )}

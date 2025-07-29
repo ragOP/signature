@@ -12,18 +12,18 @@ const CartItem = ({ item, onRemove }) => {
     <div className="relative group">
       <div className="absolute -inset-1 bg-gradient-to-r from-red-500/20 via-pink-500/20 to-purple-500/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
       <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl p-4 border border-white/20">
-        <div className="flex flex-col gap-6 sm:gap-10">
+        <div className="flex flex-col gap-4 sm:gap-6">
           {/* Top Stack: Image + Title/Subtitle */}
-          <div className="flex flex-row gap-8 sm:gap-10">
+          <div className="flex flex-row gap-4 sm:gap-6">
             {/* Item Image */}
             <div className="flex-shrink-0">
               <div className="relative group">
                 <div className="absolute -inset-2 bg-gradient-to-r from-red-500/20 via-pink-500/20 to-purple-500/20 rounded-2xl blur-lg group-hover:blur-xl transition-all duration-500"></div>
-                <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-4 border border-white/20">
+                <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-2 border border-white/20">
                   <img
                     src={item.image}
                     alt={item.name}
-                    className="w-24 h-24 sm:w-32 sm:h-32 object-cover rounded-xl"
+                    className="w-22 h-22 sm:w-32 sm:h-32 object-cover rounded-xl"
                   />
                 </div>
               </div>
@@ -31,7 +31,7 @@ const CartItem = ({ item, onRemove }) => {
 
             {/* Title and Subtitle */}
             <div className="flex-1 flex flex-col min-w-0">
-              <div className="flex justify-between items-start mb-4 sm:mb-5">
+              <div className="flex justify-between items-start mb-2">
                 <h3 className="text-2xl sm:text-3xl font-bold text-white pr-3" style={{ display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{item.name}</h3>
                 {item.id !== 1 && (
                   <button
@@ -42,11 +42,15 @@ const CartItem = ({ item, onRemove }) => {
                   </button>
                 )}
               </div>
-              <p className="text-base sm:text-lg text-white/70 mb-4 sm:mb-5 line-clamp-2">{item.description}</p>
+              {/* <p className="text-base sm:text-lg text-white/70 mb-1 sm:mb-3 line-clamp-2">{item.description}</p> */}
               <div className="flex items-center space-x-2">
                 <span className="text-base sm:text-lg text-red-300 font-medium">⏱️ {item.duration}</span>
               </div>
             </div>
+          </div>
+
+          <div className="flex items-center space-x-2">
+            <p className="text-base sm:text-lg text-white/70 line-clamp-2">{item.description}</p>
           </div>
 
           {/* Middle Stack: What's Included (starts from left) */}
@@ -65,7 +69,7 @@ const CartItem = ({ item, onRemove }) => {
           </div>
 
           {/* Bottom Stack: Price */}
-          <div className="flex items-center justify-between pt-6 sm:pt-8 border-t border-white/10">
+          <div className="flex items-center justify-between pt-4 sm:pt-6 border-t border-white/10">
             <div className="flex items-center space-x-4">
               <span className="text-3xl font-bold text-white">₹{item.price.toLocaleString()}</span>
               <span className="text-xl text-white/50 line-through">₹{item.originalPrice.toLocaleString()}</span>

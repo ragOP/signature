@@ -9,7 +9,7 @@ const ServicesSection = () => {
       icon: "📞",
       title: "Live Call",
       subtitle: "45 mins",
-      description: "Experience a transformative 45-minute one-on-one consultation with our certified astro-numerology expert. Get personalized insights about your love life, career path, and financial opportunities. Ask any questions and receive immediate guidance to unlock your true potential and overcome life's challenges. Our expert will analyze your birth chart in real-time and provide actionable solutions for your specific situation.",
+      description: "Transformative 45-minute consultation with our certified expert. Get personalized insights about love, career, and finances. Ask questions and receive immediate guidance to unlock your potential.",
       gradientFrom: "from-amber-500/20",
       gradientTo: "to-orange-500/20",
       borderColor: "hover:border-amber-400/50"
@@ -18,7 +18,7 @@ const ServicesSection = () => {
       icon: "🔮",
       title: "Kundali Reading",
       subtitle: "Detailed Analysis",
-      description: "Comprehensive birth chart analysis revealing your life's purpose, strengths, and opportunities. Our expert will decode your complete astrological blueprint, including planetary positions, houses, and aspects. Discover your hidden talents, understand relationship compatibility, and identify the best timing for important decisions. This detailed reading provides a roadmap for your spiritual and material journey ahead.",
+      description: "Comprehensive birth chart analysis revealing your life's purpose and opportunities. Discover hidden talents, understand relationships, and identify the best timing for important decisions.",
       gradientFrom: "from-purple-500/20",
       gradientTo: "to-pink-500/20",
       borderColor: "hover:border-purple-400/50"
@@ -27,7 +27,7 @@ const ServicesSection = () => {
       icon: "📄",
       title: "Love + Wealth",
       subtitle: "PDF Reports",
-      description: "In-depth reports covering love life, career prospects, and financial opportunities with actionable insights. Receive comprehensive written analysis of your romantic relationships, career trajectory, and wealth-building potential. These detailed reports include personalized recommendations, timing for important decisions, and strategies to enhance your success in both love and financial matters.",
+      description: "In-depth reports covering love life, career prospects, and financial opportunities. Receive personalized recommendations and strategies to enhance your success in both areas.",
       gradientFrom: "from-green-500/20",
       gradientTo: "to-teal-500/20",
       borderColor: "hover:border-green-400/50"
@@ -35,7 +35,7 @@ const ServicesSection = () => {
   ];
 
   return (
-    <section className="bg-gradient-to-b from-black via-slate-900/50 to-black">
+    <section className="bg-gradient-to-b mt-4 from-black via-slate-900/50 to-black">
       {/* Animated Background - Matching Hero Section */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900/20 to-slate-900"></div>

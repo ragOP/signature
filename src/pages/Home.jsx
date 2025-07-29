@@ -22,8 +22,6 @@ function Home() {
 
       <MainContent />
 
-      <ServicesSection />
-
       <WhatsIncludedSection />
 
       <PastWorkProofSection />
@@ -31,6 +29,8 @@ function Home() {
       <LifeDecodedSection />
 
       <TestimonialsSection />
+
+      <ServicesSection />
 
       <PricingSection />
 
