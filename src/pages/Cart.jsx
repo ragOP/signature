@@ -17,7 +17,7 @@ function Cart() {
       description: "1-on-1 personalized consultation with India's top astro-numerology expert",
       price: 1499,
       originalPrice: 9999,
-      duration: "60 minutes",
+      duration: "45 minutes",
       features: ["Personalized birth chart analysis", "Life path guidance", "Career & relationship insights", "Remedial solutions"],
       image: "/astro.jpg"
     }
@@ -46,7 +46,7 @@ function Cart() {
         "Easy-to-follow format",
         "Based 100% on your birth chart"
       ],
-      price: 999,
+      price: 199,
       originalPrice: 2999,
       icon: "🔮",
       color: {
@@ -65,7 +65,7 @@ function Cart() {
         "How to break karmic cycles",
         "Personalized healing path & action steps"
       ],
-      price: 799,
+      price: 199,
       originalPrice: 2499,
       icon: "🪷",
       color: {
@@ -187,48 +187,87 @@ function Cart() {
               </div>
             </div>
           ) : (
-            /* Cart Items */
-            <div className={`grid grid-cols-1 lg:grid-cols-3 px-4 gap-4 sm:gap-6 lg:gap-8 transition-all duration-1000 delay-500 transform ${animateElements ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
-              {/* Cart Items List */}
-              <div className="lg:col-span-2 space-y-4 sm:space-y-6">
-                {cartItems.map((item, index) => (
-                  <div
-                    key={item.id}
-                    className={`transition-all duration-700 delay-${index * 200} transform ${animateElements ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'}`}
-                  >
-                    <CartItem item={item} onRemove={removeItem} />
+            <>
+              {/* Cart Items - Mobile Layout (unchanged) */}
+              <div className={`lg:hidden grid grid-cols-1 px-4 gap-4 sm:gap-6 transition-all duration-1000 delay-500 transform ${animateElements ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
+                {/* Cart Items List */}
+                <div className="space-y-4 sm:space-y-6">
+                  {cartItems.map((item, index) => (
+                    <div
+                      key={item.id}
+                      className={`transition-all duration-700 delay-${index * 200} transform ${animateElements ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'}`}
+                    >
+                      <CartItem item={item} onRemove={removeItem} />
+                    </div>
+                  ))}
+                </div>
+
+                {/* Order Summary and Forms - Mobile: Stacked */}
+                <div className="space-y-4 sm:space-y-6">
+                  {/* Additional Products Section */}
+                  <div className={`transition-all duration-700 delay-700 transform ${animateElements ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
+                    <AdditionalProducts
+                      products={additionalProducts}
+                      selectedProducts={selectedProducts}
+                      onProductToggle={onProductToggle}
+                    />
                   </div>
-                ))}
-              </div>
 
-              {/* Order Summary and Forms - Mobile: Stacked, Desktop: Sidebar */}
-              <div className="lg:col-span-1 space-y-4 sm:space-y-6">
-                {/* Additional Products Section - Above Order Summary */}
-                <div className={`transition-all duration-700 delay-700 transform ${animateElements ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
-                  <AdditionalProducts
-                    products={additionalProducts}
-                    selectedProducts={selectedProducts}
-                    onProductToggle={onProductToggle}
-                  />
-                </div>
+                  {/* Consultation Form */}
+                  <div className={`transition-all duration-700 delay-800 transform ${animateElements ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
+                    <ConsultationForm onSubmit={handleConsultationFormSubmit} />
+                  </div>
 
-                {/* Consultation Form */}
-                <div className={`transition-all duration-700 delay-800 transform ${animateElements ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
-                  <ConsultationForm onSubmit={handleConsultationFormSubmit} />
-                </div>
-
-                {/* Order Summary */}
-                <div className={`transition-all duration-700 delay-900 transform ${animateElements ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
-                  <OrderSummary
-                    subtotal={subtotal}
-                    discount={discount}
-                    total={total}
-                    isCheckingOut={isCheckingOut}
-                    onCheckout={handleCheckout}
-                  />
+                  {/* Order Summary */}
+                  <div className={`transition-all duration-700 delay-900 transform ${animateElements ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
+                    <OrderSummary
+                      subtotal={subtotal}
+                      discount={discount}
+                      total={total}
+                      isCheckingOut={isCheckingOut}
+                      onCheckout={handleCheckout}
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
+
+              {/* Desktop Layout - New Design */}
+              <div className={`hidden lg:block px-4 transition-all duration-1000 delay-500 transform ${animateElements ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
+                <div className="max-w-6xl mx-auto space-y-8">
+                  {/* Main Cart Item */}
+                  <div className={`transition-all duration-700 delay-200 transform ${animateElements ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'}`}>
+                    {cartItems.map((item) => (
+                      <CartItem key={item.id} item={item} onRemove={removeItem} />
+                    ))}
+                  </div>
+
+                  {/* Additional Products Section */}
+                  <div className={`transition-all duration-700 delay-400 transform ${animateElements ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
+                    <AdditionalProducts
+                      products={additionalProducts}
+                      selectedProducts={selectedProducts}
+                      onProductToggle={onProductToggle}
+                    />
+                  </div>
+
+                  {/* Consultation Form */}
+                  <div className={`transition-all duration-700 delay-600 transform ${animateElements ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
+                    <ConsultationForm onSubmit={handleConsultationFormSubmit} />
+                  </div>
+
+                  {/* Order Summary */}
+                  <div className={`transition-all duration-700 delay-800 transform ${animateElements ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
+                    <OrderSummary
+                      subtotal={subtotal}
+                      discount={discount}
+                      total={total}
+                      isCheckingOut={isCheckingOut}
+                      onCheckout={handleCheckout}
+                    />
+                  </div>
+                </div>
+              </div>
+            </>
           )}
 
 
