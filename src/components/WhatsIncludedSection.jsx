@@ -36,7 +36,6 @@ const SERVICES_DATA = [
     }
 ];
 
-// Reusable UI components - Exactly matching LifeDecodedSection BenefitItem style
 const ServiceItem = ({ title, description, icon }) => (
     <div className="group relative">
         <div className="absolute -inset-1 bg-gradient-to-r from-amber-500/20 to-orange-500/20 rounded-xl blur-lg group-hover:blur-xl transition-all duration-500 opacity-0 group-hover:opacity-100" />
@@ -49,7 +48,7 @@ const ServiceItem = ({ title, description, icon }) => (
             </div>
             <div className="flex-1">
                 <h3 className="text-white/90 text-base sm:text-lg text-left font-medium mb-1">{title}</h3>
-                <p className="text-white/70 text-sm leading-relaxed">{description}</p>
+                <p className="text-white/70 text-sm leading-relaxed text-left">{description}</p>
             </div>
         </div>
     </div>
@@ -149,7 +148,7 @@ function WhatsIncludedSection() {
                                         <span className="block text-white">What's Included</span>
                                     </h2>
 
-                                    <p className="text-lg sm:text-xl text-white/80 font-medium max-w-3xl mx-auto">
+                                    <p className="text-lg sm:text-xl text-white/80 font-medium max-w-3xl">
                                         Here's what you get in this Mega Bundle Call:
                                     </p>
                                 </header>
