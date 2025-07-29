@@ -24,7 +24,7 @@ function Home() {
 
       <ServicesSection />
 
-      <ClientTestimonialsSection />
+      <WhatsIncludedSection />
 
       <PastWorkProofSection />
 
@@ -32,9 +32,11 @@ function Home() {
 
       <TestimonialsSection />
 
-      <WhatsIncludedSection />
-
       <PricingSection />
+
+
+      <ClientTestimonialsSection />
+
 
 
       {/* Footer */}
