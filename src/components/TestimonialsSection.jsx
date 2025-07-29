@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PrimaryButton from './PrimaryButton';
 import { PhoneCall } from 'lucide-react';
 
@@ -76,13 +76,72 @@ const SocialProofItem = ({ text }) => (
 );
 
 function TestimonialsSection() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [currentX, setCurrentX] = useState(0);
+  const carouselRef = useRef(null);
+
+  // Auto carousel for mobile
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (!isDragging) {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % TESTIMONIALS_DATA.length);
+      }
+    }, 5000); // Change every 5 seconds
+
+    return () => clearInterval(interval);
+  }, [isDragging]);
+
+  const nextSlide = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % TESTIMONIALS_DATA.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + TESTIMONIALS_DATA.length) % TESTIMONIALS_DATA.length);
+  };
+
+  // Touch/Swipe handlers
+  const handleTouchStart = (e) => {
+    setIsDragging(true);
+    setStartX(e.touches[0].clientX);
+    setCurrentX(e.touches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    if (isDragging) {
+      setCurrentX(e.touches[0].clientX);
+    }
+  };
+
+  const handleTouchEnd = () => {
+    if (isDragging) {
+      const diff = startX - currentX;
+      const threshold = 50; // Minimum swipe distance
+
+      if (Math.abs(diff) > threshold) {
+        if (diff > 0) {
+          // Swiped left - next slide
+          nextSlide();
+        } else {
+          // Swiped right - previous slide
+          prevSlide();
+        }
+      }
+      
+      setIsDragging(false);
+      setStartX(0);
+      setCurrentX(0);
+    }
+  };
+
   return (
     <section className="py-6 sm:py-16 bg-gradient-to-b from-black via-slate-900/50 to-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto">
 
           {/* Header */}
-          <div className="text-center mb-12 sm:mb-16">
+          <div className="text-center mb-6 sm:mb-12">
             <div className="inline-flex items-center space-x-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full px-4 sm:px-6 py-2 sm:py-3 mb-4 sm:mb-6">
               <div className="w-2 h-2 bg-amber-400 rounded-full animate-pulse"></div>
               <span className="text-white/70 text-sm sm:text-base font-medium">Client Success Stories</span>
@@ -97,11 +156,52 @@ function TestimonialsSection() {
             </p>
           </div>
 
-          {/* Testimonials Grid */}
-          <div className="grid md:grid-cols-2 gap-6 sm:gap-10 mb-8 sm:mb-12">
-            {TESTIMONIALS_DATA.map((testimonial, index) => (
-              <TestimonialCard key={index} {...testimonial} />
-            ))}
+          {/* Testimonials Carousel */}
+          <div className="relative mb-8">
+            {/* Desktop Layout - 2 cards side by side */}
+            <div className="hidden md:grid md:grid-cols-2 md:gap-8 md:mb-12">
+              {TESTIMONIALS_DATA.map((testimonial, index) => (
+                <TestimonialCard key={index} {...testimonial} />
+              ))}
+            </div>
+
+            {/* Mobile Layout - Carousel */}
+            <div className="md:hidden relative">
+              <div
+                className="overflow-hidden"
+                ref={carouselRef}
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
+                style={{ touchAction: 'pan-y' }}
+              >
+                <div
+                  className="flex transition-transform duration-500 ease-in-out"
+                  style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+                >
+                  {TESTIMONIALS_DATA.map((testimonial, index) => (
+                    <div key={index} className="w-full flex-shrink-0">
+                      <TestimonialCard {...testimonial} />
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Mobile Dots Indicator */}
+              <div className="flex justify-center mt-6 space-x-2">
+                {TESTIMONIALS_DATA.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentIndex(index)}
+                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                      index === currentIndex 
+                        ? 'bg-gradient-to-r from-amber-400 to-orange-400 w-6' 
+                        : 'bg-amber-400/30'
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
 
           <PrimaryButton
