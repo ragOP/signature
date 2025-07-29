@@ -1,13 +1,7 @@
 import React, { useState } from 'react';
 
-const ConsultationForm = ({ onSubmit }) => {
-    const [formData, setFormData] = useState({
-        name: '',
-        dateOfBirth: '',
-        placeOfBirth: '',
-        gender: '',
-        preferredDateTime: ''
-    });
+const ConsultationForm = ({ onSubmit, formData, setFormData }) => {
+
 
     const [errors, setErrors] = useState({});
 
@@ -31,6 +25,18 @@ const ConsultationForm = ({ onSubmit }) => {
 
         if (!formData.name.trim()) {
             newErrors.name = 'Name is required';
+        }
+
+        if (!formData.phoneNumber.trim()) {
+            newErrors.phoneNumber = 'Phone number is required';
+        } else if (!/^[0-9]{10}$/.test(formData.phoneNumber.replace(/\s/g, ''))) {
+            newErrors.phoneNumber = 'Please enter a valid 10-digit phone number';
+        }
+
+        if (!formData.email.trim()) {
+            newErrors.email = 'Email is required';
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+            newErrors.email = 'Please enter a valid email address';
         }
 
         if (!formData.dateOfBirth) {
@@ -73,6 +79,7 @@ const ConsultationForm = ({ onSubmit }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log(formData);
         if (validateForm()) {
             onSubmit(formData);
         }
@@ -100,6 +107,46 @@ const ConsultationForm = ({ onSubmit }) => {
                         />
                         {errors.name && (
                             <p className="text-red-400 text-xs mt-1">{errors.name}</p>
+                        )}
+                    </div>
+
+                    {/* Phone Number */}
+                    <div>
+                        <label htmlFor="phoneNumber" className="block text-white font-medium text-sm mb-2">
+                            Phone Number *
+                        </label>
+                        <input
+                            type="tel"
+                            id="phoneNumber"
+                            name="phoneNumber"
+                            value={formData.phoneNumber}
+                            onChange={handleChange}
+                            className={`w-full px-4 py-3 bg-gradient-to-r from-white/15 to-white/5 border rounded-xl text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-red-400 transition-all duration-300 shadow-lg ${errors.phoneNumber ? 'border-red-400' : 'border-white/20'
+                                }`}
+                            placeholder="Enter your 10-digit phone number"
+                        />
+                        {errors.phoneNumber && (
+                            <p className="text-red-400 text-xs mt-1">{errors.phoneNumber}</p>
+                        )}
+                    </div>
+
+                    {/* Email */}
+                    <div>
+                        <label htmlFor="email" className="block text-white font-medium text-sm mb-2">
+                            Email Address *
+                        </label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            className={`w-full px-4 py-3 bg-gradient-to-r from-white/15 to-white/5 border rounded-xl text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-red-400 transition-all duration-300 shadow-lg ${errors.email ? 'border-red-400' : 'border-white/20'
+                                }`}
+                            placeholder="Enter your email address"
+                        />
+                        {errors.email && (
+                            <p className="text-red-400 text-xs mt-1">{errors.email}</p>
                         )}
                     </div>
 
@@ -197,11 +244,11 @@ const ConsultationForm = ({ onSubmit }) => {
 
                                     // Calculate minimum allowed date (current day + 2 days)
                                     const minAllowedDate = new Date(today.getTime() + 3 * 24 * 60 * 60 * 1000);
-                                    
+
                                     // For debugging - you can check the console
                                     console.log('Today:', today.toDateString());
                                     console.log('Min allowed date:', minAllowedDate.toDateString());
-                                    
+
                                     return minAllowedDate.toISOString().slice(0, 16);
                                 })()}
                                 className={`w-full px-4 py-3 bg-gradient-to-r from-white/15 to-white/5 border rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-red-400 transition-all duration-300 shadow-lg ${errors.preferredDateTime ? 'border-red-400' : 'border-white/20'

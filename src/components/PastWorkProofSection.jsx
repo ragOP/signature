@@ -187,7 +187,7 @@ const PastWorkProofSection = () => {
           <div className="max-w-md mx-auto">
             <PrimaryButton
               text="Buy Now"
-              icon={<ShoppingCart className="w-4 h-4" />}
+              icon={<ShoppingCart className="w-5 h-5" />}
               className="mb-4"
             />
           </div>

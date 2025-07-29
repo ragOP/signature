@@ -83,7 +83,7 @@ const Hero = () => {
                         </div>
 
                         {/* Stats */}
-                        <div className="grid grid-cols-3 gap-4 sm:gap-8 pt-2 sm:pt-8 border-t border-white/10">
+                        <div className="grid grid-cols-3 gap-4 sm:gap-8 space-y-2 pt-4 sm:pt-8 border-t border-white/10">
                             <div className="text-center">
                                 <div className="text-2xl sm:text-3xl font-bold text-amber-400">10K+</div>
                                 <div className="text-white/60 text-xs sm:text-sm">Happy Clients</div>

@@ -31,7 +31,7 @@ const SERVICES_DATA = [
     },
     {
         title: 'Numerology Add-On',
-        description: 'Mr. X will also decode your name vibration and number destiny.',
+        description: 'Our Astrolger will also decode your name vibration and number destiny.',
         icon: '🔢'
     }
 ];
@@ -56,14 +56,13 @@ const ServiceItem = ({ title, description, icon }) => (
 
 function WhatsIncludedSection() {
     return (
-        <section className="relative py-8 sm:py-16 bg-gradient-to-b from-black via-slate-900/50 to-black">
+        <section className="relative py-4 mb-4 sm:py-16 bg-gradient-to-b from-black via-slate-900/50 to-black">
 
             {/* Animated Background - Matching LifeDecodedSection */}
-            <div className="absolute inset-0">
+            {/* <div className="absolute inset-0">
                 <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900/20 to-slate-900"></div>
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(120,119,198,0.1),transparent_50%)]"></div>
 
-                {/* Floating Elements - Matching LifeDecodedSection */}
                 {[...Array(20)].map((_, i) => (
                     <div
                         key={i}
@@ -78,7 +77,7 @@ function WhatsIncludedSection() {
                         <div className={`w-1 h-1 rounded-full ${i % 3 === 0 ? 'bg-amber-400' : i % 3 === 1 ? 'bg-purple-400' : 'bg-white'} opacity-60`}></div>
                     </div>
                 ))}
-            </div>
+            </div> */}
 
             <style jsx>{`
                 @keyframes float {
@@ -134,7 +133,7 @@ function WhatsIncludedSection() {
                         <div className="absolute -inset-2 sm:-inset-4 bg-gradient-to-r from-amber-500/20 via-purple-500/20 to-orange-500/20 rounded-3xl blur-2xl group-hover:blur-3xl transition-all duration-500" />
 
                         {/* Main content container - Matching LifeDecodedSection */}
-                        <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl p-6 sm:p-8 lg:p-12 border border-white/20 shadow-2xl">
+                        <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl px-4 py-6 sm:p-8 lg:p-12 border border-white/20 shadow-2xl">
                             <div className="text-center space-y-6 sm:space-y-12">
 
                                 {/* Header Section - Matching LifeDecodedSection Style */}

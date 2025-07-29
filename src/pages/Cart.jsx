@@ -28,6 +28,8 @@ function Cart() {
   const [animateElements, setAnimateElements] = useState(false);
   const [consultationFormData, setConsultationFormData] = useState({
     name: '',
+    phoneNumber: '',
+    email: '',
     dateOfBirth: '',
     placeOfBirth: '',
     gender: '',
@@ -219,7 +221,11 @@ function Cart() {
 
                   {/* Consultation Form */}
                   <div className={`transition-all duration-700 delay-800 transform ${animateElements ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
-                    <ConsultationForm onSubmit={handleConsultationFormSubmit} />
+                    <ConsultationForm 
+                      onSubmit={handleConsultationFormSubmit} 
+                      formData={consultationFormData}
+                      setFormData={setConsultationFormData}
+                    />
                   </div>
 
                   {/* Order Summary */}
@@ -256,7 +262,11 @@ function Cart() {
 
                   {/* Consultation Form */}
                   <div className={`transition-all duration-700 delay-600 transform ${animateElements ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
-                    <ConsultationForm onSubmit={handleConsultationFormSubmit} />
+                    <ConsultationForm 
+                      onSubmit={handleConsultationFormSubmit} 
+                      formData={consultationFormData}
+                      setFormData={setConsultationFormData}
+                    />
                   </div>
 
                   {/* Order Summary */}

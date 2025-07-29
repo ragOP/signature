@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import PrimaryButton from './PrimaryButton';
+import { ShoppingCart } from 'lucide-react';
 
 function StickyFooter() {
   const [timeLeft, setTimeLeft] = useState({ hours: 12, minutes: 0 });
@@ -20,7 +21,7 @@ function StickyFooter() {
     return () => clearInterval(timer);
   }, []);
 
-    return (
+  return (
     <div className="fixed bottom-0 left-0 right-0 z-50 bg-gradient-to-r from-red-900/95 via-pink-900/90 to-purple-900/95 backdrop-blur-xl shadow-2xl border-t border-red-400/30">
       <div className="max-w-7xl mx-auto px-3 sm:px-4 py-2 sm:py-3">
         {/* Mobile Layout - Horizontal */}
@@ -43,7 +44,7 @@ function StickyFooter() {
                   <div className="text-red-300 text-xs uppercase">Min</div>
                 </div>
               </div>
-              
+
               {/* Pricing */}
               <div className="flex items-center space-x-1 ml-2">
                 <span className="text-red-300/60 line-through text-xs">₹9999</span>
@@ -53,7 +54,9 @@ function StickyFooter() {
 
             {/* Right Side - CTA Button */}
             <div className="w-28 flex-shrink-0">
-              <PrimaryButton text="Buy Now" className='whitespace-nowrap' />
+              <PrimaryButton text="Buy Now" className='whitespace-nowrap'
+              // icon={<ShoppingCart className="w-5 h-5" />}
+              />
             </div>
           </div>
         </div>

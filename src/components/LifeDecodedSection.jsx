@@ -148,8 +148,8 @@ function LifeDecodedSection() {
                 {/* Problems Section */}
                 <section className="space-y-4 sm:space-y-8">
                   {PROBLEMS_DATA.map((problem, index) => (
-                    <div key={index} className="flex items-start space-x-2 sm:space-x-6">
-                      <div className="flex-shrink-0 mt-1">
+                    <div key={index} className="flex items-center space-x-2 sm:space-x-6">
+                      <div className="flex-shrink-0">
                         <span className="text-2xl sm:text-2xl">{problem.emoji}</span>
                       </div>
                       <p className="text-white/90 text-sm sm:text-lg font-medium break-words">{problem.text}</p>
@@ -163,7 +163,7 @@ function LifeDecodedSection() {
                     <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-4 sm:mb-6">
                       But what if you could get:
                     </h3>
-                    <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-amber-400 to-orange-400 rounded-full" />
+                    <div className="absolute -bottom-3 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-amber-400 to-orange-400 rounded-full" />
                   </div>
 
                   <div className="space-y-3 sm:space-y-6 max-w-3xl mx-auto">
@@ -177,7 +177,7 @@ function LifeDecodedSection() {
                 <section className="space-y-6 sm:space-y-10">
                   <div className="relative">
                     <p className="text-lg sm:text-xl lg:text-2xl text-white/90 leading-relaxed max-w-4xl mx-auto font-medium">
-                      That's what you get inside this 1-on-1 Personal Session with Mr. X — a guided, peaceful, and eye-opening call.
+                      That's what you get inside this 1-on-1 Personal Session with Our Certified Astrolger — a guided, peaceful, and eye-opening call.
                     </p>
                     <div className="absolute -inset-4 bg-gradient-to-r from-amber-500/10 to-purple-500/10 rounded-2xl blur-xl" />
                   </div>
