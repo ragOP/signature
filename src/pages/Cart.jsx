@@ -1,39 +1,48 @@
-import { Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import { X, Shield, Sparkles, Check, Star } from 'lucide-react';
-import Navbar from '../components/Navbar';
-import TestimonialsSection from '../components/TestimonialsSection';
-import ClientTestimonialsSection from '../components/ClientTestimonialsSection';
-import CartItem from '../components/CartItem';
-import OrderSummary from '../components/OrderSummary';
-import AdditionalProducts from '../components/AdditionalProducts';
-import ConsultationForm from '../components/ConsultationForm';
+import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { X, Shield, Sparkles, Check, Star } from "lucide-react";
+import Navbar from "../components/Navbar";
+import TestimonialsSection from "../components/TestimonialsSection";
+import ClientTestimonialsSection from "../components/ClientTestimonialsSection";
+import CartItem from "../components/CartItem";
+import OrderSummary from "../components/OrderSummary";
+import AdditionalProducts from "../components/AdditionalProducts";
+import ConsultationForm from "../components/ConsultationForm";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Cart() {
+  const navigate = useNavigate();
   const [cartItems, setCartItems] = useState([
     {
       id: 1,
       name: "Premium Astro Consultation",
-      description: "1-on-1 personalized consultation with India's top astro-numerology expert",
+      description:
+        "1-on-1 personalized consultation with India's top astro-numerology expert",
       price: 1499,
       originalPrice: 9999,
       duration: "45 minutes",
-      features: ["Personalized birth chart analysis", "Life path guidance", "Career & relationship insights", "Remedial solutions"],
-      image: "/astro.jpg"
-    }
+      features: [
+        "Personalized birth chart analysis",
+        "Life path guidance",
+        "Career & relationship insights",
+        "Remedial solutions",
+      ],
+      image: "/astro.jpg",
+    },
   ]);
 
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [animateElements, setAnimateElements] = useState(false);
   const [consultationFormData, setConsultationFormData] = useState({
-    name: '',
-    phoneNumber: '',
-    email: '',
-    dateOfBirth: '',
-    placeOfBirth: '',
-    gender: '',
-    preferredDateTime: ''
+    name: "",
+    phoneNumber: "",
+    email: "",
+    dateOfBirth: "",
+    placeOfBirth: "",
+    gender: "",
+    preferredDateTime: "",
   });
 
   // Additional products data
@@ -41,12 +50,13 @@ function Cart() {
     {
       id: 2,
       title: "Plan Your Future — Month by Month!",
-      description: "Wondering what 2025 and 2026 hold for your love life, finances, and growth? This detailed month-by-month astrological forecast gives you the clarity you need to plan ahead with confidence!",
+      description:
+        "Wondering what 2025 and 2026 hold for your love life, finances, and growth? This detailed month-by-month astrological forecast gives you the clarity you need to plan ahead with confidence!",
       features: [
         "Key dates for love, wealth & career",
         "Monthly guidance for 24 months",
         "Easy-to-follow format",
-        "Based 100% on your birth chart"
+        "Based 100% on your birth chart",
       ],
       price: 199,
       originalPrice: 2999,
@@ -54,18 +64,19 @@ function Cart() {
       color: {
         from: "from-purple-500/20",
         via: "via-pink-500/20",
-        to: "to-indigo-500/20"
-      }
+        to: "to-indigo-500/20",
+      },
     },
     {
       id: 3,
       title: "Discover Your Soul's Purpose",
-      description: "Your soul carries a journey, lessons, and unresolved karma. This deep-dive report reveals your true life path and what you must overcome to feel fulfilled and in flow.",
+      description:
+        "Your soul carries a journey, lessons, and unresolved karma. This deep-dive report reveals your true life path and what you must overcome to feel fulfilled and in flow.",
       features: [
         "Your core life purpose",
         "Past life karma & spiritual blocks",
         "How to break karmic cycles",
-        "Personalized healing path & action steps"
+        "Personalized healing path & action steps",
       ],
       price: 199,
       originalPrice: 2499,
@@ -73,14 +84,14 @@ function Cart() {
       color: {
         from: "from-emerald-500/20",
         via: "via-teal-500/20",
-        to: "to-cyan-500/20"
-      }
-    }
+        to: "to-cyan-500/20",
+      },
+    },
   ];
 
   useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-    
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+
     const timer = setTimeout(() => {
       setAnimateElements(true);
     }, 100);
@@ -88,49 +99,142 @@ function Cart() {
   }, []);
 
   const onProductToggle = (productId) => {
-    setSelectedProducts(prev =>
+    setSelectedProducts((prev) =>
       prev.includes(productId)
-        ? prev.filter(id => id !== productId)
+        ? prev.filter((id) => id !== productId)
         : [...prev, productId]
     );
   };
 
   const handleConsultationFormSubmit = (formData) => {
     setConsultationFormData(formData);
-    console.log('Consultation form submitted:', formData);
+    console.log("Consultation form submitted:", formData);
     // You can add additional logic here like API calls, validation, etc.
   };
 
   const removeItem = (itemId) => {
-    setCartItems(prev => prev.filter(item => item.id !== itemId));
+    setCartItems((prev) => prev.filter((item) => item.id !== itemId));
   };
 
   // Calculate cart totals including selected additional products
-  const selectedAdditionalProducts = additionalProducts.filter(product =>
+  const selectedAdditionalProducts = additionalProducts.filter((product) =>
     selectedProducts.includes(product.id)
   );
 
-  const cartSubtotal = cartItems.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0);
-  const additionalSubtotal = selectedAdditionalProducts.reduce((sum, product) => sum + product.price, 0);
+  const cartSubtotal = cartItems.reduce(
+    (sum, item) => sum + item.price * (item.quantity || 1),
+    0
+  );
+  const additionalSubtotal = selectedAdditionalProducts.reduce(
+    (sum, product) => sum + product.price,
+    0
+  );
   const subtotal = cartSubtotal + additionalSubtotal;
 
-  const cartDiscount = cartItems.reduce((sum, item) => sum + ((item.originalPrice - item.price) * (item.quantity || 1)), 0);
-  const additionalDiscount = selectedAdditionalProducts.reduce((sum, product) => sum + (product.originalPrice - product.price), 0);
+  const cartDiscount = cartItems.reduce(
+    (sum, item) =>
+      sum + (item.originalPrice - item.price) * (item.quantity || 1),
+    0
+  );
+  const additionalDiscount = selectedAdditionalProducts.reduce(
+    (sum, product) => sum + (product.originalPrice - product.price),
+    0
+  );
   const discount = cartDiscount + additionalDiscount;
 
   const total = subtotal;
 
-  const handleCheckout = () => {
-    // Scroll to top when checkout button is clicked (immediate, no animation)
-    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-    
-    setIsCheckingOut(true);
-    // Simulate checkout process
-    setTimeout(() => {
+  const loadScript = (src) => {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = src;
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.body.appendChild(script);
+    });
+  };
+
+  useEffect(() => {
+    loadScript("https://checkout.razorpay.com/v1/checkout.js").then(
+      (result) => {
+        if (result) {
+          console.log("Razorpay script loaded successfully");
+        }
+      }
+    );
+  }, []);
+
+  const handleCheckout = async () => {
+    if (
+      consultationFormData?.name === "" ||
+      consultationFormData?.email === "" ||
+      consultationFormData?.phoneNumber === "" ||
+      consultationFormData?.dateOfBirth === "" ||
+      consultationFormData?.placeOfBirth === "" ||
+      consultationFormData?.gender === "" ||
+      consultationFormData?.preferredDateTime === ""
+    ) {
+      alert("Please fill all the fields");
+      return;
+    }
+    try {
+      const res = await axios.post(
+        "https://skyscale-be.onrender.com/api/payment/razorpay",
+        {
+          amount: total,
+        }
+      );
+
+      console.log(res, "res");
+      const data = res.data.data;
+      console.log(data, "data");
+
+      const options = {
+        key: "rzp_test_0az4AeRtpDjU8S",
+        amount: data.amount,
+        currency: "INR",
+        name: "AstroCart",
+        description: "Order Payment",
+        order_id: data.orderId,
+        handler: async function (response) {
+          await axios.post("https://skyscale-be.onrender.com/api/create-order", {
+            amount: total,
+            razorpayOrderId: response.razorpay_order_id,
+            razorpayPaymentId: response.razorpay_payment_id,
+            razorpaySignature: response.razorpay_signature,
+            name: consultationFormData?.name,
+            email: consultationFormData?.email,
+            phone: consultationFormData?.phoneNumber,
+            dateOfBirth: consultationFormData?.dateOfBirth,
+            placeOfBirth: consultationFormData?.placeOfBirth,
+            gender: consultationFormData?.gender,
+            preferredDateTime: consultationFormData?.preferredDateTime,
+            orderId: data.orderId,
+          });
+        },
+        prefill: {
+          name: consultationFormData?.name,
+          email: consultationFormData?.email,
+          contact: consultationFormData?.phoneNumber,
+        },
+        theme: {
+          color: "#00BFA5",
+        },
+      };
+
+      const rzp = new window.Razorpay(options);
+      rzp.open();
+      navigate("/order-confirmation", {
+        state: {
+          orderId: data.orderId,
+          amount: data.amount,
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    } finally {
       setIsCheckingOut(false);
-      console.log('Checkout completed with consultation data:', consultationFormData);
-      alert('Thank you for your purchase! You will receive a confirmation email shortly.');
-    }, 2000);
+    }
   };
 
   return (
@@ -152,10 +256,18 @@ function Cart() {
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
               animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${3 + Math.random() * 2}s`
+              animationDuration: `${3 + Math.random() * 2}s`,
             }}
           >
-            <div className={`w-1 h-1 rounded-full ${i % 3 === 0 ? 'bg-amber-400' : i % 3 === 1 ? 'bg-purple-400' : 'bg-white'} opacity-60`}></div>
+            <div
+              className={`w-1 h-1 rounded-full ${
+                i % 3 === 0
+                  ? "bg-amber-400"
+                  : i % 3 === 1
+                  ? "bg-purple-400"
+                  : "bg-white"
+              } opacity-60`}
+            ></div>
           </div>
         ))}
       </div>
@@ -164,28 +276,51 @@ function Cart() {
       <section className="relative pt-0 sm:pt-12">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
-          <div className={`text-center mb-6 sm:mb-8 px-4 mt-4 sm:mt-6 transition-all duration-1000 transform ${animateElements ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
+          <div
+            className={`text-center mb-6 sm:mb-8 px-4 mt-4 sm:mt-6 transition-all duration-1000 transform ${
+              animateElements
+                ? "translate-y-0 opacity-100"
+                : "translate-y-8 opacity-0"
+            }`}
+          >
             <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold mb-3 sm:mb-4">
               <span className="bg-gradient-to-r from-red-400 via-pink-400 to-purple-400 bg-clip-text text-transparent animate-pulse">
                 Your Cosmic Cart
               </span>
             </h1>
             <p className="text-base sm:text-lg lg:text-xl text-white/70 max-w-2xl mx-auto px-2">
-              Review your selected services and prepare for your transformative journey
+              Review your selected services and prepare for your transformative
+              journey
             </p>
           </div>
 
           {cartItems.length === 0 ? (
             /* Empty Cart */
-            <div className={`max-w-2xl px-4 mx-auto transition-all duration-1000 delay-300 transform ${animateElements ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-8 opacity-0 scale-95'}`}>
+            <div
+              className={`max-w-2xl px-4 mx-auto transition-all duration-1000 delay-300 transform ${
+                animateElements
+                  ? "translate-y-0 opacity-100 scale-100"
+                  : "translate-y-8 opacity-0 scale-95"
+              }`}
+            >
               <div className="relative group">
                 <div className="absolute -inset-1 bg-gradient-to-r from-red-500/20 via-pink-500/20 to-purple-500/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
                 <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl p-6 sm:p-8 border border-white/20">
                   <div className="text-center space-y-4 sm:space-y-6">
-                    <div className="text-4xl sm:text-6xl mb-3 sm:mb-4 animate-bounce">✨</div>
-                    <h3 className="text-xl sm:text-2xl font-bold text-white">Your Cart is Empty</h3>
-                    <p className="text-sm sm:text-base text-white/70 px-2">Ready to unlock your cosmic potential? Browse our premium services!</p>
-                    <Link to="/home" className="inline-block bg-gradient-to-r from-red-500 to-pink-500 text-white px-6 sm:px-8 py-2 sm:py-3 rounded-full font-semibold hover:from-red-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105 buy-now-shimmer text-sm sm:text-base">
+                    <div className="text-4xl sm:text-6xl mb-3 sm:mb-4 animate-bounce">
+                      ✨
+                    </div>
+                    <h3 className="text-xl sm:text-2xl font-bold text-white">
+                      Your Cart is Empty
+                    </h3>
+                    <p className="text-sm sm:text-base text-white/70 px-2">
+                      Ready to unlock your cosmic potential? Browse our premium
+                      services!
+                    </p>
+                    <Link
+                      to="/home"
+                      className="inline-block bg-gradient-to-r from-red-500 to-pink-500 text-white px-6 sm:px-8 py-2 sm:py-3 rounded-full font-semibold hover:from-red-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105 buy-now-shimmer text-sm sm:text-base"
+                    >
                       <span>Explore Services</span>
                     </Link>
                   </div>
@@ -195,13 +330,25 @@ function Cart() {
           ) : (
             <>
               {/* Cart Items - Mobile Layout (unchanged) */}
-              <div className={`lg:hidden grid grid-cols-1 px-4 gap-4 sm:gap-6 transition-all duration-1000 delay-500 transform ${animateElements ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
+              <div
+                className={`lg:hidden grid grid-cols-1 px-4 gap-4 sm:gap-6 transition-all duration-1000 delay-500 transform ${
+                  animateElements
+                    ? "translate-y-0 opacity-100"
+                    : "translate-y-8 opacity-0"
+                }`}
+              >
                 {/* Cart Items List */}
                 <div className="space-y-4 sm:space-y-6">
                   {cartItems.map((item, index) => (
                     <div
                       key={item.id}
-                      className={`transition-all duration-700 delay-${index * 200} transform ${animateElements ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'}`}
+                      className={`transition-all duration-700 delay-${
+                        index * 200
+                      } transform ${
+                        animateElements
+                          ? "translate-x-0 opacity-100"
+                          : "translate-x-8 opacity-0"
+                      }`}
                     >
                       <CartItem item={item} onRemove={removeItem} />
                     </div>
@@ -211,7 +358,13 @@ function Cart() {
                 {/* Order Summary and Forms - Mobile: Stacked */}
                 <div className="space-y-4 sm:space-y-6">
                   {/* Additional Products Section */}
-                  <div className={`transition-all duration-700 delay-700 transform ${animateElements ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
+                  <div
+                    className={`transition-all duration-700 delay-700 transform ${
+                      animateElements
+                        ? "translate-y-0 opacity-100"
+                        : "translate-y-8 opacity-0"
+                    }`}
+                  >
                     <AdditionalProducts
                       products={additionalProducts}
                       selectedProducts={selectedProducts}
@@ -220,16 +373,28 @@ function Cart() {
                   </div>
 
                   {/* Consultation Form */}
-                  <div className={`transition-all duration-700 delay-800 transform ${animateElements ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
-                    <ConsultationForm 
-                      onSubmit={handleConsultationFormSubmit} 
+                  <div
+                    className={`transition-all duration-700 delay-800 transform ${
+                      animateElements
+                        ? "translate-y-0 opacity-100"
+                        : "translate-y-8 opacity-0"
+                    }`}
+                  >
+                    <ConsultationForm
+                      onSubmit={handleConsultationFormSubmit}
                       formData={consultationFormData}
                       setFormData={setConsultationFormData}
                     />
                   </div>
 
                   {/* Order Summary */}
-                  <div className={`transition-all duration-700 delay-900 transform ${animateElements ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
+                  <div
+                    className={`transition-all duration-700 delay-900 transform ${
+                      animateElements
+                        ? "translate-y-0 opacity-100"
+                        : "translate-y-8 opacity-0"
+                    }`}
+                  >
                     <OrderSummary
                       subtotal={subtotal}
                       discount={discount}
@@ -242,17 +407,39 @@ function Cart() {
               </div>
 
               {/* Desktop Layout - New Design */}
-              <div className={`hidden lg:block px-4 transition-all duration-1000 delay-500 transform ${animateElements ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
+              <div
+                className={`hidden lg:block px-4 transition-all duration-1000 delay-500 transform ${
+                  animateElements
+                    ? "translate-y-0 opacity-100"
+                    : "translate-y-8 opacity-0"
+                }`}
+              >
                 <div className="max-w-6xl mx-auto space-y-8">
                   {/* Main Cart Item */}
-                  <div className={`transition-all duration-700 delay-200 transform ${animateElements ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'}`}>
+                  <div
+                    className={`transition-all duration-700 delay-200 transform ${
+                      animateElements
+                        ? "translate-x-0 opacity-100"
+                        : "translate-x-8 opacity-0"
+                    }`}
+                  >
                     {cartItems.map((item) => (
-                      <CartItem key={item.id} item={item} onRemove={removeItem} />
+                      <CartItem
+                        key={item.id}
+                        item={item}
+                        onRemove={removeItem}
+                      />
                     ))}
                   </div>
 
                   {/* Additional Products Section */}
-                  <div className={`transition-all duration-700 delay-400 transform ${animateElements ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
+                  <div
+                    className={`transition-all duration-700 delay-400 transform ${
+                      animateElements
+                        ? "translate-y-0 opacity-100"
+                        : "translate-y-8 opacity-0"
+                    }`}
+                  >
                     <AdditionalProducts
                       products={additionalProducts}
                       selectedProducts={selectedProducts}
@@ -261,16 +448,28 @@ function Cart() {
                   </div>
 
                   {/* Consultation Form */}
-                  <div className={`transition-all duration-700 delay-600 transform ${animateElements ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
-                    <ConsultationForm 
-                      onSubmit={handleConsultationFormSubmit} 
+                  <div
+                    className={`transition-all duration-700 delay-600 transform ${
+                      animateElements
+                        ? "translate-y-0 opacity-100"
+                        : "translate-y-8 opacity-0"
+                    }`}
+                  >
+                    <ConsultationForm
+                      onSubmit={handleConsultationFormSubmit}
                       formData={consultationFormData}
                       setFormData={setConsultationFormData}
                     />
                   </div>
 
                   {/* Order Summary */}
-                  <div className={`transition-all duration-700 delay-800 transform ${animateElements ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
+                  <div
+                    className={`transition-all duration-700 delay-800 transform ${
+                      animateElements
+                        ? "translate-y-0 opacity-100"
+                        : "translate-y-8 opacity-0"
+                    }`}
+                  >
                     <OrderSummary
                       subtotal={subtotal}
                       discount={discount}
@@ -284,16 +483,13 @@ function Cart() {
             </>
           )}
 
-
           <TestimonialsSection />
 
           <ClientTestimonialsSection />
-
-
         </div>
       </section>
     </div>
   );
 }
 
-export default Cart; 
+export default Cart;
