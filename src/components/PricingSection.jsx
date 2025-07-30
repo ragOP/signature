@@ -75,12 +75,12 @@ const CTAButton = () => {
 
 function PricingSection() {
   return (
-    <section className="py-6 sm:py-16 bg-gradient-to-b from-black via-slate-900/50 to-black">
+    <section className="py-1 lg:py-6 bg-gradient-to-b from-black via-slate-900/50 to-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto">
           
           {/* Header */}
-          <div className="text-center mb-12 sm:mb-16">
+          <div className="text-center mb-6 lg:mb-6">
             <div className="inline-flex items-center space-x-2 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full px-4 sm:px-6 py-2 sm:py-3 mb-4 sm:mb-6">
               <div className="w-2 h-2 bg-red-400 rounded-full animate-pulse"></div>
               <span className="text-white/70 text-sm sm:text-base font-medium">Limited Time Offer</span>
@@ -96,7 +96,7 @@ function PricingSection() {
           </div>
 
           {/* Pricing Card */}
-          <div className="mb-8 sm:mb-12">
+          <div className="mb-8 sm:mb-16">
             <PricingCard />
           </div>
 

@@ -183,7 +183,7 @@ const PastWorkProofSection = () => {
         </div>
 
         {/* Call to Action Button */}
-        <div className="text-center mt-16 sm:mt-20">
+        <div className="text-center mt-6 lg:mt-6 sm:mt-20">
           <div className="max-w-md mx-auto">
             <PrimaryButton
               text="Buy Now"
