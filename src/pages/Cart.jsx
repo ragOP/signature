@@ -165,19 +165,21 @@ function Cart() {
   }, []);
 
   const handleCheckout = async () => {
-    if (
-      consultationFormData?.name === "" ||
-      consultationFormData?.email === "" ||
-      consultationFormData?.phoneNumber === "" ||
-      consultationFormData?.dateOfBirth === "" ||
-      consultationFormData?.placeOfBirth === "" ||
-      consultationFormData?.gender === "" ||
-      consultationFormData?.preferredDateTime === ""
-    ) {
-      alert("Please fill all the fields");
-      return;
-    }
+    // if (
+    //   consultationFormData?.name === "" ||
+    //   consultationFormData?.email === "" ||
+    //   consultationFormData?.phoneNumber === "" ||
+    //   consultationFormData?.dateOfBirth === "" ||
+    //   consultationFormData?.placeOfBirth === "" ||
+    //   consultationFormData?.gender === "" ||
+    //   consultationFormData?.preferredDateTime === ""
+    // ) {
+    //   alert("Please fill all the fields");
+    //   return;
+    // }
     try {
+      setIsCheckingOut(true);
+
       const res = await axios.post(
         "https://skyscale-be.onrender.com/api/payment/razorpay",
         {
