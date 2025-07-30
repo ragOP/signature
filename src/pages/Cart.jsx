@@ -197,20 +197,32 @@ function Cart() {
         description: "Order Payment",
         order_id: data.orderId,
         handler: async function (response) {
-          await axios.post("https://skyscale-be.onrender.com/api/create-order", {
-            amount: total,
-            razorpayOrderId: response.razorpay_order_id,
-            razorpayPaymentId: response.razorpay_payment_id,
-            razorpaySignature: response.razorpay_signature,
-            name: consultationFormData?.name,
-            email: consultationFormData?.email,
-            phone: consultationFormData?.phoneNumber,
-            dateOfBirth: consultationFormData?.dateOfBirth,
-            placeOfBirth: consultationFormData?.placeOfBirth,
-            gender: consultationFormData?.gender,
-            preferredDateTime: consultationFormData?.preferredDateTime,
-            orderId: data.orderId,
-          });
+          try {
+            await axios.post("https://skyscale-be.onrender.com/api/create-order", {
+              amount: total,
+              razorpayOrderId: response.razorpay_order_id,
+              razorpayPaymentId: response.razorpay_payment_id,
+              razorpaySignature: response.razorpay_signature,
+              name: consultationFormData?.name,
+              email: consultationFormData?.email,
+              phone: consultationFormData?.phoneNumber,
+              dateOfBirth: consultationFormData?.dateOfBirth,
+              placeOfBirth: consultationFormData?.placeOfBirth,
+              gender: consultationFormData?.gender,
+              preferredDateTime: consultationFormData?.preferredDateTime,
+              orderId: data.orderId,
+            });
+            
+            navigate("/order-confirmation", {
+              state: {
+                orderId: data.orderId,
+                amount: 2000,
+              },
+            });
+          } catch (error) {
+            console.error("Error creating order:", error);
+            alert("Payment successful but order creation failed. Please contact support.");
+          }
         },
         prefill: {
           name: consultationFormData?.name,
@@ -224,12 +236,6 @@ function Cart() {
 
       const rzp = new window.Razorpay(options);
       rzp.open();
-      navigate("/order-confirmation", {
-        state: {
-          orderId: data.orderId,
-            amount: 2000,
-          },
-        });
     } catch (error) {
       console.log(error);
     } finally {
