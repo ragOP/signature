@@ -11,7 +11,7 @@ const Navbar = () => {
             <img
               src="/brand-logo.png"
               alt="Easy Soul Logo"
-              className="w-50 h-18 object-cover"
+              className="w-60 h-18 object-cover"
             />
 
           </Link>
