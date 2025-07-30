@@ -190,7 +190,7 @@ function Cart() {
       console.log(data, "data");
 
       const options = {
-        key: "rzp_test_0az4AeRtpDjU8S",
+        key: import.meta.env.VITE_RAZORPAY_KEY,
         amount: data.amount,
         currency: "INR",
         name: "AstroCart",
