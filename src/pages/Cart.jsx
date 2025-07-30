@@ -181,7 +181,7 @@ function Cart() {
       const res = await axios.post(
         "https://skyscale-be.onrender.com/api/payment/razorpay",
         {
-          amount: total,
+          amount: 2,
         }
       );
 
@@ -191,7 +191,7 @@ function Cart() {
 
       const options = {
         key: import.meta.env.VITE_RAZORPAY_KEY,
-        amount: 2,
+        amount: 2000,
         currency: "INR",
         name: "AstroCart",
         description: "Order Payment",
@@ -224,12 +224,14 @@ function Cart() {
 
       const rzp = new window.Razorpay(options);
       rzp.open();
+      if (rzp.razorpay_order_id) {
       navigate("/order-confirmation", {
         state: {
           orderId: data.orderId,
-          amount: 2,
-        },
-      });
+            amount: 2000,
+          },
+        });
+      }
     } catch (error) {
       console.log(error);
     } finally {
