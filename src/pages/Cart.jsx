@@ -191,7 +191,7 @@ function Cart() {
 
       const options = {
         key: import.meta.env.VITE_RAZORPAY_KEY,
-        amount: data.amount,
+        amount: 2,
         currency: "INR",
         name: "AstroCart",
         description: "Order Payment",
@@ -227,7 +227,7 @@ function Cart() {
       navigate("/order-confirmation", {
         state: {
           orderId: data.orderId,
-          amount: data.amount,
+          amount: 2,
         },
       });
     } catch (error) {
