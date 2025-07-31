@@ -4,7 +4,7 @@ import { Sparkles } from 'lucide-react';
 
 const Navbar = () => {
   return (
-    <nav className="relative z-50 bg-gradient-to-br from-white/10 via-pink-50/5 to-white/10 backdrop-blur-xl border-b border-pink-400/20">
+    <nav className="absolute z-50 top-0 left-0 right-0">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-center items-center h-16 sm:h-20">
           <Link to="/home" className="flex items-center space-x-2 sm:space-x-4 hover:opacity-80 transition-opacity">

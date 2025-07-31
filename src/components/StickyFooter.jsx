@@ -54,7 +54,7 @@ function StickyFooter() {
 
             {/* Right Side - CTA Button */}
             <div className="w-28 flex-shrink-0">
-              <PrimaryButton text="Buy Now" className='whitespace-nowrap'
+              <PrimaryButton text="Buy Now" className='whitespace-nowrap  px-14.5'
               // icon={<ShoppingCart className="w-5 h-5" />}
               />
             </div>

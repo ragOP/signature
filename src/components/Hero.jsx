@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PrimaryButton from './PrimaryButton';
 import { PhoneCall } from 'lucide-react';
+import Navbar from './Navbar';
 
 const Hero = () => {
     const [isMobile, setIsMobile] = useState(() => {
@@ -23,7 +24,7 @@ const Hero = () => {
     }, []);
 
     return (
-        <section id="home" className="relative flex items-start justify-center overflow-hidden pt-4 sm:pt-12 pb-8 sm:pb-12">
+        <section id="home" className="relative flex items-start justify-center overflow-hidden pt-4 sm:pt-12 pb-8 sm:pb-12"> 
             {/* Animated Background */}
             <div className="absolute inset-0">
                 <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900/20 to-slate-900"></div>
@@ -46,7 +47,7 @@ const Hero = () => {
                 ))}
             </div>
 
-            <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
                 {/* Mobile Layout - Text First, Image Second */}
                 <div className="lg:hidden space-y-4">
                     {/* Text Content */}

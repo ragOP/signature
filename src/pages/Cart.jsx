@@ -281,7 +281,7 @@ function Cart() {
       </div>
 
       {/* Cart Content */}
-      <section className="relative pt-0 sm:pt-12">
+      <section className="relative pt-12">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
           <div
