@@ -184,7 +184,7 @@ function Cart() {
       const res = await axios.post(
         "https://skyscale-be.onrender.com/api/payment/razorpay",
         {
-          amount: 2,
+          amount: total,
         }
       );
 
@@ -192,7 +192,7 @@ function Cart() {
 
       const options = {
         key: import.meta.env.VITE_RAZORPAY_KEY,
-        amount: 2000,
+        amount: total,
         currency: "INR",
         name: "AstroSoul",
         description: "Order Payment",
@@ -218,7 +218,7 @@ function Cart() {
             navigate("/order-confirmation", {
               state: {
                 orderId: data.orderId,
-                amount: 2000,
+                amount: total,
               },
             });
           } catch (error) {
