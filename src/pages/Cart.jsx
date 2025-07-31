@@ -165,6 +165,7 @@ function Cart() {
   }, []);
 
   const handleCheckout = async () => {
+    const additionalProducts = selectedAdditionalProducts.map((product) => product.title);
     // if (
     //   consultationFormData?.name === "" ||
     //   consultationFormData?.email === "" ||
@@ -187,15 +188,13 @@ function Cart() {
         }
       );
 
-      console.log(res, "res");
       const data = res.data.data;
-      console.log(data, "data");
 
       const options = {
         key: import.meta.env.VITE_RAZORPAY_KEY,
         amount: 2000,
         currency: "INR",
-        name: "AstroCart",
+        name: "Astro Soul",
         description: "Order Payment",
         order_id: data.orderId,
         handler: async function (response) {
@@ -213,6 +212,7 @@ function Cart() {
               gender: consultationFormData?.gender,
               preferredDateTime: consultationFormData?.preferredDateTime,
               orderId: data.orderId,
+              additionalProducts: additionalProducts,
             });
             
             navigate("/order-confirmation", {
