@@ -92,7 +92,7 @@ const OrderConfirmation = () => {
                   </div>
                   <div className="space-y-2">
                     <p className="text-white/60 text-sm">Amount Paid</p>
-                    <p className="text-amber-400 font-semibold">₹{amount/100}</p>
+                    <p className="text-amber-400 font-semibold">₹{amount}</p>
                   </div>
                   <div className="space-y-2">
                     <p className="text-white/60 text-sm">Status</p>

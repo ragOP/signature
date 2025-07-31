@@ -194,7 +194,7 @@ function Cart() {
         key: import.meta.env.VITE_RAZORPAY_KEY,
         amount: total,
         currency: "INR",
-        name: "AstroSoul",
+        name: "AstraSoul",
         description: "Order Payment",
         order_id: data.orderId,
         handler: async function (response) {
