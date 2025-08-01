@@ -5,6 +5,8 @@ import './App.css'
 import OrderConfirmation from './pages/OrderConfirmation';
 import Record from './pages/Record';
 import LoveSection from './pages/LoveSection';
+import NewLove from './pages/NewLove';
+
 
 // Main App Component
 function App() {
@@ -17,7 +19,8 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/order-confirmation" element={<OrderConfirmation />} />
           <Route path="/record" element={<Record />} />
-          <Route path="/love" element={<LoveSection />} />
+          {/* <Route path="/love" element={<LoveSection />} /> */}
+          <Route path="/love" element={<NewLove />} />
         </Routes>
       </div>
     </Router>
