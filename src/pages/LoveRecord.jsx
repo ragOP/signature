@@ -77,7 +77,6 @@ const LoveRecord = () => {
                         <th style={{ border: '1px solid #ddd', padding: '8px', textAlign: 'left' }}>Gender</th>
                         <th style={{ border: '1px solid #ddd', padding: '8px', textAlign: 'left' }}>DOB</th>
                         <th style={{ border: '1px solid #ddd', padding: '8px', textAlign: 'left' }}>Place of Birth</th>
-                        <th style={{ border: '1px solid #ddd', padding: '8px', textAlign: 'left' }}>Preferred Date</th>
                         <th style={{ border: '1px solid #ddd', padding: '8px', textAlign: 'left' }}>Additional Products</th>
                         <th style={{ border: '1px solid #ddd', padding: '8px', textAlign: 'left' }}>Amount</th>
                         <th style={{ border: '1px solid #ddd', padding: '8px', textAlign: 'left' }}>Order Date</th>
@@ -93,7 +92,6 @@ const LoveRecord = () => {
                             <td style={{ border: '1px solid #ddd', padding: '8px' }}>{order.gender}</td>
                             <td style={{ border: '1px solid #ddd', padding: '8px' }}>{formatDate(order.dob)}</td>
                             <td style={{ border: '1px solid #ddd', padding: '8px' }}>{order.placeOfBirth}</td>
-                            <td style={{ border: '1px solid #ddd', padding: '8px' }}>{formatDateTime(order.prefferedDateAndTime)}</td>
                             <td style={{ border: '1px solid #ddd', padding: '8px' }}>{order.additionalProducts.join(", ")}</td>
                             <td style={{ border: '1px solid #ddd', padding: '8px' }}>₹{order.amount}</td>
                             <td style={{ border: '1px solid #ddd', padding: '8px' }}>{formatDateTime(order.orderDate)}</td>

@@ -22,9 +22,9 @@ const LoveCartItem = ({ item, onRemove, showRemoveButton = true }) => {
           {/* Row: Image + Title/Subtitle */}
           <div className="flex items-start gap-4">
             {/* Product Image */}
-            <div className="w-24 h-24 rounded-xl overflow-hidden flex-shrink-0 shadow-lg">
+            <div className="w-24 h-30 rounded-xl overflow-hidden flex-shrink-0 shadow-lg">
               <img
-                src="/astro-meet.png"
+                src="/astro-item-1.png"
                 alt={item.name}
                 className="w-full h-full object-cover"
               />
@@ -42,7 +42,7 @@ const LoveCartItem = ({ item, onRemove, showRemoveButton = true }) => {
           </div>
           
           {/* Points - Full Row */}
-          <div className="space-y-1">
+          <div className="space-y-2 mb-4">
             {item.features.map((feature, index) => (
               <div key={index} className="flex items-center space-x-2">
                 <Heart className="w-3 h-3 text-rose-500 flex-shrink-0" />

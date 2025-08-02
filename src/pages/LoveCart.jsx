@@ -180,7 +180,7 @@ function LoveCart() {
       const res = await axios.post(
         "https://skyscale-be.onrender.com/api/payment/razorpay2",
         {
-          amount: 3,
+          amount: total,
         }
       );
 
@@ -188,8 +188,7 @@ function LoveCart() {
 
       const options = {
         key: import.meta.env.VITE_RAZORPAY_KEY,
-        // amount: total,
-        amount: 3,
+        amount: total,
         currency: "INR",
         name: "AstraSoul",
         description: "Love Report Order Payment",
@@ -197,8 +196,7 @@ function LoveCart() {
         handler: async function (response) {
           try {
             await axios.post("https://skyscale-be.onrender.com/api/create-order2", {
-              // amount: total,
-              amount: 3,
+              amount: total,
               razorpayOrderId: response.razorpay_order_id,
               razorpayPaymentId: response.razorpay_payment_id,
               razorpaySignature: response.razorpay_signature,
@@ -216,8 +214,7 @@ function LoveCart() {
             navigate("/order-confirmation", {
               state: {
                 orderId: data.orderId,
-                amount: 3,
-                // amount: total,
+                amount: total,
               },
             });
           } catch (error) {
