@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronDown, Clock, Star, Target, Flame, MessageCircle, CheckCircle } from 'lucide-react';
+import { ChevronDown, Clock, Star, Target, Flame, MessageCircle, CheckCircle, HelpCircle } from 'lucide-react';
 import CTAButton from './CTAButton';
 
 const FAQSection = () => {
@@ -28,28 +28,7 @@ const FAQSection = () => {
         }
     ];
 
-    const reminderItems = [
-        {
-            icon: <Clock className="w-5 h-5 text-blue-500" />,
-            text: "Delivered in 48–72 hrs"
-        },
-        {
-            icon: <Star className="w-5 h-5 text-purple-500" />,
-            text: "Vedic + Numerology based analysis"
-        },
-        {
-            icon: <Target className="w-5 h-5 text-green-500" />,
-            text: "100% personalized (no copy-paste)"
-        },
-        {
-            icon: <Flame className="w-5 h-5 text-red-500" />,
-            text: "Only ₹499 (was ₹999)"
-        },
-        {
-            icon: <MessageCircle className="w-5 h-5 text-pink-500" />,
-            text: "Get it on WhatsApp + Email"
-        }
-    ];
+
 
     const toggleFAQ = (index) => {
         setOpenFAQ(openFAQ === index ? null : index);
@@ -62,11 +41,11 @@ const FAQSection = () => {
 
                     {/* FAQ Section */}
                     <div className="">
-                        <div className="text-center mb-12">
-                            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4 font-merriweather">
-                                Frequently Asked Questions
+                        <div className="text-center mb-6">
+                            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4 love-font-merriweather">
+                                ❓ FAQ
                             </h2>
-                            <p className="text-lg text-gray-600 font-poppins">
+                            <p className="text-lg text-gray-600 love-font-poppins">
                                 Everything you need to know about your love report
                             </p>
                         </div>

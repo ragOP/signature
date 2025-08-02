@@ -1,0 +1,108 @@
+@property --border-angle {
+  inherits: false;
+  initial-value: 0deg;
+  syntax: '<angle>';
+}
+
+/* Google Font Families */
+@layer base {
+  .font-playfair {
+    font-family: 'Playfair Display', serif;
+  }
+  .font-poppins {
+    font-family: 'Poppins', sans-serif;
+  }
+  .font-dancing {
+    font-family: 'Dancing Script', 'Brush Script MT', cursive;
+  }
+  .font-inter {
+    font-family: 'Inter', sans-serif;
+  }
+  .font-cinzel {
+    font-family: 'Cinzel', serif;
+  }
+  .font-crimson {
+    font-family: 'Crimson Text', serif;
+  }
+  .font-merriweather {
+    font-family: 'Merriweather', serif;
+  }
+  .font-source-serif {
+    font-family: 'Source Serif Pro', serif;
+  }
+  .font-libre-baskerville {
+    font-family: 'Libre Baskerville', serif;
+  }
+  .font-eb-garamond {
+    font-family: 'EB Garamond', serif;
+  }
+}
+
+/* Custom animations */
+@keyframes slide {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes borderPulse {
+  0%, 100% {
+    border-color: transparent;
+  }
+  50% {
+    border-color: rgba(244, 63, 94, 0.8);
+  }
+}
+
+@keyframes borderFade {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+@keyframes border {
+  to {
+    --border-angle: 360deg;
+  }
+}
+
+.animate-border {
+  animation: border 1s linear infinite;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 10s linear infinite;
+}
+
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(236, 72, 153, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #ec4899, #f472b6);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #db2777, #ec4899);
+}

@@ -1,8 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { Star, Quote, Heart } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Star, Quote } from 'lucide-react';
 
 const TestimonialsSection = () => {
     const [currentSlide, setCurrentSlide] = useState(0);
+    const [isDragging, setIsDragging] = useState(false);
+    const [startX, setStartX] = useState(0);
+    const [translateX, setTranslateX] = useState(0);
+    const sliderRef = useRef(null);
 
     const testimonials = [
         {
@@ -37,42 +41,96 @@ const TestimonialsSection = () => {
         return () => clearInterval(interval);
     }, [testimonials.length]);
 
+    // Touch/Swipe handlers
+    const handleTouchStart = (e) => {
+        setIsDragging(true);
+        setStartX(e.touches[0].clientX);
+        setTranslateX(0);
+    };
+
+    const handleTouchMove = (e) => {
+        if (!isDragging) return;
+        const currentX = e.touches[0].clientX;
+        const diff = currentX - startX;
+        setTranslateX(diff);
+    };
+
+    const handleTouchEnd = () => {
+        if (!isDragging) return;
+        setIsDragging(false);
+        
+        if (Math.abs(translateX) > 50) {
+            if (translateX > 0 && currentSlide > 0) {
+                setCurrentSlide(currentSlide - 1);
+            } else if (translateX < 0 && currentSlide < testimonials.length - 1) {
+                setCurrentSlide(currentSlide + 1);
+            }
+        }
+        setTranslateX(0);
+    };
+
+    // Mouse drag handlers
+    const handleMouseDown = (e) => {
+        setIsDragging(true);
+        setStartX(e.clientX);
+        setTranslateX(0);
+    };
+
+    const handleMouseMove = (e) => {
+        if (!isDragging) return;
+        const currentX = e.clientX;
+        const diff = currentX - startX;
+        setTranslateX(diff);
+    };
+
+    const handleMouseUp = () => {
+        if (!isDragging) return;
+        setIsDragging(false);
+        
+        if (Math.abs(translateX) > 50) {
+            if (translateX > 0 && currentSlide > 0) {
+                setCurrentSlide(currentSlide - 1);
+            } else if (translateX < 0 && currentSlide < testimonials.length - 1) {
+                setCurrentSlide(currentSlide + 1);
+            }
+        }
+        setTranslateX(0);
+    };
+
     return (
         <div className="py-4 mt-4">
             <div className="container mx-auto px-4">
                 <div className="max-w-4xl mx-auto">
-                    
-                    {/* Why This Report Matters Section */}
-                    <div className="text-center mb-12">
-                        <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6 font-merriweather">
-                            💔 WHY THIS REPORT MATTERS
-                        </h2>
-                        <div className="bg-white rounded-2xl p-8 shadow-xl border border-rose-100 mb-8">
-                            <div className="flex items-center justify-center mb-4">
-                                <Heart className="w-8 h-8 text-rose-500" />
-                            </div>
-                            <p className="text-xl md:text-2xl font-medium text-gray-700 font-poppins leading-relaxed italic">
-                                "Breakups, misunderstandings, family pressure to get married, or being stuck in a one-sided love — these aren't small issues. They're emotional wounds that astrology can help heal."
-                            </p>
-                        </div>
-                    </div>
 
                     {/* Testimonials Title */}
-                    <div className="text-center mb-12">
-                        <h3 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4 font-merriweather">
+                    <div className="text-center mb-6">
+                        <h3 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4 love-font-merriweather">
                             💬 What Our Clients Say
                         </h3>
-                        <p className="text-lg text-gray-600 font-poppins">
-                            Real stories from real people
-                        </p>
+
                     </div>
 
                     <div className="max-w-4xl mx-auto">
                         {/* Slider Container */}
                         <div className="bg-white rounded-2xl shadow-xl p-8">
-                            <div className="relative overflow-hidden">
-                                <div className="flex transition-transform duration-700 ease-in-out" 
-                                     style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
+                            <div 
+                                className="relative overflow-hidden cursor-grab active:cursor-grabbing"
+                                ref={sliderRef}
+                                onTouchStart={handleTouchStart}
+                                onTouchMove={handleTouchMove}
+                                onTouchEnd={handleTouchEnd}
+                                onMouseDown={handleMouseDown}
+                                onMouseMove={handleMouseMove}
+                                onMouseUp={handleMouseUp}
+                                onMouseLeave={handleMouseUp}
+                            >
+                                <div 
+                                    className="flex transition-transform duration-700 ease-in-out"
+                                    style={{ 
+                                        transform: `translateX(calc(-${currentSlide * 100}% + ${translateX}px))`,
+                                        userSelect: isDragging ? 'none' : 'auto'
+                                    }}
+                                >
                                     {testimonials.map((testimonial, index) => (
                                         <div key={index} className="w-full flex-shrink-0" style={{ minWidth: '100%' }}>
                                             <div className="text-center">
@@ -119,11 +177,10 @@ const TestimonialsSection = () => {
                                     <button
                                         key={index}
                                         onClick={() => setCurrentSlide(index)}
-                                        className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                                            index === currentSlide 
-                                                ? 'bg-rose-500 scale-125' 
+                                        className={`w-2 h-2 rounded-full transition-all duration-300 ${index === currentSlide
+                                                ? 'bg-rose-500 scale-125'
                                                 : 'bg-gray-300 hover:bg-gray-400'
-                                        }`}
+                                            }`}
                                     />
                                 ))}
                             </div>

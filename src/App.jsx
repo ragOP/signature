@@ -6,6 +6,7 @@ import OrderConfirmation from './pages/OrderConfirmation';
 import Record from './pages/Record';
 import LoveSection from './pages/LoveSection';
 import NewLove from './pages/NewLove';
+import LoveCart from './pages/LoveCart';
 
 
 // Main App Component
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/consultation" element={<Home />} />     
           <Route path="/cart" element={<Cart />} />
+          <Route path="/cart-2" element={<LoveCart />} />
           <Route path="/order-confirmation" element={<OrderConfirmation />} />
           <Route path="/record" element={<Record />} />
           {/* <Route path="/love" element={<LoveSection />} /> */}

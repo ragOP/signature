@@ -87,6 +87,21 @@ body {
   animation: float 6s ease-in-out infinite;
 }
 
+/* Marquee animation for banner */
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 60s linear infinite;
+  display: inline-block;
+}
+
 /* Shimmer animation */
 @keyframes shine {
   0% {

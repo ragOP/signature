@@ -7,12 +7,14 @@ import ProductDetail from '../components/love/ProductDetail';
 // import ComparisonTable from '../components/love/ComparisonTable';
 // import ProofSection from '../components/love/ProofSection';
 import TestimonialsSection from '../components/love/TestimonialsSection';
+import WhyReportMattersSection from '../components/love/WhyReportMattersSection';
 import WhyPeopleLoveSection from '../components/love/WhyPeopleLoveSection';
 import WhatYoullDiscoverSection from '../components/love/WhatYoullDiscoverSection';
 import HowItWorksSection from '../components/love/HowItWorksSection';
 import Hero from '../components/love/Hero';
 import FAQSection from '../components/love/FAQSection';
 import ReminderSection from '../components/love/ReminderSection';
+import '../components/love/love-styles.css';
 
 
 const NewLove = () => {
@@ -37,6 +39,8 @@ const NewLove = () => {
             <WhatYoullDiscoverSection />
 
             <HowItWorksSection />
+
+            <WhyReportMattersSection />
 
             <TestimonialsSection />
 

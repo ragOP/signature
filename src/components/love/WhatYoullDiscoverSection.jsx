@@ -37,7 +37,7 @@ const WhatYoullDiscoverSection = () => {
 
                     {/* Main Title */}
                     <div className="text-center mb-12">
-                        <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4 font-merriweather">
+                        <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4 love-font-merriweather">
                             🔍 What You'll Discover
                         </h2>
                     </div>
@@ -45,21 +45,14 @@ const WhatYoullDiscoverSection = () => {
                     <div className="grid lg:grid-cols-2 gap-12 items-center">
 
                         {/* Image Section */}
-                        <div className="order-2 lg:order-1">
                             <div className="relative">
                                 <img
                                     src="/astro-soul-3.webp"
                                     alt="Love Analysis and Discovery"
                                     className="w-full h-80 md:h-96 object-cover rounded-2xl shadow-2xl border-2 border-gray-200"
-                                    onError={(e) => {
-                                        console.error('Image failed to load:', e.target.src);
-                                        e.target.style.display = 'none';
-                                    }}
-                                    onLoad={() => console.log('Image loaded successfully')}
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl"></div>
                             </div>
-                        </div>
 
                         {/* Content Section */}
                         <div className="order-1 lg:order-2">
@@ -70,7 +63,7 @@ const WhatYoullDiscoverSection = () => {
                                             {discovery.icon}
                                         </div>
                                         <div className="flex-1">
-                                            <p className="text-lg font-medium text-gray-800 font-poppins">
+                                            <p className="text-lg font-medium text-gray-800 love-font-poppins">
                                                 {discovery.text}
                                             </p>
                                         </div>

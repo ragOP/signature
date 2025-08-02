@@ -1,9 +1,14 @@
 import React from 'react';
 import { Heart, Eye, Users } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import CTAButton from './CTAButton';
 
 const Hero = () => {
+    const navigate = useNavigate();
 
+    const handleCTAClick = () => {
+        navigate('/cart-2');
+    };
 
     return (
         <div className="relative overflow-hidden">
@@ -62,34 +67,34 @@ const Hero = () => {
             {/* Single Container */}
             <div className="relative z-10 container mx-auto flex flex-col">
                 {/* Single Image at Top with Simple Glass Morphism */}
-                <div className="mb-6 pt-6">
-                    <div className="relative max-w-4xl mx-auto group">
+                <div className="mb-6">
+                    <div className="relative max-w-4xl mx-auto group ">
 
-                        <h1 className="text-3xl md:text-5xl lg:text-7xl text-center font-extrabold text-gray-800 mb-4">
-                            <span className="bg-gradient-to-r from-rose-600 via-pink-500 to-purple-600 bg-clip-text text-transparent text-3xl md:text-5xl lg:text-6xl font-bold tracking-wide font-merriweather drop-shadow-lg">
-                                💖 Will You Meet Your Soulmate in 2025?
+                        <h1 className="text-3xl mt-2 md:text-5xl lg:text-7xl text-center font-extrabold text-gray-800 mb-2">
+                            <span className="bg-gradient-to-r from-rose-600 via-pink-500 to-purple-600 bg-clip-text text-transparent text-3xl md:text-5xl lg:text-6xl font-bold tracking-wide love-font-poppins drop-shadow-lg">
+                                💖 Kab milega sacha pyaar??
                             </span>
                         </h1>
                         {/* Single glass morphism overlay */}
-                        <div className="relative bg-white/25 backdrop-blur-xl mx-4 rounded-2xl border border-white/30 shadow-xl overflow-hidden p-2">
+                        <div className="relative bg-white/25 backdrop-blur-xl mx-4 border border-white/30 shadow-xl overflow-hidden p-2">
                             <img
                                 src="/astro-hero.jpeg"
                                 alt="Astro Soul Digital"
-                                className="w-full h-72 md:h-80 rounded-xl lg:h-96 object-cover transition-transform duration-700 group-hover:scale-105"
+                                className="w-full  object-cover transition-transform duration-700 group-hover:scale-105"
                             />
                         </div>
                     </div>
                 </div>
 
                 {/* Subheadline Section */}
-                <div className="text-center py-2 mb-2">
+                <div className="text-center">
                     <div className="relative">
-                        <p className="text-xl md:text-2xl font-medium text-rose-600 mb-4 font-poppins">
+                        <p className="text-xl md:text-2xl font-medium text-rose-600 mb-3 love-font-poppins">
                             Let the stars decode your love story.
                         </p>
 
                         {/* Trust Chip */}
-                        <div className="inline-flex items-center px-4 py-2 bg-rose-50 border border-rose-200 rounded-full text-sm font-medium text-rose-700">
+                        <div className="inline-flex items-center px-4 py-2 mb-3 bg-rose-50 border border-rose-200 rounded-full text-sm font-medium text-rose-700">
                             <Heart className="w-4 h-4 mr-2 text-rose-600" fill="currentColor" />
                             Trusted by 1.5L+ Users
                         </div>
@@ -97,13 +102,13 @@ const Hero = () => {
                 </div>
 
                 {/* Enhanced Subtitle Section */}
-                <div className="text-center max-w-4xl mx-auto mb-6 px-4">
-                    <div className="relative">
-                        <h2 className="text-xl md:text-2xl lg:text-3xl font-medium text-gray-700 leading-relaxed">
-                            <span className="block font-poppins">
+                <div className="text-center max-w-4xl mx-auto mb-4">
+                    <div className="relative px-2">
+                        <h2 className="text-[0.9rem] md:text-2xl lg:text-3xl font-medium text-gray-700 leading-relaxed">
+                            <span className="block love-font-poppins">
                                 Get your personalized Love & Relationship Report based on Vedic astrology & numerology
                             </span>
-                            <span className="block text-lg md:text-xl lg:text-2xl text-purple-600 mt-2 font-dancing">
+                            <span className="block text-[1rem] md:text-xl lg:text-2xl text-purple-600 mt-2 love-font-dancing font-bold">
                                 — delivered within 48–72 hours via Email + WhatsApp.
                             </span>
                         </h2>
@@ -111,13 +116,14 @@ const Hero = () => {
                 </div>
 
                 {/* CTA Button Section */}
-                <div className="flex justify-center mb-6 px-4">
+                <div className="flex justify-center mb-4">
                     <CTAButton 
-                        text="🔮 Get My Love Report – Just ₹499"
+                        text="Get My Love Report – Just ₹499"
                         // size="large"
                         variant="primary"
                         showArrow={true}
                         className="whitespace-nowrap"
+                        onClick={handleCTAClick}
                     />
                 </div>
 

@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Eye, Users, Star, Quote } from 'lucide-react';
 import CTAButton from './CTAButton';
 
 const WhyPeopleLoveSection = () => {
     const [currentSlide, setCurrentSlide] = useState(0);
+    const [isDragging, setIsDragging] = useState(false);
+    const [startX, setStartX] = useState(0);
+    const [translateX, setTranslateX] = useState(0);
+    const sliderRef = useRef(null);
 
     const testimonials = [
         {
@@ -45,15 +49,71 @@ const WhyPeopleLoveSection = () => {
         return () => clearInterval(interval);
     }, [testimonials.length]);
 
+    // Touch/Swipe handlers
+    const handleTouchStart = (e) => {
+        setIsDragging(true);
+        setStartX(e.touches[0].clientX);
+        setTranslateX(0);
+    };
+
+    const handleTouchMove = (e) => {
+        if (!isDragging) return;
+        const currentX = e.touches[0].clientX;
+        const diff = currentX - startX;
+        setTranslateX(diff);
+    };
+
+    const handleTouchEnd = () => {
+        if (!isDragging) return;
+        setIsDragging(false);
+        
+        if (Math.abs(translateX) > 50) {
+            if (translateX > 0 && currentSlide > 0) {
+                setCurrentSlide(currentSlide - 1);
+            } else if (translateX < 0 && currentSlide < testimonials.length - 1) {
+                setCurrentSlide(currentSlide + 1);
+            }
+        }
+        setTranslateX(0);
+    };
+
+    // Mouse drag handlers
+    const handleMouseDown = (e) => {
+        setIsDragging(true);
+        setStartX(e.clientX);
+        setTranslateX(0);
+    };
+
+    const handleMouseMove = (e) => {
+        if (!isDragging) return;
+        const currentX = e.clientX;
+        const diff = currentX - startX;
+        setTranslateX(diff);
+    };
+
+    const handleMouseUp = () => {
+        if (!isDragging) return;
+        setIsDragging(false);
+        
+        if (Math.abs(translateX) > 50) {
+            if (translateX > 0 && currentSlide > 0) {
+                setCurrentSlide(currentSlide - 1);
+            } else if (translateX < 0 && currentSlide < testimonials.length - 1) {
+                setCurrentSlide(currentSlide + 1);
+            }
+        }
+        setTranslateX(0);
+    };
+
     return (
         <div className="py-4">
             <div className="container mx-auto px-4">
                 <div className="max-w-4xl mx-auto">
                     
                     {/* Main Title */}
-                    <div className="text-center mb-12">
-                        <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4 font-merriweather">
-                            Why People Love This Report
+                    <div className="text-center mb-6">
+                        <h2 className="text-3xl md:text-4xl px-4 font-bold text-gray-800 mb-2 font-merriweather">
+                        💖 Why People Love This Report
                         </h2>
                         <p className="text-lg text-gray-600 font-poppins">
                             Real testimonials from happy customers
@@ -64,9 +124,24 @@ const WhyPeopleLoveSection = () => {
                     <div className="max-w-4xl mx-auto mb-12">
                         {/* Slider Container */}
                         <div className="bg-white rounded-2xl shadow-xl p-8">
-                            <div className="relative overflow-hidden">
-                                <div className="flex transition-transform duration-700 ease-in-out" 
-                                     style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
+                            <div 
+                                className="relative overflow-hidden cursor-grab active:cursor-grabbing"
+                                ref={sliderRef}
+                                onTouchStart={handleTouchStart}
+                                onTouchMove={handleTouchMove}
+                                onTouchEnd={handleTouchEnd}
+                                onMouseDown={handleMouseDown}
+                                onMouseMove={handleMouseMove}
+                                onMouseUp={handleMouseUp}
+                                onMouseLeave={handleMouseUp}
+                            >
+                                <div 
+                                    className="flex transition-transform duration-700 ease-in-out" 
+                                    style={{ 
+                                        transform: `translateX(calc(-${currentSlide * 100}% + ${translateX}px))`,
+                                        userSelect: isDragging ? 'none' : 'auto'
+                                    }}
+                                >
                                     {testimonials.map((testimonial, index) => (
                                         <div key={index} className="w-full flex-shrink-0" style={{ minWidth: '100%' }}>
                                             <div className="text-center">
