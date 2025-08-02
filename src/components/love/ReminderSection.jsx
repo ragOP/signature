@@ -1,8 +1,14 @@
 import React from 'react';
 import { Clock, Star, Target, Flame, MessageCircle } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import CTAButton from './CTAButton';
 
 const ReminderSection = () => {
+    const navigate = useNavigate();
+
+    const handleCTAClick = () => {
+        navigate('/cart-2');
+    };
     const reminderItems = [
         {
             icon: <Clock className="w-6 h-6 text-blue-500" />,
@@ -62,6 +68,7 @@ const ReminderSection = () => {
                             variant="primary"
                             // showArrow={true}
                             fullWidth={true}
+                            onClick={handleCTAClick}
                         />
                     </div>
 

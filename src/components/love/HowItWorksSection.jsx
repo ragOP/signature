@@ -1,8 +1,14 @@
 import React from 'react';
 import { ShoppingCart, User, FileText, MessageCircle, Sparkles } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import CTAButton from './CTAButton';
 
 const HowItWorksSection = () => {
+    const navigate = useNavigate();
+
+    const handleCTAClick = () => {
+        navigate('/cart-2');
+    };
     const steps = [
         {
             number: "1",
@@ -83,6 +89,7 @@ const HowItWorksSection = () => {
                             size="large"
                             variant="primary"
                             showArrow={false}
+                            onClick={handleCTAClick}
                         />
                     </div>
 

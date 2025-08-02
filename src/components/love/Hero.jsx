@@ -7,6 +7,7 @@ const Hero = () => {
     const navigate = useNavigate();
 
     const handleCTAClick = () => {
+        console.log('CTA button clicked!');
         navigate('/cart-2');
     };
 

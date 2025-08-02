@@ -1,8 +1,14 @@
 import React from 'react';
 import { Heart, Clock, Eye, Users, MessageCircle, ArrowRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import CTAButton from './CTAButton';
 
 const WhatYoullDiscoverSection = () => {
+    const navigate = useNavigate();
+
+    const handleCTAClick = () => {
+        navigate('/cart-2');
+    };
     const discoveries = [
         {
             icon: "❤",
@@ -78,6 +84,7 @@ const WhatYoullDiscoverSection = () => {
                                     size="large"
                                     variant="primary"
                                     showArrow={false}
+                                    onClick={handleCTAClick}
                                 />
                             </div>
                         </div>

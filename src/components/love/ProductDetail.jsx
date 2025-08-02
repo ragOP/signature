@@ -1,8 +1,14 @@
 import React from 'react';
 import { ArrowUp, Heart, MessageCircle, Star, Mail, Sparkles } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import CTAButton from './CTAButton';
 
 const ProductDetail = () => {
+    const navigate = useNavigate();
+
+    const handleCTAClick = () => {
+        navigate('/cart-2');
+    };
     return (
         <div className="bg-gradient-to-br from-rose-50 via-pink-50 to-pink-100">
             <div className="container mx-auto px-4 py-2 bg-gradient-to-br from-rose-50 via-pink-50 to-pink-100">
@@ -51,6 +57,7 @@ const ProductDetail = () => {
                             variant="primary"
                             showArrow={false}
                             fullWidth={true}
+                            onClick={handleCTAClick}
                         />
                     </div>
                 </div>

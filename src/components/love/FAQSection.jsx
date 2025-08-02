@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
 import { ChevronDown, Clock, Star, Target, Flame, MessageCircle, CheckCircle, HelpCircle } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import CTAButton from './CTAButton';
 
 const FAQSection = () => {
+    const navigate = useNavigate();
     const [openFAQ, setOpenFAQ] = useState(null);
+
+    const handleCTAClick = () => {
+        navigate('/cart-2');
+    };
 
     const faqs = [
         {
@@ -83,6 +89,7 @@ const FAQSection = () => {
                                 variant="primary"
                                 fullWidth={true}
                                 showArrow={true}
+                                onClick={handleCTAClick}
                             />
                         </div>
                     </div>

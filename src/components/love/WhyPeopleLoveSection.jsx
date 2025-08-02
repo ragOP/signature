@@ -1,13 +1,19 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Eye, Users, Star, Quote } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import CTAButton from './CTAButton';
 
 const WhyPeopleLoveSection = () => {
+    const navigate = useNavigate();
     const [currentSlide, setCurrentSlide] = useState(0);
     const [isDragging, setIsDragging] = useState(false);
     const [startX, setStartX] = useState(0);
     const [translateX, setTranslateX] = useState(0);
     const sliderRef = useRef(null);
+
+    const handleCTAClick = () => {
+        navigate('/cart-2');
+    };
 
     const testimonials = [
         {
@@ -238,6 +244,7 @@ const WhyPeopleLoveSection = () => {
                             variant="primary"
                             showArrow={true}
                             fullWidth={true}
+                            onClick={handleCTAClick}
                         />
                     </div>
 

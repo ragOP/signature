@@ -29,7 +29,10 @@ const CTAButton = ({
     
     return (
         <button 
-            onClick={onClick}
+            onClick={(e) => {
+                console.log('CTAButton clicked!', onClick);
+                if (onClick) onClick(e);
+            }}
             className={`${baseClasses} ${sizeClasses[size]} ${variantClasses[variant]} ${widthClass} ${className}`}
         >
             <span>{text}</span>
