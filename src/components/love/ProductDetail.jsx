@@ -7,7 +7,7 @@ const ProductDetail = () => {
     const navigate = useNavigate();
 
     const handleCTAClick = () => {
-        navigate('/cart-2');
+        navigate('/cart-2', { state: { scrollToTop: true } });
     };
     return (
         <div className="bg-gradient-to-br from-rose-50 via-pink-50 to-pink-100">

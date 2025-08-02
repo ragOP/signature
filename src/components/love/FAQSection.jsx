@@ -8,7 +8,7 @@ const FAQSection = () => {
     const [openFAQ, setOpenFAQ] = useState(null);
 
     const handleCTAClick = () => {
-        navigate('/cart-2');
+        navigate('/cart-2', { state: { scrollToTop: true } });
     };
 
     const faqs = [

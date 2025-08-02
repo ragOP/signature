@@ -8,7 +8,7 @@ const Hero = () => {
 
     const handleCTAClick = () => {
         console.log('CTA button clicked!');
-        navigate('/cart-2');
+        navigate('/cart-2', { state: { scrollToTop: true } });
     };
 
     return (

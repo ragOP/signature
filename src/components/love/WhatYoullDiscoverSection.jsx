@@ -7,7 +7,7 @@ const WhatYoullDiscoverSection = () => {
     const navigate = useNavigate();
 
     const handleCTAClick = () => {
-        navigate('/cart-2');
+        navigate('/cart-2', { state: { scrollToTop: true } });
     };
     const discoveries = [
         {

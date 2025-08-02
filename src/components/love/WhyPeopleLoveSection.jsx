@@ -12,7 +12,7 @@ const WhyPeopleLoveSection = () => {
     const sliderRef = useRef(null);
 
     const handleCTAClick = () => {
-        navigate('/cart-2');
+        navigate('/cart-2', { state: { scrollToTop: true } });
     };
 
     const testimonials = [

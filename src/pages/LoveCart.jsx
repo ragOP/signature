@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { X, Shield, Sparkles, Check, Star, Palette, Briefcase, Search, DollarSign } from "lucide-react";
 import Navbar from "../components/love/Navbar";
@@ -14,6 +14,7 @@ import WhyPeopleLoveSection from "../components/love/WhyPeopleLoveSection";
 
 function LoveCart() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [cartItems, setCartItems] = useState([
     {
       id: 1,
@@ -89,15 +90,22 @@ function LoveCart() {
   ];
 
   useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    // Scroll to top when component mounts or when navigating from other pages
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
 
-
+    // Check if we're coming from a CTA button (with scrollToTop state)
+    if (location.state?.scrollToTop) {
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    }
 
     const timer = setTimeout(() => {
       setAnimateElements(true);
     }, 100);
-    return () => clearTimeout(timer);
-  }, []);
+    
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [location.state]);
 
   const onProductToggle = (productId) => {
     setSelectedProducts((prev) =>
