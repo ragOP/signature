@@ -22,7 +22,7 @@ const LoveCartItem = ({ item, onRemove, showRemoveButton = true }) => {
           {/* Row: Image + Title/Subtitle */}
           <div className="flex items-start gap-4">
             {/* Product Image */}
-            <div className="w-24 h-30 rounded-xl overflow-hidden flex-shrink-0 shadow-lg">
+            <div className="w-24 pl-2 h-30 rounded-xl overflow-hidden flex-shrink-0 shadow-lg">
               <img
                 src="/astro-item-1.png"
                 alt={item.name}
