@@ -7,6 +7,7 @@ import Record from './pages/Record';
 import LoveSection from './pages/LoveSection';
 import NewLove from './pages/NewLove';
 import LoveCart from './pages/LoveCart';
+import LoveRecord from './pages/LoveRecord';
 
 
 // Main App Component
@@ -21,6 +22,7 @@ function App() {
           <Route path="/cart-2" element={<LoveCart />} />
           <Route path="/order-confirmation" element={<OrderConfirmation />} />
           <Route path="/record" element={<Record />} />
+          <Route path="/love-record" element={<LoveRecord />} />
           {/* <Route path="/love" element={<LoveSection />} /> */}
           <Route path="/love" element={<NewLove />} />
         </Routes>

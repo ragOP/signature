@@ -125,7 +125,7 @@ const LoveConsultationForm = ({ formData, setFormData, onSubmit }) => {
         </div>
 
         {/* Preferred Date/Time */}
-        <div>
+        {/* <div>
           <label className="block text-sm font-medium text-gray-700 love-font-poppins mb-2">
             <Clock className="w-4 h-4 inline mr-2 text-rose-500" />
             Preferred Delivery Date/Time
@@ -136,7 +136,7 @@ const LoveConsultationForm = ({ formData, setFormData, onSubmit }) => {
             onChange={(e) => handleInputChange('preferredDateTime', e.target.value)}
             className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-rose-500 focus:border-transparent love-font-inter"
           />
-        </div>
+        </div> */}
 
         {/* Note */}
         <div className="text-center pt-4">

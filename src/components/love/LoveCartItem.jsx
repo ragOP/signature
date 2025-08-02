@@ -4,55 +4,53 @@ import { X, Heart, Clock, FileText } from 'lucide-react';
 const LoveCartItem = ({ item, onRemove, showRemoveButton = true }) => {
   return (
     <div className="bg-white rounded-2xl shadow-lg border border-rose-100 overflow-hidden">
-      <div className="p-6">
-        {/* Header */}
-        <div className="flex items-start justify-between mb-4">
-          <div className="flex-1">
-            <h3 className="text-xl font-bold text-gray-800 love-font-poppins mb-2">
-              {item.name}
-            </h3>
-            <p className="text-gray-600 love-font-inter text-sm leading-relaxed">
-              {item.description}
-            </p>
-          </div>
+      <div className="px-4 py-4">
+        {/* Header with Remove Button */}
+        <div className="flex items-start justify-end">
           {showRemoveButton && (
             <button
               onClick={() => onRemove(item.id)}
-              className="ml-4 p-2 text-gray-400 hover:text-rose-500 transition-colors duration-200"
+              className="p-2 text-gray-400 hover:text-rose-500 transition-colors duration-200"
             >
               <X className="w-5 h-5" />
             </button>
           )}
         </div>
 
-        {/* Image and Details */}
-        <div className="flex flex-col md:flex-row gap-4 mb-4">
-          <div className="w-full md:w-32 h-32 md:h-24 rounded-xl overflow-hidden flex-shrink-0">
-            <img
-              src={item.image}
-              alt={item.name}
-              className="w-full h-full object-cover"
-            />
+        {/* Main Column Stack */}
+        <div className="space-y-4">
+          {/* Row: Image + Title/Subtitle */}
+          <div className="flex items-start gap-4">
+            {/* Product Image */}
+            <div className="w-24 h-24 rounded-xl overflow-hidden flex-shrink-0 shadow-lg">
+              <img
+                src="/astro-meet.png"
+                alt={item.name}
+                className="w-full h-full object-cover"
+              />
+            </div>
+            
+            {/* Title and Subtitle */}
+            <div className="flex-1">
+              <h3 className="text-lg font-bold text-gray-800 love-font-poppins mb-1">
+                {item.name}
+              </h3>
+              <p className="text-sm text-gray-600 love-font-inter">
+                {item.description}
+              </p>
+            </div>
           </div>
           
-          <div className="flex-1">
-            {/* Features */}
-            <div className="space-y-2 mb-4">
-              {item.features.map((feature, index) => (
-                <div key={index} className="flex items-center space-x-2">
-                  <Heart className="w-4 h-4 text-rose-500 flex-shrink-0" />
-                  <span className="text-sm text-gray-700 love-font-inter">
-                    {feature}
-                  </span>
-                </div>
-              ))}
-            </div>
-
-            {/* Duration */}
-            <div className="flex items-center space-x-2 text-sm text-gray-600">
-              <Clock className="w-4 h-4 text-purple-500" />
-              <span className="love-font-inter">Delivery: {item.duration}</span>
-            </div>
+          {/* Points - Full Row */}
+          <div className="space-y-1">
+            {item.features.map((feature, index) => (
+              <div key={index} className="flex items-center space-x-2">
+                <Heart className="w-3 h-3 text-rose-500 flex-shrink-0" />
+                <span className="text-xs text-gray-700 love-font-inter">
+                  {feature}
+                </span>
+              </div>
+            ))}
           </div>
         </div>
 

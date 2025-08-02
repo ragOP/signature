@@ -178,7 +178,7 @@ function LoveCart() {
       setIsCheckingOut(true);
 
       const res = await axios.post(
-        "https://skyscale-be.onrender.com/api/payment/razorpay",
+        "https://skyscale-be.onrender.com/api/payment/razorpay2",
         {
           amount: total,
         }
@@ -195,7 +195,7 @@ function LoveCart() {
         order_id: data.orderId,
         handler: async function (response) {
           try {
-            await axios.post("https://skyscale-be.onrender.com/api/create-order", {
+            await axios.post("https://skyscale-be.onrender.com/api/create-order2", {
               amount: total,
               razorpayOrderId: response.razorpay_order_id,
               razorpayPaymentId: response.razorpay_payment_id,
