@@ -26,7 +26,7 @@ const ServicesSection = () => {
     {
       icon: "📄",
       title: "Love + Wealth",
-      subtitle: "PDF Reports",
+      subtitle: "PDF Report",
       description: "In-depth reports covering love life, career prospects, and financial opportunities. Receive personalized recommendations and strategies to enhance your success in both areas.",
       gradientFrom: "from-green-500/20",
       gradientTo: "to-teal-500/20",
