@@ -18,14 +18,7 @@ const SignatureRecord = () => {
             const result = await response.json();
 
             if (result.success) {
-                // Filter for signature orders (you may need to adjust this based on your API)
-                const signatureOrders = result.data.filter(order => 
-                    order.additionalProducts && 
-                    order.additionalProducts.some(product => 
-                        product.toLowerCase().includes('signature')
-                    )
-                );
-                setOrders(signatureOrders);
+                setOrders(result.data);
             } else {
                 setError('Failed to fetch signature orders');
             }
