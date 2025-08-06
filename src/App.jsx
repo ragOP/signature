@@ -9,6 +9,10 @@ import NewLove from './pages/NewLove';
 import LoveCart from './pages/LoveCart';
 import LoveRecord from './pages/LoveRecord';
 import LoveOrderConfirmation from './pages/LoveOrderConfirmation';
+import Signature from './pages/Signature';
+import SignatureCart from './pages/SignatureCart';
+import SignatureRecord from './pages/SignatureRecord';
+import SignatureOrderConfirmation from './pages/SignatureOrderConfirmation';
 
 
 // Main App Component
@@ -27,6 +31,10 @@ function App() {
           <Route path="/love-record" element={<LoveRecord />} />
           {/* <Route path="/love" element={<LoveSection />} /> */}
           <Route path="/love" element={<NewLove />} />
+          <Route path="/signature" element={<Signature />} />
+          <Route path="/signature-cart" element={<SignatureCart />} />
+          <Route path="/signature-record" element={<SignatureRecord />} />
+          <Route path="/signature-order-confirmation" element={<SignatureOrderConfirmation />} />
         </Routes>
       </div>
     </Router>
