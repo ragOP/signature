@@ -12,7 +12,7 @@ const SignatureNavbar = () => {
             <img
               src="/logoT.png"
               alt="Easy Soul Logo"
-              className="w-50 h-18"
+              className="w-40 h-18"
             />
           </Link>
         </div>

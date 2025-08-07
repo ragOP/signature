@@ -161,32 +161,32 @@ const SignatureHero = () => {
                   <img
                     src="https://i.pravatar.cc/32?img=11"
                     alt="Indian Male Professional"
-                    className="w-6 h-6 rounded-full border-2 border-white shadow-sm hover:scale-110 hover:shadow-lg transition-all duration-500 opacity-0 animate-fade-in"
-                    style={{ animationDelay: '0ms', animationFillMode: 'forwards' }}
+                    className="w-6 h-6 rounded-full border-2 border-white shadow-sm hover:scale-110 hover:shadow-lg transition-all duration-500 opacity-0 animate-pop-in"
+                    style={{ animationDelay: '0ms', animationIterationCount: 'infinite', animationDuration: '3.5s' }}
                   />
                   <img
                     src="https://i.pravatar.cc/32?img=25"
                     alt="Foreign Female Professional"
-                    className="w-6 h-6 rounded-full border-2 border-white shadow-sm hover:scale-110 hover:shadow-lg transition-all duration-500 opacity-0 animate-fade-in"
-                    style={{ animationDelay: '200ms', animationFillMode: 'forwards' }}
+                    className="w-6 h-6 rounded-full border-2 border-white shadow-sm hover:scale-110 hover:shadow-lg transition-all duration-500 opacity-0 animate-pop-in"
+                    style={{ animationDelay: '200ms', animationIterationCount: 'infinite', animationDuration: '3.5s' }}
                   />
                   <img
                     src="https://i.pravatar.cc/32?img=33"
                     alt="Indian Female Professional"
-                    className="w-6 h-6 rounded-full border-2 border-white shadow-sm hover:scale-110 hover:shadow-lg transition-all duration-500 opacity-0 animate-fade-in"
-                    style={{ animationDelay: '400ms', animationFillMode: 'forwards' }}
+                    className="w-6 h-6 rounded-full border-2 border-white shadow-sm hover:scale-110 hover:shadow-lg transition-all duration-500 opacity-0 animate-pop-in"
+                    style={{ animationDelay: '400ms', animationIterationCount: 'infinite', animationDuration: '3.5s' }}
                   />
                   <img
                     src="https://i.pravatar.cc/32?img=47"
                     alt="Foreign Male Professional"
-                    className="w-6 h-6 rounded-full border-2 border-white shadow-sm hover:scale-110 hover:shadow-lg transition-all duration-500 opacity-0 animate-fade-in"
-                    style={{ animationDelay: '600ms', animationFillMode: 'forwards' }}
+                    className="w-6 h-6 rounded-full border-2 border-white shadow-sm hover:scale-110 hover:shadow-lg transition-all duration-500 opacity-0 animate-pop-in"
+                    style={{ animationDelay: '600ms', animationIterationCount: 'infinite', animationDuration: '3.5s' }}
                   />
                   <img
                     src="https://i.pravatar.cc/32?img=55"
                     alt="International Professional"
-                    className="w-6 h-6 rounded-full border-2 border-white shadow-sm hover:scale-110 hover:shadow-lg transition-all duration-500 opacity-0 animate-fade-in"
-                    style={{ animationDelay: '800ms', animationFillMode: 'forwards' }}
+                    className="w-6 h-6 rounded-full border-2 border-white shadow-sm hover:scale-110 hover:shadow-lg transition-all duration-500 opacity-0 animate-pop-in"
+                    style={{ animationDelay: '800ms', animationIterationCount: 'infinite', animationDuration: '3.5s' }}
                   />
                 </div>
                 <div className="text-xs text-gray-700">
