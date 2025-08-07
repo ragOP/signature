@@ -170,7 +170,7 @@ function SignatureCart() {
         key: import.meta.env.VITE_RAZORPAY_KEY,
         amount: total,
         currency: "INR",
-        name: "AstraSoul",
+        name: "Signature Studio",
         description: "Signature Design Order Payment",
         order_id: data.orderId,
         handler: async function (response) {
