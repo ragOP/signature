@@ -22,6 +22,7 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/" element={<Signature />} />
+          <Route path="/signature" element={<Signature />} />
           {/* <Route path="/consultation" element={<Home />} />     
           <Route path="/cart" element={<Cart />} />
           <Route path="/cart-2" element={<LoveCart />} />
