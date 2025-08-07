@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { User, Mail, Phone, Calendar, MapPin, UserCheck, Clock } from 'lucide-react';
+import { User, Mail, Phone, Briefcase, MessageSquare } from 'lucide-react';
 
 const SignatureConsultationForm = ({ onSubmit, formData, setFormData }) => {
   const [errors, setErrors] = useState({});
@@ -22,13 +22,9 @@ const SignatureConsultationForm = ({ onSubmit, formData, setFormData }) => {
   const validateForm = () => {
     const newErrors = {};
 
-    if (!formData.name.trim()) newErrors.name = 'Name is required';
-    if (!formData.email.trim()) newErrors.email = 'Email is required';
-    else if (!/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = 'Email is invalid';
+    if (!formData.name.trim()) newErrors.name = 'Full Name is required';
     if (!formData.phoneNumber.trim()) newErrors.phoneNumber = 'Phone number is required';
-    if (!formData.dateOfBirth.trim()) newErrors.dateOfBirth = 'Date of birth is required';
-    if (!formData.placeOfBirth.trim()) newErrors.placeOfBirth = 'Place of birth is required';
-    if (!formData.gender.trim()) newErrors.gender = 'Gender is required';
+    if (!formData.profession.trim()) newErrors.profession = 'Profession is required';
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -50,7 +46,7 @@ const SignatureConsultationForm = ({ onSubmit, formData, setFormData }) => {
           <div className="text-center space-y-2">
             <div className="flex items-center justify-center space-x-2 mb-4">
               <div className="w-10 h-10 bg-gradient-to-br from-gray-800 to-black rounded-full flex items-center justify-center">
-                <UserCheck className="w-5 h-5 text-white" />
+                <User className="w-5 h-5 text-white" />
               </div>
               <h3 className="text-xl sm:text-2xl font-bold text-gray-800">
                 Personal Information
@@ -85,7 +81,7 @@ const SignatureConsultationForm = ({ onSubmit, formData, setFormData }) => {
               <div className="space-y-2">
                 <label className="flex items-center space-x-2 text-sm font-medium text-gray-700">
                   <Mail className="w-4 h-4" />
-                  <span>Email Address *</span>
+                  <span>Email Address</span>
                 </label>
                 <input
                   type="email"
@@ -101,7 +97,7 @@ const SignatureConsultationForm = ({ onSubmit, formData, setFormData }) => {
               </div>
             </div>
 
-            {/* Phone and Gender Row */}
+            {/* Phone and Profession Row */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <label className="flex items-center space-x-2 text-sm font-medium text-gray-700">
@@ -123,82 +119,40 @@ const SignatureConsultationForm = ({ onSubmit, formData, setFormData }) => {
 
               <div className="space-y-2">
                 <label className="flex items-center space-x-2 text-sm font-medium text-gray-700">
-                  <UserCheck className="w-4 h-4" />
-                  <span>Gender *</span>
-                </label>
-                <select
-                  value={formData.gender}
-                  onChange={(e) => handleInputChange('gender', e.target.value)}
-                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-gray-800 focus:border-transparent transition-all duration-200 ${errors.gender ? 'border-red-300 bg-red-50' : 'border-gray-300'
-                    }`}
-                >
-                  <option value="">Select gender</option>
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                  <option value="other">Other</option>
-                </select>
-                {errors.gender && (
-                  <p className="text-red-500 text-xs">{errors.gender}</p>
-                )}
-              </div>
-            </div>
-
-            {/* Date of Birth and Place of Birth Row */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <label className="flex items-center space-x-2 text-sm font-medium text-gray-700">
-                  <Calendar className="w-4 h-4" />
-                  <span>Date of Birth *</span>
-                </label>
-                <input
-                  type="date"
-                  value={formData.dateOfBirth}
-                  onChange={(e) => handleInputChange('dateOfBirth', e.target.value)}
-                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-gray-800 focus:border-transparent transition-all duration-200 ${errors.dateOfBirth ? 'border-red-300 bg-red-50' : 'border-gray-300'
-                    }`}
-                />
-                {errors.dateOfBirth && (
-                  <p className="text-red-500 text-xs">{errors.dateOfBirth}</p>
-                )}
-              </div>
-
-              <div className="space-y-2">
-                <label className="flex items-center space-x-2 text-sm font-medium text-gray-700">
-                  <MapPin className="w-4 h-4" />
-                  <span>Place of Birth *</span>
+                  <Briefcase className="w-4 h-4" />
+                  <span>Profession *</span>
                 </label>
                 <input
                   type="text"
-                  value={formData.placeOfBirth}
-                  onChange={(e) => handleInputChange('placeOfBirth', e.target.value)}
-                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-gray-800 focus:border-transparent transition-all duration-200 ${errors.placeOfBirth ? 'border-red-300 bg-red-50' : 'border-gray-300'
+                  value={formData.profession}
+                  onChange={(e) => handleInputChange('profession', e.target.value)}
+                  className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-gray-800 focus:border-transparent transition-all duration-200 ${errors.profession ? 'border-red-300 bg-red-50' : 'border-gray-300'
                     }`}
-                  placeholder="Enter your place of birth"
+                  placeholder="Enter your profession"
                 />
-                {errors.placeOfBirth && (
-                  <p className="text-red-500 text-xs">{errors.placeOfBirth}</p>
+                {errors.profession && (
+                  <p className="text-red-500 text-xs">{errors.profession}</p>
                 )}
               </div>
             </div>
 
-            {/* Preferred Date/Time */}
+            {/* Remarks */}
             <div className="space-y-2">
               <label className="flex items-center space-x-2 text-sm font-medium text-gray-700">
-                <Clock className="w-4 h-4" />
-                <span>Preferred Delivery Date/Time</span>
+                <MessageSquare className="w-4 h-4" />
+                <span>Remarks or Any Specific Requirement</span>
               </label>
-              <input
-                type="datetime-local"
-                value={formData.preferredDateTime}
-                onChange={(e) => handleInputChange('preferredDateTime', e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-800 focus:border-transparent transition-all duration-200"
+              <textarea
+                value={formData.remarks}
+                onChange={(e) => handleInputChange('remarks', e.target.value)}
+                rows="4"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-800 focus:border-transparent transition-all duration-200 resize-none"
+                placeholder="Any specific requirements or remarks for your signature design..."
               />
               <p className="text-xs text-gray-500">
-                Optional: Let us know your preferred delivery time
+                Optional: Let us know any specific requirements for your signature
               </p>
             </div>
-
-
           </form>
         </div>
       </div>

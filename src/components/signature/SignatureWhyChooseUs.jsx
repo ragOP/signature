@@ -40,7 +40,7 @@ const SignatureWhyChooseUs = () => {
     ];
 
     return (
-        <section className="py-4 px-4 bg-white">
+        <section className="py-4 px-4 bg-white mt-8">
             <div className="max-w-4xl mx-auto">
                 {/* Section Header */}
                 <div className={`text-center mb-6 transition-all duration-1000 transform ${animateElements ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"

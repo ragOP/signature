@@ -67,7 +67,7 @@ const SignatureWhoIsThisFor = () => {
   ];
 
   return (
-    <section className="py-4 px-4 bg-gradient-to-br from-gray-50 via-white to-gray-50">
+    <section className="py-4 px-4 mt-8 bg-gradient-to-br from-gray-50 via-white to-gray-50">
       <div className="max-w-6xl mx-auto">
         {/* Section Header */}
         <div

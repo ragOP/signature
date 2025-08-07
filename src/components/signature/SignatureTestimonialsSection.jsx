@@ -84,6 +84,40 @@ const SignatureTestimonialsSection = () => {
         }
     ];
 
+    const transformationImages = [
+        {
+            src: "/signature-1.png",
+            alt: "Signature Transformation 1",
+            beforeLabel: "BEFORE",
+            afterLabel: "AFTER"
+        },
+        {
+            src: "/signature-2.png",
+            alt: "Signature Transformation 2",
+            beforeLabel: "BEFORE",
+            afterLabel: "AFTER"
+        },
+        {
+            src: "/signature-3.png",
+            alt: "Signature Transformation 3",
+            beforeLabel: "BEFORE",
+            afterLabel: "AFTER"
+        },
+        {
+            src: "/signature-4.png",
+            alt: "Signature Transformation 4",
+            beforeLabel: "BEFORE",
+            afterLabel: "AFTER"
+        },
+        {
+            src: "/signature-5.png",
+            alt: "Signature Transformation 5",
+            beforeLabel: "BEFORE",
+            afterLabel: "AFTER"
+        },
+
+    ];
+
     return (
         <section className="py-4 px-4 bg-white">
             <div className="max-w-6xl mx-auto">
@@ -103,7 +137,9 @@ const SignatureTestimonialsSection = () => {
                 {/* Image Slider */}
                 <div className={`transition-all duration-1000 delay-500 transform ${animateElements ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
                     }`}>
-                    <SignatureImageSlider images={proofImages} showArrows={false} showDots={true} />
+                    <SignatureImageSlider images={transformationImages} />
+
+                    {/* <SignatureImageSlider images={proofImages} showArrows={false} showDots={true} /> */}
                 </div>
             </div>
         </section>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Shield, Sparkles } from 'lucide-react';
 
-const SignatureOrderSummary = ({ isCheckingOut, onCheckout }) => {
+const SignatureOrderSummary = ({ subtotal, discount, total, isCheckingOut, onCheckout }) => {
   const [isPressed, setIsPressed] = useState(false);
 
   const handleButtonClick = async () => {
@@ -21,7 +21,7 @@ const SignatureOrderSummary = ({ isCheckingOut, onCheckout }) => {
 
   return (
     <div className="sticky top-8">
-      <div className="relative group">
+      <div className="relative group mb-8">
         <div className="absolute -inset-1 bg-gradient-to-r from-gray-500/20 via-black/20 to-gray-500/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
         <div className="relative bg-gradient-to-br from-white/90 to-white/80 backdrop-blur-xl rounded-3xl p-6 border border-gray-200">
           <h3 className="text-xl font-bold text-gray-800 mb-6">Order Summary</h3>
@@ -30,16 +30,16 @@ const SignatureOrderSummary = ({ isCheckingOut, onCheckout }) => {
           <div className="space-y-4 mb-6">
             <div className="flex justify-between items-center">
               <span className="text-gray-600">Subtotal</span>
-              <span className="text-gray-800 font-semibold">₹999</span>
+              <span className="text-gray-800 font-semibold">₹{subtotal.toLocaleString()}</span>
             </div>
             <div className="flex justify-between items-center">
               <span className="text-green-600">Discount</span>
-              <span className="text-green-600 font-semibold">-₹410</span>
+              <span className="text-green-600 font-semibold">-₹{discount.toLocaleString()}</span>
             </div>
             <div className="border-t border-gray-100 pt-4">
               <div className="flex justify-between items-center">
                 <span className="text-lg font-semibold text-gray-800">Total</span>
-                <span className="text-2xl font-bold text-gray-800">₹589</span>
+                <span className="text-2xl font-bold text-gray-800">₹{total.toLocaleString()}</span>
               </div>
             </div>
           </div>

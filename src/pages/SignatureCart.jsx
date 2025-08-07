@@ -7,6 +7,7 @@ import SignatureImageSlider from "../components/signature/SignatureImageSlider";
 import SignatureCartItem from "../components/signature/SignatureCartItem";
 import SignatureConsultationForm from "../components/signature/SignatureConsultationForm";
 import SignatureOrderSummary from "../components/signature/SignatureOrderSummary";
+import SignatureAdditionalProducts from "../components/signature/SignatureAdditionalProducts";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -32,17 +33,39 @@ function SignatureCart() {
     },
   ]);
 
+  const [selectedProducts, setSelectedProducts] = useState([]);
   const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [animateElements, setAnimateElements] = useState(false);
   const [consultationFormData, setConsultationFormData] = useState({
     name: "",
     phoneNumber: "",
     email: "",
-    dateOfBirth: "",
-    placeOfBirth: "",
-    gender: "",
-    preferredDateTime: "",
+    profession: "",
+    remarks: "",
   });
+
+  // Additional products data
+  const additionalProducts = [
+    {
+      id: 2,
+      title: "✍️ Want to master your new signature perfectly?",
+      description:
+        "Add a printable sheet with your signature traced & outlined — just like handwriting practice sheets.",
+      features: [
+        "Light grey version for trace-over",
+        "Lined version for repeat practice",
+        "Adds premium feel for very little effort",
+      ],
+      price: 299,
+      originalPrice: 499,
+      icon: "✍️",
+      color: {
+        from: "from-gray-500/20",
+        via: "via-black/20",
+        to: "to-gray-500/20",
+      },
+    },
+  ];
 
   useEffect(() => {
     // Scroll to top when component mounts or when navigating from other pages
@@ -62,6 +85,14 @@ function SignatureCart() {
     };
   }, [location.state]);
 
+  const onProductToggle = (productId) => {
+    setSelectedProducts((prev) =>
+      prev.includes(productId)
+        ? prev.filter((id) => id !== productId)
+        : [...prev, productId]
+    );
+  };
+
   const handleConsultationFormSubmit = (formData) => {
     setConsultationFormData(formData);
     console.log("Consultation form submitted:", formData);
@@ -71,17 +102,31 @@ function SignatureCart() {
     setCartItems((prev) => prev.filter((item) => item.id !== itemId));
   };
 
-  // Calculate cart totals
-  const subtotal = cartItems.reduce(
+  // Calculate cart totals including selected additional products
+  const selectedAdditionalProducts = additionalProducts.filter((product) =>
+    selectedProducts.includes(product.id)
+  );
+
+  const cartSubtotal = cartItems.reduce(
     (sum, item) => sum + item.price * (item.quantity || 1),
     0
   );
+  const additionalSubtotal = selectedAdditionalProducts.reduce(
+    (sum, product) => sum + product.price,
+    0
+  );
+  const subtotal = cartSubtotal + additionalSubtotal;
 
-  const discount = cartItems.reduce(
+  const cartDiscount = cartItems.reduce(
     (sum, item) =>
       sum + (item.originalPrice - item.price) * (item.quantity || 1),
     0
   );
+  const additionalDiscount = selectedAdditionalProducts.reduce(
+    (sum, product) => sum + (product.originalPrice - product.price),
+    0
+  );
+  const discount = cartDiscount + additionalDiscount;
 
   const total = subtotal;
 
@@ -105,7 +150,10 @@ function SignatureCart() {
     );
   }, []);
 
+  console.log(consultationFormData);
+
   const handleCheckout = async () => {
+    const additionalProducts = selectedAdditionalProducts.map((product) => product.title);
     try {
       setIsCheckingOut(true);
 
@@ -138,12 +186,10 @@ function SignatureCart() {
               name: consultationFormData?.name,
               email: consultationFormData?.email,
               phone: consultationFormData?.phoneNumber,
-              dateOfBirth: consultationFormData?.dateOfBirth,
-              placeOfBirth: consultationFormData?.placeOfBirth,
-              gender: consultationFormData?.gender,
-              preferredDateTime: consultationFormData?.preferredDateTime,
+              profession: consultationFormData?.profession,
+              remarks: consultationFormData?.remarks,
               orderId: data.orderId,
-              additionalProducts: [],
+              additionalProducts: additionalProducts,
             });
             
             navigate("/signature-order-confirmation", {
@@ -296,9 +342,24 @@ function SignatureCart() {
 
                 {/* Order Summary and Forms - Mobile: Stacked */}
                 <div className="space-y-4 sm:space-y-6">
-                  {/* Consultation Form */}
+                  {/* Additional Products Section */}
                   <div
                     className={`transition-all duration-700 delay-700 transform ${
+                      animateElements
+                        ? "translate-y-0 opacity-100"
+                        : "translate-y-8 opacity-0"
+                    }`}
+                  >
+                    <SignatureAdditionalProducts
+                      products={additionalProducts}
+                      selectedProducts={selectedProducts}
+                      onProductToggle={onProductToggle}
+                    />
+                  </div>
+
+                  {/* Consultation Form */}
+                  <div
+                    className={`transition-all duration-700 delay-800 transform ${
                       animateElements
                         ? "translate-y-0 opacity-100"
                         : "translate-y-8 opacity-0"
@@ -313,7 +374,7 @@ function SignatureCart() {
 
                   {/* Order Summary */}
                   <div
-                    className={`transition-all duration-700 delay-800 transform ${
+                    className={`transition-all duration-700 delay-900 transform ${
                       animateElements
                         ? "translate-y-0 opacity-100"
                         : "translate-y-8 opacity-0"
@@ -355,6 +416,21 @@ function SignatureCart() {
                         showRemoveButton={false}
                       />
                     ))}
+                  </div>
+
+                  {/* Additional Products Section */}
+                  <div
+                    className={`transition-all duration-700 delay-400 transform ${
+                      animateElements
+                        ? "translate-y-0 opacity-100"
+                        : "translate-y-8 opacity-0"
+                    }`}
+                  >
+                    <SignatureAdditionalProducts
+                      products={additionalProducts}
+                      selectedProducts={selectedProducts}
+                      onProductToggle={onProductToggle}
+                    />
                   </div>
 
                   {/* Consultation Form */}

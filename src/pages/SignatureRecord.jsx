@@ -29,10 +29,6 @@ const SignatureRecord = () => {
         }
     };
 
-    const formatDate = (dateString) => {
-        return new Date(dateString).toLocaleDateString();
-    };
-
     const formatDateTime = (dateTimeString) => {
         return new Date(dateTimeString).toLocaleString();
     };
@@ -110,9 +106,8 @@ const SignatureRecord = () => {
                                     <th className="px-6 py-4 text-left text-sm font-semibold">Name</th>
                                     <th className="px-6 py-4 text-left text-sm font-semibold">Email</th>
                                     <th className="px-6 py-4 text-left text-sm font-semibold">Phone</th>
-                                    <th className="px-6 py-4 text-left text-sm font-semibold">Gender</th>
-                                    <th className="px-6 py-4 text-left text-sm font-semibold">DOB</th>
-                                    <th className="px-6 py-4 text-left text-sm font-semibold">Place of Birth</th>
+                                    <th className="px-6 py-4 text-left text-sm font-semibold">Profession</th>
+                                    <th className="px-6 py-4 text-left text-sm font-semibold">Remarks</th>
                                     <th className="px-6 py-4 text-left text-sm font-semibold">Additional Products</th>
                                     <th className="px-6 py-4 text-left text-sm font-semibold">Amount</th>
                                     <th className="px-6 py-4 text-left text-sm font-semibold">Order Date</th>
@@ -125,9 +120,10 @@ const SignatureRecord = () => {
                                         <td className="px-6 py-4 text-sm text-gray-800 font-medium">{order.fullName}</td>
                                         <td className="px-6 py-4 text-sm text-gray-600">{order.email}</td>
                                         <td className="px-6 py-4 text-sm text-gray-600">{order.phoneNumber}</td>
-                                        <td className="px-6 py-4 text-sm text-gray-600 capitalize">{order.gender}</td>
-                                        <td className="px-6 py-4 text-sm text-gray-600">{formatDate(order.dob)}</td>
-                                        <td className="px-6 py-4 text-sm text-gray-600">{order.placeOfBirth}</td>
+                                        <td className="px-6 py-4 text-sm text-gray-600">{order.profession}</td>
+                                        <td className="px-6 py-4 text-sm text-gray-600 max-w-xs truncate" title={order.remarks}>
+                                            {order.remarks || "No remarks"}
+                                        </td>
                                         <td className="px-6 py-4 text-sm text-gray-600">
                                             {order.additionalProducts ? order.additionalProducts.join(", ") : "Signature Design"}
                                         </td>

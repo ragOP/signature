@@ -15,23 +15,36 @@ const SignatureBeforeAfterSection = () => {
     // Sample before/after images - you can replace these with actual signature transformation images
     const transformationImages = [
         {
-            src: "/src/components/signature/assets/sign-image-1.png",
+            src: "/signature-1.png",
             alt: "Signature Transformation 1",
             beforeLabel: "BEFORE",
             afterLabel: "AFTER"
         },
         {
-            src: "/src/components/signature/assets/sign-image-2.png",
+            src: "/signature-2.png",
             alt: "Signature Transformation 2",
             beforeLabel: "BEFORE",
             afterLabel: "AFTER"
         },
         {
-            src: "/src/components/signature/assets/sign-image-3.png",
+            src: "/signature-3.png",
             alt: "Signature Transformation 3",
             beforeLabel: "BEFORE",
             afterLabel: "AFTER"
-        }
+        },
+        {
+            src: "/signature-4.png",
+            alt: "Signature Transformation 4",
+            beforeLabel: "BEFORE",
+            afterLabel: "AFTER"
+        },
+        {
+            src: "/signature-5.png",
+            alt: "Signature Transformation 5",
+            beforeLabel: "BEFORE",
+            afterLabel: "AFTER"
+        },
+
     ];
 
     const transformationPoints = [
@@ -53,17 +66,16 @@ const SignatureBeforeAfterSection = () => {
     ];
 
     return (
-        <section className="px-4 py- bg-white">
+        <section className="px-4 py- bg-white mt-6">
             <div className="max-w-6xl mx-auto">
                 {/* Section Header */}
-                <div className={`text-center mb-12 transition-all duration-1000 transform ${animateElements ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+                <div className={`text-center mb-8 transition-all duration-1000 transform ${animateElements ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
                     }`}>
                     <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-gray-800 mb-4">
-                        ✍ Before vs After – See the Difference
+                        ✍ Our Work
                     </h2>
                     <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                        Witness the incredible transformation from basic signatures to professional,
-                        memorable designs that reflect your personality and brand.
+                        Here are a few example of our signature design work
                     </p>
                 </div>
 
