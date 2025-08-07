@@ -24,7 +24,7 @@ const SignatureCard = ({ animateElements }) => {
       </div>
 
       <div className='flex justify-center items-center'>
-        <img src="/src/components/signature/assets/signature-hero.webp" alt="signature" className='w-full h-1/2 rounded-lg' />
+        <img src="/signature-hero.webp" alt="signature" className='w-full h-1/2 rounded-lg' />
       </div>
 
       {/* Features Grid */}
