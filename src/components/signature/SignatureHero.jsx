@@ -23,6 +23,10 @@ const SignatureCard = ({ animateElements }) => {
         </p>
       </div>
 
+      <div className='flex justify-center items-center'>
+        <img src="/astro-hero.jpeg" alt="signature" className='w-full h-1/2 rounded-lg' />
+      </div>
+
       {/* Features Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-4">
         {features.map((feature, index) => {
@@ -94,15 +98,15 @@ const SignatureHero = () => {
             }`}>
 
             {/* Main Heading */}
-            <div className="space-y-3">
+            <div className="space-y-3 text-center">
               <h1 className="text-2xl sm:text-4xl lg:text-5xl font-display font-bold leading-relaxed">
-                <span className="text-black ">✍ Your Signature Isn't Just</span>
+                <span className="text-black">🎯 Your Signature Isn't Just</span>
                 <span className="block font-signature text-4xl sm:text-5xl lg:text-6xl bg-gradient-to-r from-gray-800 via-gray-600 to-gray-800 bg-clip-text text-transparent">
                   Ink — It's Identity.
                 </span>
               </h1>
 
-              <p className="text-md sm:text-xl text-gray-700 leading-relaxed">
+              <p className="text-md sm:text-xl text-gray-700 leading-relaxed font-display">
                 Make your name unforgettable with a designer signature crafted just for you.
               </p>
             </div>
@@ -157,27 +161,32 @@ const SignatureHero = () => {
                   <img
                     src="https://i.pravatar.cc/32?img=11"
                     alt="Indian Male Professional"
-                    className="w-6 h-6 rounded-full border-2 border-white shadow-sm"
+                    className="w-6 h-6 rounded-full border-2 border-white shadow-sm hover:scale-110 hover:shadow-lg transition-all duration-500 opacity-0 animate-fade-in"
+                    style={{ animationDelay: '0ms', animationFillMode: 'forwards' }}
                   />
                   <img
                     src="https://i.pravatar.cc/32?img=25"
                     alt="Foreign Female Professional"
-                    className="w-6 h-6 rounded-full border-2 border-white shadow-sm"
+                    className="w-6 h-6 rounded-full border-2 border-white shadow-sm hover:scale-110 hover:shadow-lg transition-all duration-500 opacity-0 animate-fade-in"
+                    style={{ animationDelay: '200ms', animationFillMode: 'forwards' }}
                   />
                   <img
                     src="https://i.pravatar.cc/32?img=33"
                     alt="Indian Female Professional"
-                    className="w-6 h-6 rounded-full border-2 border-white shadow-sm"
+                    className="w-6 h-6 rounded-full border-2 border-white shadow-sm hover:scale-110 hover:shadow-lg transition-all duration-500 opacity-0 animate-fade-in"
+                    style={{ animationDelay: '400ms', animationFillMode: 'forwards' }}
                   />
                   <img
                     src="https://i.pravatar.cc/32?img=47"
                     alt="Foreign Male Professional"
-                    className="w-6 h-6 rounded-full border-2 border-white shadow-sm"
+                    className="w-6 h-6 rounded-full border-2 border-white shadow-sm hover:scale-110 hover:shadow-lg transition-all duration-500 opacity-0 animate-fade-in"
+                    style={{ animationDelay: '600ms', animationFillMode: 'forwards' }}
                   />
                   <img
                     src="https://i.pravatar.cc/32?img=55"
                     alt="International Professional"
-                    className="w-6 h-6 rounded-full border-2 border-white shadow-sm"
+                    className="w-6 h-6 rounded-full border-2 border-white shadow-sm hover:scale-110 hover:shadow-lg transition-all duration-500 opacity-0 animate-fade-in"
+                    style={{ animationDelay: '800ms', animationFillMode: 'forwards' }}
                   />
                 </div>
                 <div className="text-xs text-gray-700">

@@ -10,9 +10,9 @@ const SignatureNavbar = () => {
           {/* Centered Brand Logo */}
           <Link to="/home" className="flex items-center space-x-2 sm:space-x-4 hover:opacity-80 transition-opacity">
             <img
-              src="/brand-logo.png"
+              src="/logoT.png"
               alt="Easy Soul Logo"
-              className="w-60 h-18 object-cover"
+              className="w-50 h-18"
             />
           </Link>
         </div>

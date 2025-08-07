@@ -38,7 +38,7 @@ const SignatureLimitedSlots = () => {
                         {/* Left Side - Urgency Info */}
 
                         <div className="space-y-6 px-2">
-                            <div className="space-y-2 ">
+                            <div className="space-y-2 flex flex-col items-center justify-center">
                                 <div className="flex space-x-4">
                                     <div className=" bg-gradient-to-br from-red-500 to-orange-600 rounded-full p-2 flex items-center justify-center shadow-lg">
                                         <Clock className="w-6 h-6 text-white" />
@@ -49,7 +49,7 @@ const SignatureLimitedSlots = () => {
                                         </h3>
                                     </div>
                                 </div>
-                                <p className="text-gray-600 font-primary ">
+                                <p className="text-gray-600 font-primary text-center">
                                     Once full, new orders are pushed to next week
                                 </p>
                             </div>
@@ -72,7 +72,7 @@ const SignatureLimitedSlots = () => {
 
                         {/* Right Side - CTA */}
                         <div className="text-center lg:text-left">
-                            <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-4  text-white">
+                            <div className="bg-gray-600 rounded-xl p-4  text-white">
                                 <h4 className="text-xl font-display font-bold mb-2 mt-1">
                                     Don't Miss Your Chance
                                 </h4>

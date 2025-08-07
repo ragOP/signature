@@ -12,6 +12,7 @@ import SignatureWhoIsThisFor from '../components/signature/SignatureWhoIsThisFor
 import SignatureTestimonialsSection from '../components/signature/SignatureTestimonialsSection';
 import SignatureLimitedSlots from '../components/signature/SignatureLimitedSlots';
 import SignatureVideoSection from '../components/signature/SignatureVideoSection';
+import SignatureCTA from '../components/signature/SignatureCTA';
 
 function Signature() {
   const [showLandingPage, setShowLandingPage] = useState(false);
@@ -35,10 +36,19 @@ function Signature() {
           <SignatureHero />
           <SignatureVideoSection />
           <SignatureBeforeAfterSection />
+          <div className='flex justify-center items-center mt-4 px-6'>
+            <SignatureCTA />
+          </div>
           <SignatureWhyChooseUs />
           <SignatureHowItWorks />
+          <div className='flex justify-center items-center mt-2 px-6'>
+            <SignatureCTA />
+          </div>
           <SignatureWhoIsThisFor />
           <SignatureTestimonialsSection />
+          <div className='flex justify-center items-center mt-2 px-6'>
+            <SignatureCTA />
+          </div>
           <SignatureLimitedSlots />
           <SignatureFooter />
         </div>
