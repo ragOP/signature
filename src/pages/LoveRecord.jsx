@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Heart, Users, Calendar, Phone, Mail, MapPin, User, Clock, Star } from 'lucide-react';
 import Navbar from '../components/love/Navbar';
+import { BACKEND_URL } from '../utils/backendUrl';
 
 const LoveRecord = () => {
     const [orders, setOrders] = useState([]);
@@ -13,7 +14,7 @@ const LoveRecord = () => {
 
     const fetchOrders = async () => {
         try {
-            const response = await fetch('https://skyscale-be.onrender.com/api/get-orders2');
+            const response = await fetch(`${BACKEND_URL}/api/lander2/get-orders`);
             const result = await response.json();
 
             if (result.success) {

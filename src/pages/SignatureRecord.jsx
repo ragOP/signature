@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FileText, Users, Calendar, Phone, Mail, MapPin, User, Clock, Star, Search, CheckCircle } from 'lucide-react';
 import SignatureNavbar from '../components/signature/SignatureNavbar';
+import { BACKEND_URL } from '../utils/backendUrl';
 
 const SignatureRecord = () => {
     const [orders, setOrders] = useState([]);
@@ -14,7 +15,7 @@ const SignatureRecord = () => {
 
     const fetchOrders = async () => {
         try {
-            const response = await fetch('https://skyscale-be.onrender.com/api/get-orders4');
+            const response = await fetch(`${BACKEND_URL}/api/lander4/get-orders`);
             const result = await response.json();
 
             if (result.success) {

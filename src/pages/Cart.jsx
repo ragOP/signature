@@ -10,6 +10,7 @@ import AdditionalProducts from "../components/AdditionalProducts";
 import ConsultationForm from "../components/ConsultationForm";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { BACKEND_URL } from "../utils/backendUrl";
 
 function Cart() {
   const navigate = useNavigate();
@@ -182,7 +183,7 @@ function Cart() {
       setIsCheckingOut(true);
 
       const res = await axios.post(
-        "https://skyscale-be.onrender.com/api/payment/razorpay",
+        `${BACKEND_URL}/api/payment/razorpay`,
         {
           amount: total,
         }
@@ -199,7 +200,7 @@ function Cart() {
         order_id: data.orderId,
         handler: async function (response) {
           try {
-            await axios.post("https://skyscale-be.onrender.com/api/create-order", {
+            await axios.post(`${BACKEND_URL}/api/lander1/create-order`, {
               amount: total,
               razorpayOrderId: response.razorpay_order_id,
               razorpayPaymentId: response.razorpay_payment_id,
@@ -214,13 +215,13 @@ function Cart() {
               orderId: data.orderId,
               additionalProducts: additionalProducts,
             });
-            
-            navigate("/order-confirmation", {
-              state: {
-                orderId: data.orderId,
-                amount: total,
-              },
-            });
+
+                          navigate("/order-confirmation", {
+                state: {
+                  orderId: data.orderId,
+                  amount: total,
+                },
+              });
           } catch (error) {
             console.error("Error creating order:", error);
             alert("Payment successful but order creation failed. Please contact support.");
@@ -268,7 +269,7 @@ function Cart() {
             }}
           >
             <div
-              className={`w-1 h-1 rounded-full ${
+                            className={`w-1 h-1 rounded-full ${
                 i % 3 === 0
                   ? "bg-amber-400"
                   : i % 3 === 1
@@ -285,11 +286,11 @@ function Cart() {
         <div className="max-w-7xl mx-auto">
           {/* Header */}
           <div
-            className={`text-center mb-6 sm:mb-8 px-4 mt-4 sm:mt-6 transition-all duration-1000 transform ${
-              animateElements
+            className={`text-center mb-6 sm:mb-8 px-4 mt-4 sm:mt-6 transition-all duration-1000 transform ${animateElements
                 ? "translate-y-0 opacity-100"
-                : "translate-y-8 opacity-0"
-            }`}
+             
+                 : "translate-y-8 opacity-0"
+              }`}
           >
             <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold mb-3 sm:mb-4">
               <span className="bg-gradient-to-r from-red-400 via-pink-400 to-purple-400 bg-clip-text text-transparent animate-pulse">
@@ -305,14 +306,14 @@ function Cart() {
           {cartItems.length === 0 ? (
             /* Empty Cart */
             <div
-              className={`max-w-2xl px-4 mx-auto transition-all duration-1000 delay-300 transform ${
-                animateElements
+              className={`max-w-2xl px-4 mx-auto transition-all duration-1000 delay-300 transform ${animateElements
                   ? "translate-y-0 opacity-100 scale-100"
-                  : "translate-y-8 opacity-0 scale-95"
-              }`}
+ 
+                                 : "translate-y-8 opacity-0 scale-95"
+                }`}
             >
               <div className="relative group">
-                <div className="absolute -inset-1 bg-gradient-to-r from-red-500/20 via-pink-500/20 to-purple-500/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+              <div className="absolute -inset-1 bg-gradient-to-r from-red-500/20 via-pink-500/20 to-purple-500/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
                 <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl p-6 sm:p-8 border border-white/20">
                   <div className="text-center space-y-4 sm:space-y-6">
                     <div className="text-4xl sm:text-6xl mb-3 sm:mb-4 animate-bounce">
@@ -339,26 +340,24 @@ function Cart() {
             <>
               {/* Cart Items - Mobile Layout (unchanged) */}
               <div
-                className={`lg:hidden grid grid-cols-1 px-4 gap-4 sm:gap-6 transition-all duration-1000 delay-500 transform ${
-                  animateElements
+                className={`lg:hidden grid grid-cols-1 px-4 gap-4 sm:gap-6 transition-all duration-1000 delay-500 transform ${animateElements
                     ? "translate-y-0 opacity-100"
-                    : "translate-y-8 opacity-0"
-                }`}
+         
+                             : "translate-y-8 opacity-0"
+                  }`}
               >
                 {/* Cart Items List */}
-                <div className="space-y-4 sm:space-y-6">
+              <div className="space-y-4 sm:space-y-6">
                   {cartItems.map((item, index) => (
                     <div
                       key={item.id}
-                      className={`transition-all duration-700 delay-${
-                        index * 200
-                      } transform ${
-                        animateElements
-                          ? "translate-x-0 opacity-100"
-                          : "translate-x-8 opacity-0"
-                      }`}
-                    >
-                      <CartItem item={item} onRemove={removeItem} />
+                                              className={`transition-all duration-700 delay-${index * 200
+                          } transform ${animateElements
+                            ? "translate-x-0 opacity-100"
+                            : "translate-x-8 opacity-0"
+                          }`}
+                      >
+                        <CartItem item={item} onRemove={removeItem} />
                     </div>
                   ))}
                 </div>
@@ -367,14 +366,14 @@ function Cart() {
                 <div className="space-y-4 sm:space-y-6">
                   {/* Additional Products Section */}
                   <div
-                    className={`transition-all duration-700 delay-700 transform ${
-                      animateElements
+                    className={`transition-all duration-700 delay-700 transform ${animateElements
                         ? "translate-y-0 opacity-100"
-                        : "translate-y-8 opacity-0"
-                    }`}
+     
+                                         : "translate-y-8 opacity-0"
+                      }`}
                   >
                     <AdditionalProducts
-                      products={additionalProducts}
+                    products={additionalProducts}
                       selectedProducts={selectedProducts}
                       onProductToggle={onProductToggle}
                     />
@@ -382,14 +381,14 @@ function Cart() {
 
                   {/* Consultation Form */}
                   <div
-                    className={`transition-all duration-700 delay-800 transform ${
-                      animateElements
+                    className={`transition-all duration-700 delay-800 transform ${animateElements
                         ? "translate-y-0 opacity-100"
-                        : "translate-y-8 opacity-0"
-                    }`}
+     
+                                         : "translate-y-8 opacity-0"
+                      }`}
                   >
                     <ConsultationForm
-                      onSubmit={handleConsultationFormSubmit}
+                    onSubmit={handleConsultationFormSubmit}
                       formData={consultationFormData}
                       setFormData={setConsultationFormData}
                     />
@@ -397,14 +396,14 @@ function Cart() {
 
                   {/* Order Summary */}
                   <div
-                    className={`transition-all duration-700 delay-900 transform ${
-                      animateElements
+                    className={`transition-all duration-700 delay-900 transform ${animateElements
                         ? "translate-y-0 opacity-100"
-                        : "translate-y-8 opacity-0"
-                    }`}
+     
+                                         : "translate-y-8 opacity-0"
+                      }`}
                   >
                     <OrderSummary
-                      subtotal={subtotal}
+                    subtotal={subtotal}
                       discount={discount}
                       total={total}
                       isCheckingOut={isCheckingOut}
@@ -416,23 +415,23 @@ function Cart() {
 
               {/* Desktop Layout - New Design */}
               <div
-                className={`hidden lg:block px-4 transition-all duration-1000 delay-500 transform ${
-                  animateElements
+                className={`hidden lg:block px-4 transition-all duration-1000 delay-500 transform ${animateElements
                     ? "translate-y-0 opacity-100"
-                    : "translate-y-8 opacity-0"
-                }`}
+         
+                             : "translate-y-8 opacity-0"
+                  }`}
               >
                 <div className="max-w-6xl mx-auto space-y-8">
                   {/* Main Cart Item */}
                   <div
-                    className={`transition-all duration-700 delay-200 transform ${
-                      animateElements
+                    className={`transition-all duration-700 delay-200 transform ${animateElements
                         ? "translate-x-0 opacity-100"
-                        : "translate-x-8 opacity-0"
-                    }`}
+     
+                                         : "translate-x-8 opacity-0"
+                      }`}
                   >
                     {cartItems.map((item) => (
-                      <CartItem
+                    <CartItem
                         key={item.id}
                         item={item}
                         onRemove={removeItem}
@@ -442,14 +441,14 @@ function Cart() {
 
                   {/* Additional Products Section */}
                   <div
-                    className={`transition-all duration-700 delay-400 transform ${
-                      animateElements
+                    className={`transition-all duration-700 delay-400 transform ${animateElements
                         ? "translate-y-0 opacity-100"
-                        : "translate-y-8 opacity-0"
-                    }`}
+     
+                                         : "translate-y-8 opacity-0"
+                      }`}
                   >
                     <AdditionalProducts
-                      products={additionalProducts}
+                    products={additionalProducts}
                       selectedProducts={selectedProducts}
                       onProductToggle={onProductToggle}
                     />
@@ -457,14 +456,14 @@ function Cart() {
 
                   {/* Consultation Form */}
                   <div
-                    className={`transition-all duration-700 delay-600 transform ${
-                      animateElements
+                    className={`transition-all duration-700 delay-600 transform ${animateElements
                         ? "translate-y-0 opacity-100"
-                        : "translate-y-8 opacity-0"
-                    }`}
+     
+                                         : "translate-y-8 opacity-0"
+                      }`}
                   >
                     <ConsultationForm
-                      onSubmit={handleConsultationFormSubmit}
+                    onSubmit={handleConsultationFormSubmit}
                       formData={consultationFormData}
                       setFormData={setConsultationFormData}
                     />
@@ -472,14 +471,14 @@ function Cart() {
 
                   {/* Order Summary */}
                   <div
-                    className={`transition-all duration-700 delay-800 transform ${
-                      animateElements
+                    className={`transition-all duration-700 delay-800 transform ${animateElements
                         ? "translate-y-0 opacity-100"
-                        : "translate-y-8 opacity-0"
-                    }`}
+     
+                                         : "translate-y-8 opacity-0"
+                      }`}
                   >
                     <OrderSummary
-                      subtotal={subtotal}
+                    subtotal={subtotal}
                       discount={discount}
                       total={total}
                       isCheckingOut={isCheckingOut}

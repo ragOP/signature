@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { BACKEND_URL } from '../utils/backendUrl'
 
 const Record = () => {
   const [orders, setOrders] = useState([])
@@ -11,7 +12,7 @@ const Record = () => {
 
   const fetchOrders = async () => {
     try {
-      const response = await fetch('https://skyscale-be.onrender.com/api/get-orders')
+      const response = await fetch(`${BACKEND_URL}/api/lander1/get-orders`)
       const result = await response.json()
       
       if (result.success) {

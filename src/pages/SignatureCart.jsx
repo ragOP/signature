@@ -10,6 +10,7 @@ import SignatureOrderSummary from "../components/signature/SignatureOrderSummary
 import SignatureAdditionalProducts from "../components/signature/SignatureAdditionalProducts";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { BACKEND_URL } from "../utils/backendUrl";
 
 function SignatureCart() {
   const navigate = useNavigate();
@@ -158,7 +159,7 @@ function SignatureCart() {
       setIsCheckingOut(true);
 
       const res = await axios.post(
-        "https://skyscale-be.onrender.com/api/payment/razorpay4",
+        `${BACKEND_URL}/api/payment/razorpay`,
         {
           amount: total,
         }
@@ -175,7 +176,7 @@ function SignatureCart() {
         order_id: data.orderId,
         handler: async function (response) {
           try {
-            await axios.post("https://skyscale-be.onrender.com/api/create-order4", {
+            await axios.post(`${BACKEND_URL}/api/lander4/create-order`, {
               amount: total,
               razorpayOrderId: response.razorpay_order_id,
               razorpayPaymentId: response.razorpay_payment_id,
@@ -245,10 +246,10 @@ function SignatureCart() {
           >
             <div
               className={`w-1 h-1 rounded-full ${i % 3 === 0
-                  ? "bg-gray-400"
-                  : i % 3 === 1
-                    ? "bg-blue-400"
-                    : "bg-black"
+                ? "bg-gray-400"
+                : i % 3 === 1
+                  ? "bg-blue-400"
+                  : "bg-black"
                 } opacity-60`}
             ></div>
           </div>
@@ -261,8 +262,8 @@ function SignatureCart() {
           {/* Header */}
           <div
             className={`text-center mb-4 sm:mb-6 px-4 mt-4 sm:mt-6 transition-all duration-1000 transform ${animateElements
-                ? "translate-y-0 opacity-100"
-                : "translate-y-8 opacity-0"
+              ? "translate-y-0 opacity-100"
+              : "translate-y-8 opacity-0"
               }`}
           >
             <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold mb-1 sm:mb-2">
@@ -279,8 +280,8 @@ function SignatureCart() {
             /* Empty Cart */
             <div
               className={`max-w-2xl px-4 mx-auto transition-all duration-1000 delay-300 transform ${animateElements
-                  ? "translate-y-0 opacity-100 scale-100"
-                  : "translate-y-8 opacity-0 scale-95"
+                ? "translate-y-0 opacity-100 scale-100"
+                : "translate-y-8 opacity-0 scale-95"
                 }`}
             >
               <div className="relative group">
@@ -311,8 +312,8 @@ function SignatureCart() {
               {/* Cart Items - Mobile Layout */}
               <div
                 className={`lg:hidden grid grid-cols-1 px-4 gap-4 sm:gap-6 transition-all duration-1000 delay-500 transform ${animateElements
-                    ? "translate-y-0 opacity-100"
-                    : "translate-y-8 opacity-0"
+                  ? "translate-y-0 opacity-100"
+                  : "translate-y-8 opacity-0"
                   }`}
               >
                 {/* Cart Items List */}
@@ -336,8 +337,8 @@ function SignatureCart() {
                   {/* Additional Products Section */}
                   <div
                     className={`transition-all duration-700 delay-700 transform ${animateElements
-                        ? "translate-y-0 opacity-100"
-                        : "translate-y-8 opacity-0"
+                      ? "translate-y-0 opacity-100"
+                      : "translate-y-8 opacity-0"
                       }`}
                   >
                     <SignatureAdditionalProducts
@@ -350,8 +351,8 @@ function SignatureCart() {
                   {/* Consultation Form */}
                   <div
                     className={`transition-all duration-700 delay-800 transform ${animateElements
-                        ? "translate-y-0 opacity-100"
-                        : "translate-y-8 opacity-0"
+                      ? "translate-y-0 opacity-100"
+                      : "translate-y-8 opacity-0"
                       }`}
                   >
                     <SignatureConsultationForm
@@ -364,8 +365,8 @@ function SignatureCart() {
                   {/* Order Summary */}
                   <div
                     className={`transition-all duration-700 delay-900 transform ${animateElements
-                        ? "translate-y-0 opacity-100"
-                        : "translate-y-8 opacity-0"
+                      ? "translate-y-0 opacity-100"
+                      : "translate-y-8 opacity-0"
                       }`}
                   >
                     <SignatureOrderSummary
@@ -382,16 +383,16 @@ function SignatureCart() {
               {/* Desktop Layout */}
               <div
                 className={`hidden lg:block px-4 transition-all duration-1000 delay-500 transform ${animateElements
-                    ? "translate-y-0 opacity-100"
-                    : "translate-y-8 opacity-0"
+                  ? "translate-y-0 opacity-100"
+                  : "translate-y-8 opacity-0"
                   }`}
               >
                 <div className="max-w-6xl mx-auto space-y-8">
                   {/* Main Cart Item */}
                   <div
                     className={`transition-all duration-700 delay-200 transform ${animateElements
-                        ? "translate-x-0 opacity-100"
-                        : "translate-x-8 opacity-0"
+                      ? "translate-x-0 opacity-100"
+                      : "translate-x-8 opacity-0"
                       }`}
                   >
                     {cartItems.map((item) => (
@@ -407,8 +408,8 @@ function SignatureCart() {
                   {/* Additional Products Section */}
                   <div
                     className={`transition-all duration-700 delay-400 transform ${animateElements
-                        ? "translate-y-0 opacity-100"
-                        : "translate-y-8 opacity-0"
+                      ? "translate-y-0 opacity-100"
+                      : "translate-y-8 opacity-0"
                       }`}
                   >
                     <SignatureAdditionalProducts
@@ -421,8 +422,8 @@ function SignatureCart() {
                   {/* Consultation Form */}
                   <div
                     className={`transition-all duration-700 delay-600 transform ${animateElements
-                        ? "translate-y-0 opacity-100"
-                        : "translate-y-8 opacity-0"
+                      ? "translate-y-0 opacity-100"
+                      : "translate-y-8 opacity-0"
                       }`}
                   >
                     <SignatureConsultationForm
@@ -435,8 +436,8 @@ function SignatureCart() {
                   {/* Order Summary */}
                   <div
                     className={`transition-all duration-700 delay-800 transform ${animateElements
-                        ? "translate-y-0 opacity-100"
-                        : "translate-y-8 opacity-0"
+                      ? "translate-y-0 opacity-100"
+                      : "translate-y-8 opacity-0"
                       }`}
                   >
                     <SignatureOrderSummary

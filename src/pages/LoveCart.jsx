@@ -10,6 +10,7 @@ import LoveAdditionalProducts from "../components/love/LoveAdditionalProducts";
 import LoveConsultationForm from "../components/love/LoveConsultationForm";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { BACKEND_URL } from "../utils/backendUrl";
 import WhyPeopleLoveSection from "../components/love/WhyPeopleLoveSection";
 
 function LoveCart() {
@@ -178,7 +179,7 @@ function LoveCart() {
       setIsCheckingOut(true);
 
       const res = await axios.post(
-        "https://skyscale-be.onrender.com/api/payment/razorpay2",
+        `${BACKEND_URL}/api/payment/razorpay`,
         {
           amount: total,
         }
@@ -195,7 +196,7 @@ function LoveCart() {
         order_id: data.orderId,
         handler: async function (response) {
           try {
-            await axios.post("https://skyscale-be.onrender.com/api/create-order2", {
+            await axios.post(`${BACKEND_URL}/api/lander2/create-order`, {
               amount: total,
               razorpayOrderId: response.razorpay_order_id,
               razorpayPaymentId: response.razorpay_payment_id,
