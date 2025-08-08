@@ -3,7 +3,7 @@ import React from 'react';
 const SignatureVideoSection = () => {
   return (
     <section className="py-4 mb-2">
-      <div className="max-w-4xl mx-auto relative">
+      <div className="max-w-4xl mx-auto relative rounded-3xl overflow-hidden shadow-lg">
         <video
           className="w-full h-64 object-cover"
           autoPlay

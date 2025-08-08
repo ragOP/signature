@@ -131,13 +131,13 @@ const SignatureTestimonialsSection = () => {
 
                 {/* Testimonials Slider */}
                 <div className="mb-6">
-                    <SignatureTestimonialsSlider testimonials={testimonials} />
+                    <SignatureTestimonialsSlider testimonials={testimonials} showArrows={false} />
                 </div>
 
                 {/* Image Slider */}
                 <div className={`transition-all duration-1000 delay-500 transform ${animateElements ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
                     }`}>
-                    <SignatureImageSlider images={transformationImages} />
+                    <SignatureImageSlider images={transformationImages} showArrows={false}  />
 
                     {/* <SignatureImageSlider images={proofImages} showArrows={false} showDots={true} /> */}
                 </div>

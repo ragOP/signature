@@ -82,7 +82,7 @@ const SignatureBeforeAfterSection = () => {
                 {/* Image Slider */}
                 <div className={`mb-12 transition-all duration-1000 delay-300 transform ${animateElements ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
                     }`}>
-                    <SignatureImageSlider images={transformationImages} />
+                    <SignatureImageSlider images={transformationImages}  showArrows={false}/>
                 </div>
 
                 {/* Transformation Points Grid */}
