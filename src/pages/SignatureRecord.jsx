@@ -107,7 +107,7 @@ const SignatureRecord = () => {
                                     <th className="px-6 py-4 text-left text-sm font-semibold">Email</th>
                                     <th className="px-6 py-4 text-left text-sm font-semibold">Phone</th>
                                     <th className="px-6 py-4 text-left text-sm font-semibold">Profession</th>
-                                    <th className="px-6 py-4 text-left text-sm font-semibold">Remarks</th>
+                                    <th className="px-6 py-4 text-left text-sm font-semibold ">Remarks</th>
                                     <th className="px-6 py-4 text-left text-sm font-semibold">Additional Products</th>
                                     <th className="px-6 py-4 text-left text-sm font-semibold">Amount</th>
                                     <th className="px-6 py-4 text-left text-sm font-semibold">Order Date</th>
@@ -121,11 +121,24 @@ const SignatureRecord = () => {
                                         <td className="px-6 py-4 text-sm text-gray-600">{order.email}</td>
                                         <td className="px-6 py-4 text-sm text-gray-600">{order.phoneNumber}</td>
                                         <td className="px-6 py-4 text-sm text-gray-600">{order.profession}</td>
-                                        <td className="px-6 py-4 text-sm text-gray-600 max-w-xs truncate" title={order.remarks}>
-                                            {order.remarks || "No remarks"}
+                                        <td className="px-6 py-4 text-sm text-gray-600 max-w-xs" title={order.remarks}>
+                                            <div className="w-64">
+                                                {order.remarks || "No remarks"}
+                                            </div>
                                         </td>
                                         <td className="px-6 py-4 text-sm text-gray-600">
-                                            {order.additionalProducts ? order.additionalProducts.join(", ") : "Signature Design"}
+                                            {order.additionalProducts ? (
+                                                <div className="space-y-1 w-[7vw]">
+                                                    {order.additionalProducts.map((product, idx) => (
+                                                        <div key={idx} className="leading-tight">
+                                                            <div className="text-gray-800">{product}</div>
+                                                            <div className="text-xs font-semibold text-gray-700">₹299</div>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            ) : (
+                                                "Signature Design"
+                                            )}
                                         </td>
                                         <td className="px-6 py-4 text-sm font-semibold text-gray-800">₹{order.amount}</td>
                                         <td className="px-6 py-4 text-sm text-gray-600">{formatDateTime(order.orderDate)}</td>
