@@ -257,7 +257,7 @@ const BrandSignatureOverlay = ({ onAnimationComplete }) => {
         {/* Astro Soul Text */}
         <div className="mb-8 text-center">
           <h1 className="font-signature text-6xl sm:text-5xl lg:text-6xl text-gray-800 font-semibold leading-none">
-            Astro Soul
+           The Signature Studio
           </h1>
         </div>
 
