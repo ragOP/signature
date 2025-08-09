@@ -10,7 +10,7 @@ const BrandSignatureOverlay = ({ onAnimationComplete }) => {
     const timer = setTimeout(() => {
       setShowOverlay(false);
       onAnimationComplete();
-    }, 3000);
+    }, 2000);
 
     return () => clearTimeout(timer);
   }, [onAnimationComplete]);
