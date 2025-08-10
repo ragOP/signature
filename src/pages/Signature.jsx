@@ -49,6 +49,7 @@ function Signature() {
           <div className='flex justify-center items-center mt-2 px-6'>
             <SignatureCTA />
           </div>
+          
           <SignatureLimitedSlots />
           <SignatureFooter />
         </div>

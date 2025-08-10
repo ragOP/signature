@@ -16,6 +16,7 @@ const SignatureLimitedSlots = () => {
         <section className="py-8 px-4 bg-gradient-to-br from-gray-50 to-white">
             <div className="max-w-5xl mx-auto">
                 {/* Section Header */}
+                
                 <div className={`text-center mb-12 transition-all duration-1000 transform ${animateElements ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
                     }`}>
                     <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-red-50 to-orange-50 border border-red-200 rounded-full px-6 py-3 mb-6">
@@ -103,6 +104,9 @@ const SignatureLimitedSlots = () => {
                         <div className="text-sm text-gray-600 font-medium mb-1">Design Options</div>
                         <div className="text-3xl font-bold text-gray-800">3</div>
                     </div>
+                    <div className="mt-6 text-center">
+            
+          </div>
                 </div>
             </div>
         </section>
