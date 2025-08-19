@@ -2,13 +2,13 @@
 
 import { useMemo } from "react";
 
-export default function PolicyPage() {
+export default function Contact() {
   const sections = useMemo(
     () => [
      
       {
         id: "support-policy",
-        title: "Support Policy",
+        title: "Contact",
         content: (
           <div className="space-y-4">
             <ul className="list-disc pl-6 space-y-2">

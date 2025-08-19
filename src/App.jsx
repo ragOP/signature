@@ -14,6 +14,7 @@ import SignatureCart from './pages/SignatureCart';
 import SignatureRecord from './pages/SignatureRecord';
 import SignatureOrderConfirmation from './pages/SignatureOrderConfirmation';
 import Privacy from './pages/Privacy';
+import Contact from './pages/Contact';
 
 
 // Main App Component
@@ -24,6 +25,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Signature />} />
           <Route path="/signature" element={<Signature />} />
+           <Route path="/contact" element={<Contact />} />
           {/* <Route path="/consultation" element={<Home />} />     
           <Route path="/cart" element={<Cart />} />
           <Route path="/cart-2" element={<LoveCart />} />
