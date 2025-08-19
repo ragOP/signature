@@ -167,6 +167,7 @@ export default function PolicyPage() {
                 If you have questions,{" "}
                 <a className="underline" href="mailto:support@thesignaturestudio.in">contact us</a>.
               </p>
+                <p>Sakshi Srivastava”</p>
             </div>
           </div>
 
