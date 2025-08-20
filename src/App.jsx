@@ -26,16 +26,7 @@ function App() {
           <Route path="/" element={<Signature />} />
           <Route path="/signature" element={<Signature />} />
            <Route path="/contact" element={<Contact />} />
-          {/* <Route path="/consultation" element={<Home />} />     
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/cart-2" element={<LoveCart />} />
-          <Route path="/order-confirmation" element={<OrderConfirmation />} />
-          <Route path="/order-confirmation-2" element={<LoveOrderConfirmation />} />
-          <Route path="/record" element={<Record />} />
-          <Route path="/love-record" element={<LoveRecord />} /> */}
-          {/* <Route path="/love" element={<LoveSection />} /> */}
-          {/* <Route path="/love" element={<NewLove />} /> */}
-          {/* <Route path="/signature" element={<Signature />} /> */}
+      
           <Route path="/signature-cart" element={<SignatureCart />} />
           <Route path="/signature-record" element={<SignatureRecord />} />
           <Route path="/signature-order-confirmation" element={<SignatureOrderConfirmation />} />
