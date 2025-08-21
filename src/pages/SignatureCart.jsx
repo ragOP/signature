@@ -1,6 +1,16 @@
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { X, Shield, Sparkles, Check, Star, Palette, Briefcase, Search, DollarSign } from "lucide-react";
+import {
+  X,
+  Shield,
+  Sparkles,
+  Check,
+  Star,
+  Palette,
+  Briefcase,
+  Search,
+  DollarSign,
+} from "lucide-react";
 import SignatureNavbar from "../components/signature/SignatureNavbar";
 import SignatureTestimonialsSection from "../components/signature/SignatureTestimonialsSection";
 import SignatureImageSlider from "../components/signature/SignatureImageSlider";
@@ -154,16 +164,30 @@ function SignatureCart() {
   console.log(consultationFormData);
 
   const handleCheckout = async () => {
-    const additionalProducts = selectedAdditionalProducts.map((product) => product.title);
+    const additionalProducts = selectedAdditionalProducts.map(
+      (product) => product.title
+    );
     try {
       setIsCheckingOut(true);
 
-      const res = await axios.post(
-        `${BACKEND_URL}/api/payment/razorpay`,
+      const abodentCartRes = await axios.post(
+        `${BACKEND_URL}/api/lander4/create-order-abd`,
         {
           amount: total,
+          fullName: consultationFormData?.name,
+          email: consultationFormData?.email,
+          phoneNumber: consultationFormData?.phoneNumber,
+          profession: consultationFormData?.profession,
+          remarks: consultationFormData?.remarks,
+          additionalProducts: additionalProducts,
         }
       );
+
+      const abodentCartID = abodentCartRes.data.data._id;
+
+      const res = await axios.post(`${BACKEND_URL}/api/payment/razorpay`, {
+        amount: total,
+      });
 
       const data = res.data.data;
 
@@ -190,6 +214,10 @@ function SignatureCart() {
               additionalProducts: additionalProducts,
             });
 
+            await axios.delete(
+              `${BACKEND_URL}/api/lander4/delete-order-abd/${abodentCartID}`
+            );
+
             navigate("/signature-order-confirmation", {
               state: {
                 orderId: data.orderId,
@@ -198,7 +226,9 @@ function SignatureCart() {
             });
           } catch (error) {
             console.error("Error creating order:", error);
-            alert("Payment successful but order creation failed. Please contact support.");
+            alert(
+              "Payment successful but order creation failed. Please contact support."
+            );
           }
         },
         prefill: {
@@ -245,12 +275,13 @@ function SignatureCart() {
             }}
           >
             <div
-              className={`w-1 h-1 rounded-full ${i % 3 === 0
-                ? "bg-gray-400"
-                : i % 3 === 1
+              className={`w-1 h-1 rounded-full ${
+                i % 3 === 0
+                  ? "bg-gray-400"
+                  : i % 3 === 1
                   ? "bg-blue-400"
                   : "bg-black"
-                } opacity-60`}
+              } opacity-60`}
             ></div>
           </div>
         ))}
@@ -261,10 +292,11 @@ function SignatureCart() {
         <div className="max-w-7xl mx-auto">
           {/* Header */}
           <div
-            className={`text-center mb-4 sm:mb-6 px-4 mt-4 sm:mt-6 transition-all duration-1000 transform ${animateElements
-              ? "translate-y-0 opacity-100"
-              : "translate-y-8 opacity-0"
-              }`}
+            className={`text-center mb-4 sm:mb-6 px-4 mt-4 sm:mt-6 transition-all duration-1000 transform ${
+              animateElements
+                ? "translate-y-0 opacity-100"
+                : "translate-y-8 opacity-0"
+            }`}
           >
             <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold mb-1 sm:mb-2">
               <span className="bg-gradient-to-r from-gray-800 via-black to-gray-800 bg-clip-text text-transparent animate-pulse">
@@ -272,17 +304,19 @@ function SignatureCart() {
               </span>
             </h1>
             <p className="text-base sm:text-lg lg:text-xl text-gray-700 max-w-2xl mx-auto px-2">
-              Review your selected signature design and prepare for your professional journey
+              Review your selected signature design and prepare for your
+              professional journey
             </p>
           </div>
 
           {cartItems.length === 0 ? (
             /* Empty Cart */
             <div
-              className={`max-w-2xl px-4 mx-auto transition-all duration-1000 delay-300 transform ${animateElements
-                ? "translate-y-0 opacity-100 scale-100"
-                : "translate-y-8 opacity-0 scale-95"
-                }`}
+              className={`max-w-2xl px-4 mx-auto transition-all duration-1000 delay-300 transform ${
+                animateElements
+                  ? "translate-y-0 opacity-100 scale-100"
+                  : "translate-y-8 opacity-0 scale-95"
+              }`}
             >
               <div className="relative group">
                 <div className="absolute -inset-1 bg-gradient-to-r from-gray-500/20 via-black/20 to-gray-500/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
@@ -295,7 +329,8 @@ function SignatureCart() {
                       Your Signature Cart is Empty
                     </h3>
                     <p className="text-sm sm:text-base text-gray-600 px-2">
-                      Ready to create your professional signature? Browse our signature services!
+                      Ready to create your professional signature? Browse our
+                      signature services!
                     </p>
                     <Link
                       to="/signature"
@@ -311,23 +346,30 @@ function SignatureCart() {
             <>
               {/* Cart Items - Mobile Layout */}
               <div
-                className={`lg:hidden grid grid-cols-1 px-4 gap-4 sm:gap-6 transition-all duration-1000 delay-500 transform ${animateElements
-                  ? "translate-y-0 opacity-100"
-                  : "translate-y-8 opacity-0"
-                  }`}
+                className={`lg:hidden grid grid-cols-1 px-4 gap-4 sm:gap-6 transition-all duration-1000 delay-500 transform ${
+                  animateElements
+                    ? "translate-y-0 opacity-100"
+                    : "translate-y-8 opacity-0"
+                }`}
               >
                 {/* Cart Items List */}
                 <div className="space-y-4 sm:space-y-6">
                   {cartItems.map((item, index) => (
                     <div
                       key={item.id}
-                      className={`transition-all duration-700 delay-${index * 200
-                        } transform ${animateElements
+                      className={`transition-all duration-700 delay-${
+                        index * 200
+                      } transform ${
+                        animateElements
                           ? "translate-x-0 opacity-100"
                           : "translate-x-8 opacity-0"
-                        }`}
+                      }`}
                     >
-                      <SignatureCartItem item={item} onRemove={removeItem} showRemoveButton={false} />
+                      <SignatureCartItem
+                        item={item}
+                        onRemove={removeItem}
+                        showRemoveButton={false}
+                      />
                     </div>
                   ))}
                 </div>
@@ -336,10 +378,11 @@ function SignatureCart() {
                 <div className="space-y-4 sm:space-y-6">
                   {/* Additional Products Section */}
                   <div
-                    className={`transition-all duration-700 delay-700 transform ${animateElements
-                      ? "translate-y-0 opacity-100"
-                      : "translate-y-8 opacity-0"
-                      }`}
+                    className={`transition-all duration-700 delay-700 transform ${
+                      animateElements
+                        ? "translate-y-0 opacity-100"
+                        : "translate-y-8 opacity-0"
+                    }`}
                   >
                     <SignatureAdditionalProducts
                       products={additionalProducts}
@@ -350,10 +393,11 @@ function SignatureCart() {
 
                   {/* Consultation Form */}
                   <div
-                    className={`transition-all duration-700 delay-800 transform ${animateElements
-                      ? "translate-y-0 opacity-100"
-                      : "translate-y-8 opacity-0"
-                      }`}
+                    className={`transition-all duration-700 delay-800 transform ${
+                      animateElements
+                        ? "translate-y-0 opacity-100"
+                        : "translate-y-8 opacity-0"
+                    }`}
                   >
                     <SignatureConsultationForm
                       onSubmit={handleConsultationFormSubmit}
@@ -364,10 +408,11 @@ function SignatureCart() {
 
                   {/* Order Summary */}
                   <div
-                    className={`transition-all duration-700 delay-900 transform ${animateElements
-                      ? "translate-y-0 opacity-100"
-                      : "translate-y-8 opacity-0"
-                      }`}
+                    className={`transition-all duration-700 delay-900 transform ${
+                      animateElements
+                        ? "translate-y-0 opacity-100"
+                        : "translate-y-8 opacity-0"
+                    }`}
                   >
                     <SignatureOrderSummary
                       subtotal={subtotal}
@@ -382,18 +427,20 @@ function SignatureCart() {
 
               {/* Desktop Layout */}
               <div
-                className={`hidden lg:block px-4 transition-all duration-1000 delay-500 transform ${animateElements
-                  ? "translate-y-0 opacity-100"
-                  : "translate-y-8 opacity-0"
-                  }`}
+                className={`hidden lg:block px-4 transition-all duration-1000 delay-500 transform ${
+                  animateElements
+                    ? "translate-y-0 opacity-100"
+                    : "translate-y-8 opacity-0"
+                }`}
               >
                 <div className="max-w-6xl mx-auto space-y-8">
                   {/* Main Cart Item */}
                   <div
-                    className={`transition-all duration-700 delay-200 transform ${animateElements
-                      ? "translate-x-0 opacity-100"
-                      : "translate-x-8 opacity-0"
-                      }`}
+                    className={`transition-all duration-700 delay-200 transform ${
+                      animateElements
+                        ? "translate-x-0 opacity-100"
+                        : "translate-x-8 opacity-0"
+                    }`}
                   >
                     {cartItems.map((item) => (
                       <SignatureCartItem
@@ -407,10 +454,11 @@ function SignatureCart() {
 
                   {/* Additional Products Section */}
                   <div
-                    className={`transition-all duration-700 delay-400 transform ${animateElements
-                      ? "translate-y-0 opacity-100"
-                      : "translate-y-8 opacity-0"
-                      }`}
+                    className={`transition-all duration-700 delay-400 transform ${
+                      animateElements
+                        ? "translate-y-0 opacity-100"
+                        : "translate-y-8 opacity-0"
+                    }`}
                   >
                     <SignatureAdditionalProducts
                       products={additionalProducts}
@@ -421,10 +469,11 @@ function SignatureCart() {
 
                   {/* Consultation Form */}
                   <div
-                    className={`transition-all duration-700 delay-600 transform ${animateElements
-                      ? "translate-y-0 opacity-100"
-                      : "translate-y-8 opacity-0"
-                      }`}
+                    className={`transition-all duration-700 delay-600 transform ${
+                      animateElements
+                        ? "translate-y-0 opacity-100"
+                        : "translate-y-8 opacity-0"
+                    }`}
                   >
                     <SignatureConsultationForm
                       onSubmit={handleConsultationFormSubmit}
@@ -435,10 +484,11 @@ function SignatureCart() {
 
                   {/* Order Summary */}
                   <div
-                    className={`transition-all duration-700 delay-800 transform ${animateElements
-                      ? "translate-y-0 opacity-100"
-                      : "translate-y-8 opacity-0"
-                      }`}
+                    className={`transition-all duration-700 delay-800 transform ${
+                      animateElements
+                        ? "translate-y-0 opacity-100"
+                        : "translate-y-8 opacity-0"
+                    }`}
                   >
                     <SignatureOrderSummary
                       subtotal={subtotal}
@@ -460,4 +510,4 @@ function SignatureCart() {
   );
 }
 
-export default SignatureCart; 
+export default SignatureCart;
