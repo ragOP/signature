@@ -15,12 +15,12 @@ const SignatureFooter = () => {
               </div>
               <span className="text-xs text-red-600 font-medium">Last 2 slots left</span>
             </div>
-            <a
+            {/* <a
               href="/privacy#delivery-policy"
               className="inline-block text-gray-800 underline underline-offset-4 hover:text-black focus:outline-none focus:ring-2 focus:ring-gray-300 rounded px-1 transition-colors"
             >
               Privacy 
-            </a>
+            </a> */}
             <SignatureCTA size="small" width="fit-content" title="Get Signature" />
             
           </div>
