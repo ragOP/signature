@@ -19,7 +19,7 @@ export default function PolicyPage() {
               <li><strong>Delivery Time:</strong> Orders are typically delivered within 24–48 hours.</li>
               <li>
                 <strong>Non-Delivery:</strong> If you do not receive your product within 48 hours, please contact us
-                immediately at <a className="underline" href="mailto:support@thesignaturestudio.in">support@thesignaturestudio.in</a> with your order number so we can resolve the issue promptly.
+                immediately at <a className="underline" href="mailto:orders@thesignaturestudio.in">orders@thesignaturestudio.in</a> with your order number so we can resolve the issue promptly.
               </li>
             </ul>
           </div>
@@ -94,7 +94,7 @@ export default function PolicyPage() {
         content: (
           <div className="space-y-4">
             <ul className="list-disc pl-6 space-y-2">
-              <li><strong>Email Support:</strong> <a className="underline" href="mailto:support@thesignaturestudio.in">support@thesignaturestudio.in</a></li>
+              <li><strong>Email Support:</strong> <a className="underline" href="mailto:orders@thesignaturestudio.in">orders@thesignaturestudio.in</a></li>
               <li><strong>Working Hours:</strong> Monday–Saturday, 10:00 AM – 6:00 PM (IST)</li>
               <li><strong>Response Time:</strong> We respond to all inquiries within 24 hours. Urgent issues are prioritised.</li>
             </ul>
@@ -165,7 +165,7 @@ export default function PolicyPage() {
               <p className="text-sm text-slate-700">
                 <strong>Note:</strong> By using our website, you agree to these policies.  
                 If you have questions,{" "}
-                <a className="underline" href="mailto:support@thesignaturestudio.in">contact us</a>.
+                <a className="underline" href="mailto:orders@thesignaturestudio.in">contact us</a>.
               </p>
                 <p>Sakshi Srivastava”</p>
             </div>
