@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FileText, Users, Calendar, Phone, Mail, MapPin, User, Clock, Star, Search, CheckCircle } from 'lucide-react';
+import { FileText, Users, Calendar, Phone, Mail, MapPin, User, Clock, Star, Search, CheckCircle, Download, CalendarIcon, ChevronDown } from 'lucide-react';
 import SignatureNavbar from '../components/signature/SignatureNavbar';
 import { BACKEND_URL } from '../utils/backendUrl';
 
@@ -8,10 +8,29 @@ const SignatureRecord = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
+    const [dateFilter, setDateFilter] = useState('all');
+    const [customStartDate, setCustomStartDate] = useState('');
+    const [customEndDate, setCustomEndDate] = useState('');
+    const [showDateDropdown, setShowDateDropdown] = useState(false);
+    const [showCustomDatePicker, setShowCustomDatePicker] = useState(false);
 
     useEffect(() => {
         fetchOrders();
     }, []);
+
+    // Close dropdown when clicking outside
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (showDateDropdown && !event.target.closest('.date-filter-dropdown')) {
+                setShowDateDropdown(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [showDateDropdown]);
 
     const fetchOrders = async () => {
         try {
@@ -34,11 +53,112 @@ const SignatureRecord = () => {
         return new Date(dateTimeString).toLocaleString();
     };
 
-    const filteredOrders = orders.filter(order =>
+    // Date filtering logic
+    const getDateFilteredOrders = (orders) => {
+        const now = new Date();
+        const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        const yesterday = new Date(today);
+        yesterday.setDate(yesterday.getDate() - 1);
+        const lastWeek = new Date(today);
+        lastWeek.setDate(lastWeek.getDate() - 7);
+
+        return orders.filter(order => {
+            const orderDate = new Date(order.orderDate);
+            const orderDay = new Date(orderDate.getFullYear(), orderDate.getMonth(), orderDate.getDate());
+
+            switch (dateFilter) {
+                case 'today':
+                    return orderDay.getTime() === today.getTime();
+                case 'yesterday':
+                    return orderDay.getTime() === yesterday.getTime();
+                case 'last7days':
+                    return orderDate >= lastWeek;
+                case 'custom':
+                    if (customStartDate && customEndDate) {
+                        const startDate = new Date(customStartDate);
+                        const endDate = new Date(customEndDate);
+                        endDate.setHours(23, 59, 59, 999); // Include the entire end date
+                        return orderDate >= startDate && orderDate <= endDate;
+                    }
+                    return true;
+                default:
+                    return true;
+            }
+        });
+    };
+
+    // CSV export function
+    const exportToCSV = () => {
+        const csvHeaders = [
+            'Order ID',
+            'Name',
+            'Email',
+            'Phone',
+            'Profession',
+            'Remarks',
+            'Additional Products',
+            'Amount',
+            'Order Date'
+        ];
+
+        const csvData = filteredOrders.map(order => [
+            order.orderId,
+            order.fullName,
+            order.email,
+            order.phoneNumber,
+            order.profession,
+            order.remarks || 'No remarks',
+            order.additionalProducts ? order.additionalProducts.join(', ') : 'Signature Design',
+            order.amount,
+            formatDateTime(order.orderDate)
+        ]);
+
+        const csvContent = [
+            csvHeaders.join(','),
+            ...csvData.map(row => 
+                row.map(field => 
+                    typeof field === 'string' && field.includes(',') 
+                        ? `"${field.replace(/"/g, '""')}"` 
+                        : field
+                ).join(',')
+            )
+        ].join('\n');
+
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement('a');
+        const url = URL.createObjectURL(blob);
+        link.setAttribute('href', url);
+        link.setAttribute('download', `signature_orders_${new Date().toISOString().split('T')[0]}.csv`);
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    };
+
+    const dateFilteredOrders = getDateFilteredOrders(orders);
+    const filteredOrders = dateFilteredOrders.filter(order =>
         order.fullName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
         order.email?.toLowerCase().includes(searchTerm.toLowerCase()) ||
         order.orderId?.toLowerCase().includes(searchTerm.toLowerCase())
     );
+
+    const dateFilterOptions = [
+        { value: 'all', label: 'All' },
+        { value: 'today', label: 'Today' },
+        { value: 'yesterday', label: 'Yesterday' },
+        { value: 'last7days', label: 'Last 7 Days' },
+        { value: 'custom', label: 'Custom Range' }
+    ];
+
+    const handleDateFilterChange = (value) => {
+        setDateFilter(value);
+        setShowDateDropdown(false);
+        setShowCustomDatePicker(value === 'custom');
+        if (value !== 'custom') {
+            setCustomStartDate('');
+            setCustomEndDate('');
+        }
+    };
 
     if (loading) {
         return (
@@ -83,18 +203,92 @@ const SignatureRecord = () => {
                     </p>
                 </div>
 
-                {/* Search Bar */}
-                <div className="max-w-md mx-auto mb-8">
-                    <div className="relative">
-                        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                        <input
-                            type="text"
-                            placeholder="Search by name, email, or order ID..."
-                            value={searchTerm}
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                            className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-800 focus:border-transparent transition-all duration-200"
-                        />
+                {/* Search Bar and Filters */}
+                <div className="max-w-4xl mx-auto mb-8">
+                    <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
+                        {/* Search Bar */}
+                        <div className="flex-1 max-w-md">
+                            <div className="relative">
+                                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                                <input
+                                    type="text"
+                                    placeholder="Search by name, email, or order ID..."
+                                    value={searchTerm}
+                                    onChange={(e) => setSearchTerm(e.target.value)}
+                                    className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-800 focus:border-transparent transition-all duration-200"
+                                />
+                            </div>
+                        </div>
+
+                        {/* Date Filter Dropdown */}
+                        <div className="relative date-filter-dropdown">
+                            <button
+                                onClick={() => setShowDateDropdown(!showDateDropdown)}
+                                className="flex items-center space-x-2 px-4 py-3 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 focus:ring-2 focus:ring-gray-800 focus:border-transparent transition-all duration-200"
+                            >
+                                <CalendarIcon className="w-5 h-5 text-gray-600" />
+                                <span className="text-gray-700">
+                                    {dateFilterOptions.find(option => option.value === dateFilter)?.label}
+                                </span>
+                                <ChevronDown className="w-4 h-4 text-gray-600" />
+                            </button>
+
+                            {showDateDropdown && (
+                                <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+                                    {dateFilterOptions.map((option) => (
+                                        <button
+                                            key={option.value}
+                                            onClick={() => handleDateFilterChange(option.value)}
+                                            className={`w-full text-left px-4 py-2 hover:bg-gray-50 transition-colors duration-200 first:rounded-t-lg last:rounded-b-lg ${
+                                                dateFilter === option.value ? 'bg-gray-100 text-gray-900 font-medium' : 'text-gray-700'
+                                            }`}
+                                        >
+                                            {option.label}
+                                        </button>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+
+                        {/* Export CSV Button */}
+                        <button
+                            onClick={exportToCSV}
+                            className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-gray-800 to-black text-white rounded-lg hover:from-gray-900 hover:to-gray-800 focus:ring-2 focus:ring-gray-800 focus:ring-offset-2 transition-all duration-200 shadow-lg"
+                        >
+                            <Download className="w-5 h-5" />
+                            <span>Export CSV</span>
+                        </button>
                     </div>
+
+                    {/* Custom Date Range Picker */}
+                    {showCustomDatePicker && (
+                        <div className="mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                            <div className="flex flex-col sm:flex-row gap-4 items-center">
+                                <div className="flex-1">
+                                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                                        Start Date
+                                    </label>
+                                    <input
+                                        type="date"
+                                        value={customStartDate}
+                                        onChange={(e) => setCustomStartDate(e.target.value)}
+                                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-800 focus:border-transparent"
+                                    />
+                                </div>
+                                <div className="flex-1">
+                                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                                        End Date
+                                    </label>
+                                    <input
+                                        type="date"
+                                        value={customEndDate}
+                                        onChange={(e) => setCustomEndDate(e.target.value)}
+                                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-800 focus:border-transparent"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    )}
                 </div>
 
                 {/* Orders Table */}
