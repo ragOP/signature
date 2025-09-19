@@ -20,6 +20,7 @@ import SignatureAbondentReport from "./pages/AbondedentReport";
 import SignatureRag from "./pages/SignatureRag";
 import SignatureCartRag from "./pages/SignatureCartRag";
 import SignatureRecordRag from "./pages/SignatureRecordRag";
+import V2 from "./pages/V2";
 import SignatureOrderConfirmationRag from "./pages/SignatureOrderConfirmationRag";
 import SignatureAbondentReportRag from "./pages/AbondedentResportRag";
 
@@ -32,6 +33,7 @@ function App() {
           <Route path="/" element={<SignatureRag />} />
           <Route path="/rag" element={<SignatureRag />} />
           <Route path="/signature-cart/rag" element={<SignatureCartRag />} />
+               <Route path="/v2" element={<V2 />} />
           <Route
             path="/signature-record/rag"
             element={<SignatureRecordRag />}
