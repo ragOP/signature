@@ -34,7 +34,7 @@ function Signature() {
         <div className="signature-container mb-20 relative bg-gradient-to-br from-white via-gray-50 to-blue-50">
           <BackgroundVariations activeVariation={0} />
           <SignatureHero />
-          <SignatureVideoSection />
+          {/* <SignatureVideoSection /> */}
           <SignatureBeforeAfterSection />
           <div className='flex justify-center items-center mt-4 px-6'>
             <SignatureCTA />
