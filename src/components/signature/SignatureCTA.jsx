@@ -1,8 +1,13 @@
-import React, { useState } from 'react';
-import { Sparkles } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { Sparkles } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
-const SignatureCTA = ({ size = 'large', className = "", width = "100%", title = "Get My Signature Now" }) => {
+const SignatureCTA = ({
+  size = "large",
+  className = "",
+  width = "100%",
+  title = "Get My Signature Now",
+}) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
   const navigate = useNavigate();
@@ -11,17 +16,17 @@ const SignatureCTA = ({ size = 'large', className = "", width = "100%", title = 
     setIsClicked(true);
     setTimeout(() => setIsClicked(false), 200);
     // Navigate to signature cart
-    navigate('/signature-cart', { state: { scrollToTop: true } });
+    navigate("/signature-cart/rag", { state: { scrollToTop: true } });
   };
 
-  const isSmall = size === 'small';
+  const isSmall = size === "small";
   const buttonClasses = isSmall
     ? `group relative flex items-center justify-center px-6 py-4 text-sm font-semibold text-white bg-black rounded-2xl shadow-lg hover:shadow-2xl transform transition-all duration-500 hover:scale-105 active:scale-95 overflow-hidden border border-gray-300 ${className}`
     : `group relative flex items-center justify-center px-10 py-5 text-lg font-semibold text-white bg-black rounded-3xl shadow-xl hover:shadow-2xl transform transition-all duration-500 hover:scale-105 active:scale-95 overflow-hidden border border-gray-300 ${className}`;
 
   const textSize = "text-base";
 
-  const signatureSize = isSmall ? 'w-8 h-6' : 'w-12 h-8';
+  const signatureSize = isSmall ? "w-8 h-6" : "w-12 h-8";
 
   return (
     <button
@@ -55,9 +60,9 @@ const SignatureCTA = ({ size = 'large', className = "", width = "100%", title = 
               fill="none"
               className="opacity-100"
               style={{
-                strokeDasharray: '100',
-                strokeDashoffset: '100',
-                animation: 'signatureDraw 3s ease-in-out infinite'
+                strokeDasharray: "100",
+                strokeDashoffset: "100",
+                animation: "signatureDraw 3s ease-in-out infinite",
               }}
             />
 
@@ -68,15 +73,18 @@ const SignatureCTA = ({ size = 'large', className = "", width = "100%", title = 
               r="1"
               fill="white"
               style={{
-                animation: 'penMove 3s ease-in-out infinite'
+                animation: "penMove 3s ease-in-out infinite",
               }}
             />
           </svg>
         </div>
 
         {/* Button text with glow */}
-        <span className={`relative font-display font-semibold ${textSize} transition-all duration-300 ${isHovered ? 'text-gray-200 drop-shadow-lg' : 'text-white'
-          }`}>
+        <span
+          className={`relative font-display font-semibold ${textSize} transition-all duration-300 ${
+            isHovered ? "text-gray-200 drop-shadow-lg" : "text-white"
+          }`}
+        >
           {title}
         </span>
       </div>
@@ -86,13 +94,14 @@ const SignatureCTA = ({ size = 'large', className = "", width = "100%", title = 
         {[...Array(6)].map((_, i) => (
           <Sparkles
             key={i}
-            className={`absolute w-2 h-2 text-gray-400 transition-all duration-1000 ${isHovered ? 'opacity-100 animate-bounce' : 'opacity-0'
-              }`}
+            className={`absolute w-2 h-2 text-gray-400 transition-all duration-1000 ${
+              isHovered ? "opacity-100 animate-bounce" : "opacity-0"
+            }`}
             style={{
               left: `${15 + i * 12}%`,
               top: `${20 + (i % 3) * 20}%`,
               animationDelay: `${i * 0.1}s`,
-              animationDuration: `${1 + i * 0.2}s`
+              animationDuration: `${1 + i * 0.2}s`,
             }}
           />
         ))}
@@ -103,12 +112,13 @@ const SignatureCTA = ({ size = 'large', className = "", width = "100%", title = 
         {[...Array(4)].map((_, i) => (
           <div
             key={i}
-            className={`absolute w-1 h-1 bg-gray-500 rounded-full transition-all duration-700 ${isHovered ? 'opacity-100 animate-pulse' : 'opacity-0'
-              }`}
+            className={`absolute w-1 h-1 bg-gray-500 rounded-full transition-all duration-700 ${
+              isHovered ? "opacity-100 animate-pulse" : "opacity-0"
+            }`}
             style={{
               left: `${25 + i * 15}%`,
               top: `${35 + (i % 2) * 30}%`,
-              animationDelay: `${i * 0.2}s`
+              animationDelay: `${i * 0.2}s`,
             }}
           />
         ))}
@@ -126,8 +136,9 @@ const SignatureCTA = ({ size = 'large', className = "", width = "100%", title = 
       <div className="absolute inset-1 rounded-2xl bg-gradient-to-r from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
 
       {/* Custom CSS animations for infinite signature */}
-      <style dangerouslySetInnerHTML={{
-        __html: `
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
           @keyframes signatureDraw {
             0% {
               stroke-dashoffset: 100;
@@ -151,10 +162,11 @@ const SignatureCTA = ({ size = 'large', className = "", width = "100%", title = 
               cx: 10;
             }
           }
-        `
-      }} />
+        `,
+        }}
+      />
     </button>
   );
 };
 
-export default SignatureCTA; 
+export default SignatureCTA;
