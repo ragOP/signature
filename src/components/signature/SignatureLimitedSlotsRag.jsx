@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { AlertTriangle, Clock, CheckCircle } from "lucide-react";
-import SignatureCTA from "./SignatureCTA";
+import SignatureRagCTA from "./SignatureRagCTA";
 import { Link } from "react-router-dom";
 
-const SignatureLimitedSlots = () => {
+const SignatureLimitedSlotsRag = () => {
   const [animateElements, setAnimateElements] = useState(false);
 
   useEffect(() => {
@@ -96,7 +96,7 @@ const SignatureLimitedSlots = () => {
               </div>
             </div>
 
-            <SignatureCTA size="small" className="text-sm" />
+            <SignatureRagCTA size="small" className="text-sm" />
           </div>
         </div>
 
@@ -155,4 +155,4 @@ const SignatureLimitedSlots = () => {
   );
 };
 
-export default SignatureLimitedSlots;
+export default SignatureLimitedSlotsRag;

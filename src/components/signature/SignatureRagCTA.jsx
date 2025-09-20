@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Sparkles } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-const SignatureCTA = ({
+const SignatureRagCTA = ({
   size = "large",
   className = "",
   width = "100%",
@@ -16,7 +16,7 @@ const SignatureCTA = ({
     setIsClicked(true);
     setTimeout(() => setIsClicked(false), 200);
     // Navigate to signature cart
-    navigate("/signature-cart", { state: { scrollToTop: true } });
+    navigate("/signature-cart/rag", { state: { scrollToTop: true } });
   };
 
   const isSmall = size === "small";
@@ -169,4 +169,4 @@ const SignatureCTA = ({
   );
 };
 
-export default SignatureCTA;
+export default SignatureRagCTA;
