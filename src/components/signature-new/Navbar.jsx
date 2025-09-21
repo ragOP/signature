@@ -123,7 +123,7 @@ const Navbar = () => {
             className="fixed inset-0 bg-black/50 backdrop-blur-sm"
             onClick={() => setIsMenuOpen(false)}
           ></div>
-          <div className="fixed top-0 right-0 h-full w-80 bg-gray-900/95 backdrop-blur-md shadow-2xl transform transition-transform duration-300 ease-in-out border-l border-white/10">
+          <div className="fixed top-0 right-0 h-full w-80 bg-gradient-to-br from-yellow-50/95 via-amber-50/95 to-orange-50/95 backdrop-blur-md shadow-2xl transform transition-transform duration-300 ease-in-out border-l border-yellow-200/30">
             <div className="p-6 pt-20">
               {/* Menu Items */}
               <div className="space-y-1 px-4">
@@ -132,7 +132,7 @@ const Navbar = () => {
                     key={index}
                     href={item.href}
                     onClick={() => setIsMenuOpen(false)}
-                    className="block px-4 py-3 text-white/90 hover:text-white hover:bg-white/10 rounded-xl font-medium transition-all duration-200 transform hover:scale-[1.02]"
+                    className="block px-4 py-3 text-gray-700 hover:text-gray-900 hover:bg-yellow-100/50 rounded-xl font-medium transition-all duration-200 transform hover:scale-[1.02]"
                   >
                     {item.label}
                   </a>
@@ -143,18 +143,18 @@ const Navbar = () => {
               <div className="px-4 mt-6">
                 <button
                   onClick={() => setIsMenuOpen(false)}
-                  className="w-full bg-gradient-to-r from-blue-600 via-cyan-600 to-teal-600 text-white py-3 rounded-xl font-semibold hover:shadow-lg transform hover:scale-[1.02] transition-all duration-200"
+                  className="w-full bg-gradient-to-r from-yellow-500 to-amber-500 hover:from-yellow-600 hover:to-amber-600 text-white py-3 rounded-xl font-semibold hover:shadow-lg transform hover:scale-[1.02] transition-all duration-200"
                 >
                   Get Started
                 </button>
               </div>
 
               {/* Contact Info */}
-              <div className="px-4 mt-4 pt-4 border-t border-white/20">
-                <p className="text-sm text-white/70 text-center">
+              <div className="px-4 mt-4 pt-4 border-t border-yellow-200/40">
+                <p className="text-sm text-gray-600 text-center">
                   Ready to upgrade your signature?
                 </p>
-                <p className="text-xs text-white/50 text-center mt-1">
+                <p className="text-xs text-gray-500 text-center mt-1">
                   Professional • Fast • Affordable
                 </p>
               </div>

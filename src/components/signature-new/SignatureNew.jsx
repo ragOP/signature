@@ -5,6 +5,8 @@ import WhyChooseUs from "./WhyChooseUs";
 import HowItWorks from "./HowItWorks";
 import WhoThisIsFor from "./WhoThisIsFor";
 import Testimonial from "./Testimonial";
+import LimitedSlot from "./LimitedSlot";
+import Footer from "./Footer";
 
 const SignatureNew = () => {
   return (
@@ -16,6 +18,8 @@ const SignatureNew = () => {
       <HowItWorks />
       <WhoThisIsFor />
       <Testimonial />
+      <LimitedSlot />
+      <Footer />
     </div>
   );
 };

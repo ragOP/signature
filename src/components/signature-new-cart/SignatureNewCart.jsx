@@ -1,0 +1,484 @@
+import { Link, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
+import {
+  X,
+  Shield,
+  Sparkles,
+  Check,
+  Star,
+  Palette,
+  Briefcase,
+  Search,
+  DollarSign,
+} from "lucide-react";
+import Navbar from "../signature-new/Navbar";
+import Testimonial from "../signature-new/Testimonial";
+import Footer from "../signature-new/Footer";
+import CartItem from "./CartItem";
+import SignatureCartConsultationForm from "./SignatureCartConsultationForm";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { BACKEND_URL } from "../../utils/backendUrl";
+
+function SignatureNewCart() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [cartItems, setCartItems] = useState([
+    {
+      id: 1,
+      name: "✍ Professional Signature Design",
+      description:
+        "Personalized professional signature design based on your name and personality",
+      price: 589,
+      originalPrice: 999,
+      duration: "24-48 hours",
+      features: [
+        "Your Professional Signature Design",
+        "Multiple Style Variations",
+        "Digital & Print Ready Formats",
+        "Lifetime Usage Rights",
+      ],
+      image: "/astro-hero.jpeg",
+    },
+  ]);
+
+  const [selectedProducts, setSelectedProducts] = useState([]);
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
+  const [animateElements, setAnimateElements] = useState(false);
+  const [consultationFormData, setConsultationFormData] = useState({
+    name: "",
+    phoneNumber: "",
+    email: "",
+    profession: "",
+    remarks: "",
+  });
+
+  // Additional products data
+  const additionalProducts = [
+    {
+      id: 2,
+      title: "✍️ Want to master your new signature perfectly?",
+      description:
+        "Add a printable sheet with your signature traced & outlined — just like handwriting practice sheets.",
+      features: [
+        "Light grey version for trace-over",
+        "Lined version for repeat practice",
+        "Adds premium feel for very little effort",
+      ],
+      price: 299,
+      originalPrice: 499,
+      icon: "✍️",
+      color: {
+        from: "from-yellow-500/20",
+        via: "via-amber-500/20",
+        to: "to-yellow-500/20",
+      },
+    },
+  ];
+
+  useEffect(() => {
+    // Scroll to top when component mounts or when navigating from other pages
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+
+    // Check if we're coming from a CTA button (with scrollToTop state)
+    if (location.state?.scrollToTop) {
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    }
+
+    const timer = setTimeout(() => {
+      setAnimateElements(true);
+    }, 100);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [location.state]);
+
+  const onProductToggle = (productId) => {
+    setSelectedProducts((prev) =>
+      prev.includes(productId)
+        ? prev.filter((id) => id !== productId)
+        : [...prev, productId]
+    );
+  };
+
+  const handleConsultationFormSubmit = (formData) => {
+    setConsultationFormData(formData);
+    console.log("Consultation form submitted:", formData);
+  };
+
+  const removeItem = (itemId) => {
+    setCartItems((prev) => prev.filter((item) => item.id !== itemId));
+  };
+
+  // Calculate cart totals including selected additional products
+  const selectedAdditionalProducts = additionalProducts.filter((product) =>
+    selectedProducts.includes(product.id)
+  );
+
+  const cartSubtotal = cartItems.reduce(
+    (sum, item) => sum + item.price * (item.quantity || 1),
+    0
+  );
+  const additionalSubtotal = selectedAdditionalProducts.reduce(
+    (sum, product) => sum + product.price,
+    0
+  );
+  const subtotal = cartSubtotal + additionalSubtotal;
+
+  const cartDiscount = cartItems.reduce(
+    (sum, item) =>
+      sum + (item.originalPrice - item.price) * (item.quantity || 1),
+    0
+  );
+  const additionalDiscount = selectedAdditionalProducts.reduce(
+    (sum, product) => sum + (product.originalPrice - product.price),
+    0
+  );
+  const discount = cartDiscount + additionalDiscount;
+
+  const total = subtotal;
+
+  const loadScript = (src) => {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = src;
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.body.appendChild(script);
+    });
+  };
+
+  useEffect(() => {
+    loadScript("https://checkout.razorpay.com/v1/checkout.js").then(
+      (result) => {
+        if (result) {
+          console.log("Razorpay script loaded successfully");
+        }
+      }
+    );
+  }, []);
+
+  const handleCheckout = async () => {
+    const additionalProducts = selectedAdditionalProducts.map(
+      (product) => product.title
+    );
+    try {
+      setIsCheckingOut(true);
+
+      const abodentCartRes = await axios.post(
+        `${BACKEND_URL}/api/lander4/create-order-abd`,
+        {
+          amount: total,
+          fullName: consultationFormData?.name,
+          email: consultationFormData?.email,
+          phoneNumber: consultationFormData?.phoneNumber,
+          profession: consultationFormData?.profession,
+          remarks: consultationFormData?.remarks,
+          additionalProducts: additionalProducts,
+        }
+      );
+
+      const abodentCartID = abodentCartRes.data.data._id;
+
+      const res = await axios.post(`${BACKEND_URL}/api/payment/razorpay`, {
+        amount: total,
+      });
+
+      const data = res.data.data;
+
+      const options = {
+        key: import.meta.env.VITE_RAZORPAY_KEY,
+        amount: total,
+        currency: "INR",
+        name: "Signature Studio",
+        description: "Signature Design Order Payment",
+        order_id: data.orderId,
+        handler: async function (response) {
+          try {
+            await axios.post(`${BACKEND_URL}/api/lander4/create-order`, {
+              amount: total,
+              razorpayOrderId: response.razorpay_order_id,
+              razorpayPaymentId: response.razorpay_payment_id,
+              razorpaySignature: response.razorpay_signature,
+              fullName: consultationFormData?.name,
+              email: consultationFormData?.email,
+              phoneNumber: consultationFormData?.phoneNumber,
+              profession: consultationFormData?.profession,
+              remarks: consultationFormData?.remarks,
+              orderId: data.orderId,
+              additionalProducts: additionalProducts,
+            });
+
+            await axios.delete(
+              `${BACKEND_URL}/api/lander4/delete-order-abd/${abodentCartID}`
+            );
+
+            navigate("/signature-order-confirmation", {
+              state: {
+                orderId: data.orderId,
+                amount: total,
+              },
+            });
+          } catch (error) {
+            console.error("Error creating order:", error);
+            alert(
+              "Payment successful but order creation failed. Please contact support."
+            );
+          }
+        },
+        prefill: {
+          name: consultationFormData?.name,
+          email: consultationFormData?.email,
+          contact: consultationFormData?.phoneNumber,
+        },
+        theme: {
+          color: "#f59e0b",
+        },
+      };
+
+      const rzp = new window.Razorpay(options);
+      rzp.open();
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsCheckingOut(false);
+    }
+  };
+
+  // Additional Products Component
+  const AdditionalProducts = ({ products, selectedProducts, onProductToggle }) => {
+    return (
+      <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
+        <h3 className="text-xl font-bold text-gray-900 mb-4">Add-On Services</h3>
+        <div className="space-y-4">
+          {products.map((product) => (
+            <div
+              key={product.id}
+              className={`border rounded-lg p-4 cursor-pointer transition-all duration-200 ${
+                selectedProducts.includes(product.id)
+                  ? "border-yellow-400 bg-yellow-50"
+                  : "border-gray-200 hover:border-yellow-300"
+              }`}
+              onClick={() => onProductToggle(product.id)}
+            >
+              <div className="flex justify-between items-start">
+                <div className="flex-1">
+                  <h4 className="font-semibold text-gray-900 mb-2">{product.title}</h4>
+                  <p className="text-sm text-gray-600 mb-3">{product.description}</p>
+                  <div className="space-y-1">
+                    {product.features.map((feature, index) => (
+                      <div key={index} className="flex items-center space-x-2">
+                        <Check className="w-4 h-4 text-green-500" />
+                        <span className="text-sm text-gray-700">{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className="text-right ml-4">
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-lg font-bold text-gray-900">₹{product.price}</span>
+                    <span className="text-sm text-gray-400 line-through">₹{product.originalPrice}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  };
+
+
+
+  // Order Summary Component
+  const OrderSummary = ({ subtotal, discount, total, isCheckingOut, onCheckout }) => {
+    return (
+      <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
+        <h3 className="text-xl font-bold text-gray-900 mb-4">Order Summary</h3>
+        <div className="space-y-3">
+          <div className="flex justify-between">
+            <span className="text-gray-600">Subtotal</span>
+            <span className="font-medium">₹{subtotal}</span>
+          </div>
+          {discount > 0 && (
+            <div className="flex justify-between text-green-600">
+              <span>Discount</span>
+              <span>-₹{discount}</span>
+            </div>
+          )}
+          <div className="border-t pt-3">
+            <div className="flex justify-between text-lg font-bold">
+              <span>Total</span>
+              <span>₹{total}</span>
+            </div>
+          </div>
+        </div>
+        <button
+          onClick={onCheckout}
+          disabled={isCheckingOut}
+          className="w-full mt-6 bg-gradient-to-r from-yellow-400 to-amber-500 text-white py-3 px-6 rounded-lg font-semibold hover:from-yellow-500 hover:to-amber-600 transition-all duration-300 disabled:opacity-50"
+        >
+          {isCheckingOut ? "Processing..." : `Proceed to Payment - ₹${total}`}
+        </button>
+      </div>
+    );
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-yellow-50 to-amber-100">
+      {/* Navigation */}
+      <div className="relative z-50">
+        <Navbar />
+      </div>
+
+      {/* Cart Content */}
+      <section className="relative pt-8 pb-16 z-10">
+        <div className="max-w-7xl mx-auto px-4">
+          {/* Header */}
+          <div
+            className={`text-center mb-8 transition-all duration-1000 transform ${
+              animateElements
+                ? "translate-y-0 opacity-100"
+                : "translate-y-8 opacity-0"
+            }`}
+          >
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
+              <span className="bg-gradient-to-r from-yellow-600 via-amber-600 to-yellow-600 bg-clip-text text-transparent">
+                Your Signature Cart
+              </span>
+            </h1>
+            <p className="text-lg text-gray-700 max-w-2xl mx-auto">
+              Review your selected signature design and prepare for your
+              professional journey
+            </p>
+          </div>
+
+          {cartItems.length === 0 ? (
+            /* Empty Cart */
+            <div
+              className={`max-w-2xl mx-auto transition-all duration-1000 delay-300 transform ${
+                animateElements
+                  ? "translate-y-0 opacity-100 scale-100"
+                  : "translate-y-8 opacity-0 scale-95"
+              }`}
+            >
+              <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-8">
+                <div className="text-center space-y-6">
+                  <div className="text-6xl mb-4 animate-bounce">✍️</div>
+                  <h3 className="text-2xl font-bold text-gray-800">
+                    Your Signature Cart is Empty
+                  </h3>
+                  <p className="text-gray-600">
+                    Ready to create your professional signature? Browse our
+                    signature services!
+                  </p>
+                  <Link
+                    to="/signature"
+                    className="inline-block bg-gradient-to-r from-yellow-400 to-amber-500 text-white px-8 py-3 rounded-lg font-semibold hover:from-yellow-500 hover:to-amber-600 transition-all duration-300 transform hover:scale-105"
+                  >
+                    Explore Signature Services
+                  </Link>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <>
+              {/* Desktop Layout */}
+              <div
+                className={`grid grid-cols-1 lg:grid-cols-3 gap-8 transition-all duration-1000 delay-500 transform ${
+                  animateElements
+                    ? "translate-y-0 opacity-100"
+                    : "translate-y-8 opacity-0"
+                }`}
+              >
+                {/* Left Column - Cart Items and Additional Products */}
+                <div className="lg:col-span-2 space-y-6">
+                  {/* Cart Items */}
+                  <div className="space-y-4">
+                    {cartItems.map((item, index) => (
+                      <div
+                        key={item.id}
+                        className={`transition-all duration-700 delay-${
+                          index * 200
+                        } transform ${
+                          animateElements
+                            ? "translate-x-0 opacity-100"
+                            : "translate-x-8 opacity-0"
+                        }`}
+                      >
+                        <CartItem
+                          item={item}
+                          onRemove={removeItem}
+                          showRemoveButton={false}
+                        />
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Additional Products */}
+                  <div
+                    className={`transition-all duration-700 delay-700 transform ${
+                      animateElements
+                        ? "translate-y-0 opacity-100"
+                        : "translate-y-8 opacity-0"
+                    }`}
+                  >
+                    <AdditionalProducts
+                      products={additionalProducts}
+                      selectedProducts={selectedProducts}
+                      onProductToggle={onProductToggle}
+                    />
+                  </div>
+                </div>
+
+                {/* Right Column - Forms and Summary */}
+                <div className="space-y-6">
+                  {/* Consultation Form */}
+                  <div
+                    className={`transition-all duration-700 delay-800 transform ${
+                      animateElements
+                        ? "translate-y-0 opacity-100"
+                        : "translate-y-8 opacity-0"
+                    }`}
+                  >
+                    <SignatureCartConsultationForm
+                      onSubmit={handleConsultationFormSubmit}
+                      formData={consultationFormData}
+                      setFormData={setConsultationFormData}
+                    />
+                  </div>
+
+                  {/* Order Summary */}
+                  <div
+                    className={`transition-all duration-700 delay-900 transform ${
+                      animateElements
+                        ? "translate-y-0 opacity-100"
+                        : "translate-y-8 opacity-0"
+                    }`}
+                  >
+                    <OrderSummary
+                      subtotal={subtotal}
+                      discount={discount}
+                      total={total}
+                      isCheckingOut={isCheckingOut}
+                      onCheckout={handleCheckout}
+                    />
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <Testimonial />
+
+      {/* Footer */}
+      <Footer />
+    </div>
+  );
+}
+
+export default SignatureNewCart;
