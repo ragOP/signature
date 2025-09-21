@@ -4,6 +4,7 @@ import BeforeAfter from "./BeforeAfter";
 import WhyChooseUs from "./WhyChooseUs";
 import HowItWorks from "./HowItWorks";
 import WhoThisIsFor from "./WhoThisIsFor";
+import Testimonial from "./Testimonial";
 
 const SignatureNew = () => {
   return (
@@ -14,6 +15,7 @@ const SignatureNew = () => {
       <WhyChooseUs />
       <HowItWorks />
       <WhoThisIsFor />
+      <Testimonial />
     </div>
   );
 };
