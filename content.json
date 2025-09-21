@@ -1,0 +1,153 @@
+{
+  "hero": {
+    "headline": "🎯 Your Signature Isn't Just Ink — It's Identity.",
+    "subheadline": "Make your name unforgettable with a designer signature crafted just for you.",
+    "cta": "Get My Signature Now"
+  },
+  "features": [
+    {
+      "title": "Expert Designers",
+      "description": "Handcrafted by professional signature designers, not AI-generated"
+    },
+    {
+      "title": "Career-Focused",
+      "description": "Built to enhance your professional image across all documents"
+    },
+    {
+      "title": "Elegant & Readable",
+      "description": "Perfect balance of aesthetics and readability for maximum impact"
+    },
+    {
+      "title": "Digital Delivery",
+      "description": "Instant delivery ready to use on all your devices"
+    },
+    {
+      "title": "Personal Attention",
+      "description": "One-on-one attention ensuring your signature reflects your personality"
+    },
+    {
+      "title": "3 Unique Designer Options",
+      "description": "3 unique designer signature options tailored to your style"
+    },
+    {
+      "title": "Signature Writing Tutorial",
+      "description": "Complete tutorial to help you master your new signature"
+    },
+    {
+      "title": "Practice Sheet",
+      "description": "PDF practice sheet to perfect your signature technique"
+    },
+    {
+      "title": "Fast Delivery",
+      "description": "Delivered within 24–48 hours via email"
+    }
+  ],
+  "testimonials": [
+    {
+      "name": "Priya",
+      "quote": "From messy to magnetic. My new signature gets compliments every time!",
+      "role": "CA"
+    },
+    {
+      "name": "Rahul",
+      "quote": "Didn't realize how weak my signature looked until now. Total upgrade!",
+      "role": "Founder"
+    },
+    {
+      "name": "Aisha",
+      "quote": "Best ₹500 I've spent on myself in 2024.",
+      "role": "MBA Grad"
+    },
+    {
+      "name": "Sarah",
+      "quote": "Professional signature that matches my brand perfectly!",
+      "role": "Marketing Director"
+    },
+    {
+      "name": "Michael",
+      "quote": "Worth every penny. My confidence has skyrocketed!",
+      "role": "Software Engineer"
+    }
+  ],
+  "howItWorks": [
+    {
+      "step": "01",
+      "title": "Place your order & share your name",
+      "description": "Simple form with your name and preferences"
+    },
+    {
+      "step": "02",
+      "title": "Our designers study your name, vibe & goals",
+      "description": "Expert analysis of your personality and professional needs"
+    },
+    {
+      "step": "03",
+      "title": "We craft 3 designer-style signatures",
+      "description": "Three unique options tailored to your style"
+    },
+    {
+      "step": "04",
+      "title": "Receive your full package within 24–48 hours",
+      "description": "Complete package with tutorials and practice sheets"
+    }
+  ],
+  "targetAudience": [
+    {
+      "title": "Students & Freshers",
+      "subtitle": "starting their career",
+      "description": "Make a strong first impression with a professional signature that sets you apart from the crowd"
+    },
+    {
+      "title": "Business Owners",
+      "subtitle": "who want to stand out",
+      "description": "Elevate your brand with a signature that reflects your business's professionalism and values"
+    },
+    {
+      "title": "Working Professionals",
+      "subtitle": "upgrading their image",
+      "description": "Transform your professional presence with a signature that commands respect and attention"
+    },
+    {
+      "title": "Creatives",
+      "subtitle": "who value aesthetics",
+      "description": "Express your artistic vision through a signature that's as unique and beautiful as your work"
+    },
+    {
+      "title": "Anyone tired of basic",
+      "subtitle": "or inconsistent signatures",
+      "description": "Upgrade from messy handwriting to a signature that represents the best version of yourself"
+    }
+  ],
+  "pricing": {
+    "currentPrice": "₹589",
+    "originalPrice": "₹1,200",
+    "discount": "51% OFF",
+    "urgency": "🚨 Only 7 slots available per week"
+  },
+  "stats": [
+    {
+      "value": "2,500+",
+      "label": "Happy Clients"
+    },
+    {
+      "value": "4.9/5",
+      "label": "Customer Rating"
+    },
+    {
+      "value": "24hrs",
+      "label": "Delivery Time"
+    }
+  ],
+  "sectionHeaders": {
+    "whyChooseUs": "Why Choose Us",
+    "howItWorks": "How It Works",
+    "whoIsThisFor": "💼 Who Is This For?",
+    "testimonials": "What Our Customers Say"
+  },
+  "cardContent": {
+    "upgradeSignature": {
+      "title": "✨ Upgrade Your Signature. Elevate Your Identity.",
+      "description": "A handcrafted, custom-designed signature that reflects your style, ambition, and profession."
+    }
+  }
+}
