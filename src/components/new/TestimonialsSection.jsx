@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowLeft, ArrowRight, Star, Quote } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Star, Quote, Heart } from 'lucide-react';
 
 const TestimonialsSection = () => {
     const [currentSlide, setCurrentSlide] = useState(0);
@@ -102,13 +102,17 @@ const TestimonialsSection = () => {
                         <div className="flex transition-transform duration-500 ease-in-out" style={{ transform: `translateX(-${currentSlide * 100}%)` }}>
                             {testimonials.map((testimonial, index) => (
                                 <div key={index} className="w-full flex-shrink-0">
-                                    <div className="bg-white rounded-xl p-8 shadow-lg border border-gray-200 mx-4">
+                                    <div className="bg-white rounded-xl p-8 shadow-lg border border-gray-200 mx-4 relative">
+                                        {/* Top Right Icon */}
+                                        <div className="absolute top-4 right-4">
+                                            <Quote className="w-6 h-6 text-yellow-500" />
+                                        </div>
                                         <div className="text-center">
                                             {/* Quote Icon */}
-                                            <div className="flex justify-center mb-4">
+                                            {/* <div className="flex justify-center mb-4">
                                                 <Quote className="w-8 h-8 text-yellow-500" />
                                             </div>
-                                            
+                                             */}
                                             {/* Testimonial Image */}
                                             <div className="flex justify-center mb-6">
                                                 <img
