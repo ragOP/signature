@@ -1,0 +1,376 @@
+/* Signature Dark Theme CSS */
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Great+Vibes:wght@400&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* Dark Theme Color Variables */
+:root {
+  --font-primary: 'Inter', sans-serif;
+  --font-secondary: 'Montserrat', sans-serif;
+  --font-display: 'Montserrat', serif;
+  --font-signature: 'Dancing Script', cursive;
+  
+  /* Dark Theme Colors */
+  --color-primary-dark: #ffffff;
+  --color-secondary-dark: #e5e5e5;
+  --color-accent-dark: #a0a0a0;
+  --color-light-dark: #1a1a1a;
+  --color-gray-dark: #2d2d2d;
+  --color-border-dark: rgba(255, 255, 255, 0.1);
+  --color-card-dark: #2a2a2a;
+  --color-hover-dark: #3a3a3a;
+  --color-background-dark: #0f0f0f;
+  
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  
+  /* Dark Theme Shadows */
+  --shadow-sm-dark: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md-dark: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+  --shadow-lg-dark: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+  --shadow-xl-dark: 0 20px 25px -5px rgba(0, 0, 0, 0.6);
+}
+
+/* Dark Theme Base Styles */
+.signature-container-dark {
+  background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #0f0f0f 100%);
+  color: var(--color-primary-dark);
+  min-height: 100vh;
+}
+
+/* Dark Theme Typography */
+.signature-container-dark h1,
+.signature-container-dark h2,
+.signature-container-dark h3,
+.signature-container-dark h4,
+.signature-container-dark h5,
+.signature-container-dark h6 {
+  color: var(--color-primary-dark);
+  font-family: var(--font-display);
+}
+
+.signature-container-dark p,
+.signature-container-dark span,
+.signature-container-dark div {
+  color: var(--color-secondary-dark);
+}
+
+.signature-container-dark a {
+  color: var(--color-secondary-dark);
+  transition: color 0.3s ease;
+}
+
+.signature-container-dark a:hover {
+  color: var(--color-primary-dark);
+}
+
+/* Dark Theme Navbar */
+.signature-container-dark .signature-navbar,
+.signature-navbar-dark {
+  background: rgba(17, 24, 39, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.signature-container-dark .signature-navbar:hover,
+.signature-navbar-dark:hover {
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.signature-container-dark .signature-logo {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.5rem;
+  color: var(--color-primary-dark);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.signature-container-dark .signature-logo:hover {
+  color: var(--color-secondary-dark);
+  transform: scale(1.05);
+}
+
+.signature-container-dark .signature-nav-link {
+  font-family: var(--font-secondary);
+  font-weight: 500;
+  color: var(--color-secondary-dark);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.signature-container-dark .signature-nav-link:hover {
+  color: var(--color-primary-dark);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.signature-container-dark .signature-nav-link.active {
+  color: var(--color-primary-dark);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Dark Theme Buttons */
+.signature-container-dark .signature-btn {
+  font-family: var(--font-secondary);
+  font-weight: 500;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.signature-container-dark .signature-btn-primary {
+  background: var(--color-primary-dark);
+  color: var(--color-light-dark);
+}
+
+.signature-container-dark .signature-btn-primary:hover {
+  background: var(--color-secondary-dark);
+  color: var(--color-light-dark);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md-dark);
+}
+
+.signature-container-dark .signature-btn-secondary {
+  background: transparent;
+  color: var(--color-primary-dark);
+  border: 1px solid var(--color-border-dark);
+}
+
+.signature-container-dark .signature-btn-secondary:hover {
+  background: var(--color-hover-dark);
+  border-color: var(--color-secondary-dark);
+}
+
+/* Dark Theme Cards */
+.signature-container-dark .signature-card {
+  background: var(--color-card-dark);
+  border-radius: 1rem;
+  border: 1px solid var(--color-border-dark);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-sm-dark);
+  transition: all 0.3s ease;
+  color: var(--color-primary-dark);
+}
+
+.signature-container-dark .signature-card:hover {
+  box-shadow: var(--shadow-lg-dark);
+  transform: translateY(-2px);
+  background: var(--color-hover-dark);
+}
+
+/* Dark Theme Footer */
+.signature-container-dark .signature-footer {
+  background: rgba(15, 15, 15, 0.95);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid var(--color-border-dark);
+  padding: var(--spacing-lg) 0;
+  font-family: var(--font-secondary);
+  font-size: 0.875rem;
+  color: var(--color-secondary-dark);
+}
+
+/* Dark Theme Form Elements */
+.signature-container-dark input,
+.signature-container-dark textarea,
+.signature-container-dark select {
+  background: var(--color-card-dark);
+  border: 1px solid var(--color-border-dark);
+  color: var(--color-primary-dark);
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  transition: all 0.3s ease;
+}
+
+.signature-container-dark input:focus,
+.signature-container-dark textarea:focus,
+.signature-container-dark select:focus {
+  border-color: var(--color-secondary-dark);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+  outline: none;
+}
+
+.signature-container-dark input::placeholder,
+.signature-container-dark textarea::placeholder {
+  color: var(--color-accent-dark);
+}
+
+/* Dark Theme Video and Media */
+.signature-container-dark video {
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow-lg-dark);
+}
+
+.signature-container-dark img {
+  border-radius: 0.5rem;
+  transition: transform 0.3s ease;
+}
+
+.signature-container-dark img:hover {
+  transform: scale(1.02);
+}
+
+/* Dark Theme Testimonials */
+.signature-container-dark .testimonial-card {
+  background: var(--color-card-dark);
+  border: 1px solid var(--color-border-dark);
+  color: var(--color-primary-dark);
+}
+
+.signature-container-dark .testimonial-card:hover {
+  background: var(--color-hover-dark);
+  box-shadow: var(--shadow-lg-dark);
+}
+
+/* Dark Theme Sections */
+.signature-container-dark .section-title {
+  color: var(--color-primary-dark);
+  font-family: var(--font-display);
+  font-weight: 600;
+}
+
+.signature-container-dark .section-subtitle {
+  color: var(--color-secondary-dark);
+  font-family: var(--font-primary);
+}
+
+/* Dark Theme Animations */
+.signature-container-dark .fade-in {
+  animation: fadeInDark 0.5s ease-in-out;
+}
+
+.signature-container-dark .slide-up {
+  animation: slideUpDark 0.5s ease-out;
+}
+
+@keyframes fadeInDark {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUpDark {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Dark Theme Responsive Design */
+@media (max-width: 768px) {
+  .signature-container-dark .signature-logo {
+    font-size: 1.25rem;
+  }
+  
+  .signature-container-dark .text-6xl {
+    font-size: 2.5rem;
+  }
+  
+  .signature-container-dark .text-5xl {
+    font-size: 2rem;
+  }
+  
+  .signature-container-dark .text-4xl {
+    font-size: 1.75rem;
+  }
+}
+
+/* Dark Theme Scrollbar */
+.signature-container-dark ::-webkit-scrollbar {
+  width: 8px;
+}
+
+.signature-container-dark ::-webkit-scrollbar-track {
+  background: var(--color-background-dark);
+}
+
+.signature-container-dark ::-webkit-scrollbar-thumb {
+  background: var(--color-gray-dark);
+  border-radius: 4px;
+}
+
+.signature-container-dark ::-webkit-scrollbar-thumb:hover {
+  background: var(--color-hover-dark);
+}
+
+/* Dark Theme Selection */
+.signature-container-dark ::selection {
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--color-primary-dark);
+}
+
+/* Dark Theme Focus States */
+.signature-container-dark *:focus {
+  outline: 2px solid var(--color-secondary-dark);
+  outline-offset: 2px;
+}
+
+/* Dark Theme Loading States */
+.signature-container-dark .loading {
+  color: var(--color-accent-dark);
+}
+
+.signature-container-dark .loading::after {
+  content: '';
+  animation: loadingDots 1.5s infinite;
+}
+
+@keyframes loadingDots {
+  0%, 20% { content: ''; }
+  40% { content: '.'; }
+  60% { content: '..'; }
+  80%, 100% { content: '...'; }
+}
+
+/* Dark Theme Lottie Animation Styling */
+.lottie-container {
+  filter: invert(1) brightness(1.2) contrast(1.1);
+  position: relative;
+}
+
+.lottie-container::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  z-index: -1;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+  50% {
+    opacity: 0.6;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+}

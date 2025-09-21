@@ -11,13 +11,13 @@ import {
   Search,
   DollarSign,
 } from "lucide-react";
-import SignatureNavbar from "../components/signature/SignatureNavbar";
-import SignatureTestimonialsSection from "../components/signature/SignatureTestimonialsSection";
-import SignatureImageSlider from "../components/signature/SignatureImageSlider";
-import SignatureCartItem from "../components/signature/SignatureCartItem";
-import SignatureConsultationForm from "../components/signature/SignatureConsultationForm";
-import SignatureOrderSummary from "../components/signature/SignatureOrderSummary";
-import SignatureAdditionalProducts from "../components/signature/SignatureAdditionalProducts";
+import SignatureNavbarRag from "../components/signature-rag/SignatureNavbarRag";
+import SignatureTestimonialsSectionRag from "../components/signature-rag/SignatureTestimonialsSectionRag";
+import SignatureImageSlider from "../components/signature-rag/SignatureImageSlider";
+import SignatureCartItem from "../components/signature-rag/SignatureCartItem";
+import SignatureConsultationForm from "../components/signature-rag/SignatureConsultationForm";
+import SignatureOrderSummary from "../components/signature-rag/SignatureOrderSummary";
+import SignatureAdditionalProducts from "../components/signature-rag/SignatureAdditionalProducts";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { BACKEND_URL } from "../utils/backendUrl";
@@ -251,16 +251,16 @@ function SignatureCartRag() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white via-gray-50 to-blue-50 selection:bg-gray-500/20 selection:text-white">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 selection:bg-blue-500/20 selection:text-white">
       {/* Navigation */}
       <div className="relative z-50">
-        <SignatureNavbar />
+        <SignatureNavbarRag />
       </div>
 
       {/* Animated Background */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-white via-gray-50 to-blue-50"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,0,0,0.05),transparent_50%)]"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.1),transparent_50%)]"></div>
 
         {/* Floating Elements */}
         {[...Array(15)].map((_, i) => (
@@ -277,10 +277,10 @@ function SignatureCartRag() {
             <div
               className={`w-1 h-1 rounded-full ${
                 i % 3 === 0
-                  ? "bg-gray-400"
-                  : i % 3 === 1
                   ? "bg-blue-400"
-                  : "bg-black"
+                  : i % 3 === 1
+                  ? "bg-blue-500"
+                  : "bg-blue-600"
               } opacity-60`}
             ></div>
           </div>
@@ -299,11 +299,11 @@ function SignatureCartRag() {
             }`}
           >
             <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold mb-1 sm:mb-2">
-              <span className="bg-gradient-to-r from-gray-800 via-black to-gray-800 bg-clip-text text-transparent animate-pulse">
+              <span className="bg-gradient-to-r from-blue-800 via-blue-600 to-blue-800 bg-clip-text text-transparent animate-pulse">
                 Your Signature Cart
               </span>
             </h1>
-            <p className="text-base sm:text-lg lg:text-xl text-gray-700 max-w-2xl mx-auto px-2">
+            <p className="text-base sm:text-lg lg:text-xl text-blue-700 max-w-2xl mx-auto px-2">
               Review your selected signature design and prepare for your
               professional journey
             </p>
@@ -319,22 +319,22 @@ function SignatureCartRag() {
               }`}
             >
               <div className="relative group">
-                <div className="absolute -inset-1 bg-gradient-to-r from-gray-500/20 via-black/20 to-gray-500/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-                <div className="relative bg-gradient-to-br from-white/90 to-white/80 backdrop-blur-xl rounded-3xl p-6 sm:p-8 border border-gray-200">
+                <div className="absolute -inset-1 bg-gradient-to-r from-blue-500/20 via-blue-600/20 to-blue-500/20 rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+                <div className="relative bg-gradient-to-br from-white/90 to-white/80 backdrop-blur-xl rounded-3xl p-6 sm:p-8 border border-blue-200">
                   <div className="text-center space-y-4 sm:space-y-6">
                     <div className="text-4xl sm:text-6xl mb-3 sm:mb-4 animate-bounce">
                       ✍️
                     </div>
-                    <h3 className="text-xl sm:text-2xl font-bold text-gray-800">
+                    <h3 className="text-xl sm:text-2xl font-bold text-blue-800">
                       Your Signature Cart is Empty
                     </h3>
-                    <p className="text-sm sm:text-base text-gray-600 px-2">
+                    <p className="text-sm sm:text-base text-blue-600 px-2">
                       Ready to create your professional signature? Browse our
                       signature services!
                     </p>
                     <Link
-                      to="/signature"
-                      className="inline-block bg-gradient-to-r from-gray-800 to-black text-white px-6 sm:px-8 py-2 sm:py-3 rounded-full font-semibold hover:from-gray-900 hover:to-black transition-all duration-300 transform hover:scale-105 buy-now-shimmer text-sm sm:text-base"
+                      to="/signature-rag"
+                      className="inline-block bg-gradient-to-r from-blue-600 to-blue-800 text-white px-6 sm:px-8 py-2 sm:py-3 rounded-full font-semibold hover:from-blue-700 hover:to-blue-900 transition-all duration-300 transform hover:scale-105 buy-now-shimmer text-sm sm:text-base"
                     >
                       <span>Explore Signature Services</span>
                     </Link>
@@ -503,7 +503,7 @@ function SignatureCartRag() {
             </>
           )}
 
-          <SignatureTestimonialsSection />
+          <SignatureTestimonialsSectionRag />
         </div>
       </section>
     </div>

@@ -30,10 +30,10 @@ function App() {
     <Router>
       <div className="App">
         <Routes>
-          <Route path="/" element={<SignatureRag />} />
+          {/* <Route path="/" element={<SignatureRag />} /> */}
           <Route path="/rag" element={<SignatureRag />} />
-          <Route path="/signature-cart/rag" element={<SignatureCartRag />} />
-               <Route path="/v2" element={<V2 />} />
+          <Route path="/signature-cart-rag" element={<SignatureCartRag />} />
+          <Route path="/v2" element={<V2 />} />
           <Route
             path="/signature-record/rag"
             element={<SignatureRecordRag />}

@@ -1,21 +1,21 @@
 import React, { useState } from "react";
-import BackgroundVariations from "../components/signature/BackgroundVariations";
-import SignatureNavbar from "../components/signature/SignatureNavbar";
-import SignatureHero from "../components/signature/SignatureHero";
-import SignatureFooter from "../components/signature/SignatureFooter";
-import BrandSignatureOverlay from "../components/signature/BrandSignatureOverlay";
-import "../components/signature/signature-css.css";
-import SignatureBeforeAfterSection from "../components/signature/SignatureBeforeAfterSection";
-import SignatureWhyChooseUs from "../components/signature/SignatureWhyChooseUs";
-import SignatureHowItWorks from "../components/signature/SignatureHowItWorks";
-import SignatureWhoIsThisFor from "../components/signature/SignatureWhoIsThisFor";
-import SignatureTestimonialsSection from "../components/signature/SignatureTestimonialsSection";
-import SignatureLimitedSlots from "../components/signature/SignatureLimitedSlots";
-import SignatureVideoSection from "../components/signature/SignatureVideoSection";
-import SignatureCTA from "../components/signature/SignatureCTA";
+import BackgroundVariationsRag from "../components/signature-rag/BackgroundVariationsRag";
+import SignatureNavbarRag from "../components/signature-rag/SignatureNavbarRag";
+import SignatureHeroRag from "../components/signature-rag/SignatureHeroRag";
+import SignatureFooterRag from "../components/signature-rag/SignatureFooterRag";
+import BrandSignatureOverlayRag from "../components/signature-rag/BrandSignatureOverlayRag";
+import "../components/signature/signature-rag-fresh.css";
+import SignatureBeforeAfterSectionRag from "../components/signature-rag/SignatureBeforeAfterSectionRag";
+import SignatureWhyChooseUsRag from "../components/signature-rag/SignatureWhyChooseUsRag";
+import SignatureHowItWorksRag from "../components/signature-rag/SignatureHowItWorksRag";
+import SignatureWhoIsThisForRag from "../components/signature-rag/SignatureWhoIsThisForRag";
+import SignatureTestimonialsSectionRag from "../components/signature-rag/SignatureTestimonialsSectionRag";
+import SignatureLimitedSlotsRag from "../components/signature-rag/SignatureLimitedSlotsRag";
+import SignatureVideoSectionRag from "../components/signature-rag/SignatureVideoSectionRag";
+import SignatureCTAButton from "../components/signature-rag/SignatureCTAButton";
 
 function SignatureRag() {
-  const [showLandingPage, setShowLandingPage] = useState(false);
+  const [showLandingPage, setShowLandingPage] = useState(true);
 
   const handleAnimationComplete = () => {
     setShowLandingPage(true);
@@ -24,34 +24,27 @@ function SignatureRag() {
   return (
     <>
       {/* Always show navbar */}
-      <SignatureNavbar />
+      <SignatureNavbarRag />
 
-      {!showLandingPage && (
-        <BrandSignatureOverlay onAnimationComplete={handleAnimationComplete} />
-      )}
+      {/* {!showLandingPage && (
+        <BrandSignatureOverlayRag onAnimationComplete={handleAnimationComplete} />
+      )} */}
 
       {showLandingPage && (
-        <div className="signature-container mb-20 relative bg-gradient-to-br from-white via-gray-50 to-blue-50">
-          <BackgroundVariations activeVariation={0} />
-          <SignatureHero />
-          <SignatureVideoSection />
-          <SignatureBeforeAfterSection />
-          <div className="flex justify-center items-center mt-4 px-6">
-            <SignatureCTA />
-          </div>
-          <SignatureWhyChooseUs />
-          <SignatureHowItWorks />
-          <div className="flex justify-center items-center mt-2 px-6">
-            <SignatureCTA />
-          </div>
-          <SignatureWhoIsThisFor />
-          <SignatureTestimonialsSection />
-          <div className="flex justify-center items-center mt-2 px-6">
-            <SignatureCTA />
-          </div>
+        <div className="signature-rag-fresh mb-20 relative">
+          <SignatureHeroRag />
+          <SignatureVideoSectionRag />
+          <SignatureBeforeAfterSectionRag />
 
-          <SignatureLimitedSlots />
-          <SignatureFooter />
+          <SignatureWhyChooseUsRag />
+          <SignatureHowItWorksRag />
+
+          <SignatureWhoIsThisForRag />
+          <SignatureTestimonialsSectionRag />
+
+
+          <SignatureLimitedSlotsRag />
+          <SignatureFooterRag />
         </div>
       )}
     </>

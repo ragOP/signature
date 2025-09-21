@@ -16,7 +16,7 @@ const SignatureCTA = ({
     setIsClicked(true);
     setTimeout(() => setIsClicked(false), 200);
     // Navigate to signature cart
-    navigate("/signature-cart/rag", { state: { scrollToTop: true } });
+    navigate("/signature-cart", { state: { scrollToTop: true } });
   };
 
   const isSmall = size === "small";
