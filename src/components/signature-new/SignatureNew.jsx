@@ -2,6 +2,7 @@ import Navbar from "./Navbar";
 import SignatureHeroRedesigned from "./Hero";
 import BeforeAfter from "./BeforeAfter";
 import WhyChooseUs from "./WhyChooseUs";
+import HowItWorks from "./HowItWorks";
 
 const SignatureNew = () => {
   return (
@@ -10,6 +11,7 @@ const SignatureNew = () => {
       <SignatureHeroRedesigned />
       <BeforeAfter />
       <WhyChooseUs />
+      <HowItWorks />
     </div>
   );
 };
