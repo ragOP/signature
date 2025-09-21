@@ -24,6 +24,7 @@ import V2 from "./pages/V2";
 import SignatureOrderConfirmationRag from "./pages/SignatureOrderConfirmationRag";
 import SignatureAbondentReportRag from "./pages/AbondedentResportRag";
 import SignatureNew from "./components/signature-new/SignatureNew";
+import SignatureNewCart from "./components/signature-new-cart/SignatureNewCart";
 
 // Main App Component
 function App() {
@@ -54,6 +55,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
 
           <Route path="/signature-cart" element={<SignatureCart />} />
+          <Route path="/signature-new-cart" element={<SignatureNewCart />} />
 
           <Route path="/signature-record" element={<SignatureRecord />} />
 
