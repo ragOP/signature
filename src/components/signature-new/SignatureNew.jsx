@@ -8,7 +8,7 @@ import Testimonial from "./Testimonial";
 import LimitedSlot from "./LimitedSlot";
 import Footer from "./Footer";
 
-const SignatureNew = () => {
+const SignatureNewRedesigned = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-yellow-50 via-amber-50 to-orange-50">
       <Navbar />
@@ -24,4 +24,4 @@ const SignatureNew = () => {
   );
 };
 
-export default SignatureNew;
+export default SignatureNewRedesigned;
