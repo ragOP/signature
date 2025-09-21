@@ -55,10 +55,10 @@ function App() {
 
           <Route path="/" element={<Signature />} />
           <Route path="/signature" element={<Signature />} />
-          <Route path="/signature-new" element={<SignatureNew />} />
+          <Route path="/signature-new" element={<SignatureNewRedesigned />} />
           <Route path="/contact" element={<Contact />} />
 
-          <Route path="/signature-cart" element={<SignatureNewRedesigned />} />
+          <Route path="/signature-cart" element={<SignatureCart />} />
           <Route path="/signature-new-cart" element={<SignatureNewCart />} />
 
           <Route path="/signature-record" element={<SignatureRecord />} />
