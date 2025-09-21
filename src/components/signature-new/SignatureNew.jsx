@@ -3,6 +3,7 @@ import SignatureHeroRedesigned from "./Hero";
 import BeforeAfter from "./BeforeAfter";
 import WhyChooseUs from "./WhyChooseUs";
 import HowItWorks from "./HowItWorks";
+import WhoThisIsFor from "./WhoThisIsFor";
 
 const SignatureNew = () => {
   return (
@@ -12,6 +13,7 @@ const SignatureNew = () => {
       <BeforeAfter />
       <WhyChooseUs />
       <HowItWorks />
+      <WhoThisIsFor />
     </div>
   );
 };
