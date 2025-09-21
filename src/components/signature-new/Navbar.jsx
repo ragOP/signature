@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Menu, Signature, X } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+
+  const navigate = useNavigate();
 
   // Handle scroll effect for navbar background
   useEffect(() => {
@@ -77,7 +80,9 @@ const Navbar = () => {
             <div className="bg-gradient-to-r from-yellow-500 to-amber-500 p-2 rounded-xl">
               <Signature className="h-6 w-6 text-white" />
             </div>
-            <span className="text-xl font-bold text-gray-800">SignaturePro</span>
+            <span className="text-xl font-bold text-gray-800">
+              SignaturePro
+            </span>
           </div>
 
           {/* Desktop Menu - Hidden on mobile */}
@@ -96,7 +101,10 @@ const Navbar = () => {
 
           {/* CTA Button - Hidden on mobile */}
           <div className="hidden md:block">
-            <button className="bg-gradient-to-r from-yellow-500 to-amber-500 hover:from-yellow-600 hover:to-amber-600 text-white px-6 py-2.5 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-yellow-500/25">
+            <button
+              onClick={() => navigate("/signature-new-cart")}
+              className="bg-gradient-to-r from-yellow-500 to-amber-500 hover:from-yellow-600 hover:to-amber-600 text-white px-6 py-2.5 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-yellow-500/25"
+            >
               Get Started
             </button>
           </div>
@@ -142,7 +150,7 @@ const Navbar = () => {
               {/* Mobile CTA */}
               <div className="px-4 mt-6">
                 <button
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={() => navigate("/signature-new-cart")}
                   className="w-full bg-gradient-to-r from-yellow-500 to-amber-500 hover:from-yellow-600 hover:to-amber-600 text-white py-3 rounded-xl font-semibold hover:shadow-lg transform hover:scale-[1.02] transition-all duration-200"
                 >
                   Get Started

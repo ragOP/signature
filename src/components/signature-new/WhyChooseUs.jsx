@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Shield, Briefcase, PenTool, Smartphone, Gift } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const WhyChooseUs = () => {
   const [animateElements, setAnimateElements] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -242,7 +244,10 @@ const WhyChooseUs = () => {
               Join thousands of professionals who have transformed their
               personal brand with our signature design service
             </p>
-            <button className="bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-white font-semibold px-8 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+            <button
+              onClick={() => navigate("/signature-new-cart")}
+              className="bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-white font-semibold px-8 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+            >
               Get Your Signature Design
             </button>
           </div>

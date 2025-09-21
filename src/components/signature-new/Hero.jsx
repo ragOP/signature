@@ -13,6 +13,7 @@ import {
   Shield,
   Timer,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 // Animated feature card with modern design
 const FeatureCard = ({ icon: Icon, title, description, delay }) => (
@@ -128,6 +129,7 @@ const TrustIndicators = () => {
 
 const SignatureHeroRedesigned = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setIsVisible(true);
@@ -262,7 +264,10 @@ const SignatureHeroRedesigned = () => {
                   </p>
                 </div>
 
-                <button className="w-full bg-gradient-to-r from-yellow-500 to-amber-500 hover:from-yellow-600 hover:to-amber-600 text-white font-bold py-4 px-8 rounded-xl shadow-2xl hover:shadow-yellow-500/25 transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2 group">
+                <button
+                  onClick={() => navigate("/signature-new-cart")}
+                  className="w-full bg-gradient-to-r from-yellow-500 to-amber-500 hover:from-yellow-600 hover:to-amber-600 text-white font-bold py-4 px-8 rounded-xl shadow-2xl hover:shadow-yellow-500/25 transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2 group"
+                >
                   <Crown className="w-5 h-5" />
                   <span>Get Your Designer Signature</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

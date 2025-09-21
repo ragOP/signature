@@ -1,17 +1,18 @@
-import React, { useState } from 'react';
-import { 
-  GraduationCap, 
-  Building2, 
-  Briefcase, 
-  Palette, 
-  Mail, 
+import React, { useState } from "react";
+import {
+  GraduationCap,
+  Building2,
+  Briefcase,
+  Palette,
+  Mail,
   ChevronDown,
-  Sparkles 
-} from 'lucide-react';
+  Sparkles,
+} from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const AccordionItem = ({ item, isOpen, onToggle, index }) => {
   const Icon = item.icon;
-  
+
   return (
     <div className="border border-yellow-200 rounded-xl overflow-hidden bg-white shadow-sm hover:shadow-md transition-all duration-300">
       {/* Accordion Header */}
@@ -24,21 +25,23 @@ const AccordionItem = ({ item, isOpen, onToggle, index }) => {
             <Icon className="w-5 h-5 text-white" />
           </div>
           <div>
-            <h3 className="text-lg font-semibold text-gray-900">{item.title}</h3>
+            <h3 className="text-lg font-semibold text-gray-900">
+              {item.title}
+            </h3>
             <p className="text-sm text-gray-600">{item.subtitle}</p>
           </div>
         </div>
-        <ChevronDown 
+        <ChevronDown
           className={`w-5 h-5 text-gray-400 transition-transform duration-300 ${
-            isOpen ? 'rotate-180' : 'rotate-0'
-          }`} 
+            isOpen ? "rotate-180" : "rotate-0"
+          }`}
         />
       </button>
-      
+
       {/* Accordion Content */}
-      <div 
+      <div
         className={`overflow-hidden transition-all duration-300 ease-in-out ${
-          isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+          isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
         <div className="px-6 pb-4 pt-2">
@@ -53,38 +56,44 @@ const AccordionItem = ({ item, isOpen, onToggle, index }) => {
 
 const WhoThisIsFor = () => {
   const [openIndex, setOpenIndex] = useState(0); // First item open by default
+  const navigate = useNavigate();
 
   const targetAudience = [
     {
       icon: GraduationCap,
       title: "Students & Freshers",
       subtitle: "starting their career",
-      description: "Make a strong first impression with a professional signature that sets you apart from the crowd. Perfect for job applications, internships, and building your professional identity from day one."
+      description:
+        "Make a strong first impression with a professional signature that sets you apart from the crowd. Perfect for job applications, internships, and building your professional identity from day one.",
     },
     {
       icon: Building2,
       title: "Business Owners",
       subtitle: "who want to stand out",
-      description: "Elevate your brand with a signature that reflects your business's professionalism and values. Create a memorable mark that reinforces your company's credibility in every document you sign."
+      description:
+        "Elevate your brand with a signature that reflects your business's professionalism and values. Create a memorable mark that reinforces your company's credibility in every document you sign.",
     },
     {
       icon: Briefcase,
       title: "Working Professionals",
       subtitle: "upgrading their image",
-      description: "Transform your professional presence with a signature that commands respect and attention. Whether you're signing contracts, emails, or important documents, make every signature count."
+      description:
+        "Transform your professional presence with a signature that commands respect and attention. Whether you're signing contracts, emails, or important documents, make every signature count.",
     },
     {
       icon: Palette,
       title: "Creatives",
       subtitle: "who value aesthetics",
-      description: "Express your artistic vision through a signature that's as unique and beautiful as your work. Perfect for designers, artists, and anyone who appreciates the power of visual identity."
+      description:
+        "Express your artistic vision through a signature that's as unique and beautiful as your work. Perfect for designers, artists, and anyone who appreciates the power of visual identity.",
     },
     {
       icon: Mail,
       title: "Anyone Tired of Basic Signatures",
       subtitle: "or inconsistent handwriting",
-      description: "Upgrade from messy handwriting to a signature that represents the best version of yourself. Say goodbye to embarrassing scribbles and hello to a signature you'll be proud to use anywhere."
-    }
+      description:
+        "Upgrade from messy handwriting to a signature that represents the best version of yourself. Say goodbye to embarrassing scribbles and hello to a signature you'll be proud to use anywhere.",
+    },
   ];
 
   const handleToggle = (index) => {
@@ -102,12 +111,13 @@ const WhoThisIsFor = () => {
               Perfect For
             </span>
           </div>
-          
+
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
             Who Is This For?
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Professional signature design for everyone who wants to make their mark
+            Professional signature design for everyone who wants to make their
+            mark
           </p>
         </div>
 
@@ -131,9 +141,13 @@ const WhoThisIsFor = () => {
               Ready to Create Your Perfect Signature?
             </h3>
             <p className="text-gray-600 mb-6">
-              Join thousands of professionals who've transformed their image with a custom signature
+              Join thousands of professionals who've transformed their image
+              with a custom signature
             </p>
-            <button className="bg-gradient-to-r from-yellow-400 to-amber-500 text-white px-8 py-3 rounded-xl font-semibold hover:from-yellow-500 hover:to-amber-600 transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl">
+            <button
+              onClick={() => navigate("/signature-new-cart")}
+              className="bg-gradient-to-r from-yellow-400 to-amber-500 text-white px-8 py-3 rounded-xl font-semibold hover:from-yellow-500 hover:to-amber-600 transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
+            >
               Get Started Today
             </button>
           </div>

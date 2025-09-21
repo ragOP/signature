@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { ArrowRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const BeforeAfter = () => {
+  const navigate = useNavigate();
   // Add custom styles for handwriting font and enhanced aesthetics
   useEffect(() => {
     const style = document.createElement("style");
@@ -264,7 +266,10 @@ const BeforeAfter = () => {
               Join thousands of professionals who have elevated their personal
               brand with a custom signature design
             </p>
-            <button className="bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-white font-semibold px-8 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+            <button
+              onClick={() => navigate("/signature-new-cart")}
+              className="bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-white font-semibold px-8 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+            >
               Start Your Transformation
             </button>
           </div>
