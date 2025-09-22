@@ -24,10 +24,10 @@ const Navbar = () => {
   );
 };
 const SignatureNewOrderConfirmationPage = () => {
-  // const { orderId, amount } = useLocation().state;
+  const { orderId, amount } = useLocation().state;
 
-  const orderId = "1234567890";
-  const amount = 1000;
+  // const orderId = "1234567890";
+  // const amount = 1000;
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "instant" });
