@@ -19,14 +19,17 @@ import SignatureAbondentReport from "./pages/AbondedentReport";
 
 import SignatureRag from "./pages/SignatureRag";
 import SignatureCartRag from "./pages/SignatureCartRag";
-import SignatureRecordRag from "./pages/SignatureRecordRag";
+// import SignatureRecordRag from "./pages/SignatureRecordRag";
 import V2 from "./pages/V2";
 import SignatureOrderConfirmationRag from "./pages/SignatureOrderConfirmationRag";
-import SignatureAbondentReportRag from "./pages/AbondedentResportRag";
+// import SignatureAbondentReportRag from "./pages/AbondedentResportRag";
 import SignatureNewRedesigned from "./components/signature-new/SignatureNew";
 import SignatureNewCart from "./components/signature-new-cart/SignatureNewCart";
 import SignatureNew from "./pages/new/SignatureNew";
 import NewCart from "./pages/new/NewCart";
+import SignatureNewAbondentReport from "./pages/new/SignatureNewAbondentReport";
+import SignatureNewRecord from "./pages/new/SignatureNewRecord";
+import SignatureNewOrderConfirmationPage from "./pages/new/SignatureNewOrderConfirmationPage";
 
 // Main App Component
 function App() {
@@ -40,18 +43,18 @@ function App() {
           <Route path="/new-cart" element={<NewCart />} />
           <Route path="/signature-cart-rag" element={<SignatureCartRag />} />
           <Route path="/v2" element={<V2 />} />
-          <Route
+          {/* <Route
             path="/signature-record/rag"
             element={<SignatureRecordRag />}
-          />
+          /> */}
           <Route
             path="/signature-order-confirmation/rag"
             element={<SignatureOrderConfirmationRag />}
           />
-          <Route
+          {/* <Route
             path="/abondent-report/rag"
             element={<SignatureAbondentReportRag />}
-          />
+          /> */}
 
           <Route path="/" element={<Signature />} />
           <Route path="/signature" element={<Signature />} />
@@ -62,16 +65,28 @@ function App() {
           <Route path="/signature-new-cart" element={<SignatureNewCart />} />
 
           <Route path="/signature-record" element={<SignatureRecord />} />
+          <Route
+            path="/signature-new-record"
+            element={<SignatureNewRecord />}
+          />
 
           <Route
             path="/signature-order-confirmation"
             element={<SignatureOrderConfirmation />}
+          />
+          <Route
+            path="/signature-new-order-confirmation"
+            element={<SignatureNewOrderConfirmationPage />}
           />
           <Route path="/privacy" element={<Privacy />} />
 
           <Route
             path="/abondent-report"
             element={<SignatureAbondentReport />}
+          />
+          <Route
+            path="/signature-new-abondent-report"
+            element={<SignatureNewAbondentReport />}
           />
         </Routes>
       </div>

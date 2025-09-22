@@ -37,7 +37,7 @@ const ProcessStep = ({
 
       {/* Content Card */}
       <div className="flex-grow pb-12">
-        <div className="bg-white p-5 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-300">
+        <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-300">
           <div className="flex items-center space-x-3 mb-2">
             <Icon className={`w-5 h-5 ${color.text}`} />
             <h3 className="text-lg font-semibold text-gray-900">{title}</h3>
@@ -103,8 +103,8 @@ const HowItWorks = () => {
   ];
 
   return (
-    <section className="py-12 px-4 bg-gradient-to-br from-yellow-50 via-amber-50 to-orange-50">
-      <div className="max-w-4xl mx-auto">
+    <section className="py-16 px-4 bg-gradient-to-br from-yellow-50 via-amber-50 to-orange-50">
+      <div className="max-w-6xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-3">

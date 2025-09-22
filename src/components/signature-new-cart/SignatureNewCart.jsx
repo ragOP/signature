@@ -167,7 +167,7 @@ function SignatureNewCart() {
       setIsCheckingOut(true);
 
       const abodentCartRes = await axios.post(
-        `${BACKEND_URL}/api/lander4/create-order-abd`,
+        `${BACKEND_URL}/api/signature/rag/create-order-abd`,
         {
           amount: total,
           fullName: consultationFormData?.name,
@@ -180,6 +180,7 @@ function SignatureNewCart() {
       );
 
       const abodentCartID = abodentCartRes.data.data._id;
+      console.log(abodentCartID);
 
       const res = await axios.post(`${BACKEND_URL}/api/payment/razorpay`, {
         amount: total,
@@ -196,7 +197,7 @@ function SignatureNewCart() {
         order_id: data.orderId,
         handler: async function (response) {
           try {
-            await axios.post(`${BACKEND_URL}/api/lander4/create-order`, {
+            await axios.post(`${BACKEND_URL}/api/signature/rag/create-order`, {
               amount: total,
               razorpayOrderId: response.razorpay_order_id,
               razorpayPaymentId: response.razorpay_payment_id,
@@ -211,10 +212,10 @@ function SignatureNewCart() {
             });
 
             await axios.delete(
-              `${BACKEND_URL}/api/lander4/delete-order-abd/${abodentCartID}`
+              `${BACKEND_URL}/api/signature/rag/delete-order-abd/${abodentCartID}`
             );
 
-            navigate("/signature-order-confirmation", {
+            navigate("/signature-new-order-confirmation", {
               state: {
                 orderId: data.orderId,
                 amount: total,
@@ -247,10 +248,16 @@ function SignatureNewCart() {
   };
 
   // Additional Products Component
-  const AdditionalProducts = ({ products, selectedProducts, onProductToggle }) => {
+  const AdditionalProducts = ({
+    products,
+    selectedProducts,
+    onProductToggle,
+  }) => {
     return (
       <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
-        <h3 className="text-xl font-bold text-gray-900 mb-4">Add-On Services</h3>
+        <h3 className="text-xl font-bold text-gray-900 mb-4">
+          Add-On Services
+        </h3>
         <div className="space-y-4">
           {products.map((product) => (
             <div
@@ -264,8 +271,12 @@ function SignatureNewCart() {
             >
               <div className="flex justify-between items-start">
                 <div className="flex-1">
-                  <h4 className="font-semibold text-gray-900 mb-2">{product.title}</h4>
-                  <p className="text-sm text-gray-600 mb-3">{product.description}</p>
+                  <h4 className="font-semibold text-gray-900 mb-2">
+                    {product.title}
+                  </h4>
+                  <p className="text-sm text-gray-600 mb-3">
+                    {product.description}
+                  </p>
                   <div className="space-y-1">
                     {product.features.map((feature, index) => (
                       <div key={index} className="flex items-center space-x-2">
@@ -277,8 +288,12 @@ function SignatureNewCart() {
                 </div>
                 <div className="text-right ml-4">
                   <div className="flex items-baseline gap-2">
-                    <span className="text-lg font-bold text-gray-900">₹{product.price}</span>
-                    <span className="text-sm text-gray-400 line-through">₹{product.originalPrice}</span>
+                    <span className="text-lg font-bold text-gray-900">
+                      ₹{product.price}
+                    </span>
+                    <span className="text-sm text-gray-400 line-through">
+                      ₹{product.originalPrice}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -289,10 +304,14 @@ function SignatureNewCart() {
     );
   };
 
-
-
   // Order Summary Component
-  const OrderSummary = ({ subtotal, discount, total, isCheckingOut, onCheckout }) => {
+  const OrderSummary = ({
+    subtotal,
+    discount,
+    total,
+    isCheckingOut,
+    onCheckout,
+  }) => {
     return (
       <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
         <h3 className="text-xl font-bold text-gray-900 mb-4">Order Summary</h3>

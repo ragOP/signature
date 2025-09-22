@@ -199,7 +199,7 @@ const Testimonial = () => {
             >
               {testimonials.map((testimonial, index) => (
                 <div key={index} className="w-full flex-shrink-0">
-                  <div className="grid md:grid-cols-2 gap-8 p-8">
+                  <div className="grid md:grid-cols-2 gap-8 p-6">
                     {/* Left Side: Testimonial Content */}
                     <div className="flex flex-col justify-center space-y-6">
                       {/* Star Rating */}
@@ -292,7 +292,7 @@ const Testimonial = () => {
 
         {/* Call to Action */}
         <div className="text-center mt-12">
-          <div className="bg-white rounded-2xl p-8 border border-yellow-200 shadow-sm">
+          <div className="bg-white rounded-2xl p-6 border border-yellow-200 shadow-sm">
             <h3 className="text-xl font-semibold text-gray-900 mb-3">
               Ready to Join These Success Stories?
             </h3>
@@ -303,7 +303,7 @@ const Testimonial = () => {
 
             <button
               onClick={() => navigate("/signature-new-cart")}
-              className="bg-gradient-to-r from-yellow-400 to-amber-500 text-white px-8 py-3 rounded-xl font-semibold hover:from-yellow-500 hover:to-amber-600 transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
+              className="bg-gradient-to-r from-yellow-400 to-amber-500 text-white px-6 py-3 rounded-xl font-semibold hover:from-yellow-500 hover:to-amber-600 transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
             >
               Start Your Transformation
             </button>

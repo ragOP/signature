@@ -35,7 +35,7 @@ const StatCard = ({ icon: Icon, value, label, color }) => (
     <div
       className={`absolute inset-0 bg-gradient-to-r from-${color}-500 to-${color}-600 rounded-2xl blur-lg opacity-20 group-hover:opacity-40 transition-opacity duration-300`}
     ></div>
-    <div className="relative bg-white/60 backdrop-blur-sm border border-yellow-200/50 rounded-2xl p-6 text-center hover:bg-white/80 hover:border-yellow-300/60 transition-all duration-300">
+    <div className="relative bg-white/60 backdrop-blur-sm border border-yellow-200/50 rounded-2xl p-6 text-center hover:bg-white/80 hover:border-yellow-300/60 transition-all duration-300 h-32 flex flex-col justify-center">
       <Icon className={`w-8 h-8 mx-auto mb-3 text-${color}-400`} />
       <div className="text-2xl font-bold text-amber-700 mb-1">{value}</div>
       <div className="text-gray-600 text-sm">{label}</div>
@@ -183,12 +183,12 @@ const SignatureHeroRedesigned = () => {
       </div>
 
       <div
-        className={`relative z-10 container mx-auto px-6 py-12 transition-all duration-1000 ${
+        className={`relative z-10 max-w-7xl mx-auto px-6 py-16 transition-all duration-1000 ${
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
         }`}
       >
         {/* Hero Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-12">
           <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-yellow-400/30 to-amber-400/30 text-amber-800 px-6 py-3 rounded-full text-sm font-medium mb-8 border border-yellow-400/50">
             <Sparkles className="w-4 h-4" />
             <span>Transform Your Identity</span>
@@ -208,9 +208,9 @@ const SignatureHeroRedesigned = () => {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
+        <div className="grid lg:grid-cols-2 gap-12 items-start">
           {/* Left Column - Features */}
-          <div className="space-y-8">
+          <div className="space-y-6">
             <div>
               <h2 className="text-2xl font-bold text-gray-800 mb-8 flex items-center">
                 <Crown className="w-6 h-6 text-amber-600 mr-3" />
@@ -233,12 +233,12 @@ const SignatureHeroRedesigned = () => {
           </div>
 
           {/* Right Column - Showcase & Pricing */}
-          <div className="space-y-8">
+          <div className="space-y-6">
             {/* Signature Showcase */}
             <SignatureShowcase />
 
             {/* Pricing Card */}
-            <div className="bg-gradient-to-br from-yellow-50 to-amber-100 rounded-3xl p-8 border border-yellow-200/50 relative overflow-hidden shadow-lg shadow-yellow-200/20">
+            <div className="bg-gradient-to-br from-yellow-50 to-amber-100 rounded-3xl p-6 border border-yellow-200/50 relative overflow-hidden shadow-lg shadow-yellow-200/20">
               <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/5 to-amber-400/5"></div>
 
               <div className="relative z-10 text-center">
@@ -266,7 +266,7 @@ const SignatureHeroRedesigned = () => {
 
                 <button
                   onClick={() => navigate("/signature-new-cart")}
-                  className="w-full bg-gradient-to-r from-yellow-500 to-amber-500 hover:from-yellow-600 hover:to-amber-600 text-white font-bold py-4 px-8 rounded-xl shadow-2xl hover:shadow-yellow-500/25 transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2 group"
+                  className="w-full bg-gradient-to-r from-yellow-500 to-amber-500 hover:from-yellow-600 hover:to-amber-600 text-white font-bold py-3 px-6 rounded-xl shadow-2xl hover:shadow-yellow-500/25 transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2 group"
                 >
                   <Crown className="w-5 h-5" />
                   <span>Get Your Designer Signature</span>

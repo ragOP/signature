@@ -220,11 +220,11 @@ const BeforeAfter = () => {
   };
 
   return (
-    <section className="px-4 py-20 bg-gradient-to-br from-yellow-50 via-amber-50 to-orange-50">
-      <div className="max-w-7xl mx-auto">
+    <section className="px-4 py-16 bg-gradient-to-br from-yellow-50 via-amber-50 to-orange-50">
+      <div className="max-w-6xl mx-auto">
         {/* Section Header */}
         <div
-          className={`text-center mb-16 transition-all duration-1000 transform ${
+          className={`text-center mb-12 transition-all duration-1000 transform ${
             animateElements
               ? "translate-y-0 opacity-100"
               : "translate-y-8 opacity-0"
@@ -240,7 +240,7 @@ const BeforeAfter = () => {
         </div>
 
         {/* Transformation Cards */}
-        <div className="space-y-12">
+        <div className="space-y-8">
           {transformations.map((transformation, index) => (
             <ComparisonCard
               key={transformation.id}
@@ -252,13 +252,13 @@ const BeforeAfter = () => {
 
         {/* Call to Action */}
         <div
-          className={`text-center mt-16 transition-all duration-1000 delay-1000 transform ${
+          className={`text-center mt-12 transition-all duration-1000 delay-1000 transform ${
             animateElements
               ? "translate-y-0 opacity-100"
               : "translate-y-8 opacity-0"
           }`}
         >
-          <div className="bg-gradient-to-r from-amber-100 to-yellow-100 rounded-2xl p-8 border border-yellow-200/50 shadow-lg">
+          <div className="bg-gradient-to-r from-amber-100 to-yellow-100 rounded-2xl p-6 border border-yellow-200/50 shadow-lg">
             <h3 className="text-2xl font-bold text-gray-800 mb-4">
               Ready for Your Signature Transformation?
             </h3>
@@ -268,7 +268,7 @@ const BeforeAfter = () => {
             </p>
             <button
               onClick={() => navigate("/signature-new-cart")}
-              className="bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-white font-semibold px-8 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+              className="bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
             >
               Start Your Transformation
             </button>
