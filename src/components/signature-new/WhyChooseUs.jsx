@@ -186,7 +186,7 @@ const WhyChooseUs = () => {
   };
 
   return (
-    <section className="py-20 px-6 bg-gradient-to-br from-yellow-50 via-amber-50 to-orange-50">
+    <section className="py-6 px-6 bg-gradient-to-br from-yellow-50 via-amber-50 to-orange-50">
       <div className="max-w-6xl mx-auto">
         {/* Section Header */}
         <div
@@ -226,7 +226,7 @@ const WhyChooseUs = () => {
 
         {/* Call to Action */}
         <div
-          className={`text-center mt-16 transition-all duration-1000 delay-1200 transform ${
+          className={`text-center transition-all duration-1000 delay-1200 transform ${
             animateElements
               ? "translate-y-0 opacity-100"
               : "translate-y-8 opacity-0"

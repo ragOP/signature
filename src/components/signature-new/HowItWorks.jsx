@@ -103,7 +103,7 @@ const HowItWorks = () => {
   ];
 
   return (
-    <section className="py-16 px-4 bg-gradient-to-br from-yellow-50 via-amber-50 to-orange-50">
+    <section className="py-6 px-4 bg-gradient-to-br from-yellow-50 via-amber-50 to-orange-50">
       <div className="max-w-6xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-12">

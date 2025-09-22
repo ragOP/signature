@@ -16,7 +16,7 @@ const LimitedSlot = () => {
   ];
 
   return (
-    <section className="py-16 px-4 bg-gradient-to-br from-yellow-50 via-amber-50 to-orange-50">
+    <section className="py-8 px-4 bg-gradient-to-br from-yellow-50 via-amber-50 to-orange-50">
       <div className="max-w-6xl mx-auto text-center">
         {/* Section Header */}
         <div className="flex justify-center items-center gap-3 mb-6">

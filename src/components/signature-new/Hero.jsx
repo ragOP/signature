@@ -81,7 +81,7 @@ const SignatureShowcase = () => {
         </div>
 
         <div className="font-signature text-5xl md:text-6xl text-gray-800 mb-4 transform group-hover:scale-105 transition-transform duration-500">
-          <img src="/beutifull.jpg" alt="" />
+          <img src="/signature-1.png" alt="" />
         </div>
 
         <p className="text-gray-600 text-sm">
@@ -178,7 +178,7 @@ const SignatureHeroRedesigned = () => {
   ];
 
   return (
-    <section className="min-h-screen bg-gradient-to-br from-yellow-50 via-amber-100 to-orange-100 relative overflow-hidden">
+    <section className="min-h-screen bg-gradient-to-br from-yellow-50 via-amber-100 to-orange-100 relative overflow-hidden pb-8">
       {/* Animated background elements */}
       <div className="absolute inset-0">
         <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-yellow-300/20 rounded-full blur-3xl animate-pulse"></div>
@@ -223,7 +223,7 @@ const SignatureHeroRedesigned = () => {
           {/* Left Column - Features */}
           <div className="space-y-6">
             <div>
-              <h2 className="text-2xl font-bold text-gray-800 mb-8 flex items-center">
+              <h2 className="text-2xl font-bold  text-gray-800 mb-8 text-center flex items-center justify-center">
                 <Crown className="w-6 h-6 text-amber-600 mr-3" />
                 What You'll Receive
               </h2>
