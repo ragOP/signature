@@ -138,6 +138,7 @@ function SignatureNewCart() {
   const discount = cartDiscount + additionalDiscount;
 
   const total = subtotal;
+  const originalPrice = subtotal + discount;
 
   const loadScript = (src) => {
     return new Promise((resolve) => {
@@ -318,7 +319,7 @@ function SignatureNewCart() {
         <div className="space-y-3">
           <div className="flex justify-between">
             <span className="text-gray-600">Subtotal</span>
-            <span className="font-medium">₹{subtotal}</span>
+            <span className="font-medium">₹{originalPrice}</span>
           </div>
           {discount > 0 && (
             <div className="flex justify-between text-green-600">
