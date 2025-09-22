@@ -96,7 +96,7 @@ const BeforeAfter = () => {
   const transformations = [
     {
       id: 1,
-      beforeText: "Salman Basha",
+      beforeText: "/sign-4.jpg",
       beforeDescription: "Basic, forgettable name writing",
       afterImage: "/signature-1.png",
       afterDescription: "Bold, professional signature",
@@ -105,7 +105,7 @@ const BeforeAfter = () => {
     },
     {
       id: 2,
-      beforeText: "Shashikant Kale",
+      beforeText: "/sign-5.jpg",
       beforeDescription: "Cluttered, hard to read",
       afterImage: "/signature-2.png",
       afterDescription: "Clean, elegant design",
@@ -114,7 +114,7 @@ const BeforeAfter = () => {
     },
     {
       id: 3,
-      beforeText: "Charlie",
+      beforeText: "/sign-6.jpg",
       beforeDescription: "Forgettable, plain text",
       afterImage: "/signature-3.png",
       afterDescription: "Memorable, distinctive mark",
@@ -157,13 +157,18 @@ const BeforeAfter = () => {
                 <div className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-semibold mb-4 inline-block">
                   BEFORE
                 </div>
-                <div className="bg-white rounded-lg p-4 border-2 border-dashed border-red-300">
-                  <div className="text-gray-800 text-xl font-handwriting mb-2">
-                    {transformation.beforeText}
+                <div className="bg-white rounded-lg p-4 border-2 border-dashed border-red-300 min-h-[120px] flex items-center justify-center">
+                  <img
+                    src={transformation.beforeText}
+                    alt={`Original handwriting ${transformation.id}`}
+                    className="max-w-full w-80 max-h-24 object-cover"
+                  />
+                  <div className="text-gray-800 text-xl hidden">
+                    Original handwriting
                   </div>
-                  <div className="text-red-600 text-sm">
-                    {transformation.beforeDescription}
-                  </div>
+                </div>
+                <div className="text-red-600 text-sm">
+                  {transformation.beforeDescription}
                 </div>
               </div>
             </div>

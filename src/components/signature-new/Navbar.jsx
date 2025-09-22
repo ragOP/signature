@@ -77,12 +77,11 @@ const Navbar = () => {
         <div className="flex items-center justify-between px-4 py-3 md:px-6 md:py-4">
           {/* Logo */}
           <div className="flex items-center space-x-3">
-            <div className="bg-gradient-to-r from-yellow-500 to-amber-500 p-2 rounded-xl">
-              <Signature className="h-6 w-6 text-white" />
-            </div>
-            <span className="text-xl font-bold text-gray-800">
-              SignaturePro
-            </span>
+            <img
+              src="/logoT.png"
+              alt="Easy Soul Logo"
+              className="w-32 h-13 object-cover"
+            />
           </div>
 
           {/* Desktop Menu - Hidden on mobile */}

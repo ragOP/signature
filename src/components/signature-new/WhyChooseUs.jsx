@@ -124,7 +124,7 @@ const WhyChooseUs = () => {
     return (
       <div className="relative">
         {/* Timeline Dot */}
-        <div className="absolute left-6 top-32 w-4 h-4 timeline-dot rounded-full z-10"></div>
+        {/* <div className="absolute left-6 top-32 w-4 h-4 timeline-dot rounded-full z-10"></div> */}
 
         {/* Timeline Connector Line */}
         {/* {!isLast && (
@@ -133,7 +133,7 @@ const WhyChooseUs = () => {
 
         {/* Benefit Card */}
         <div
-          className={`ml-16 transition-all duration-1000 delay-${
+          className={`items-center justify-center transition-all duration-1000 delay-${
             (index + 1) * 200
           } transform ${
             animateElements

@@ -2,95 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Star, ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-// --- Helper Component: Interactive Comparison Slider ---
-// We'll reuse a compact version of this powerful component inside each testimonial card.
-const InteractiveComparisonSlider = ({ beforeImage, afterImage }) => {
-  const [sliderPosition, setSliderPosition] = useState(50);
-  const [isDragging, setIsDragging] = useState(false);
-  const containerRef = useRef(null);
-
-  const handleMove = (clientX) => {
-    if (!isDragging || !containerRef.current) return;
-    const bounds = containerRef.current.getBoundingClientRect();
-    const x = clientX - bounds.left;
-    const percentage = (x / bounds.width) * 100;
-    setSliderPosition(Math.max(0, Math.min(100, percentage)));
-  };
-
-  const handleInteractionStart = () => setIsDragging(true);
-  const handleInteractionEnd = () => setIsDragging(false);
-
-  const handleMouseMove = (e) => handleMove(e.clientX);
-  const handleTouchMove = (e) => handleMove(e.touches[0].clientX);
-
-  return (
-    <div
-      ref={containerRef}
-      className="relative w-full aspect-video overflow-hidden rounded-lg select-none cursor-ew-resize border border-yellow-200 shadow-sm"
-      onMouseDown={handleInteractionStart}
-      onTouchStart={handleInteractionStart}
-      onMouseUp={handleInteractionEnd}
-      onMouseLeave={handleInteractionEnd}
-      onTouchEnd={handleInteractionEnd}
-      onMouseMove={handleMouseMove}
-      onTouchMove={handleTouchMove}
-    >
-      {/* Before Image */}
-      <div className="absolute top-0 left-0 w-full h-full">
-        <img
-          src={beforeImage}
-          alt="Before"
-          className="w-full h-full object-cover pointer-events-none"
-        />
-        <div className="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 rounded text-xs font-semibold">
-          BEFORE
-        </div>
-      </div>
-
-      {/* After Image */}
-      <div
-        className="absolute top-0 left-0 w-full h-full"
-        style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
-      >
-        <img
-          src={afterImage}
-          alt="After"
-          className="w-full h-full object-cover pointer-events-none"
-        />
-        <div className="absolute top-2 right-2 bg-green-500 text-white px-2 py-1 rounded text-xs font-semibold">
-          AFTER
-        </div>
-      </div>
-
-      {/* Slider Handle */}
-      <div
-        className="absolute top-0 h-full w-1 bg-yellow-400 cursor-ew-resize shadow-lg"
-        style={{ left: `${sliderPosition}%`, transform: "translateX(-50%)" }}
-      >
-        <div className="absolute top-1/2 -translate-y-1/2 -left-3.5 bg-white rounded-full p-1.5 shadow-lg border-2 border-yellow-400">
-          <svg
-            className="w-4 h-4 text-yellow-600"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M8 9l4-4 4 4m0 6l-4 4-4-4"
-            ></path>
-          </svg>
-        </div>
-      </div>
-
-      {/* Drag Instruction */}
-      <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 bg-black/70 text-white px-3 py-1 rounded-full text-xs">
-        Drag to compare
-      </div>
-    </div>
-  );
-};
+// --- Helper Component removed (Before/After slider) ---
 
 // --- Main Redesigned Section Component ---
 const Testimonial = () => {
@@ -199,7 +111,7 @@ const Testimonial = () => {
             >
               {testimonials.map((testimonial, index) => (
                 <div key={index} className="w-full flex-shrink-0">
-                  <div className="grid md:grid-cols-2 gap-8 p-6">
+                  <div className="grid grid-cols-1 gap-8 p-6">
                     {/* Left Side: Testimonial Content */}
                     <div className="flex flex-col justify-center space-y-6">
                       {/* Star Rating */}
@@ -227,22 +139,6 @@ const Testimonial = () => {
                           {testimonial.role}
                         </div>
                       </div>
-                    </div>
-
-                    {/* Right Side: Interactive Comparison */}
-                    <div className="flex flex-col justify-center">
-                      <div className="mb-4">
-                        <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                          See the Transformation
-                        </h3>
-                        <p className="text-sm text-gray-600">
-                          Drag the slider to see the before and after
-                        </p>
-                      </div>
-                      <InteractiveComparisonSlider
-                        beforeImage={testimonial.beforeImage}
-                        afterImage={testimonial.afterImage}
-                      />
                     </div>
                   </div>
                 </div>

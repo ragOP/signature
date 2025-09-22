@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import { User, Mail, Phone, Briefcase, MessageSquare } from 'lucide-react';
+import React, { useState } from "react";
+import { User, Mail, Phone, Briefcase, MessageSquare } from "lucide-react";
 
 // Reusable InputField component for clean, consistent styling
-const InputField = ({ 
-  icon: Icon, 
-  label, 
-  type = "text", 
-  value, 
-  onChange, 
-  placeholder, 
-  required = false, 
+const InputField = ({
+  icon: Icon,
+  label,
+  type = "text",
+  value,
+  onChange,
+  placeholder,
+  required = false,
   error,
-  rows 
+  rows,
 }) => {
   return (
     <div className="space-y-2">
@@ -22,13 +22,13 @@ const InputField = ({
         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
           <Icon className="h-5 w-5 text-gray-400" />
         </div>
-        {type === 'textarea' ? (
+        {type === "textarea" ? (
           <textarea
             value={value}
             onChange={onChange}
             rows={rows || 4}
             className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all duration-200 resize-none ${
-              error ? 'border-red-300 bg-red-50' : 'border-gray-300'
+              error ? "border-red-300 bg-red-50" : "border-gray-300"
             }`}
             placeholder={placeholder}
           />
@@ -38,16 +38,14 @@ const InputField = ({
             value={value}
             onChange={onChange}
             className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all duration-200 ${
-              error ? 'border-red-300 bg-red-50' : 'border-gray-300'
+              error ? "border-red-300 bg-red-50" : "border-gray-300"
             }`}
             placeholder={placeholder}
             required={required}
           />
         )}
       </div>
-      {error && (
-        <p className="text-red-500 text-sm">{error}</p>
-      )}
+      {error && <p className="text-red-500 text-sm">{error}</p>}
     </div>
   );
 };
@@ -56,16 +54,16 @@ const SignatureCartConsultationForm = ({ onSubmit, formData, setFormData }) => {
   const [errors, setErrors] = useState({});
 
   const handleInputChange = (field, value) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [field]: value
+      [field]: value,
     }));
 
     // Clear error when user starts typing
     if (errors[field]) {
-      setErrors(prev => ({
+      setErrors((prev) => ({
         ...prev,
-        [field]: ''
+        [field]: "",
       }));
     }
   };
@@ -73,9 +71,11 @@ const SignatureCartConsultationForm = ({ onSubmit, formData, setFormData }) => {
   const validateForm = () => {
     const newErrors = {};
 
-    if (!formData.name.trim()) newErrors.name = 'Full Name is required';
-    if (!formData.phoneNumber.trim()) newErrors.phoneNumber = 'Phone number is required';
-    if (!formData.profession.trim()) newErrors.profession = 'Profession is required';
+    if (!formData.name.trim()) newErrors.name = "Full Name is required";
+    if (!formData.phoneNumber.trim())
+      newErrors.phoneNumber = "Phone number is required";
+    if (!formData.profession.trim())
+      newErrors.profession = "Profession is required";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -96,9 +96,7 @@ const SignatureCartConsultationForm = ({ onSubmit, formData, setFormData }) => {
           <div className="w-10 h-10 bg-gradient-to-br from-yellow-400 to-amber-500 rounded-full flex items-center justify-center">
             <User className="w-5 h-5 text-white" />
           </div>
-          <h3 className="text-xl font-bold text-gray-900">
-            Your Details
-          </h3>
+          <h3 className="text-xl font-bold text-gray-900">Your Details</h3>
         </div>
         <p className="text-gray-600 text-sm">
           Please provide your information for personalized signature design
@@ -111,7 +109,7 @@ const SignatureCartConsultationForm = ({ onSubmit, formData, setFormData }) => {
           icon={User}
           label="Full Name"
           value={formData.name}
-          onChange={(e) => handleInputChange('name', e.target.value)}
+          onChange={(e) => handleInputChange("name", e.target.value)}
           placeholder="Enter your full name"
           required
           error={errors.name}
@@ -122,7 +120,7 @@ const SignatureCartConsultationForm = ({ onSubmit, formData, setFormData }) => {
           label="Email Address"
           type="email"
           value={formData.email}
-          onChange={(e) => handleInputChange('email', e.target.value)}
+          onChange={(e) => handleInputChange("email", e.target.value)}
           placeholder="Enter your email address"
           error={errors.email}
         />
@@ -132,7 +130,7 @@ const SignatureCartConsultationForm = ({ onSubmit, formData, setFormData }) => {
           label="Phone Number"
           type="tel"
           value={formData.phoneNumber}
-          onChange={(e) => handleInputChange('phoneNumber', e.target.value)}
+          onChange={(e) => handleInputChange("phoneNumber", e.target.value)}
           placeholder="Enter your phone number"
           required
           error={errors.phoneNumber}
@@ -142,7 +140,7 @@ const SignatureCartConsultationForm = ({ onSubmit, formData, setFormData }) => {
           icon={Briefcase}
           label="Profession"
           value={formData.profession}
-          onChange={(e) => handleInputChange('profession', e.target.value)}
+          onChange={(e) => handleInputChange("profession", e.target.value)}
           placeholder="Enter your profession"
           required
           error={errors.profession}
@@ -153,24 +151,12 @@ const SignatureCartConsultationForm = ({ onSubmit, formData, setFormData }) => {
           label="Special Remarks"
           type="textarea"
           value={formData.remarks}
-          onChange={(e) => handleInputChange('remarks', e.target.value)}
+          onChange={(e) => handleInputChange("remarks", e.target.value)}
           placeholder="Any specific requirements or remarks for your signature design..."
           rows={4}
         />
 
         {/* Submit button with yellowish theme */}
-        <div className="pt-4">
-          <button
-            type="submit"
-            className="w-full bg-gradient-to-r from-yellow-400 to-amber-500 text-white py-3 px-6 rounded-lg font-semibold hover:from-yellow-500 hover:to-amber-600 transition-all duration-300 transform hover:scale-[1.02] focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2"
-          >
-            Save Information
-          </button>
-        </div>
-
-        <p className="text-xs text-gray-500 text-center">
-          Your information will be used to create a personalized signature design
-        </p>
       </form>
     </div>
   );

@@ -21,11 +21,15 @@ const FeatureCard = ({ icon: Icon, title, description, delay }) => (
     className={`bg-white/60 backdrop-blur-sm border border-yellow-200/50 rounded-2xl p-6 hover:bg-white/80 hover:border-yellow-300/60 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-yellow-200/20`}
     style={{ animationDelay: delay }}
   >
-    <div className="bg-gradient-to-br from-yellow-400/30 to-amber-400/30 w-12 h-12 rounded-xl flex items-center justify-center mb-4">
-      <Icon className="w-6 h-6 text-amber-700" />
+    <div className="flex items-center mb-4">
+      <div className="bg-gradient-to-br from-yellow-400/30 to-amber-400/30 w-12 h-12 rounded-xl flex items-center justify-center mr-6">
+        <Icon className="w-6 h-6 text-amber-700" />
+      </div>
+      <h2 className="text-gray-800 font-bold text-xl mb-2">{title}</h2>
     </div>
-    <h3 className="text-gray-800 font-semibold text-lg mb-2">{title}</h3>
-    <p className="text-gray-600 text-sm leading-relaxed">{description}</p>
+    <p className="text-center text-gray-600 text-sm leading-relaxed">
+      {description}
+    </p>
   </div>
 );
 
@@ -77,7 +81,7 @@ const SignatureShowcase = () => {
         </div>
 
         <div className="font-signature text-5xl md:text-6xl text-gray-800 mb-4 transform group-hover:scale-105 transition-transform duration-500">
-          Raghib Najmi
+          <img src="/beutifull.jpg" alt="" />
         </div>
 
         <p className="text-gray-600 text-sm">
@@ -206,6 +210,13 @@ const SignatureHeroRedesigned = () => {
             Elevate your personal brand with a handcrafted, designer signature
             that reflects your style, ambition, and profession.
           </p>
+        </div>
+        <div className="flex justify-center items-center mb-6">
+          <img
+            src="/signature-hero.webp"
+            alt="signature"
+            className="w-full h-1/2 rounded-lg"
+          />
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 items-start">
