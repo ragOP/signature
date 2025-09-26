@@ -26,8 +26,9 @@ const SignatureOrderConfirmationCashfree = () => {
   const orderId = orderIdFromParams || orderIdFromState;
   
   // Get other data from location state or localStorage
-  const { amount, paymentMethod } = location.state || {};
+  const { paymentMethod } = location.state || {};
   const storedOrderData = localStorage.getItem('orderData') ? JSON.parse(localStorage.getItem('orderData')) : null;
+  const amount = storedOrderData?.amount || 1
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "instant" });
@@ -152,7 +153,7 @@ const SignatureOrderConfirmationCashfree = () => {
         ...(storedOrderData || {}),
 
         orderId: orderId,
-        amount: storedOrderData?.amount || 1,
+        amount: amount,
         fullName: storedOrderData?.name,
         email: storedOrderData?.email,
         phoneNumber: storedOrderData?.phoneNumber,
