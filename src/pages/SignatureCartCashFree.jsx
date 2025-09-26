@@ -213,7 +213,7 @@ function SignatureCartCashFree() {
           additionalProducts: selectedAdditionalProducts.map(product => product.title),
           orderType: "normal",
           quantity: 1,
-          url: `${window.location.origin}/signature-order-confirmation-cashfree`,
+          // url: `${window.location.origin}/signature-order-confirmation-cashfree`,
         },
         {
           headers: {
