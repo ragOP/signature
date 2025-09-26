@@ -78,7 +78,7 @@ const SignatureOrderConfirmationCashfree = () => {
 
       console.log('Payment verification response:', paymentVerificationResponse.data);
 
-      const paymentData = paymentVerificationResponse?.data?.data;
+      const paymentData = paymentVerificationResponse?.data[0];
 
       // Validate payment data
       if (!paymentData) {
@@ -86,7 +86,7 @@ const SignatureOrderConfirmationCashfree = () => {
       }
 
       // Check payment status
-      if (paymentData.order_status === "PAID") {
+      if (paymentData.payment_status === "SUCCESS") {
         console.log('Payment verified successfully');
         
         // Step 2: Create order in database
