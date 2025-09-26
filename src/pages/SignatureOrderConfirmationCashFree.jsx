@@ -66,7 +66,7 @@ const SignatureOrderConfirmationCashfree = () => {
 
       // Step 1: Verify payment status with Cashfree
       const paymentVerificationResponse = await axios.get(
-        `${BACKEND_URL}/api/payment/cashfree-order/${orderId}`,
+        `${BACKEND_URL}/api/payment/details/${orderId}`,
         {
           headers: {
             "Content-Type": "application/json",
