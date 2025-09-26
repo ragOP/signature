@@ -78,7 +78,7 @@ const SignatureOrderConfirmationCashfree = () => {
 
       console.log('Payment verification response:', paymentVerificationResponse.data);
 
-      const paymentData = paymentVerificationResponse?.data[0];
+      const paymentData = paymentVerificationResponse?.data?.data?.[0];
 
       // Validate payment data
       if (!paymentData) {
