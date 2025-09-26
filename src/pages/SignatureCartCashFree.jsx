@@ -213,7 +213,7 @@ function SignatureCartCashFree() {
           additionalProducts: selectedAdditionalProducts.map(product => product.title),
           orderType: "normal",
           quantity: 1,
-          // url: `${window.location.origin}/signature-order-confirmation-cashfree`,
+          url: `${window.location.origin}/signature-order-confirmation-cashfree`,
         },
         {
           headers: {
@@ -234,61 +234,6 @@ function SignatureCartCashFree() {
     }
   };
 
-  // Verify payment and create order
-  const verifyPaymentAndCreateOrder = async (orderId) => {
-    try {
-      // First verify the payment status with Cashfree
-      const paymentVerificationResponse = await axios.get(
-        `${BACKEND_URL}/api/payment/cashfree-order/${orderId}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
-          },
-        }
-      );
-
-      const paymentData = paymentVerificationResponse?.data?.data;
-
-      if (paymentData?.order_status === "PAID") {
-        // Payment successful, now create the order
-        const orderResponse = await axios.post(
-          `${BACKEND_URL}/api/lander4/create-order`,
-          {
-            cashfreeOrderId: orderId,
-            orderType: "normal",
-            // amount: total,
-            amount: 1,
-            fullName: consultationFormData?.name,
-            email: consultationFormData?.email,
-            phoneNumber: consultationFormData?.phoneNumber,
-            profession: consultationFormData?.profession,
-            remarks: consultationFormData?.remarks,
-            additionalProducts: selectedAdditionalProducts.map(product => product.title),
-          },
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
-            },
-          }
-        );
-
-        if (orderResponse?.data?.success) {
-          toast.success("Order placed successfully!");
-          return orderResponse.data;
-        } else {
-          throw new Error("Failed to create order");
-        }
-      } else {
-        throw new Error("Payment not verified");
-      }
-    } catch (error) {
-      console.error("Error verifying payment and creating order:", error);
-      toast.error("Failed to verify payment or create order");
-      throw error;
-    }
-  };
 
   const doPayment = async () => {
     // Check if SDK is initialized
@@ -309,26 +254,27 @@ function SignatureCartCashFree() {
       
       const checkoutOptions = {
         paymentSessionId: paymentSessionId,
-        // redirectTarget: "_self",
-        onSuccess: async function (data) {
+        redirectTarget: "_self",
+        onSuccess: function (data) {
           console.log("Payment successful:", data);
-          try {
-            // Verify payment and create order
-            const orderData = await verifyPaymentAndCreateOrder(data.orderId);
-            
-            // Navigate to order confirmation page
-            navigate("/signature-order-confirmation-cashfree", { 
-              state: { 
-                orderId: data.orderId,
-                // amount: total,
-                amount: 1,
-                paymentMethod: "Cashfree"
-              } 
-            });
-          } catch (error) {
-            console.error("Error in payment success callback:", error);
-            toast.error("Payment successful but order creation failed. Please contact support.");
-          }
+          // Store order data for verification page
+          localStorage.setItem('orderData', JSON.stringify({
+            fullName: consultationFormData?.name,
+            email: consultationFormData?.email,
+            phoneNumber: consultationFormData?.phoneNumber,
+            profession: consultationFormData?.profession,
+            remarks: consultationFormData?.remarks,
+            additionalProducts: selectedAdditionalProducts.map(product => product.title),
+          }));
+          
+          // Navigate to order confirmation page for verification
+          navigate("/signature-order-confirmation-cashfree", { 
+            state: { 
+              orderId: data.orderId,
+              amount: total,
+              paymentMethod: "Cashfree"
+            } 
+          });
         },
         onFailure: function (data) {
           console.log("Payment failed:", data);
