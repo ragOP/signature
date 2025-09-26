@@ -201,7 +201,8 @@ function SignatureCartCashFree() {
       const apiResponse = await axios.post(
         `${BACKEND_URL}/api/payment/create-session`,
         {
-          amount: total,
+          // amount: total,
+          amount: 1,
           fullName: consultationFormData?.name,
           email: consultationFormData?.email,
           phoneNumber: consultationFormData?.phoneNumber,
