@@ -180,8 +180,8 @@ function SignatureCartCashFree() {
       const abandonedCartRes = await axios.post(
         `${BACKEND_URL}/api/lander4/create-order-abd`,
         {
-          // amount: total,
-          amount: 1,
+          amount: total,
+          // amount: 1,
           fullName: consultationFormData?.name,
           email: consultationFormData?.email,
           phoneNumber: consultationFormData?.phoneNumber,
@@ -204,7 +204,8 @@ function SignatureCartCashFree() {
 
       // Storing to localstorage 
       localStorage.setItem('orderData', JSON.stringify({
-        amount: 1,
+        // amount: 1,
+        amount: total,
         fullName: consultationFormData?.name,
         email: consultationFormData?.email,
         phoneNumber: consultationFormData?.phoneNumber,
@@ -217,8 +218,8 @@ function SignatureCartCashFree() {
       const apiResponse = await axios.post(
         `${BACKEND_URL}/api/payment/create-session`,
         {
-          // amount: total,
-          amount: 1,
+          amount: total,
+          // amount: 1,
           fullName: consultationFormData?.name,
           email: consultationFormData?.email,
           phoneNumber: consultationFormData?.phoneNumber,
