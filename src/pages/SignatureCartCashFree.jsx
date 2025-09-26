@@ -199,6 +199,17 @@ function SignatureCartCashFree() {
 
       const abandonedCartID = abandonedCartRes.data.data._id;
 
+      // Storing to localstorage 
+      localStorage.setItem('orderData', JSON.stringify({
+        amount: 1,
+        fullName: consultationFormData?.name,
+        email: consultationFormData?.email,
+        phoneNumber: consultationFormData?.phoneNumber,
+        profession: consultationFormData?.profession,
+        remarks: consultationFormData?.remarks,
+        additionalProducts: selectedAdditionalProducts.map(product => product.title),
+      }));
+
       // Create payment session
       const apiResponse = await axios.post(
         `${BACKEND_URL}/api/payment/create-session`,

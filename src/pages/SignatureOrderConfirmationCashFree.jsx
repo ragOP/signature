@@ -146,10 +146,18 @@ const SignatureOrderConfirmationCashfree = () => {
       console.log('Creating order in database...');
       
       const orderPayload = {
-        cashfreeOrderId: orderId,
-        orderType: "normal",
-        amount: amount || 1,
+        // cashfreeOrderId: orderId,
+        // orderType: "normal",
+        // amount: amount || 1,
         ...(storedOrderData || {}),
+
+        amount: storedOrderData?.amount || 1,
+        fullName: storedOrderData?.name,
+        email: storedOrderData?.email,
+        phoneNumber: storedOrderData?.phoneNumber,
+        profession: storedOrderData?.profession,
+        remarks: storedOrderData?.remarks,
+        additionalProducts: storedOrderData?.additionalProducts,
       };
 
       const orderResponse = await axios.post(
