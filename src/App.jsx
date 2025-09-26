@@ -63,7 +63,10 @@ function App() {
           <Route path="/signature-new" element={<SignatureNewRedesigned />} />
           <Route path="/contact" element={<Contact />} />
 
-          <Route path="/signature-cart" element={<SignatureCart />} />
+          {/* Old routes */}
+          {/* <Route path="/signature-cart" element={<SignatureCart />} /> */}
+          <Route path="/signature-cart" element={<SignatureCartCashFree />} />
+          {/* New Routes */}
           <Route path="/signature-cart-cashfree" element={<SignatureCartCashFree />} />
 
           <Route path="/signature-new-cart" element={<SignatureNewCart />} />
@@ -74,11 +77,17 @@ function App() {
             element={<SignatureNewRecord />}
           />
 
-          <Route
+          {/* Old Route */}
+          {/* <Route
             path="/signature-order-confirmation"
             element={<SignatureOrderConfirmation />}
+          /> */}
+          <Route
+            path="/signature-order-confirmation"
+            element={<SignatureOrderConfirmationCashfree />}
           />
 
+            {/* New Route */}
             <Route
               path="/signature-order-confirmation-cashfree"
               element={<SignatureOrderConfirmationCashfree />}
