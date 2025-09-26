@@ -212,7 +212,8 @@ function SignatureCartCashFree() {
           remarks: consultationFormData?.remarks,
           additionalProducts: selectedAdditionalProducts.map(product => product.title),
           orderType: "normal",
-          quantity: 1
+          quantity: 1,
+          url: `${window.location.origin}/signature-order-confirmation-cashfree`,
         },
         {
           headers: {
