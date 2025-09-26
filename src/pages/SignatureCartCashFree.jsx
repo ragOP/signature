@@ -309,7 +309,7 @@ function SignatureCartCashFree() {
       
       const checkoutOptions = {
         paymentSessionId: paymentSessionId,
-        redirectTarget: "_self",
+        // redirectTarget: "_self",
         onSuccess: async function (data) {
           console.log("Payment successful:", data);
           try {
