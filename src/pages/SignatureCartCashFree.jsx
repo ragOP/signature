@@ -53,7 +53,7 @@ function SignatureCartCashFree() {
   const [sdkInitialized, setSdkInitialized] = useState(false);
   const [consultationFormData, setConsultationFormData] = useState({
     name: "",
-    phoneNumber: "1234567890",
+    phoneNumber: "",
     email: "",
     profession: "",
     remarks: "",
@@ -171,6 +171,8 @@ function SignatureCartCashFree() {
       toast.error("Payment session is already being created. Please wait.");
       return null;
     }
+
+
     try {
       setCreatingSession(true);
       
@@ -178,7 +180,8 @@ function SignatureCartCashFree() {
       const abandonedCartRes = await axios.post(
         `${BACKEND_URL}/api/lander4/create-order-abd`,
         {
-          amount: total,
+          // amount: total,
+          amount: 1,
           fullName: consultationFormData?.name,
           email: consultationFormData?.email,
           phoneNumber: consultationFormData?.phoneNumber,
@@ -189,7 +192,6 @@ function SignatureCartCashFree() {
         {
           headers: {
             "Content-Type": "application/json",
-            // Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL21hcGxlbGF3cHJvLmNvbS9uZXdhcHAvcHVibGljL2FwaS9sb2dpbiIsImlhdCI6MTc1ODg2ODcxNSwiZXhwIjoxNzYxNDYwNzE1LCJuYmYiOjE3NTg4Njg3MTUsImp0aSI6ImR2RktSaUZGeGJxN3FzU1UiLCJzdWIiOiIxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyIsInBlcm1pc3Npb25zIjpbInVzZXJzLnZpZXciLCJ1c2Vycy5jcmVhdGUiLCJ1c2Vycy5zaG93IiwidXNlcnMudXBkYXRlIiwidXNlcnMuZGVsZXRlIiwidXNlcnMuc3RhdHVzLnVwZGF0ZSIsInJvbGVzLnZpZXciLCJyb2xlcy5jcmVhdGUiLCJyb2xlcy5zaG93Iiwicm9sZXMudXBkYXRlIiwicm9sZXMuZGVsZXRlIiwicm9sZXMucGVybWlzc2lvbnMubWFuYWdlIiwibWFzdGVycy52aWV3IiwibWFzdGVycy5jcmVhdGUiLCJtYXN0ZXJzLnNob3ciLCJtYXN0ZXJzLnVwZGF0ZSIsIm1hc3RlcnMuZGVsZXRlIiwibWFzdGVycy5zdGF0dXMudXBkYXRlIiwiZXZlbnRzLnZpZXciLCJldmVudHMuY3JlYXRlIiwiZXZlbnRzLnNob3ciLCJldmVudHMudXBkYXRlIiwiZXZlbnRzLmRlbGV0ZSIsImV2ZW50cy50aW1lLnVwZGF0ZSIsImV2ZW50cy5hdHRhY2htZW50cy51cGxvYWQiLCJldmVudHMucmVtaW5kZXJzLmRlbGV0ZSIsImV2ZW50cy5wYXJ0aWNpcGFudHMuZGVsZXRlIiwiZXZlbnRzLmF0dGFjaG1lbnRzLmRlbGV0ZSIsInRhc2tzLnZpZXciLCJ0YXNrcy5jcmVhdGUiLCJ0YXNrcy5zaG93IiwidGFza3MudXBkYXRlIiwidGFza3MuZGVsZXRlIiwidGFza3Muc2VhcmNoIiwidGFza3MuZmlsdGVyIiwidGFza3Muc3RhdHVzLnVwZGF0ZSIsInRhc2tzLmF0dGFjaG1lbnRzLnVwbG9hZCIsInRhc2tzLnJlbWluZGVycy5kZWxldGUiLCJ0YXNrcy5hdHRhY2htZW50cy5kZWxldGUiLCJ0YXNrLWNvbW1lbnRzLnZpZXciLCJ0YXNrLWNvbW1lbnRzLmNyZWF0ZSIsInRhc2stY29tbWVudHMuc2hvdyIsInRhc2stY29tbWVudHMuYXR0YWNobWVudHMudXBsb2FkIiwiYWdlbmRhLnZpZXciLCJuZXdzZmVlZC52aWV3Iiwic2VhcmNoLmFkdmFuY2VkLnJ1biIsImRvY3VtZW50cy52aWV3IiwiZG9jdW1lbnRzLmZvbGRlcnMuY3JlYXRlIiwiZG9jdW1lbnRzLnVwbG9hZCIsImRvY3VtZW50cy5yZW5hbWUiLCJkb2N1bWVudHMuZGVsZXRlIiwiZG9jdW1lbnRzLml0ZW1zLmdldCIsImNvbW11bmljYXRpb25zLnZpZXciLCJjb21tdW5pY2F0aW9ucy5zbXMuc2VuZCJdfQ.9o7L8dG9tPZUr6ggvQ8W5j9A1V4p2P6tu8cTkrhfXBE`,
             Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
           },
         }
@@ -215,12 +217,11 @@ function SignatureCartCashFree() {
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL21hcGxlbGF3cHJvLmNvbS9uZXdhcHAvcHVibGljL2FwaS9sb2dpbiIsImlhdCI6MTc1ODg2ODcxNSwiZXhwIjoxNzYxNDYwNzE1LCJuYmYiOjE3NTg4Njg3MTUsImp0aSI6ImR2RktSaUZGeGJxN3FzU1UiLCJzdWIiOiIxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyIsInBlcm1pc3Npb25zIjpbInVzZXJzLnZpZXciLCJ1c2Vycy5jcmVhdGUiLCJ1c2Vycy5zaG93IiwidXNlcnMudXBkYXRlIiwidXNlcnMuZGVsZXRlIiwidXNlcnMuc3RhdHVzLnVwZGF0ZSIsInJvbGVzLnZpZXciLCJyb2xlcy5jcmVhdGUiLCJyb2xlcy5zaG93Iiwicm9sZXMudXBkYXRlIiwicm9sZXMuZGVsZXRlIiwicm9sZXMucGVybWlzc2lvbnMubWFuYWdlIiwibWFzdGVycy52aWV3IiwibWFzdGVycy5jcmVhdGUiLCJtYXN0ZXJzLnNob3ciLCJtYXN0ZXJzLnVwZGF0ZSIsIm1hc3RlcnMuZGVsZXRlIiwibWFzdGVycy5zdGF0dXMudXBkYXRlIiwiZXZlbnRzLnZpZXciLCJldmVudHMuY3JlYXRlIiwiZXZlbnRzLnNob3ciLCJldmVudHMudXBkYXRlIiwiZXZlbnRzLmRlbGV0ZSIsImV2ZW50cy50aW1lLnVwZGF0ZSIsImV2ZW50cy5hdHRhY2htZW50cy51cGxvYWQiLCJldmVudHMucmVtaW5kZXJzLmRlbGV0ZSIsImV2ZW50cy5wYXJ0aWNpcGFudHMuZGVsZXRlIiwiZXZlbnRzLmF0dGFjaG1lbnRzLmRlbGV0ZSIsInRhc2tzLnZpZXciLCJ0YXNrcy5jcmVhdGUiLCJ0YXNrcy5zaG93IiwidGFza3MudXBkYXRlIiwidGFza3MuZGVsZXRlIiwidGFza3Muc2VhcmNoIiwidGFza3MuZmlsdGVyIiwidGFza3Muc3RhdHVzLnVwZGF0ZSIsInRhc2tzLmF0dGFjaG1lbnRzLnVwbG9hZCIsInRhc2tzLnJlbWluZGVycy5kZWxldGUiLCJ0YXNrcy5hdHRhY2htZW50cy5kZWxldGUiLCJ0YXNrLWNvbW1lbnRzLnZpZXciLCJ0YXNrLWNvbW1lbnRzLmNyZWF0ZSIsInRhc2stY29tbWVudHMuc2hvdyIsInRhc2stY29tbWVudHMuYXR0YWNobWVudHMudXBsb2FkIiwiYWdlbmRhLnZpZXciLCJuZXdzZmVlZC52aWV3Iiwic2VhcmNoLmFkdmFuY2VkLnJ1biIsImRvY3VtZW50cy52aWV3IiwiZG9jdW1lbnRzLmZvbGRlcnMuY3JlYXRlIiwiZG9jdW1lbnRzLnVwbG9hZCIsImRvY3VtZW50cy5yZW5hbWUiLCJkb2N1bWVudHMuZGVsZXRlIiwiZG9jdW1lbnRzLml0ZW1zLmdldCIsImNvbW11bmljYXRpb25zLnZpZXciLCJjb21tdW5pY2F0aW9ucy5zbXMuc2VuZCJdfQ.9o7L8dG9tPZUr6ggvQ8W5j9A1V4p2P6tu8cTkrhfXBE`,
+            Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
           },
         }
       );
 
-      // localStorage.setItem("cashfree_payment_session_id", apiResponse?.data?.data);
       console.log("Payment session created:", apiResponse);
       return apiResponse?.data?.data?.payment_session_id;
     } catch (error) {
@@ -232,14 +233,71 @@ function SignatureCartCashFree() {
     }
   };
 
-  const doPayment = async () => {
-        // Check if SDK is initialized
-        if (!sdkInitialized || !cashfree) {
-          toast.error("Payment system is not ready. Please try again in a moment.");
-          return;
+  // Verify payment and create order
+  const verifyPaymentAndCreateOrder = async (orderId) => {
+    try {
+      // First verify the payment status with Cashfree
+      const paymentVerificationResponse = await axios.get(
+        `${BACKEND_URL}/api/payment/cashfree-order/${orderId}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
+          },
         }
+      );
+
+      const paymentData = paymentVerificationResponse?.data?.data;
+
+      if (paymentData?.order_status === "PAID") {
+        // Payment successful, now create the order
+        const orderResponse = await axios.post(
+          `${BACKEND_URL}/api/lander4/create-order`,
+          {
+            cashfreeOrderId: orderId,
+            orderType: "normal",
+            // amount: total,
+            amount: 1,
+            fullName: consultationFormData?.name,
+            email: consultationFormData?.email,
+            phoneNumber: consultationFormData?.phoneNumber,
+            profession: consultationFormData?.profession,
+            remarks: consultationFormData?.remarks,
+            additionalProducts: selectedAdditionalProducts.map(product => product.title),
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
+            },
+          }
+        );
+
+        if (orderResponse?.data?.success) {
+          toast.success("Order placed successfully!");
+          return orderResponse.data;
+        } else {
+          throw new Error("Failed to create order");
+        }
+      } else {
+        throw new Error("Payment not verified");
+      }
+    } catch (error) {
+      console.error("Error verifying payment and creating order:", error);
+      toast.error("Failed to verify payment or create order");
+      throw error;
+    }
+  };
+
+  const doPayment = async () => {
+    // Check if SDK is initialized
+    if (!sdkInitialized || !cashfree) {
+      toast.error("Payment system is not ready. Please try again in a moment.");
+      return;
+    }
+
     const paymentSessionId = await createPaymentSession();
-    console.log("paymentsessionid", paymentSessionId)
+    console.log("paymentsessionid", paymentSessionId);
 
     if (!paymentSessionId) {
       return;
@@ -251,6 +309,30 @@ function SignatureCartCashFree() {
       const checkoutOptions = {
         paymentSessionId: paymentSessionId,
         redirectTarget: "_self",
+        onSuccess: async function (data) {
+          console.log("Payment successful:", data);
+          try {
+            // Verify payment and create order
+            const orderData = await verifyPaymentAndCreateOrder(data.orderId);
+            
+            // Navigate to order confirmation page
+            navigate("/signature-order-confirmation-cashfree", { 
+              state: { 
+                orderId: data.orderId,
+                // amount: total,
+                amount: 1,
+                paymentMethod: "Cashfree"
+              } 
+            });
+          } catch (error) {
+            console.error("Error in payment success callback:", error);
+            toast.error("Payment successful but order creation failed. Please contact support.");
+          }
+        },
+        onFailure: function (data) {
+          console.log("Payment failed:", data);
+          toast.error("Payment failed. Please try again.");
+        },
       };
 
       cashfree.checkout(checkoutOptions);
@@ -507,7 +589,6 @@ function SignatureCartCashFree() {
                       discount={discount}
                       total={total}
                       isCheckingOut={isCheckingOut}
-                      // onCheckout={handleCheckout}
                       onCheckout={doPayment}
                     />
                   </div>
