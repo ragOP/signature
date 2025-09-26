@@ -26,6 +26,7 @@ import { toast } from "react-toastify";
 function SignatureCartCashFree() {
   const navigate = useNavigate();
   const location = useLocation();
+  // const [loading, setLoading] = useState(false);
   const [creatingSession, setCreatingSession] = useState(false);
   const [cartItems, setCartItems] = useState([
     {
@@ -257,6 +258,9 @@ function SignatureCartCashFree() {
       return;
     }
 
+    // setLoading(true);
+    setIsCheckingOut(true);
+
     const paymentSessionId = await createPaymentSession();
     console.log("paymentsessionid", paymentSessionId);
 
@@ -265,7 +269,6 @@ function SignatureCartCashFree() {
     }
 
     try {
-      setIsCheckingOut(true);
       
       const checkoutOptions = {
         paymentSessionId: paymentSessionId,
@@ -303,6 +306,7 @@ function SignatureCartCashFree() {
       toast.error("An error occurred during payment. Please try again.");
     } finally {
       setIsCheckingOut(false);
+      // setLoading(false);
     }
   };
 
