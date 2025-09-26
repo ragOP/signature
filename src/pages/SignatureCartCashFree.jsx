@@ -200,6 +200,9 @@ function SignatureCartCashFree() {
       const abandonedCartID = abandonedCartRes.data.data._id;
 
       // Storing to localstorage 
+      localStorage.setItem('abandonedCartID', abandonedCartID);
+
+      // Storing to localstorage 
       localStorage.setItem('orderData', JSON.stringify({
         amount: 1,
         fullName: consultationFormData?.name,

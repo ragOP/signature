@@ -30,6 +30,8 @@ const SignatureOrderConfirmationCashfree = () => {
   const storedOrderData = localStorage.getItem('orderData') ? JSON.parse(localStorage.getItem('orderData')) : null;
   const amount = storedOrderData?.amount || 1
 
+  const abandonedCartID = localStorage.getItem('abandonedCartID');
+
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "instant" });
     
@@ -183,6 +185,14 @@ const SignatureOrderConfirmationCashfree = () => {
         
         // Clear stored order data
         localStorage.removeItem('orderData');
+
+        // Clear abandoned cart if exists
+        await axios.delete(
+          `${BACKEND_URL}/api/lander4/delete-order-abd/${abandonedCartID}`
+        );
+
+        // Clear abandoned cart ID
+        localStorage.removeItem('abandonedCartID');
         
       } else {
         throw new Error(orderResponse?.data?.message || 'Failed to create order');
@@ -236,11 +246,7 @@ const SignatureOrderConfirmationCashfree = () => {
                 ? 'Please wait while we process your order.' 
                 : 'We are verifying your payment with Cashfree.'}
             </p>
-            {verificationAttempts > 0 && (
-              <p className="text-sm text-gray-500">
-                Attempt {verificationAttempts} of 5
-              </p>
-            )}
+            {/* {verifiabandonedCartID */}
           </div>
         </div>
       </div>
