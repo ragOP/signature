@@ -77,12 +77,11 @@ const Navbar = () => {
         <div className="flex items-center justify-between px-4 py-3 md:px-6 md:py-4">
           {/* Logo */}
           <div className="flex items-center space-x-3">
-            <div className="bg-gradient-to-r from-yellow-500 to-amber-500 p-2 rounded-xl">
-              <Signature className="h-6 w-6 text-white" />
-            </div>
-            <span className="text-xl font-bold text-gray-800">
-              SignaturePro
-            </span>
+            <img
+              src="/logoT.png"
+              alt="Easy Soul Logo"
+              className="w-32 h-13 object-cover"
+            />
           </div>
 
           {/* Desktop Menu - Hidden on mobile */}
@@ -103,7 +102,7 @@ const Navbar = () => {
           <div className="hidden md:block">
             <button
               onClick={() => navigate("/signature-new-cart")}
-              className="bg-gradient-to-r from-yellow-500 to-amber-500 hover:from-yellow-600 hover:to-amber-600 text-white px-6 py-2.5 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-yellow-500/25"
+              className="bg-gradient-to-r from-yellow-500 to-amber-500 hover:from-yellow-600 hover:to-amber-600 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-yellow-500/25"
             >
               Get Started
             </button>
@@ -151,7 +150,7 @@ const Navbar = () => {
               <div className="px-4 mt-6">
                 <button
                   onClick={() => navigate("/signature-new-cart")}
-                  className="w-full bg-gradient-to-r from-yellow-500 to-amber-500 hover:from-yellow-600 hover:to-amber-600 text-white py-3 rounded-xl font-semibold hover:shadow-lg transform hover:scale-[1.02] transition-all duration-200"
+                  className="w-full bg-gradient-to-r from-yellow-500 to-amber-500 hover:from-yellow-600 hover:to-amber-600 text-white py-3 px-6 rounded-xl font-semibold hover:shadow-lg transform hover:scale-[1.02] transition-all duration-200"
                 >
                   Get Started
                 </button>

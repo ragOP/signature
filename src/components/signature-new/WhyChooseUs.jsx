@@ -124,16 +124,16 @@ const WhyChooseUs = () => {
     return (
       <div className="relative">
         {/* Timeline Dot */}
-        <div className="absolute left-6 top-32 w-4 h-4 timeline-dot rounded-full z-10"></div>
+        {/* <div className="absolute left-6 top-32 w-4 h-4 timeline-dot rounded-full z-10"></div> */}
 
         {/* Timeline Connector Line */}
-        {!isLast && (
+        {/* {!isLast && (
           <div className="absolute left-7 top-36 w-0.5 h-32 timeline-connector"></div>
-        )}
+        )} */}
 
         {/* Benefit Card */}
         <div
-          className={`ml-16 transition-all duration-1000 delay-${
+          className={`items-center justify-center transition-all duration-1000 delay-${
             (index + 1) * 200
           } transform ${
             animateElements
@@ -143,24 +143,20 @@ const WhyChooseUs = () => {
         >
           <div className="benefit-card rounded-2xl p-8 mb-8">
             {/* Icon and Title Row */}
-            <div className="flex flex-col items-start space-x-6 mb-6 gap-2">
-              <div className="flex-shrink-0 flex justify-between items-center">
+            <div className="flex flex-col items-start mb-8">
+              <div className="flex items-center justify-between w-full mb-8">
                 <div className="icon-container w-16 h-16 rounded-2xl flex items-center justify-center">
                   <point.icon className="w-8 h-8 text-white" />
                 </div>
-                <div className="flex justify-center items-center">
-                  <span className="bg-amber-100 text-amber-800 p-1 rounded-full text-sm font-semibold">
-                    {point.highlight}
-                  </span>
-                </div>
+                <span className="bg-amber-100 text-amber-800 px-4 py-2 rounded-full text-sm font-semibold">
+                  {point.highlight}
+                </span>
               </div>
 
-              <div className="flex-1">
-                <div className="flex items-center space-x-3 mb-2">
-                  <h3 className="text-2xl font-bold text-gray-800">
-                    {point.title}
-                  </h3>
-                </div>
+              <div className="w-full">
+                <h3 className="text-2xl font-bold text-gray-800 mb-4">
+                  {point.title}
+                </h3>
                 <p className="text-gray-600 leading-relaxed text-lg">
                   {point.description}
                 </p>
@@ -190,8 +186,8 @@ const WhyChooseUs = () => {
   };
 
   return (
-    <section className="py-20 px-4 bg-gradient-to-br from-yellow-50 via-amber-50 to-orange-50">
-      <div className="max-w-4xl mx-auto">
+    <section className="py-6 px-6 bg-gradient-to-br from-yellow-50 via-amber-50 to-orange-50">
+      <div className="max-w-6xl mx-auto">
         {/* Section Header */}
         <div
           className={`text-center mb-16 transition-all duration-1000 transform ${
@@ -200,10 +196,10 @@ const WhyChooseUs = () => {
               : "translate-y-8 opacity-0"
           }`}
         >
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-800 mb-6">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-800 mb-8">
             Why Choose Us
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8">
             Professional signature design that elevates your personal brand and
             makes a lasting impression
           </p>
@@ -217,7 +213,7 @@ const WhyChooseUs = () => {
         </div>
 
         {/* Timeline of Benefits */}
-        <div className="relative">
+        <div className="relative pb-12">
           {uspPoints.map((point, index) => (
             <BenefitCard
               key={index}
@@ -230,23 +226,23 @@ const WhyChooseUs = () => {
 
         {/* Call to Action */}
         <div
-          className={`text-center mt-16 transition-all duration-1000 delay-1200 transform ${
+          className={`text-center transition-all duration-1000 delay-1200 transform ${
             animateElements
               ? "translate-y-0 opacity-100"
               : "translate-y-8 opacity-0"
           }`}
         >
           <div className="bg-gradient-to-r from-amber-100 to-yellow-100 rounded-2xl p-8 border border-yellow-200/50 shadow-lg">
-            <h3 className="text-2xl font-bold text-gray-800 mb-4">
+            <h3 className="text-2xl font-bold text-gray-800 mb-6">
               Ready to Elevate Your Professional Image?
             </h3>
-            <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+            <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
               Join thousands of professionals who have transformed their
               personal brand with our signature design service
             </p>
             <button
               onClick={() => navigate("/signature-new-cart")}
-              className="bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-white font-semibold px-8 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+              className="bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
             >
               Get Your Signature Design
             </button>

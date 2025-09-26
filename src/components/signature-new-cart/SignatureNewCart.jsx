@@ -138,6 +138,7 @@ function SignatureNewCart() {
   const discount = cartDiscount + additionalDiscount;
 
   const total = subtotal;
+  const originalPrice = subtotal + discount;
 
   const loadScript = (src) => {
     return new Promise((resolve) => {
@@ -167,7 +168,7 @@ function SignatureNewCart() {
       setIsCheckingOut(true);
 
       const abodentCartRes = await axios.post(
-        `${BACKEND_URL}/api/lander4/create-order-abd`,
+        `${BACKEND_URL}/api/signature/rag/create-order-abd`,
         {
           amount: total,
           fullName: consultationFormData?.name,
@@ -180,6 +181,7 @@ function SignatureNewCart() {
       );
 
       const abodentCartID = abodentCartRes.data.data._id;
+      console.log(abodentCartID);
 
       const res = await axios.post(`${BACKEND_URL}/api/payment/razorpay`, {
         amount: total,
@@ -196,7 +198,7 @@ function SignatureNewCart() {
         order_id: data.orderId,
         handler: async function (response) {
           try {
-            await axios.post(`${BACKEND_URL}/api/lander4/create-order`, {
+            await axios.post(`${BACKEND_URL}/api/signature/rag/create-order`, {
               amount: total,
               razorpayOrderId: response.razorpay_order_id,
               razorpayPaymentId: response.razorpay_payment_id,
@@ -211,10 +213,10 @@ function SignatureNewCart() {
             });
 
             await axios.delete(
-              `${BACKEND_URL}/api/lander4/delete-order-abd/${abodentCartID}`
+              `${BACKEND_URL}/api/signature/rag/delete-order-abd/${abodentCartID}`
             );
 
-            navigate("/signature-order-confirmation", {
+            navigate("/signature-new-order-confirmation", {
               state: {
                 orderId: data.orderId,
                 amount: total,
@@ -247,10 +249,16 @@ function SignatureNewCart() {
   };
 
   // Additional Products Component
-  const AdditionalProducts = ({ products, selectedProducts, onProductToggle }) => {
+  const AdditionalProducts = ({
+    products,
+    selectedProducts,
+    onProductToggle,
+  }) => {
     return (
       <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
-        <h3 className="text-xl font-bold text-gray-900 mb-4">Add-On Services</h3>
+        <h3 className="text-xl font-bold text-gray-900 mb-4">
+          Add-On Services
+        </h3>
         <div className="space-y-4">
           {products.map((product) => (
             <div
@@ -262,10 +270,51 @@ function SignatureNewCart() {
               }`}
               onClick={() => onProductToggle(product.id)}
             >
-              <div className="flex justify-between items-start">
+              <div className="flex items-start space-x-4">
+                {/* Tick checkbox like SignatureAdditionalProducts */}
+                <div className="relative mt-1">
+                  <input
+                    type="checkbox"
+                    id={`add-${product.id}`}
+                    checked={selectedProducts.includes(product.id)}
+                    onChange={(e) => {
+                      e.stopPropagation();
+                      onProductToggle(product.id);
+                    }}
+                    className="sr-only"
+                  />
+                  <label
+                    htmlFor={`add-${product.id}`}
+                    onClick={(e) => e.stopPropagation()}
+                    className={`relative flex items-center justify-center w-6 h-6 rounded-lg border-2 cursor-pointer transition-all duration-300 transform hover:scale-110 ${
+                      selectedProducts.includes(product.id)
+                        ? "bg-gradient-to-r from-yellow-500 to-amber-500 border-amber-600 shadow-lg"
+                        : "bg-white border-gray-300 hover:border-amber-500"
+                    }`}
+                  >
+                    {selectedProducts.includes(product.id) && (
+                      <svg
+                        className="w-4 h-4 text-white"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    )}
+                  </label>
+                </div>
+
                 <div className="flex-1">
-                  <h4 className="font-semibold text-gray-900 mb-2">{product.title}</h4>
-                  <p className="text-sm text-gray-600 mb-3">{product.description}</p>
+                  <h4 className="font-semibold text-gray-900 mb-2">
+                    {product.title}
+                  </h4>
+                  <p className="text-sm text-gray-600 mb-3">
+                    {product.description}
+                  </p>
                   <div className="space-y-1">
                     {product.features.map((feature, index) => (
                       <div key={index} className="flex items-center space-x-2">
@@ -277,8 +326,12 @@ function SignatureNewCart() {
                 </div>
                 <div className="text-right ml-4">
                   <div className="flex items-baseline gap-2">
-                    <span className="text-lg font-bold text-gray-900">₹{product.price}</span>
-                    <span className="text-sm text-gray-400 line-through">₹{product.originalPrice}</span>
+                    <span className="text-lg font-bold text-gray-900">
+                      ₹{product.price}
+                    </span>
+                    <span className="text-sm text-gray-400 line-through">
+                      ₹{product.originalPrice}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -289,17 +342,21 @@ function SignatureNewCart() {
     );
   };
 
-
-
   // Order Summary Component
-  const OrderSummary = ({ subtotal, discount, total, isCheckingOut, onCheckout }) => {
+  const OrderSummary = ({
+    subtotal,
+    discount,
+    total,
+    isCheckingOut,
+    onCheckout,
+  }) => {
     return (
       <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
         <h3 className="text-xl font-bold text-gray-900 mb-4">Order Summary</h3>
         <div className="space-y-3">
           <div className="flex justify-between">
             <span className="text-gray-600">Subtotal</span>
-            <span className="font-medium">₹{subtotal}</span>
+            <span className="font-medium">₹{originalPrice}</span>
           </div>
           {discount > 0 && (
             <div className="flex justify-between text-green-600">
@@ -474,9 +531,6 @@ function SignatureNewCart() {
 
       {/* Testimonials */}
       <Testimonial />
-
-      {/* Footer */}
-      <Footer />
     </div>
   );
 }

@@ -16,8 +16,8 @@ const LimitedSlot = () => {
   ];
 
   return (
-    <section className="py-16 px-4 bg-gradient-to-br from-yellow-50 via-amber-50 to-orange-50">
-      <div className="max-w-4xl mx-auto text-center">
+    <section className="py-8 px-4 bg-gradient-to-br from-yellow-50 via-amber-50 to-orange-50">
+      <div className="max-w-6xl mx-auto text-center">
         {/* Section Header */}
         <div className="flex justify-center items-center gap-3 mb-6">
           <Sparkles className="w-7 h-7 text-yellow-400" />
@@ -32,7 +32,7 @@ const LimitedSlot = () => {
         </p>
 
         {/* The Main Offer Card */}
-        <div className="bg-gradient-to-br from-yellow-50 via-amber-50 to-orange-50 text-gray-900 rounded-3xl p-8 md:p-10 shadow-2xl border border-yellow-200 transform hover:scale-105 transition-all duration-500">
+        <div className="bg-gradient-to-br from-yellow-50 via-amber-50 to-orange-50 text-gray-900 rounded-3xl p-6 md:p-8 shadow-2xl border border-yellow-200 transform hover:scale-105 transition-all duration-500">
           <div className="mb-8">
             <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-red-100 to-orange-100 border border-red-300 rounded-full px-6 py-3 mb-4">
               <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
@@ -69,7 +69,7 @@ const LimitedSlot = () => {
           {/* The New, Clean CTA Button */}
           <button
             onClick={handleCTAClick}
-            className="group w-full md:w-auto inline-flex items-center justify-center px-10 py-5 bg-gradient-to-r from-yellow-500 via-amber-500 to-orange-500 text-white font-bold text-xl rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-yellow-300 border border-yellow-400"
+            className="group w-full md:w-auto inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-yellow-500 via-amber-500 to-orange-500 text-white font-bold text-lg rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-yellow-300 border border-yellow-400"
           >
             <span className="mr-3">Secure Your Spot Now</span>
             <ArrowRight className="w-6 h-6 transition-transform duration-300 group-hover:translate-x-2" />

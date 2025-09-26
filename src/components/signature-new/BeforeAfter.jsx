@@ -96,7 +96,7 @@ const BeforeAfter = () => {
   const transformations = [
     {
       id: 1,
-      beforeText: "Salman Basha",
+      beforeText: "/sign-4.jpg",
       beforeDescription: "Basic, forgettable name writing",
       afterImage: "/signature-1.png",
       afterDescription: "Bold, professional signature",
@@ -105,7 +105,7 @@ const BeforeAfter = () => {
     },
     {
       id: 2,
-      beforeText: "Shashikant Kale",
+      beforeText: "/sign-5.jpg",
       beforeDescription: "Cluttered, hard to read",
       afterImage: "/signature-2.png",
       afterDescription: "Clean, elegant design",
@@ -114,7 +114,7 @@ const BeforeAfter = () => {
     },
     {
       id: 3,
-      beforeText: "Charlie",
+      beforeText: "/sign-6.jpg",
       beforeDescription: "Forgettable, plain text",
       afterImage: "/signature-3.png",
       afterDescription: "Memorable, distinctive mark",
@@ -157,13 +157,18 @@ const BeforeAfter = () => {
                 <div className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-semibold mb-4 inline-block">
                   BEFORE
                 </div>
-                <div className="bg-white rounded-lg p-4 border-2 border-dashed border-red-300">
-                  <div className="text-gray-800 text-xl font-handwriting mb-2">
-                    {transformation.beforeText}
+                <div className="bg-white rounded-lg p-4 border-2 border-dashed border-red-300 min-h-[120px] flex items-center justify-center">
+                  <img
+                    src={transformation.beforeText}
+                    alt={`Original handwriting ${transformation.id}`}
+                    className="max-w-full w-80 max-h-24 object-cover"
+                  />
+                  <div className="text-gray-800 text-xl hidden">
+                    Original handwriting
                   </div>
-                  <div className="text-red-600 text-sm">
-                    {transformation.beforeDescription}
-                  </div>
+                </div>
+                <div className="text-red-600 text-sm">
+                  {transformation.beforeDescription}
                 </div>
               </div>
             </div>
@@ -220,11 +225,11 @@ const BeforeAfter = () => {
   };
 
   return (
-    <section className="px-4 py-20 bg-gradient-to-br from-yellow-50 via-amber-50 to-orange-50">
-      <div className="max-w-7xl mx-auto">
+    <section className="px-4 py-8 bg-gradient-to-br from-yellow-50 via-amber-50 to-orange-50">
+      <div className="max-w-6xl mx-auto">
         {/* Section Header */}
         <div
-          className={`text-center mb-16 transition-all duration-1000 transform ${
+          className={`text-center mb-12 transition-all duration-1000 transform ${
             animateElements
               ? "translate-y-0 opacity-100"
               : "translate-y-8 opacity-0"
@@ -240,7 +245,7 @@ const BeforeAfter = () => {
         </div>
 
         {/* Transformation Cards */}
-        <div className="space-y-12">
+        <div className="space-y-8">
           {transformations.map((transformation, index) => (
             <ComparisonCard
               key={transformation.id}
@@ -252,13 +257,13 @@ const BeforeAfter = () => {
 
         {/* Call to Action */}
         <div
-          className={`text-center mt-16 transition-all duration-1000 delay-1000 transform ${
+          className={`text-center mt-12 transition-all duration-1000 delay-1000 transform ${
             animateElements
               ? "translate-y-0 opacity-100"
               : "translate-y-8 opacity-0"
           }`}
         >
-          <div className="bg-gradient-to-r from-amber-100 to-yellow-100 rounded-2xl p-8 border border-yellow-200/50 shadow-lg">
+          <div className="bg-gradient-to-r from-amber-100 to-yellow-100 rounded-2xl p-6 border border-yellow-200/50 shadow-lg">
             <h3 className="text-2xl font-bold text-gray-800 mb-4">
               Ready for Your Signature Transformation?
             </h3>
@@ -268,7 +273,7 @@ const BeforeAfter = () => {
             </p>
             <button
               onClick={() => navigate("/signature-new-cart")}
-              className="bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-white font-semibold px-8 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+              className="bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
             >
               Start Your Transformation
             </button>

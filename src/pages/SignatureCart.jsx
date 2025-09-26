@@ -73,7 +73,7 @@ function SignatureCart() {
       color: {
         from: "from-gray-500/20",
         via: "via-black/20",
-        to: "to-gray-500/20",
+        to: "to-gray-500/20", 
       },
     },
   ];
@@ -140,6 +140,7 @@ function SignatureCart() {
   const discount = cartDiscount + additionalDiscount;
 
   const total = subtotal;
+  const originalPrice = subtotal + discount;
 
   const loadScript = (src) => {
     return new Promise((resolve) => {
@@ -415,7 +416,7 @@ function SignatureCart() {
                     }`}
                   >
                     <SignatureOrderSummary
-                      subtotal={subtotal}
+                      subtotal={originalPrice}
                       discount={discount}
                       total={total}
                       isCheckingOut={isCheckingOut}
@@ -491,7 +492,7 @@ function SignatureCart() {
                     }`}
                   >
                     <SignatureOrderSummary
-                      subtotal={subtotal}
+                      subtotal={originalPrice}
                       discount={discount}
                       total={total}
                       isCheckingOut={isCheckingOut}

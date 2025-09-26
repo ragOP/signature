@@ -101,8 +101,8 @@ const WhoThisIsFor = () => {
   };
 
   return (
-    <section className="py-16 px-4 bg-gradient-to-br from-yellow-50 via-amber-50 to-orange-50">
-      <div className="max-w-4xl mx-auto">
+    <section className="py-8 px-4 bg-gradient-to-br from-yellow-50 via-amber-50 to-orange-50">
+      <div className="max-w-6xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-12">
           <div className="inline-flex items-center space-x-2 bg-white border border-yellow-200 rounded-full px-6 py-3 mb-6 shadow-sm">
@@ -136,7 +136,7 @@ const WhoThisIsFor = () => {
 
         {/* Call to Action */}
         <div className="text-center mt-12">
-          <div className="bg-white rounded-2xl p-8 border border-yellow-200 shadow-sm">
+          <div className="bg-white rounded-2xl p-6 border border-yellow-200 shadow-sm">
             <h3 className="text-xl font-semibold text-gray-900 mb-3">
               Ready to Create Your Perfect Signature?
             </h3>
@@ -146,7 +146,7 @@ const WhoThisIsFor = () => {
             </p>
             <button
               onClick={() => navigate("/signature-new-cart")}
-              className="bg-gradient-to-r from-yellow-400 to-amber-500 text-white px-8 py-3 rounded-xl font-semibold hover:from-yellow-500 hover:to-amber-600 transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
+              className="bg-gradient-to-r from-yellow-400 to-amber-500 text-white px-6 py-3 rounded-xl font-semibold hover:from-yellow-500 hover:to-amber-600 transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
             >
               Get Started Today
             </button>
