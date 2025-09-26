@@ -151,6 +151,7 @@ const SignatureOrderConfirmationCashfree = () => {
         // amount: amount || 1,
         ...(storedOrderData || {}),
 
+        orderId: orderId,
         amount: storedOrderData?.amount || 1,
         fullName: storedOrderData?.name,
         email: storedOrderData?.email,
