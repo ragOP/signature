@@ -226,7 +226,7 @@ function SignatureNewCartCashFree() {
           additionalProducts: selectedAdditionalProducts.map(product => product.title),
           orderType: "normal",
           quantity: 1,
-          url: `${window.location.origin}/signature-order-confirmation-cashfree`,
+          url: `${window.location.origin}/signature-new-order-confirmation`,
         },
         {
           headers: {
@@ -286,7 +286,7 @@ function SignatureNewCartCashFree() {
           navigate("/signature-new-order-confirmation", { 
             state: { 
               orderId: data.orderId,
-              // amount: total,
+              amount: total,
               paymentMethod: "Cashfree"
             } 
           });
