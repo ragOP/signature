@@ -32,6 +32,7 @@ import SignatureOrderConfirmationCashfree from "./pages/SignatureOrderConfirmati
 import SignatureNewAbondentReport from "./pages/new/SignatureNewAbondentReport";
 import SignatureNewRecord from "./pages/new/SignatureNewRecord";
 import SignatureNewOrderConfirmationPage from "./pages/new/SignatureNewOrderConfirmationPage";
+import SignatureNewCartCashFree from "./components/signature-new-cart/SignatureNewCartCashFree";
 
 // Main App Component
 function App() {
@@ -69,8 +70,9 @@ function App() {
           {/* New Routes */}
           <Route path="/signature-cart-cashfree" element={<SignatureCartCashFree />} />
 
-          <Route path="/signature-new-cart" element={<SignatureNewCart />} />
-
+          {/* <Route path="/signature-new-cart" element={<SignatureNewCart />} /> */}
+          <Route path="/signature-new-cart" element={<SignatureNewCartCashFree />} />
+ 
           <Route path="/signature-record" element={<SignatureRecord />} />
           <Route
             path="/signature-new-record"
