@@ -13,7 +13,7 @@ import {
   RefreshCw,
 } from "lucide-react";
 import axios from 'axios';
-import { BACKEND_URL } from '../utils/backendUrl';
+import { BACKEND_URL } from '../../utils/backendUrl';
 import { toast } from 'react-toastify';
 
 const Navbar = () => {
