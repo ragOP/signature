@@ -1,5 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import {
+  Link,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
 import {
   CheckCircle,
   Star,
@@ -12,9 +17,9 @@ import {
   Loader2,
   RefreshCw,
 } from "lucide-react";
-import axios from 'axios';
-import { BACKEND_URL } from '../../utils/backendUrl';
-import { toast } from 'react-toastify';
+import axios from "axios";
+import { BACKEND_URL } from "../../utils/backendUrl";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
   return (
@@ -30,65 +35,72 @@ const Navbar = () => {
   );
 };
 const SignatureNewOrderConfirmationCashfree = () => {
-    const navigate = useNavigate();
-    const location = useLocation();
-    const [searchParams] = useSearchParams();
-    
-    // State management
-    const [orderStatus, setOrderStatus] = useState('processing'); // processing, success, failed, verifying
-    const [orderData, setOrderData] = useState(null);
-    const [verificationAttempts, setVerificationAttempts] = useState(0);
-    const [isRetrying, setIsRetrying] = useState(false);
-    const [errorMessage, setErrorMessage] = useState('');
-    const [retryCount, setRetryCount] = useState(0);
-    
-    // Get order ID from URL params or location state
-    const orderIdFromParams = searchParams.get('orderId');
-    const orderIdFromState = location.state?.orderId;
-    const orderId = orderIdFromParams || orderIdFromState;
-    
-    // Get other data from location state or localStorage
-    const { paymentMethod } = location.state || {};
-    const storedOrderData = localStorage.getItem('orderData') ? JSON.parse(localStorage.getItem('orderData')) : null;
-    const amount = storedOrderData?.amount || 0;
-  
-    const abandonedCartID = localStorage.getItem('abandonedCartID');
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [searchParams] = useSearchParams();
 
-    useEffect(() => {
-        window.scrollTo({ top: 0, left: 0, behavior: "instant" });
-        
-        // If no order ID, redirect to cart
-        if (!orderId) {
-          console.error('No order ID found');
-          setOrderStatus('failed');
-          setErrorMessage('Invalid order. Please try again.');
-          toast.error('No order ID found. Redirecting to cart.');
-          setTimeout(() => navigate('/signature-cart'), 2000);
-          return;
-        }
-    
-        // Start verification process
-        verifyPaymentAndCreateOrder();
-      }, [orderId, navigate]);
+  // State management
+  const [orderStatus, setOrderStatus] = useState("processing"); // processing, success, failed, verifying
+  const [orderData, setOrderData] = useState(null);
+  const [verificationAttempts, setVerificationAttempts] = useState(0);
+  const [isRetrying, setIsRetrying] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [retryCount, setRetryCount] = useState(0);
 
-      
+  // Get order ID from URL params or location state
+  const orderIdFromParams = searchParams.get("orderId");
+  const orderIdFromState = location.state?.orderId;
+  const orderId = orderIdFromParams || orderIdFromState;
+
+  // Get other data from location state or localStorage
+  const { paymentMethod } = location.state || {};
+  const storedOrderData = localStorage.getItem("orderData")
+    ? JSON.parse(localStorage.getItem("orderData"))
+    : null;
+  const amount = storedOrderData?.amount || 0;
+
+  const abandonedCartID = localStorage.getItem("abandonedCartID");
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+
+    // If no order ID, redirect to cart
+    if (!orderId) {
+      console.error("No order ID found");
+      setOrderStatus("failed");
+      setErrorMessage("Invalid order. Please try again.");
+      toast.error("No order ID found. Redirecting to cart.");
+      setTimeout(() => navigate("/signature-cart"), 2000);
+      return;
+    }
+
+    // Start verification process
+    verifyPaymentAndCreateOrder();
+  }, [orderId, navigate]);
+
   // Robust payment verification and order creation
   const verifyPaymentAndCreateOrder = async () => {
     const maxAttempts = 5;
     const retryDelay = 2000; // 2 seconds
 
     if (verificationAttempts >= maxAttempts) {
-      setOrderStatus('failed');
-      setErrorMessage('Maximum verification attempts reached. Please contact support.');
-      toast.error('Payment verification failed after multiple attempts.');
+      setOrderStatus("failed");
+      setErrorMessage(
+        "Maximum verification attempts reached. Please contact support."
+      );
+      toast.error("Payment verification failed after multiple attempts.");
       return;
     }
 
     try {
-      setOrderStatus('verifying');
-      setVerificationAttempts(prev => prev + 1);
-      
-      console.log(`Verifying payment for order: ${orderId} (Attempt ${verificationAttempts + 1})`);
+      setOrderStatus("verifying");
+      setVerificationAttempts((prev) => prev + 1);
+
+      console.log(
+        `Verifying payment for order: ${orderId} (Attempt ${
+          verificationAttempts + 1
+        })`
+      );
 
       // Step 1: Verify payment status with Cashfree
       const paymentVerificationResponse = await axios.get(
@@ -102,157 +114,156 @@ const SignatureNewOrderConfirmationCashfree = () => {
         }
       );
 
-      console.log('Payment verification response:', paymentVerificationResponse.data);
+      console.log(
+        "Payment verification response:",
+        paymentVerificationResponse.data
+      );
 
       const paymentData = paymentVerificationResponse?.data?.data?.[0];
 
       // Validate payment data
       if (!paymentData) {
-        throw new Error('No payment data received from server');
+        throw new Error("No payment data received from server");
       }
 
       // Check payment status
       if (paymentData.payment_status === "SUCCESS") {
-        console.log('Payment verified successfully');
-        
+        console.log("Payment verified successfully");
+
         // Step 2: Create order in database
         await createOrderInDatabase();
-        
       } else if (paymentData.order_status === "ACTIVE") {
         // Payment is still pending, retry after delay
-        console.log('Payment still pending, retrying...');
+        console.log("Payment still pending, retrying...");
         setTimeout(() => {
           verifyPaymentAndCreateOrder();
         }, retryDelay);
-        
       } else if (paymentData.order_status === "EXPIRED") {
-        throw new Error('Payment session has expired. Please try again.');
-        
+        throw new Error("Payment session has expired. Please try again.");
       } else {
-        throw new Error(`Payment not successful. Status: ${paymentData.order_status}`);
+        throw new Error(
+          `Payment not successful. Status: ${paymentData.order_status}`
+        );
       }
-
     } catch (error) {
-      console.error('Payment verification error:', error);
-      
+      console.error("Payment verification error:", error);
+
       // Handle different types of errors
-      if (error.code === 'ECONNABORTED' || error.message.includes('timeout')) {
-        setErrorMessage('Connection timeout. Retrying...');
+      if (error.code === "ECONNABORTED" || error.message.includes("timeout")) {
+        setErrorMessage("Connection timeout. Retrying...");
         setTimeout(() => {
           verifyPaymentAndCreateOrder();
         }, retryDelay);
-        
       } else if (error.response?.status === 404) {
-        setErrorMessage('Order not found. Please contact support.');
-        setOrderStatus('failed');
-        
+        setErrorMessage("Order not found. Please contact support.");
+        setOrderStatus("failed");
       } else if (error.response?.status === 401) {
-        setErrorMessage('Authentication failed. Please login again.');
-        setOrderStatus('failed');
-        toast.error('Session expired. Please login again.');
-        setTimeout(() => navigate('/signature-cart'), 2000);
-        
+        setErrorMessage("Authentication failed. Please login again.");
+        setOrderStatus("failed");
+        toast.error("Session expired. Please login again.");
+        setTimeout(() => navigate("/signature-cart"), 2000);
       } else if (error.response?.status >= 500) {
-        setErrorMessage('Server error. Retrying...');
+        setErrorMessage("Server error. Retrying...");
         setTimeout(() => {
           verifyPaymentAndCreateOrder();
         }, retryDelay * 2);
-        
       } else {
-        setErrorMessage(error.message || 'Payment verification failed');
-        setOrderStatus('failed');
-        toast.error('Payment verification failed. Please contact support.');
+        setErrorMessage(error.message || "Payment verification failed");
+        setOrderStatus("failed");
+        toast.error("Payment verification failed. Please contact support.");
       }
     }
   };
 
-    // Create order in database
-    const createOrderInDatabase = async () => {
-        try {
-          console.log('Creating order in database...');
-          
-          const orderPayload = {
-            // cashfreeOrderId: orderId,
-            // orderType: "normal",
-            // amount: amount || 1,
-            ...(storedOrderData || {}),
-    
-            orderId: orderId,
-            amount: amount,
-            fullName: storedOrderData?.name,
-            email: storedOrderData?.email,
-            phoneNumber: storedOrderData?.phoneNumber,
-            profession: storedOrderData?.profession,
-            remarks: storedOrderData?.remarks,
-            additionalProducts: storedOrderData?.additionalProducts,
-          };
-    
-          const orderResponse = await axios.post(
-            `${BACKEND_URL}/api/lander4/create-order`,
-            orderPayload,
-            {
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
-              },
-              timeout: 20000, // 20 second timeout
-            }
-          );
-    
-          console.log('Order creation response:', orderResponse.data);
-    
-          if (orderResponse?.data?.success) {
-            setOrderData(orderResponse.data);
-            setOrderStatus('success');
-            toast.success('Order placed successfully!');
-            
-            // Clear stored order data
-            localStorage.removeItem('orderData');
-    
-            // Clear abandoned cart if exists
-            await axios.delete(
-              `${BACKEND_URL}/api/lander4/delete-order-abd/${abandonedCartID}`
-            );
-    
-            // Clear abandoned cart ID
-            localStorage.removeItem('abandonedCartID');
-            
-          } else {
-            throw new Error(orderResponse?.data?.message || 'Failed to create order');
-          }
-    
-        } catch (error) {
-          console.error('Order creation error:', error);
-          
-          if (error.response?.status === 409) {
-            // Order already exists
-            setOrderStatus('success');
-            toast.info('Order already exists and is confirmed.');
-            
-          } else if (error.response?.status === 400) {
-            setErrorMessage('Invalid order data. Please contact support.');
-            setOrderStatus('failed');
-            
-          } else {
-            setErrorMessage('Order creation failed. Payment was successful but order could not be created.');
-            setOrderStatus('failed');
-            toast.error('Order creation failed. Please contact support with your payment details.');
-          }
-        }
+  // Create order in database
+  const createOrderInDatabase = async () => {
+    try {
+      console.log("Creating order in database...");
+
+      const orderPayload = {
+        // cashfreeOrderId: orderId,
+        // orderType: "normal",
+        // amount: amount || 1,
+        ...(storedOrderData || {}),
+
+        orderId: orderId,
+        amount: amount,
+        fullName: storedOrderData?.name,
+        email: storedOrderData?.email,
+        phoneNumber: storedOrderData?.phoneNumber,
+        profession: storedOrderData?.profession,
+        remarks: storedOrderData?.remarks,
+        additionalProducts: storedOrderData?.additionalProducts,
       };
 
-        // Retry verification
+      const orderResponse = await axios.post(
+        `${BACKEND_URL}/api/lander4/create-order`,
+        orderPayload,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
+          },
+          timeout: 20000, // 20 second timeout
+        }
+      );
+
+      console.log("Order creation response:", orderResponse.data);
+
+      if (orderResponse?.data?.success) {
+        setOrderData(orderResponse.data);
+        setOrderStatus("success");
+        toast.success("Order placed successfully!");
+
+        // Clear stored order data
+        localStorage.removeItem("orderData");
+
+        // Clear abandoned cart if exists
+        await axios.delete(
+          `${BACKEND_URL}/api/lander4/delete-order-abd/${abandonedCartID}`
+        );
+
+        // Clear abandoned cart ID
+        localStorage.removeItem("abandonedCartID");
+      } else {
+        throw new Error(
+          orderResponse?.data?.message || "Failed to create order"
+        );
+      }
+    } catch (error) {
+      console.error("Order creation error:", error);
+
+      if (error.response?.status === 409) {
+        // Order already exists
+        setOrderStatus("success");
+        toast.info("Order already exists and is confirmed.");
+      } else if (error.response?.status === 400) {
+        setErrorMessage("Invalid order data. Please contact support.");
+        setOrderStatus("failed");
+      } else {
+        setErrorMessage(
+          "Order creation failed. Payment was successful but order could not be created."
+        );
+        setOrderStatus("failed");
+        toast.error(
+          "Order creation failed. Please contact support with your payment details."
+        );
+      }
+    }
+  };
+
+  // Retry verification
   const handleRetry = () => {
     setIsRetrying(true);
     setVerificationAttempts(0);
-    setErrorMessage('');
-    setRetryCount(prev => prev + 1);
+    setErrorMessage("");
+    setRetryCount((prev) => prev + 1);
     verifyPaymentAndCreateOrder();
     setTimeout(() => setIsRetrying(false), 1000);
   };
 
   // Loading state
-  if (orderStatus === 'processing' || orderStatus === 'verifying') {
+  if (orderStatus === "processing" || orderStatus === "verifying") {
     return (
       <div className="min-h-screen bg-gradient-to-br from-white via-gray-50 to-blue-50 flex items-center justify-center">
         <div className="text-center space-y-6">
@@ -262,12 +273,14 @@ const SignatureNewOrderConfirmationCashfree = () => {
           </div>
           <div className="space-y-2">
             <h2 className="text-2xl font-bold text-gray-800">
-              {orderStatus === 'processing' ? 'Processing your order...' : 'Verifying payment...'}
+              {orderStatus === "processing"
+                ? "Processing your order..."
+                : "Verifying payment..."}
             </h2>
             <p className="text-gray-600">
-              {orderStatus === 'processing' 
-                ? 'Please wait while we process your order.' 
-                : 'We are verifying your payment with Cashfree.'}
+              {orderStatus === "processing"
+                ? "Please wait while we process your order."
+                : "We are verifying your payment with Cashfree."}
             </p>
             {/* {verifiabandonedCartID */}
           </div>
@@ -277,7 +290,7 @@ const SignatureNewOrderConfirmationCashfree = () => {
   }
 
   // Failed state
-  if (orderStatus === 'failed') {
+  if (orderStatus === "failed") {
     return (
       <div className="min-h-screen bg-gradient-to-br from-white via-gray-50 to-blue-50 flex items-center justify-center">
         <div className="max-w-md mx-auto text-center space-y-6">
@@ -286,7 +299,9 @@ const SignatureNewOrderConfirmationCashfree = () => {
             <div className="absolute inset-0 bg-gradient-to-r from-red-500/20 to-red-600/20 rounded-full blur-xl"></div>
           </div>
           <div className="space-y-4">
-            <h2 className="text-2xl font-bold text-gray-800">Order Verification Failed</h2>
+            <h2 className="text-2xl font-bold text-gray-800">
+              Order Verification Failed
+            </h2>
             <p className="text-gray-600">{errorMessage}</p>
             <div className="space-y-3">
               <button
@@ -307,7 +322,7 @@ const SignatureNewOrderConfirmationCashfree = () => {
                 )}
               </button>
               <button
-                onClick={() => navigate('/signature-cart')}
+                onClick={() => navigate("/signature-cart")}
                 className="w-full bg-gray-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-700 transition"
               >
                 Back to Cart
@@ -324,7 +339,7 @@ const SignatureNewOrderConfirmationCashfree = () => {
     );
   }
 
-
+  console.log("amount paid is", amount);
 
   // Success state continues with existing UI...
   return (
@@ -410,13 +425,15 @@ const SignatureNewOrderConfirmationCashfree = () => {
                     <p className="text-amber-900/70 text-sm font-primary">
                       Amount Paid
                     </p>
-                    <p className="text-amber-900 font-semibold">₹{amount || 'N/A'}</p>
+                    <p className="text-amber-900 font-semibold">₹{amount}</p>
                   </div>
                   <div className="space-y-2">
                     <p className="text-amber-900/70 text-sm font-primary">
                       Payment Method
                     </p>
-                    <p className="text-amber-900 font-primary">{paymentMethod || 'Cashfree'}</p>
+                    <p className="text-amber-900 font-primary">
+                      {paymentMethod || "Cashfree"}
+                    </p>
                   </div>
                   <div className="space-y-2">
                     <p className="text-amber-900/70 text-sm font-primary">
