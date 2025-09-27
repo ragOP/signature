@@ -197,7 +197,7 @@ const SignatureNewOrderConfirmationCashfree = () => {
       };
 
       const orderResponse = await axios.post(
-        `${BACKEND_URL}/api/lander4/create-order`,
+        `${BACKEND_URL}/api/signature/rag/create-order`,
         orderPayload,
         {
           headers: {
@@ -220,7 +220,7 @@ const SignatureNewOrderConfirmationCashfree = () => {
 
         // Clear abandoned cart if exists
         await axios.delete(
-          `${BACKEND_URL}/api/lander4/delete-order-abd/${abandonedCartID}`
+          `${BACKEND_URL}/api/signature/rag/delete-order-abd/${abandonedCartID}`
         );
 
         // Clear abandoned cart ID
