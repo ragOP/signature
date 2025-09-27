@@ -216,7 +216,7 @@ const SignatureNewOrderConfirmationCashfree = () => {
         toast.success("Order placed successfully!");
 
         // Clear stored order data
-        localStorage.removeItem("orderData");
+        // localStorage.removeItem("orderData");
 
         // Clear abandoned cart if exists
         await axios.delete(
@@ -224,7 +224,7 @@ const SignatureNewOrderConfirmationCashfree = () => {
         );
 
         // Clear abandoned cart ID
-        localStorage.removeItem("abandonedCartID");
+        // localStorage.removeItem("abandonedCartID");
       } else {
         throw new Error(
           orderResponse?.data?.message || "Failed to create order"
