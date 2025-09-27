@@ -33,6 +33,7 @@ import SignatureNewAbondentReport from "./pages/new/SignatureNewAbondentReport";
 import SignatureNewRecord from "./pages/new/SignatureNewRecord";
 import SignatureNewOrderConfirmationPage from "./pages/new/SignatureNewOrderConfirmationPage";
 import SignatureNewCartCashFree from "./components/signature-new-cart/SignatureNewCartCashFree";
+import SignatureNewOrderConfirmationCashfree from "./pages/new/SignatureNewOrderConfirmationCashfree";
 
 // Main App Component
 function App() {
@@ -95,9 +96,13 @@ function App() {
               element={<SignatureOrderConfirmationCashfree />}
             />
           
-          <Route
+          {/* <Route
             path="/signature-new-order-confirmation"
             element={<SignatureNewOrderConfirmationPage />}
+          /> */}
+          <Route
+            path="/signature-new-order-confirmation"
+            element={<SignatureNewOrderConfirmationCashfree />}
           />
           <Route path="/privacy" element={<Privacy />} />
 

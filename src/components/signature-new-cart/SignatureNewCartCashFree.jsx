@@ -178,8 +178,8 @@ function SignatureNewCartCashFree() {
       const abandonedCartRes = await axios.post(
         `${BACKEND_URL}/api/lander4/create-order-abd`,
         {
-          amount: total,
-          // amount: 1,
+          // amount: total,
+          amount: 1,
           fullName: consultationFormData?.name,
           email: consultationFormData?.email,
           phoneNumber: consultationFormData?.phoneNumber,
@@ -202,8 +202,8 @@ function SignatureNewCartCashFree() {
 
       // Storing to localstorage 
       localStorage.setItem('orderData', JSON.stringify({
-        // amount: 1,
-        amount: total,
+        amount: 1,
+        // amount: total,
         fullName: consultationFormData?.name,
         email: consultationFormData?.email,
         phoneNumber: consultationFormData?.phoneNumber,
@@ -216,8 +216,8 @@ function SignatureNewCartCashFree() {
       const apiResponse = await axios.post(
         `${BACKEND_URL}/api/payment/create-session`,
         {
-          amount: total,
-          // amount: 1,
+          // amount: total,
+          amount: 1,
           fullName: consultationFormData?.name,
           email: consultationFormData?.email,
           phoneNumber: consultationFormData?.phoneNumber,
@@ -283,10 +283,10 @@ function SignatureNewCartCashFree() {
           }));
           
           // Navigate to order confirmation page for verification
-          navigate("/signature-order-confirmation-cashfree", { 
+          navigate("/signature-new-order-confirmation", { 
             state: { 
               orderId: data.orderId,
-              amount: total,
+              // amount: total,
               paymentMethod: "Cashfree"
             } 
           });
