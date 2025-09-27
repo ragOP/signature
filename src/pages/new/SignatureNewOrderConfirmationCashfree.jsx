@@ -70,7 +70,7 @@ const SignatureNewOrderConfirmationCashfree = () => {
       setOrderStatus("failed");
       setErrorMessage("Invalid order. Please try again.");
       toast.error("No order ID found. Redirecting to cart.");
-      setTimeout(() => navigate("/signature-cart"), 2000);
+      setTimeout(() => navigate("/signature-new-cart"), 2000);
       return;
     }
 
@@ -161,7 +161,7 @@ const SignatureNewOrderConfirmationCashfree = () => {
         setErrorMessage("Authentication failed. Please login again.");
         setOrderStatus("failed");
         toast.error("Session expired. Please login again.");
-        setTimeout(() => navigate("/signature-cart"), 2000);
+        setTimeout(() => navigate("/signature-new-cart"), 2000);
       } else if (error.response?.status >= 500) {
         setErrorMessage("Server error. Retrying...");
         setTimeout(() => {
@@ -322,7 +322,7 @@ const SignatureNewOrderConfirmationCashfree = () => {
                 )}
               </button>
               <button
-                onClick={() => navigate("/signature-cart")}
+                onClick={() => navigate("/signature-new-cart")}
                 className="w-full bg-gray-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-700 transition"
               >
                 Back to Cart

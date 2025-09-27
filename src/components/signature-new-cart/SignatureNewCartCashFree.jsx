@@ -107,7 +107,7 @@ function SignatureNewCartCashFree() {
     try {
       const cashfreeInstance = await load({
         // mode: "sandbox", // Change to "production" for live environment
-        mode: "production"
+        mode: "production",
       });
       setCashfree(cashfreeInstance);
       setSdkInitialized(true);
@@ -163,29 +163,30 @@ function SignatureNewCartCashFree() {
   const discount = cartDiscount + additionalDiscount;
 
   const total = subtotal;
-    // Create Payment Session
+  // Create Payment Session
   const createPaymentSession = async () => {
     if (creatingSession) {
       toast.error("Payment session is already being created. Please wait.");
       return null;
     }
 
-
     try {
       setCreatingSession(true);
-      
+
       // Create abandoned cart first
       const abandonedCartRes = await axios.post(
         `${BACKEND_URL}/api/lander4/create-order-abd`,
         {
           // amount: total,
-          amount: 1,
+          amount: 2,
           fullName: consultationFormData?.name,
           email: consultationFormData?.email,
           phoneNumber: consultationFormData?.phoneNumber,
           profession: consultationFormData?.profession,
           remarks: consultationFormData?.remarks,
-          additionalProducts: selectedAdditionalProducts.map(product => product.title),
+          additionalProducts: selectedAdditionalProducts.map(
+            (product) => product.title
+          ),
         },
         {
           headers: {
@@ -197,33 +198,40 @@ function SignatureNewCartCashFree() {
 
       const abandonedCartID = abandonedCartRes.data.data._id;
 
-      // Storing to localstorage 
-      localStorage.setItem('abandonedCartID', abandonedCartID);
+      // Storing to localstorage
+      localStorage.setItem("abandonedCartID", abandonedCartID);
 
-      // Storing to localstorage 
-      localStorage.setItem('orderData', JSON.stringify({
-        amount: 1,
-        // amount: total,
-        fullName: consultationFormData?.name,
-        email: consultationFormData?.email,
-        phoneNumber: consultationFormData?.phoneNumber,
-        profession: consultationFormData?.profession,
-        remarks: consultationFormData?.remarks,
-        additionalProducts: selectedAdditionalProducts.map(product => product.title),
-      }));
+      // Storing to localstorage
+      localStorage.setItem(
+        "orderData",
+        JSON.stringify({
+          amount: 2,
+          // amount: total,
+          fullName: consultationFormData?.name,
+          email: consultationFormData?.email,
+          phoneNumber: consultationFormData?.phoneNumber,
+          profession: consultationFormData?.profession,
+          remarks: consultationFormData?.remarks,
+          additionalProducts: selectedAdditionalProducts.map(
+            (product) => product.title
+          ),
+        })
+      );
 
       // Create payment session
       const apiResponse = await axios.post(
         `${BACKEND_URL}/api/payment/create-session`,
         {
           // amount: total,
-          amount: 1,
+          amount: 2,
           fullName: consultationFormData?.name,
           email: consultationFormData?.email,
           phoneNumber: consultationFormData?.phoneNumber,
           profession: consultationFormData?.profession,
           remarks: consultationFormData?.remarks,
-          additionalProducts: selectedAdditionalProducts.map(product => product.title),
+          additionalProducts: selectedAdditionalProducts.map(
+            (product) => product.title
+          ),
           orderType: "normal",
           quantity: 1,
           url: `${window.location.origin}/signature-new-order-confirmation`,
@@ -247,7 +255,6 @@ function SignatureNewCartCashFree() {
     }
   };
 
-
   const doPayment = async () => {
     // Check if SDK is initialized
     if (!sdkInitialized || !cashfree) {
@@ -266,29 +273,35 @@ function SignatureNewCartCashFree() {
     }
 
     try {
-      
       const checkoutOptions = {
         paymentSessionId: paymentSessionId,
         redirectTarget: "_self",
         onSuccess: function (data) {
           console.log("Payment successful:", data);
           // Store order data for verification page
-          localStorage.setItem('orderData', JSON.stringify({
-            fullName: consultationFormData?.name,
-            email: consultationFormData?.email,
-            phoneNumber: consultationFormData?.phoneNumber,
-            profession: consultationFormData?.profession,
-            remarks: consultationFormData?.remarks,
-            additionalProducts: selectedAdditionalProducts.map(product => product.title),
-          }));
-          
+          localStorage.setItem(
+            "orderData",
+            JSON.stringify({
+              // amount: total,
+              amount: 2,
+              fullName: consultationFormData?.name,
+              email: consultationFormData?.email,
+              phoneNumber: consultationFormData?.phoneNumber,
+              profession: consultationFormData?.profession,
+              remarks: consultationFormData?.remarks,
+              additionalProducts: selectedAdditionalProducts.map(
+                (product) => product.title
+              ),
+            })
+          );
+
           // Navigate to order confirmation page for verification
-          navigate("/signature-new-order-confirmation", { 
-            state: { 
+          navigate("/signature-new-order-confirmation", {
+            state: {
               orderId: data.orderId,
               amount: total,
-              paymentMethod: "Cashfree"
-            } 
+              paymentMethod: "Cashfree",
+            },
           });
         },
         onFailure: function (data) {
