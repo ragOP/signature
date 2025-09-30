@@ -9,14 +9,17 @@ const SignatureFooter = () => {
         <div className="block lg:hidden">
           <div className="flex items-center justify-between">
             <div className="flex flex-col items-start space-y-1">
-            <span
-  className="text-xl font-bold text-gray-800 animate-pulse"
-  style={{
-    textShadow: "0 0 8px rgba(255, 215, 0, 0.8), 0 0 12px rgba(255, 215, 0, 0.6)"
-  }}
->
-  ₹589
-</span>
+            <div className="flex items-center space-x-2">
+  <span className="text-gray-400 line-through text-sm">₹999</span>
+  <span
+    className="text-xl font-bold text-gray-800 relative"
+    style={{
+      textShadow: "0 0 8px rgba(255, 215, 0, 0.8), 0 0 12px rgba(255, 215, 0, 0.6)"
+    }}
+  >
+    ₹589
+  </span>
+</div>
 
               <span className="text-xs text-red-600 font-medium">Last 2 slots left</span>
             </div>
