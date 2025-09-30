@@ -11,7 +11,7 @@ const SignatureFooter = () => {
             <div className="flex flex-col items-start space-y-1">
               <div className="flex items-center space-x-2">
                 <span className="text-gray-400 line-through text-sm">₹999</span>
-                <span className="text-xl font-bold text-gray-800">₹589</span>
+                <span className="text-xl font-bold text-gray-800">₹5892</span>
               </div>
               <span className="text-xs text-red-600 font-medium">Last 2 slots left</span>
             </div>
