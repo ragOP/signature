@@ -439,7 +439,7 @@ function SignatureNewCartCashFree() {
           <div className="border-t pt-3">
             <div className="flex justify-between text-lg font-bold">
               <span className="text-gray-600">Total</span>
-              <span>₹{total}</span>
+              <span className="text-gray-600">₹{total}</span>
             </div>
           </div>
         </div>
