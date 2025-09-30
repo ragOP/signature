@@ -428,17 +428,17 @@ function SignatureNewCartCashFree() {
         <div className="space-y-3">
           <div className="flex justify-between">
             <span className="text-gray-600">Subtotal</span>
-            <span className="font-medium">₹{subtotal}</span>
+            <span className="text-gray-600 font-medium">₹{subtotal}</span>
           </div>
           {discount > 0 && (
             <div className="flex justify-between text-green-600">
-              <span>Discount</span>
+              <span className="">Discount</span>
               <span>-₹{discount}</span>
             </div>
           )}
           <div className="border-t pt-3">
             <div className="flex justify-between text-lg font-bold">
-              <span>Total</span>
+              <span className="text-gray-600">Total</span>
               <span>₹{total}</span>
             </div>
           </div>
