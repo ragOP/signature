@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Shield, Sparkles } from 'lucide-react';
 
-const SignatureOrderSummary = ({ subtotal, discount, total, isCheckingOut, onCheckout }) => {
+const SignatureOrderSummary = ({ subtotal, discount, total, isCheckingOut, onCheckout, totalMrp, discountMrp }) => {
   const [isPressed, setIsPressed] = useState(false);
 
   const handleButtonClick = async () => {
@@ -30,11 +30,11 @@ const SignatureOrderSummary = ({ subtotal, discount, total, isCheckingOut, onChe
           <div className="space-y-4 mb-6">
             <div className="flex justify-between items-center">
               <span className="text-gray-600">Subtotal</span>
-              <span className="text-gray-800 font-semibold">₹{subtotal.toLocaleString()}</span>
+              <span className="text-gray-800 font-semibold">₹{totalMrp.toLocaleString()}</span>
             </div>
             <div className="flex justify-between items-center">
               <span className="text-green-600">Discount</span>
-              <span className="text-green-600 font-semibold">-₹{discount.toLocaleString()}</span>
+              <span className="text-green-600 font-semibold">-₹{discountMrp.toLocaleString()}</span>
             </div>
             <div className="border-t border-gray-100 pt-4">
               <div className="flex justify-between items-center">

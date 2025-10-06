@@ -147,11 +147,20 @@ function SignatureCartCashFree() {
     (sum, item) => sum + item.price * (item.quantity || 1),
     0
   );
+  const cartTotalMrp = cartItems.reduce(
+    (sum, item) => sum + item.originalPrice * (item.quantity || 1),
+    0
+  );
   const additionalSubtotal = selectedAdditionalProducts.reduce(
     (sum, product) => sum + product.price,
     0
   );
+  const additionalTotalMrp = selectedAdditionalProducts.reduce(
+    (sum, product) => sum + product.originalPrice,
+    0
+  );
   const subtotal = cartSubtotal + additionalSubtotal;
+  const totalMrp = cartTotalMrp + additionalTotalMrp;
 
   const cartDiscount = cartItems.reduce(
     (sum, item) =>
@@ -162,6 +171,16 @@ function SignatureCartCashFree() {
     (sum, product) => sum + (product.originalPrice - product.price),
     0
   );
+  const cartDiscountMrp = cartItems.reduce(
+    (sum, item) =>
+      sum + (item.originalPrice - item.price) * (item.quantity || 1),
+    0
+  );
+  const additionalDiscountMrp = selectedAdditionalProducts.reduce(
+    (sum, product) => sum + (product.originalPrice - product.price),
+    0
+  );
+  const discountMrp = cartDiscountMrp + additionalDiscountMrp;
   const discount = cartDiscount + additionalDiscount;
 
   const total = subtotal;
@@ -491,6 +510,8 @@ function SignatureCartCashFree() {
                       subtotal={subtotal}
                       discount={discount}
                       total={total}
+                      totalMrp={totalMrp}
+                      discountMrp={discountMrp}
                       isCheckingOut={isCheckingOut}
                       onCheckout={doPayment}
                     />
@@ -566,6 +587,8 @@ function SignatureCartCashFree() {
                     <SignatureOrderSummary
                       subtotal={subtotal}
                       discount={discount}
+                      totalMrp={totalMrp}
+                      discountMrp={discountMrp}
                       total={total}
                       isCheckingOut={isCheckingOut}
                       onCheckout={doPayment}

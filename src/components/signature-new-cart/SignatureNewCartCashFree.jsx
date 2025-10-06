@@ -145,10 +145,19 @@ function SignatureNewCartCashFree() {
     (sum, item) => sum + item.price * (item.quantity || 1),
     0
   );
+  const cartTotalMrp = cartItems.reduce(
+    (sum, item) => sum + item.originalPrice * (item.quantity || 1),
+    0
+  );
   const additionalSubtotal = selectedAdditionalProducts.reduce(
     (sum, product) => sum + product.price,
     0
   );
+  const additionalTotalMrp = selectedAdditionalProducts.reduce(
+    (sum, product) => sum + product.originalPrice,
+    0
+  );
+  const totalMrp = cartTotalMrp + additionalTotalMrp;
   const subtotal = cartSubtotal + additionalSubtotal;
 
   const cartDiscount = cartItems.reduce(
@@ -160,6 +169,16 @@ function SignatureNewCartCashFree() {
     (sum, product) => sum + (product.originalPrice - product.price),
     0
   );
+  const cartDiscountMrp = cartItems.reduce(
+    (sum, item) =>
+      sum + (item.originalPrice - item.price) * (item.quantity || 1),
+    0
+  );
+  const additionalDiscountMrp = selectedAdditionalProducts.reduce(
+    (sum, product) => sum + (product.originalPrice - product.price),
+    0
+  );
+  const discountMrp = cartDiscountMrp + additionalDiscountMrp;
   const discount = cartDiscount + additionalDiscount;
 
   const total = subtotal;
@@ -421,6 +440,8 @@ function SignatureNewCartCashFree() {
     total,
     isCheckingOut,
     onCheckout,
+    totalMrp,
+    discountMrp,
   }) => {
     return (
       <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
@@ -428,12 +449,12 @@ function SignatureNewCartCashFree() {
         <div className="space-y-3">
           <div className="flex justify-between">
             <span className="text-gray-600">Subtotal</span>
-            <span className="text-gray-600 font-medium">₹{subtotal}</span>
+            <span className="text-gray-600 font-medium">₹{totalMrp}</span>
           </div>
           {discount > 0 && (
             <div className="flex justify-between text-green-600">
               <span className="">Discount</span>
-              <span>-₹{discount}</span>
+              <span>-₹{discountMrp}</span>
             </div>
           )}
           <div className="border-t pt-3">
@@ -590,6 +611,8 @@ function SignatureNewCartCashFree() {
                       subtotal={subtotal}
                       discount={discount}
                       total={total}
+                      totalMrp={totalMrp}
+                      discountMrp={discountMrp}
                       isCheckingOut={isCheckingOut}
                       onCheckout={doPayment}
                     />
