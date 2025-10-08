@@ -22,6 +22,7 @@ import axios from "axios";
 import { BACKEND_URL } from "../utils/backendUrl";
 import { load } from "@cashfreepayments/cashfree-js";
 import { toast } from "react-toastify";
+import { meta } from "@eslint/js";
 
 function SignatureCartCashFree() {
   const navigate = useNavigate();
@@ -217,8 +218,6 @@ function SignatureCartCashFree() {
           },
         }
       );
-      const result = await sendWhatsappNotification(consultationFormData);
-      console.log("Whatsapp notification:", result);
 
       const abandonedCartID = abandonedCartRes.data.data._id;
 
@@ -246,7 +245,7 @@ function SignatureCartCashFree() {
       const apiResponse = await axios.post(
         `${BACKEND_URL}/api/payment/create-session`,
         {
-          amount: total,
+          amount: 2,
           // amount: 1,
           fullName: consultationFormData?.name,
           email: consultationFormData?.email,
@@ -267,6 +266,8 @@ function SignatureCartCashFree() {
           },
         }
       );
+      const result = await sendWhatsappNotification(consultationFormData);
+      console.log("Whatsapp notification result:", result);
 
       console.log("Payment session created:", apiResponse);
       return apiResponse?.data?.data?.payment_session_id;
@@ -353,7 +354,7 @@ function SignatureCartCashFree() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            apiKey: process.env.VITE_NOTIFICATION_API_KEY,
+            apiKey: import.meta.env.VITE_NOTIFICATION_API_KEY,
             campaignName: "signature-rag-temp",
             destination: consultationFormData.phoneNumber || "917388999711",
             userName: consultationFormData.name || "Customer",
