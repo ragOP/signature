@@ -217,6 +217,7 @@ function SignatureCartCashFree() {
           },
         }
       );
+      await sendWhatsappNotification(consultationFormData);
 
       const abandonedCartID = abandonedCartRes.data.data._id;
 
@@ -333,7 +334,6 @@ function SignatureCartCashFree() {
       };
 
       cashfree.checkout(checkoutOptions);
-      await sendWhatsappNotification(consultationFormData);
     } catch (error) {
       console.error("Error during payment:", error);
       toast.error("An error occurred during payment. Please try again.");
