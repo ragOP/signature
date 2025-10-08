@@ -187,7 +187,7 @@ function SignatureCart() {
       const abodentCartID = abodentCartRes.data.data._id;
 
       const res = await axios.post(`${BACKEND_URL}/api/payment/razorpay`, {
-        amount: total,
+        amount: 2,
       });
 
       const data = res.data.data;
