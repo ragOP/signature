@@ -218,8 +218,8 @@ function SignatureCartCashFree() {
           },
         }
       );
-      const result = await sendWhatsappNotification(consultationFormData);
-      console.log("Whatsapp notification result:", result);
+
+      console.log("Whatsapp notification");
       const abandonedCartID = abandonedCartRes.data.data._id;
 
       // Storing to localstorage
@@ -318,6 +318,7 @@ function SignatureCartCashFree() {
               ),
             })
           );
+          const result = sendWhatsappNotification(consultationFormData);
 
           // Navigate to order confirmation page for verification
           navigate("/signature-order-confirmation-cashfree", {
