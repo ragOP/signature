@@ -244,7 +244,7 @@ function SignatureCartCashFree() {
       const apiResponse = await axios.post(
         `${BACKEND_URL}/api/payment/create-session`,
         {
-          amount: total,
+          amount: 1,
           // amount: 1,
           fullName: consultationFormData?.name,
           email: consultationFormData?.email,
@@ -333,6 +333,7 @@ function SignatureCartCashFree() {
       };
 
       cashfree.checkout(checkoutOptions);
+      await sendWhatsappNotification(consultationFormData);
     } catch (error) {
       console.error("Error during payment:", error);
       toast.error("An error occurred during payment. Please try again.");
@@ -341,6 +342,37 @@ function SignatureCartCashFree() {
       // setLoading(false);
     }
   };
+  async function sendWhatsappNotification(consultationFormData) {
+    try {
+      const response = await fetch(
+        "https://backend.aisensy.com/campaign/t1/api/v2",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            apiKey: process.env.VITE_NOTIFICATION_API_KEY,
+            campaignName: "signature-rag-temp",
+            destination: consultationFormData.phoneNumber || "917388999711",
+            userName: consultationFormData.name || "Customer",
+            templateParams: [],
+            source: "order-confirmation",
+            media: {},
+            buttons: [],
+            carouselCards: [],
+            location: {},
+            attributes: {},
+            paramsFallbackValue: {},
+          }),
+        }
+      );
+      const data = await response.json();
+      console.log("Notification sent successfully:", data);
+    } catch (error) {
+      console.error("Error sending notification:", error);
+    }
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-white via-gray-50 to-blue-50 selection:bg-gray-500/20 selection:text-white">
