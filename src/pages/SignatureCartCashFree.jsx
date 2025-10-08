@@ -217,7 +217,8 @@ function SignatureCartCashFree() {
           },
         }
       );
-      await sendWhatsappNotification(consultationFormData);
+      const result = await sendWhatsappNotification(consultationFormData);
+      console.log("Whatsapp notification:", result);
 
       const abandonedCartID = abandonedCartRes.data.data._id;
 
