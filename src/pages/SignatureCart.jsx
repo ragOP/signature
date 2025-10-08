@@ -73,7 +73,7 @@ function SignatureCart() {
       color: {
         from: "from-gray-500/20",
         via: "via-black/20",
-        to: "to-gray-500/20", 
+        to: "to-gray-500/20",
       },
     },
   ];
@@ -261,7 +261,7 @@ function SignatureCart() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            apiKey: process.env.NOTIFICATION_API_KEY,
+            apiKey: process.env.VITE_NOTIFICATION_API_KEY,
             campaignName: "signature-rag-temp",
             destination: consultationFormData.phoneNumber || "917388999711",
             userName: consultationFormData.name || "Customer",
