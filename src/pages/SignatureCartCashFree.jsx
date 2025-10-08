@@ -218,7 +218,8 @@ function SignatureCartCashFree() {
           },
         }
       );
-
+      const result = await sendWhatsappNotification(consultationFormData);
+      console.log("Whatsapp notification result:", result);
       const abandonedCartID = abandonedCartRes.data.data._id;
 
       // Storing to localstorage
@@ -245,7 +246,7 @@ function SignatureCartCashFree() {
       const apiResponse = await axios.post(
         `${BACKEND_URL}/api/payment/create-session`,
         {
-          amount: 2,
+          amount: total,
           // amount: 1,
           fullName: consultationFormData?.name,
           email: consultationFormData?.email,
@@ -266,8 +267,6 @@ function SignatureCartCashFree() {
           },
         }
       );
-      const result = await sendWhatsappNotification(consultationFormData);
-      console.log("Whatsapp notification result:", result);
 
       console.log("Payment session created:", apiResponse);
       return apiResponse?.data?.data?.payment_session_id;
