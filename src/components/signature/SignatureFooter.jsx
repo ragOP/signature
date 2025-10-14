@@ -10,14 +10,14 @@ const SignatureFooter = () => {
           <div className="flex items-center justify-between">
             <div className="flex flex-col items-start space-y-1">
             <div className="flex items-center space-x-2">
-  <span className="text-gray-400 line-through text-sm">₹999</span>
+  <span className="text-gray-400 line-through text-sm">₹4,999</span>
   <span
     className="text-xl font-bold text-gray-800 relative"
     style={{
       textShadow: "0 0 8px rgba(255, 215, 0, 0.8), 0 0 12px rgba(255, 215, 0, 0.6)"
     }}
   >
-    ₹589
+    ₹489
   </span>
 </div>
 
@@ -38,8 +38,8 @@ const SignatureFooter = () => {
         <div className="hidden lg:flex items-center justify-between">
           <div className="flex flex-col items-start space-y-1">
             <div className="flex items-center space-x-4">
-              <span className="text-gray-400 line-through text-lg">₹999</span>
-              <span className="text-2xl font-bold text-gray-800">₹589</span>
+              <span className="text-gray-400 line-through text-lg">₹4999</span>
+              <span className="text-2xl font-bold text-gray-800">₹489</span>
             </div>
             <span className="text-sm text-red-600 font-medium">Last 2 slots left</span>
           </div>

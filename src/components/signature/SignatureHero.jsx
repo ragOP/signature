@@ -52,8 +52,8 @@ const SignatureCard = ({ animateElements }) => {
         <div className="flex flex-col items-center justify-center text-center space-y-2">
           <div className="space-y-1">
             <div className="flex items-center justify-center space-x-2">
-              <span className="text-xl font-bold text-gray-800">₹589</span>
-              <span className="text-xs text-gray-600 line-through">₹1,200</span>
+              <span className="text-xl font-bold text-gray-800">₹489</span>
+              <span className="text-xs text-gray-600 line-through">₹4,999</span>
               <span className="text-xs bg-green-100 text-green-800 px-1.5 py-0.5 rounded-full font-semibold">
                 51% OFF
               </span>

@@ -12,10 +12,10 @@ const Footer = () => {
           <div className="flex flex-col items-start space-y-1">
             <div className="flex items-center space-x-2 lg:space-x-4">
               <span className="text-gray-500 line-through text-sm lg:text-lg">
-                ₹999
+                ₹4,999
               </span>
               <span className="text-xl lg:text-2xl font-bold text-gray-800">
-                ₹589
+                ₹489
               </span>
             </div>
             <div className="flex items-center space-x-1">
