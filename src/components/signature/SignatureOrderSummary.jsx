@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Shield, Sparkles } from 'lucide-react';
 
-const SignatureOrderSummary = ({ subtotal, discount, total, isCheckingOut, onCheckout, totalMrp, discountMrp }) => {
+const SignatureOrderSummary = ({ subtotal, discount, total, isCheckingOut, onCheckout, totalMrp, discountMrp, couponCode, couponDiscount, couponDiscountAmount }) => {
   const [isPressed, setIsPressed] = useState(false);
 
   const handleButtonClick = async () => {
@@ -36,6 +36,15 @@ const SignatureOrderSummary = ({ subtotal, discount, total, isCheckingOut, onChe
               <span className="text-green-600">Discount</span>
               <span className="text-green-600 font-semibold">-₹{discountMrp.toLocaleString()}</span>
             </div>
+            {couponCode && couponDiscountAmount > 0 && (
+              <div className="flex justify-between items-center bg-gradient-to-r from-orange-50 to-red-50 p-3 rounded-lg border border-orange-200">
+                <div className="flex flex-col">
+                  <span className="text-orange-600 font-semibold text-sm">Coupon Applied ({couponCode.toUpperCase()})</span>
+                  <span className="text-orange-500 text-xs">{couponDiscount}% OFF</span>
+                </div>
+                <span className="text-orange-600 font-bold">-₹{couponDiscountAmount.toLocaleString()}</span>
+              </div>
+            )}
             <div className="border-t border-gray-100 pt-4">
               <div className="flex justify-between items-center">
                 <span className="text-lg font-semibold text-gray-800">Total</span>

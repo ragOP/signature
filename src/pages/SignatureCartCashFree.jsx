@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   X,
   Shield,
@@ -22,7 +22,6 @@ import axios from "axios";
 import { BACKEND_URL } from "../utils/backendUrl";
 import { load } from "@cashfreepayments/cashfree-js";
 import { toast } from "react-toastify";
-import { meta } from "@eslint/js";
 
 function SignatureCartCashFree() {
   const navigate = useNavigate();
@@ -61,6 +60,10 @@ function SignatureCartCashFree() {
     remarks: "",
   });
 
+  // Coupon state
+  const [couponCode, setCouponCode] = useState(null);
+  const [couponDiscount, setCouponDiscount] = useState(0);
+
   // Additional products data
   const additionalProducts = [
     {
@@ -93,6 +96,24 @@ function SignatureCartCashFree() {
       window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     }
 
+    // Parse URL parameters for coupon codes
+    const urlParams = new URLSearchParams(window.location.search);
+    const couponParam = urlParams.toString();
+    
+    if (couponParam.includes('rag30')) {
+      setCouponCode('rag30');
+      setCouponDiscount(30);
+      console.log('Coupon applied: RAG30 (30% off)');
+    } else if (couponParam.includes('rag60')) {
+      setCouponCode('rag60');
+      setCouponDiscount(60);
+      console.log('Coupon applied: RAG60 (60% off)');
+    } else if (couponParam.includes('rag75')) {
+      setCouponCode('rag75');
+      setCouponDiscount(75);
+      console.log('Coupon applied: RAG75 (75% off)');
+    }
+
     const timer = setTimeout(() => {
       setAnimateElements(true);
     }, 100);
@@ -123,11 +144,19 @@ function SignatureCartCashFree() {
   };
 
   const onProductToggle = (productId) => {
-    setSelectedProducts((prev) =>
-      prev.includes(productId)
+    setSelectedProducts((prev) => {
+      const newSelection = prev.includes(productId)
         ? prev.filter((id) => id !== productId)
-        : [...prev, productId]
-    );
+        : [...prev, productId];
+      
+      console.log('Additional products toggled:', {
+        productId,
+        newSelection,
+        action: prev.includes(productId) ? 'removed' : 'added'
+      });
+      
+      return newSelection;
+    });
   };
 
   const handleConsultationFormSubmit = (formData) => {
@@ -184,7 +213,27 @@ function SignatureCartCashFree() {
   const discountMrp = cartDiscountMrp + additionalDiscountMrp;
   const discount = cartDiscount + additionalDiscount;
 
-  const total = subtotal;
+  // Calculate coupon discount amount - apply to the subtotal after regular discounts
+  const couponDiscountAmount = couponDiscount > 0 ? Math.floor((subtotal * couponDiscount) / 100) : 0;
+  
+  // Final total after applying coupon discount
+  const total = subtotal - couponDiscountAmount;
+
+  // Log calculation changes when relevant values change
+  useEffect(() => {
+    if (couponCode) {
+      console.log('Price calculation update:', {
+        cartSubtotal,
+        additionalSubtotal,
+        subtotal,
+        couponCode,
+        couponDiscount: `${couponDiscount}%`,
+        couponDiscountAmount,
+        finalTotal: total,
+        selectedAdditionalProducts: selectedAdditionalProducts.length
+      });
+    }
+  }, [subtotal, couponDiscountAmount, total, selectedAdditionalProducts.length]);
 
   // Create Payment Session
   const createPaymentSession = async () => {
@@ -318,7 +367,7 @@ function SignatureCartCashFree() {
               ),
             })
           );
-          const result = sendWhatsappNotification(consultationFormData);
+          sendWhatsappNotification(consultationFormData);
 
           // Navigate to order confirmation page for verification
           navigate("/signature-order-confirmation-cashfree", {
@@ -546,6 +595,9 @@ function SignatureCartCashFree() {
                       total={total}
                       totalMrp={totalMrp}
                       discountMrp={discountMrp}
+                      couponCode={couponCode}
+                      couponDiscount={couponDiscount}
+                      couponDiscountAmount={couponDiscountAmount}
                       isCheckingOut={isCheckingOut}
                       onCheckout={doPayment}
                     />
@@ -624,6 +676,9 @@ function SignatureCartCashFree() {
                       totalMrp={totalMrp}
                       discountMrp={discountMrp}
                       total={total}
+                      couponCode={couponCode}
+                      couponDiscount={couponDiscount}
+                      couponDiscountAmount={couponDiscountAmount}
                       isCheckingOut={isCheckingOut}
                       onCheckout={doPayment}
                     />

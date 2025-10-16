@@ -26,6 +26,24 @@ function SignatureNewCartCashFree() {
   const navigate = useNavigate();
   const location = useLocation();
   const [creatingSession, setCreatingSession] = useState(false);
+  
+  // Parse RAG coupon from URL parameters
+  const urlParams = new URLSearchParams(location.search);
+  const ragCoupon = urlParams.get('rag30') !== null ? 'rag30' : 
+                   urlParams.get('rag60') !== null ? 'rag60' : 
+                   urlParams.get('rag75') !== null ? 'rag75' : null;
+  
+  // Get discount percentage based on coupon
+  const getCouponDiscount = (coupon) => {
+    switch(coupon) {
+      case 'rag30': return 30;
+      case 'rag60': return 60;
+      case 'rag75': return 75;
+      default: return 0;
+    }
+  };
+  
+  const couponDiscountPercentage = getCouponDiscount(ragCoupon);
   const [cartItems, setCartItems] = useState([
     {
       id: 1,
@@ -181,7 +199,21 @@ function SignatureNewCartCashFree() {
   const discountMrp = cartDiscountMrp + additionalDiscountMrp;
   const discount = cartDiscount + additionalDiscount;
 
-  const total = subtotal;
+  // Calculate RAG coupon discount
+  const couponDiscount = couponDiscountPercentage > 0 ? Math.round((subtotal * couponDiscountPercentage) / 100) : 0;
+  
+  // Final total after applying coupon discount
+  const total = subtotal - couponDiscount;
+  
+  // Debug logging for coupon functionality
+  console.log('RAG Coupon Debug:', {
+    ragCoupon,
+    couponDiscountPercentage,
+    subtotal,
+    couponDiscount,
+    total,
+    selectedAdditionalProducts: selectedAdditionalProducts.length
+  });
   // Create Payment Session
   const createPaymentSession = async () => {
     if (creatingSession) {
@@ -206,6 +238,9 @@ function SignatureNewCartCashFree() {
           additionalProducts: selectedAdditionalProducts.map(
             (product) => product.title
           ),
+          couponCode: ragCoupon,
+          couponDiscount: couponDiscount,
+          originalAmount: subtotal,
         },
         {
           headers: {
@@ -234,6 +269,9 @@ function SignatureNewCartCashFree() {
           additionalProducts: selectedAdditionalProducts.map(
             (product) => product.title
           ),
+          couponCode: ragCoupon,
+          couponDiscount: couponDiscount,
+          originalAmount: subtotal,
         })
       );
 
@@ -251,6 +289,9 @@ function SignatureNewCartCashFree() {
           additionalProducts: selectedAdditionalProducts.map(
             (product) => product.title
           ),
+          couponCode: ragCoupon,
+          couponDiscount: couponDiscount,
+          originalAmount: subtotal,
           orderType: "normal",
           quantity: 1,
           url: `${window.location.origin}/signature-new-order-confirmation`,
@@ -311,6 +352,9 @@ function SignatureNewCartCashFree() {
               additionalProducts: selectedAdditionalProducts.map(
                 (product) => product.title
               ),
+              couponCode: ragCoupon,
+              couponDiscount: couponDiscount,
+              originalAmount: subtotal,
             })
           );
 
@@ -435,13 +479,15 @@ function SignatureNewCartCashFree() {
 
   // Order Summary Component
   const OrderSummary = ({
-    subtotal,
     discount,
     total,
     isCheckingOut,
     onCheckout,
     totalMrp,
     discountMrp,
+    couponDiscount,
+    couponDiscountPercentage,
+    ragCoupon,
   }) => {
     return (
       <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
@@ -455,6 +501,14 @@ function SignatureNewCartCashFree() {
             <div className="flex justify-between text-green-600">
               <span className="">Discount</span>
               <span>-₹{discountMrp}</span>
+            </div>
+          )}
+          {couponDiscount > 0 && (
+            <div className="flex justify-between text-orange-600 bg-orange-50 px-3 py-2 rounded-lg border border-orange-200">
+              <span className="font-semibold">
+                {ragCoupon?.toUpperCase()} Coupon ({couponDiscountPercentage}% OFF)
+              </span>
+              <span className="font-bold">-₹{couponDiscount}</span>
             </div>
           )}
           <div className="border-t pt-3">
@@ -608,11 +662,13 @@ function SignatureNewCartCashFree() {
                     }`}
                   >
                     <OrderSummary
-                      subtotal={subtotal}
                       discount={discount}
                       total={total}
                       totalMrp={totalMrp}
                       discountMrp={discountMrp}
+                      couponDiscount={couponDiscount}
+                      couponDiscountPercentage={couponDiscountPercentage}
+                      ragCoupon={ragCoupon}
                       isCheckingOut={isCheckingOut}
                       onCheckout={doPayment}
                     />
