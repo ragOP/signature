@@ -34,6 +34,7 @@ import SignatureNewAbondentReport from "./pages/new/SignatureNewAbondentReport";
 import SignatureNewRecord from "./pages/new/SignatureNewRecord";
 import SignatureNewOrderConfirmationPage from "./pages/new/SignatureNewOrderConfirmationPage";
 import SignatureNewCartCashFree from "./components/signature-new-cart/SignatureNewCartCashFree";
+import SignatureNewCartCashFreeV2 from "./components/signature-new-cart-v2/SignatureNewCartCashFree";
 import SignatureNewOrderConfirmationCashfree from "./pages/new/SignatureNewOrderConfirmationCashfree";
 
 // Main App Component
@@ -64,7 +65,7 @@ function App() {
           <Route path="/" element={<Signature />} />
           <Route path="/signature" element={<Signature />} />
           <Route path="/signature-new" element={<SignatureNewRedesigned />} />
-            <Route path="/signature-new-v2" element={<SignatureNewRedesignedV2 />} />
+            <Route path="/signature-new-v2" element={<SignatureNewRedesignedV2/>} />
           <Route path="/contact" element={<Contact />} />
 
           {/* Old routes */}
@@ -75,6 +76,7 @@ function App() {
 
           {/* <Route path="/signature-new-cart" element={<SignatureNewCart />} /> */}
           <Route path="/signature-new-cart" element={<SignatureNewCartCashFree />} />
+              <Route path="/signature-new-cart-v2" element={<SignatureNewCartCashFreeV2 />} />
  
           <Route path="/signature-record" element={<SignatureRecord />} />
           <Route

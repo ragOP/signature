@@ -12,16 +12,16 @@ const Footer = () => {
           <div className="flex flex-col items-start space-y-1">
             <div className="flex items-center space-x-2 lg:space-x-4">
               <span className="text-gray-500 line-through text-sm lg:text-lg">
-                ₹4,999
+                ₹5,880
               </span>
               <span className="text-xl lg:text-2xl font-bold text-gray-800">
-                ₹489
+              ₹1999
               </span>
             </div>
             <div className="flex items-center space-x-1">
               <Zap className="w-3 h-3 lg:w-4 lg:h-4 text-amber-500" />
               <span className="text-xs lg:text-sm text-amber-700 font-semibold">
-                Last 2 slots left
+                Last 3 slots left
               </span>
             </div>
           </div>
