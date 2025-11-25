@@ -13,7 +13,9 @@ import {
   CheckCircle,
   Signature,
 } from "lucide-react";
+// import SignatureNavbar from "../components/signature/SignatureNavbar";
 import { BACKEND_URL } from "../../utils/backendUrl";
+
 const Navbar = () => {
   return (
     <div className="flex items-center justify-center px-4 py-3 md:px-6 md:py-4 border-b border-amber-200">
@@ -28,7 +30,7 @@ const Navbar = () => {
   );
 };
 
-const SignatureNewRecord = () => {
+const SignatureNewAbondentReport = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -41,7 +43,7 @@ const SignatureNewRecord = () => {
   const fetchOrders = async () => {
     try {
       const response = await fetch(
-        `${BACKEND_URL}/api/signature/rag-v2/get-orders`
+        `${BACKEND_URL}/api/signature/rag-v2/get-orders-abd`
       );
       const result = await response.json();
 
@@ -99,14 +101,14 @@ const SignatureNewRecord = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-yellow-50 via-amber-100 to-orange-100 ">
+    <div className="min-h-screen bg-gradient-to-br from-yellow-50 via-amber-100 to-orange-100">
       <Navbar />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-3xl sm:text-4xl font-bold text-amber-500 mb-4">
-            Signature Design Records
+            Signature Abondent Records
           </h1>
           <p className="text-gray-600 max-w-2xl mx-auto">
             View all your signature design orders and their current status
@@ -114,9 +116,9 @@ const SignatureNewRecord = () => {
         </div>
 
         {/* Search Bar */}
-        <div className="max-w-md mx-auto mb-8">
+        <div className="max-w-md mx-auto mb-8  ">
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5 " />
             <input
               type="text"
               placeholder="Search by name, email, or order ID..."
@@ -128,10 +130,10 @@ const SignatureNewRecord = () => {
         </div>
 
         {/* Orders Table */}
-        <div className="bg-white  shadow-lg border border-gray-200 overflow-hidden">
+        <div className="bg-white shadow-lg border border-gray-200 overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-gradient-to-r from-amber-300 to-amber-500 text-white">
+              <thead className="bg-gradient-to-r from-amber-200 to-amber-500 text-white">
                 <tr>
                   <th className="px-6 py-4 text-left text-sm font-semibold">
                     Order ID
@@ -171,7 +173,7 @@ const SignatureNewRecord = () => {
                     }`}
                   >
                     <td className="px-6 py-4 text-sm font-mono text-gray-800">
-                      {order.orderId}
+                      {order.abdOrderId}
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-800 font-medium">
                       {order.fullName}
@@ -232,55 +234,9 @@ const SignatureNewRecord = () => {
             </div>
           )}
         </div>
-
-        {/* Stats */}
-        <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-white rounded-xl p-6 border border-gray-200 shadow-lg">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-amber-300 to-amber-500 rounded-full flex items-center justify-center">
-                <FileText className="w-5 h-5 text-white" />
-              </div>
-              <div>
-                <p className="text-2xl font-bold text-gray-800">
-                  {filteredOrders.length}
-                </p>
-                <p className="text-sm text-gray-600">Total Orders</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-xl p-6 border border-gray-200 shadow-lg">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-green-600 to-emerald-600 rounded-full flex items-center justify-center">
-                <CheckCircle className="w-5 h-5 text-white" />
-              </div>
-              <div>
-                <p className="text-2xl font-bold text-gray-800">
-                  ₹
-                  {filteredOrders.reduce((sum, order) => sum + order.amount, 0)}
-                </p>
-                <p className="text-sm text-gray-600">Total Revenue</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-xl p-6 border border-gray-200 shadow-lg">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-full flex items-center justify-center">
-                <Users className="w-5 h-5 text-white" />
-              </div>
-              <div>
-                <p className="text-2xl font-bold text-gray-800">
-                  {new Set(filteredOrders.map((order) => order.email)).size}
-                </p>
-                <p className="text-sm text-gray-600">Unique Customers</p>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );
 };
 
-export default SignatureNewRecord;
+export default SignatureNewAbondentReport;

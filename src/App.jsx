@@ -31,6 +31,7 @@ import NewCart from "./pages/new/NewCart";
 import SignatureCartCashFree from "./pages/SignatureCartCashFree";
 import SignatureOrderConfirmationCashfree from "./pages/SignatureOrderConfirmationCashFree";
 import SignatureNewAbondentReport from "./pages/new/SignatureNewAbondentReport";
+import SignatureNewAbondentReportv2 from "./pages/new/Sigv2";
 import SignatureNewRecord from "./pages/new/SignatureNewRecord";
 import SignatureNewOrderConfirmationPage from "./pages/new/SignatureNewOrderConfirmationPage";
 import SignatureNewCartCashFree from "./components/signature-new-cart/SignatureNewCartCashFree";
@@ -83,6 +84,10 @@ function App() {
             path="/signature-new-record"
             element={<SignatureNewRecord />}
           />
+             <Route
+            path="/signature-new-recordv2"
+            element={<SignatureNewRecord />}
+          />
 
           {/* Old Route */}
           {/* <Route
@@ -108,6 +113,10 @@ function App() {
             path="/signature-new-order-confirmation"
             element={<SignatureNewOrderConfirmationCashfree />}
           />
+              <Route
+            path="/signature-new-order-confirmationV2"
+            element={<SignatureNewOrderConfirmationCashfree />}
+          />
           <Route path="/privacy" element={<Privacy />} />
 
           <Route
@@ -117,6 +126,10 @@ function App() {
           <Route
             path="/signature-new-abondent-report"
             element={<SignatureNewAbondentReport />}
+          />
+           <Route
+            path="/signature-new-abondent-reportv2"
+            element={<SignatureNewAbondentReportv2 />}
           />
         </Routes>
       </div>

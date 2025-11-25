@@ -226,7 +226,7 @@ function SignatureNewCartCashFree() {
 
       // Create abandoned cart first
       const abandonedCartRes = await axios.post(
-        `${BACKEND_URL}/api/signature/rag/create-order-abd`,
+        `${BACKEND_URL}/api/signature/rag-v2/create-order-abd`,
         {
           amount: total,
           // amount: 2,
@@ -359,7 +359,7 @@ function SignatureNewCartCashFree() {
           );
 
           // Navigate to order confirmation page for verification
-          navigate("/signature-new-order-confirmation", {
+          navigate("/signature-new-order-confirmationV2", {
             state: {
               orderId: data.orderId,
               amount: total,
