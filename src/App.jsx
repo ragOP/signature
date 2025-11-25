@@ -24,6 +24,7 @@ import V2 from "./pages/V2";
 import SignatureOrderConfirmationRag from "./pages/SignatureOrderConfirmationRag";
 // import SignatureAbondentReportRag from "./pages/AbondedentResportRag";
 import SignatureNewRedesigned from "./components/signature-new/SignatureNew";
+import SignatureNewRedesignedV2 from "./components/signature-new-v2/SignatureNew";
 import SignatureNewCart from "./components/signature-new-cart/SignatureNewCart";
 import SignatureNew from "./pages/new/SignatureNew";
 import NewCart from "./pages/new/NewCart";
@@ -63,6 +64,7 @@ function App() {
           <Route path="/" element={<Signature />} />
           <Route path="/signature" element={<Signature />} />
           <Route path="/signature-new" element={<SignatureNewRedesigned />} />
+            <Route path="/signature-new-v2" element={<SignatureNewRedesignedV2 />} />
           <Route path="/contact" element={<Contact />} />
 
           {/* Old routes */}
