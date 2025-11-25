@@ -277,7 +277,7 @@ function SignatureNewCartCashFree() {
 
       // Create payment session
       const apiResponse = await axios.post(
-        `${BACKEND_URL}/api/payment/create-session`,
+        `${BACKEND_URL}/api/payment/create-session-v2`,
         {
           amount: total,
           // amount: 2,
