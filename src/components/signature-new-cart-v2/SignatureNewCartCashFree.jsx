@@ -228,7 +228,7 @@ function SignatureNewCartCashFree() {
       const abandonedCartRes = await axios.post(
         `${BACKEND_URL}/api/signature/rag-v2/create-order-abd`,
         {
-          amount: 3,
+          amount: total,
           // amount: 2,
           fullName: consultationFormData?.name,
           email: consultationFormData?.email,
@@ -260,7 +260,7 @@ function SignatureNewCartCashFree() {
         "orderData",
         JSON.stringify({
           // amount: 2,
-          amount: 3,
+          amount: total,
           fullName: consultationFormData?.name,
           email: consultationFormData?.email,
           phoneNumber: consultationFormData?.phoneNumber,
@@ -279,7 +279,7 @@ function SignatureNewCartCashFree() {
       const apiResponse = await axios.post(
         `${BACKEND_URL}/api/payment/create-session-v2`,
         {
-          amount: 3,
+          amount: total,
           // amount: 2,
           fullName: consultationFormData?.name,
           email: consultationFormData?.email,
@@ -342,7 +342,7 @@ function SignatureNewCartCashFree() {
           localStorage.setItem(
             "orderData",
             JSON.stringify({
-              amount: 3,
+              amount: total,
               // amount: 2,
               fullName: consultationFormData?.name,
               email: consultationFormData?.email,
@@ -362,7 +362,7 @@ function SignatureNewCartCashFree() {
           navigate("/signature-new-order-confirmationV2", {
             state: {
               orderId: data.orderId,
-              amount: 3,
+              amount: total,
               paymentMethod: "Cashfree",
             },
           });
