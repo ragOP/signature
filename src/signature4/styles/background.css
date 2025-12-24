@@ -1,0 +1,27 @@
+/* Background FX */
+.stars{ position:fixed; inset:0; pointer-events:none; z-index:0; }
+.star{
+  position:absolute; border-radius:999px;
+  background: rgba(255,255,255,.95);
+  box-shadow: 0 0 14px rgba(255,255,255,.25);
+  animation: tw 4.8s ease-in-out infinite;
+}
+@keyframes tw{
+  0%,100%{transform:scale(1); opacity:var(--o, .3)}
+  50%{transform:scale(1.7); opacity:1}
+}
+
+.aurora{ position:fixed; inset:0; pointer-events:none; z-index:0; opacity:.9; }
+.aurora .a{
+  position:absolute; width: 520px; height: 520px; border-radius: 999px;
+  filter: blur(60px); opacity:.42;
+  animation: drift 10s ease-in-out infinite;
+}
+.a1{ left:-140px; top: 140px; background: radial-gradient(circle at 30% 30%, rgba(184,140,255,.55), transparent 65%); }
+.a2{ right:-160px; top: 60px; background: radial-gradient(circle at 30% 30%, rgba(109,228,255,.50), transparent 65%); animation-delay: -3s; }
+.a3{ left: 20%; bottom: -260px; background: radial-gradient(circle at 30% 30%, rgba(246,215,125,.35), transparent 65%); animation-delay: -6s; }
+
+@keyframes drift{
+  0%,100%{transform: translate3d(0,0,0) scale(1)}
+  50%{transform: translate3d(40px,-26px,0) scale(1.06)}
+}

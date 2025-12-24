@@ -38,6 +38,7 @@ import SignatureNewCartCashFree from "./components/signature-new-cart/SignatureN
 import SignatureNewCartCashFreeV2 from "./components/signature-new-cart-v2/SignatureNewCartCashFree";
 import SignatureNewOrderConfirmationCashfree from "./pages/new/SignatureNewOrderConfirmationCashfree";
 import Signature4 from "./pages/Signature4";
+import SignatureStudioLanding from "./signature4/SignatureStudioLanding";
 
 // Main App Component
 function App() {
@@ -46,8 +47,10 @@ function App() {
       <div className="App">
         <Routes>
           {/* <Route path="/" element={<SignatureRag />} /> */}
-
-          <Route path="/signature4" element={<Signature4 />} />
+   <Route path="/signature4" element={<SignatureStudioLanding />} />
+          {/* <Route path="/signature4" element={<Signature4 />} />
+          
+          */}
           <Route path="/rag" element={<SignatureRag />} />
           <Route path="/new" element={<SignatureNew />} />
           <Route path="/new-cart" element={<NewCart />} />
