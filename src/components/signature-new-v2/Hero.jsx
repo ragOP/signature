@@ -259,7 +259,7 @@ const SignatureHeroRedesigned = () => {
                 </div>
 
                 <div className="flex items-center justify-center space-x-4 mb-6">
-                  <span className="text-4xl font-bold text-gray-800">₹489</span>
+                  <span className="text-4xl font-bold text-gray-800">₹1999</span>
                   <span className="text-xl text-gray-500 line-through">
                     ₹4,999
                   </span>
