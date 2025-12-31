@@ -463,7 +463,7 @@ function SignatureCartCashFree() {
       </div>
 
       {/* Cart Content */}
-      <section className="relative pt-2 z-10">
+      <section className="relative pt-2 z-10 "   style={{ backgroundColor: "#c821afff" }}>
         <div className="max-w-7xl mx-auto">
           {/* Header */}
           <div
