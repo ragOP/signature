@@ -40,6 +40,9 @@ import SignatureNewOrderConfirmationCashfree from "./pages/new/SignatureNewOrder
 import Signature4 from "./pages/Signature4";
 import SignatureStudioLanding from "./signature4/SignatureStudioLanding";
 import SignatureCartFour from "./pages/Signaturefour";
+import OrderConfirmation5 from "./pages/OrderConfirmation5";
+import AbondentRecord5 from "./pages/AbondentRecord5";
+import Record5 from "./pages/Record5";
 
 // Main App Component
 function App() {
@@ -48,8 +51,11 @@ function App() {
       <div className="App">
         <Routes>
           {/* <Route path="/" element={<SignatureRag />} /> */}
-   <Route path="/signature4" element={<SignatureStudioLanding />} />
+    <Route path="/signature4" element={<SignatureStudioLanding />} />
       <Route path="/signature-cart-four" element={<SignatureCartFour />} />
+      <Route path="/order-confirmation-five" element={<OrderConfirmation5 />} />
+      <Route path="/signature4-abondent-record" element={<AbondentRecord5 />} />
+      <Route path="/signature4-record" element={<Record5 />} />
           {/* <Route path="/signature4" element={<Signature4 />} />
           
           */}

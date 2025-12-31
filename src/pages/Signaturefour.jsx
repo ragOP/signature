@@ -247,7 +247,7 @@ function SignatureCartCashFree() {
 
       // Create abandoned cart first
       const abandonedCartRes = await axios.post(
-        `${BACKEND_URL}/api/lander4/create-order-abd`,
+        `${BACKEND_URL}/api/lander5/create-order-abd`,
         {
           amount: total,
           // amount: 1,
@@ -307,7 +307,7 @@ function SignatureCartCashFree() {
           ),
           orderType: "normal",
           quantity: 1,
-          url: `${window.location.origin}/signature-order-confirmation-cashfree`,
+          url: `${window.location.origin}/order-confirmation-five`,
         },
         {
           headers: {
@@ -370,7 +370,7 @@ function SignatureCartCashFree() {
           sendWhatsappNotification(consultationFormData);
 
           // Navigate to order confirmation page for verification
-          navigate("/signature-order-confirmation-cashfree", {
+          navigate("/order-confirmation-five", {
             state: {
               orderId: data.orderId,
               amount: total,
