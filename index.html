@@ -2,7 +2,6 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <!-- <link rel="icon" type="image/svg+xml" href="/brand-logo.png" /> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Signature</title>
 
@@ -14,11 +13,11 @@
       rel="stylesheet"
     >
 
-    <!-- LinkedIn Insight Tag (scripts stay in HEAD ✅) -->
+    <!-- LinkedIn Insight Tag -->
     <script type="text/javascript">
-      _linkedin_partner_id = "8472492";
+      window._linkedin_partner_id = "8472492";
       window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
-      window._linkedin_data_partner_ids.push(_linkedin_partner_id);
+      window._linkedin_data_partner_ids.push(window._linkedin_partner_id);
     </script>
     <script type="text/javascript">
       (function(l) {
@@ -36,8 +35,9 @@
         s.parentNode.insertBefore(b, s);
       })(window.lintrk);
     </script>
+    <!-- End LinkedIn Insight Tag -->
 
-    <!-- Meta / Facebook Pixel (script can stay in HEAD ✅) -->
+    <!-- Meta / Facebook Pixel -->
     <script>
       !function(f,b,e,v,n,t,s)
       {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -53,7 +53,7 @@
   </head>
 
   <body>
-    <!-- LinkedIn noscript MUST be in BODY ✅ -->
+    <!-- LinkedIn noscript -->
     <noscript>
       <img
         height="1"
@@ -64,7 +64,7 @@
       />
     </noscript>
 
-    <!-- Facebook noscript in BODY ✅ -->
+    <!-- Facebook noscript -->
     <noscript>
       <img
         height="1"
