@@ -315,73 +315,101 @@ function SignatureNewCartCashFree() {
     }
   };
 
-  const doPayment = async () => {
-    // Check if SDK is initialized
-    if (!sdkInitialized || !cashfree) {
-      toast.error("Payment system is not ready. Please try again in a moment.");
+ const trackLinkedIn = (conversionId) => {
+  console.log("aaaaa")
+  try {
+    if (typeof window === "undefined") return;
+
+    // If lintrk is available, fire immediately
+    if (typeof window.lintrk === "function") {
+      window.lintrk("track", { conversion_id: conversionId });
       return;
     }
 
-    // setLoading(true);
-    setIsCheckingOut(true);
+    // If LinkedIn script hasn't loaded yet, queue it (this matches how LinkedIn sets lintrk.q)
+    window.lintrk = window.lintrk || function (...args) {
+      window.lintrk.q = window.lintrk.q || [];
+      window.lintrk.q.push(args);
+    };
+    window.lintrk.q = window.lintrk.q || [];
+    window.lintrk("track", { conversion_id: conversionId });
+  } catch (e) {
+    // silently ignore tracking errors
+    console.warn("LinkedIn tracking failed:", e);
+  }
+};
 
-    const paymentSessionId = await createPaymentSession();
-    console.log("paymentsessionid", paymentSessionId);
+const doPayment = async () => {
+  // ✅ Track "checkout click" (user intent)
+  trackLinkedIn(23367916);
 
-    if (!paymentSessionId) {
-      return;
-    }
+  // Check if SDK is initialized
+  if (!sdkInitialized || !cashfree) {
+    toast.error("Payment system is not ready. Please try again in a moment.");
+    return;
+  }
 
-    try {
-      const checkoutOptions = {
-        paymentSessionId: paymentSessionId,
-        redirectTarget: "_self",
-        onSuccess: function (data) {
-          console.log("Payment successful:", data);
-          // Store order data for verification page
-          localStorage.setItem(
-            "orderData",
-            JSON.stringify({
-              amount: total,
-              // amount: 2,
-              fullName: consultationFormData?.name,
-              email: consultationFormData?.email,
-              phoneNumber: consultationFormData?.phoneNumber,
-              profession: consultationFormData?.profession,
-              remarks: consultationFormData?.remarks,
-              additionalProducts: selectedAdditionalProducts.map(
-                (product) => product.title
-              ),
-              couponCode: ragCoupon,
-              couponDiscount: couponDiscount,
-              originalAmount: subtotal,
-            })
-          );
+  setIsCheckingOut(true);
 
-          // Navigate to order confirmation page for verification
-          navigate("/signature-new-order-confirmation", {
-            state: {
-              orderId: data.orderId,
-              amount: total,
-              paymentMethod: "Cashfree",
-            },
-          });
-        },
-        onFailure: function (data) {
-          console.log("Payment failed:", data);
-          toast.error("Payment failed. Please try again.");
-        },
-      };
+  const paymentSessionId = await createPaymentSession();
+  console.log("paymentsessionid", paymentSessionId);
 
-      cashfree.checkout(checkoutOptions);
-    } catch (error) {
-      console.error("Error during payment:", error);
-      toast.error("An error occurred during payment. Please try again.");
-    } finally {
-      setIsCheckingOut(false);
-      // setLoading(false);
-    }
-  };
+  if (!paymentSessionId) {
+    setIsCheckingOut(false);
+    return;
+  }
+
+  try {
+    const checkoutOptions = {
+      paymentSessionId,
+      redirectTarget: "_self",
+      onSuccess: function (data) {
+        console.log("Payment successful:", data);
+
+        // ✅ Track "payment success" too (stronger conversion signal)
+        trackLinkedIn(23367916);
+
+        localStorage.setItem(
+          "orderData",
+          JSON.stringify({
+            amount: total,
+            fullName: consultationFormData?.name,
+            email: consultationFormData?.email,
+            phoneNumber: consultationFormData?.phoneNumber,
+            profession: consultationFormData?.profession,
+            remarks: consultationFormData?.remarks,
+            additionalProducts: selectedAdditionalProducts.map(
+              (product) => product.title
+            ),
+            couponCode: ragCoupon,
+            couponDiscount,
+            originalAmount: subtotal,
+          })
+        );
+
+        navigate("/signature-new-order-confirmation", {
+          state: {
+            orderId: data.orderId,
+            amount: total,
+            paymentMethod: "Cashfree",
+          },
+        });
+      },
+      onFailure: function (data) {
+        console.log("Payment failed:", data);
+        toast.error("Payment failed. Please try again.");
+      },
+    };
+
+    cashfree.checkout(checkoutOptions);
+  } catch (error) {
+    console.error("Error during payment:", error);
+    toast.error("An error occurred during payment. Please try again.");
+  } finally {
+    setIsCheckingOut(false);
+  }
+};
+
 
   // Additional Products Component
   const AdditionalProducts = ({
