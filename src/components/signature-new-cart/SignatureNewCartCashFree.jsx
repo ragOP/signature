@@ -558,15 +558,15 @@ const doPayment = async () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-yellow-50 to-amber-100">
+     <div className="min-h-screen bg-gradient-to-br from-yellow-50 to-amber-100 relative isolate">
       {/* Navigation */}
-      <div className="relative z-50">
+      <div className="sticky top-0 z-[100]">
         <Navbar />
       </div>
 
       {/* Cart Content */}
-      <section className="relative pt-8 pb-16 z-10">
-        <div className="max-w-7xl mx-auto px-4">
+     <section className="relative pt-8 pb-16 z-[1]">
+         <div className="max-w-7xl mx-auto px-4">
           {/* Header */}
           <div
             className={`text-center mb-8 transition-all duration-1000 transform ${
