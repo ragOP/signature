@@ -570,52 +570,61 @@
 
       // 3. Start Cashfree payment (ensure SDK is loaded and method exists)
       function startCashfreeCheckout() {
-        if (window.Cashfree && typeof window.Cashfree.checkout === 'function') {
-          window.Cashfree.checkout({
-            paymentSessionId,
-            redirect: false, // Use popup/modal
-            onSuccess: async function (data) {
-              // 4. On payment success, call create order API
-              try {
-                const orderRes = await fetch('https://signature-backend-x93b.onrender.com/api/lander4/create-order', {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({
-                    orderId: data.orderId,
-                    amount: formData.amount,
-                    fullName: formData.name,
-                    email: formData.email,
-                    phoneNumber: formData.phone,
-                    style: formData.style,
-                    remarks: formData.notes,
-                    additionalProducts: [],
-                  })
-                });
-                const orderData = await orderRes.json();
-                if (!orderData?.success) throw new Error(orderData?.message || 'Order creation failed');
-                // Save to localStorage (optional)
-                const orders = JSON.parse(localStorage.getItem('signatureOrders') || '[]');
-                orders.unshift(formData);
-                localStorage.setItem('signatureOrders', JSON.stringify(orders));
-                // Delete abandoned cart if exists
-                const abdId = localStorage.getItem('abandonedCartID');
-                if (abdId) {
-                  try {
-                    await fetch('https://signature-backend-x93b.onrender.com/api/lander4/delete-order-abd/' + abdId, { method: 'DELETE' });
-                    localStorage.removeItem('abandonedCartID');
-                  } catch (e) { /* ignore */ }
+        console.log('Cashfree diagnostic:', window.Cashfree);
+        if (window.Cashfree) {
+          console.log('Cashfree keys:', Object.keys(window.Cashfree));
+          if (typeof window.Cashfree.checkout === 'function') {
+            console.log('Cashfree.checkout is available, starting payment...');
+            window.Cashfree.checkout({
+              paymentSessionId,
+              redirect: false, // Use popup/modal
+              onSuccess: async function (data) {
+                // 4. On payment success, call create order API
+                try {
+                  const orderRes = await fetch('https://signature-backend-x93b.onrender.com/api/lander4/create-order', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                      orderId: data.orderId,
+                      amount: formData.amount,
+                      fullName: formData.name,
+                      email: formData.email,
+                      phoneNumber: formData.phone,
+                      style: formData.style,
+                      remarks: formData.notes,
+                      additionalProducts: [],
+                    })
+                  });
+                  const orderData = await orderRes.json();
+                  if (!orderData?.success) throw new Error(orderData?.message || 'Order creation failed');
+                  // Save to localStorage (optional)
+                  const orders = JSON.parse(localStorage.getItem('signatureOrders') || '[]');
+                  orders.unshift(formData);
+                  localStorage.setItem('signatureOrders', JSON.stringify(orders));
+                  // Delete abandoned cart if exists
+                  const abdId = localStorage.getItem('abandonedCartID');
+                  if (abdId) {
+                    try {
+                      await fetch('https://signature-backend-x93b.onrender.com/api/lander4/delete-order-abd/' + abdId, { method: 'DELETE' });
+                      localStorage.removeItem('abandonedCartID');
+                    } catch (e) { /* ignore */ }
+                  }
+                  // Redirect to thank you page
+                  window.location.href = 'thanyou.html';
+                } catch (err) {
+                  showError('Payment succeeded but order creation failed. Please contact support.');
                 }
-                // Redirect to thank you page
-                window.location.href = 'thanyou.html';
-              } catch (err) {
-                showError('Payment succeeded but order creation failed. Please contact support.');
+              },
+              onFailure: function (data) {
+                showError('Payment failed or cancelled. Please try again.');
               }
-            },
-            onFailure: function (data) {
-              showError('Payment failed or cancelled. Please try again.');
-            }
-          });
+            });
+          } else {
+            console.error('Cashfree.checkout is NOT a function. Available keys:', Object.keys(window.Cashfree));
+            showError('Cashfree SDK loaded, but checkout method missing. See console for details.');
+          }
         } else {
+          console.error('window.Cashfree is NOT available:', window.Cashfree);
           showError('Cashfree SDK not loaded or checkout method missing. Please refresh and try again.');
         }
       }
