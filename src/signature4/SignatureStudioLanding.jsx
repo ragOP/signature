@@ -28,7 +28,7 @@ const SignatureStudioLanding = () => {
   const heroParallaxY = useTransform(scrollYProgress, [0, 0.25], [0, 85]);
   const heroGlow = useTransform(scrollYProgress, [0, 0.22], [1, 0.65]);
 
-  const CTA_LINK = "/signature-cart";
+  const CTA_LINK = "/signature-cart-four";
   const CTA_TEXT = "Buy Now";
 
   const IMAGES = useMemo(
