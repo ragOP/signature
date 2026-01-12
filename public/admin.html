@@ -508,11 +508,25 @@
   </div>
 
   <script>
-    // Load orders
-    function loadOrders() {
-      const orders = JSON.parse(localStorage.getItem('signatureOrders') || '[]');
-      displayOrders(orders);
-      updateStats(orders);
+
+    // Load orders from backend API
+    async function loadOrders() {
+      try {
+        const res = await fetch('https://signature-backend-x93b.onrender.com/api/lander30/get-orders');
+        const result = await res.json();
+        if (result.success) {
+          displayOrders(result.data);
+          updateStats(result.data);
+        } else {
+          displayOrders([]);
+          updateStats([]);
+          alert('Failed to fetch orders from server.');
+        }
+      } catch (err) {
+        displayOrders([]);
+        updateStats([]);
+        alert('Error fetching orders: ' + err.message);
+      }
     }
 
     // Update stats
@@ -528,7 +542,7 @@
       document.getElementById('totalRevenue').textContent = '₹' + revenue.toLocaleString();
     }
 
-    // Display orders
+    // Display orders (from API)
     function displayOrders(orders) {
       const container = document.getElementById('ordersList');
       const countEl = document.getElementById('ordersCount');
@@ -539,14 +553,14 @@
         container.innerHTML = `
           <div class="no-orders">
             <div class="no-orders-icon">📭</div>
-            <p>No orders found matching your filters.</p>
+            <p>No orders found.</p>
           </div>
         `;
         return;
       }
 
       container.innerHTML = orders.map((order, index) => {
-        const date = new Date(order.timestamp);
+        const date = new Date(order.orderDate || order.timestamp);
         const formattedDate = date.toLocaleDateString('en-IN', {
           day: 'numeric',
           month: 'short',
@@ -569,17 +583,17 @@
         return `
           <div class="order-card">
             <div class="order-top">
-              <div class="order-name">${order.name}</div>
+              <div class="order-name">${order.fullName || order.name || ''}</div>
               <span class="order-status ${statusClass}">${statusClass}</span>
             </div>
             <div class="order-details">
               <div class="order-detail">
                 <span class="order-detail-icon">📧</span>
-                <span>${order.email}</span>
+                <span>${order.email || ''}</span>
               </div>
               <div class="order-detail">
                 <span class="order-detail-icon">📱</span>
-                <span>${order.phone}</span>
+                <span>${order.phoneNumber || order.phone || ''}</span>
               </div>
               <div class="order-detail">
                 <span class="order-detail-icon">🎨</span>
@@ -590,18 +604,42 @@
                 <span>₹${order.amount || 489}</span>
               </div>
             </div>
-            ${order.notes ? `<div class="order-notes">"${order.notes}"</div>` : ''}
+            ${order.remarks || order.notes ? `<div class="order-notes">"${order.remarks || order.notes}"</div>` : ''}
             <div class="order-meta">
               <span>📅 ${formattedDate} at ${formattedTime}</span>
               ${order.orderId ? `<span>ID: ${order.orderId.slice(-8)}</span>` : ''}
             </div>
-            <div class="order-actions">
-              ${order.status !== 'paid' ? `<button class="order-action-btn mark-paid" onclick="markAsPaid(${index})">✓ Mark Paid</button>` : ''}
-              <button class="order-action-btn delete" onclick="deleteOrder(${index})">🗑 Delete</button>
-            </div>
           </div>
         `;
       }).join('');
+    }
+
+    // Show order detail modal
+    window.showOrderDetail = function(index) {
+      const orders = JSON.parse(localStorage.getItem('signatureOrders') || '[]');
+      const order = orders[index];
+      if (!order) return;
+      const modal = document.getElementById('orderDetailModal');
+      const content = document.getElementById('orderDetailContent');
+      content.innerHTML = `
+        <button onclick="hideOrderDetail()" style="position:absolute;top:12px;right:16px;font-size:1.5rem;background:none;border:none;color:#fff;cursor:pointer;">&times;</button>
+        <h2 style="margin-bottom:16px;">Order Details</h2>
+        <div style="margin-bottom:12px;"><b>Name:</b> ${order.name}</div>
+        <div style="margin-bottom:12px;"><b>Email:</b> ${order.email}</div>
+        <div style="margin-bottom:12px;"><b>Phone:</b> ${order.phone}</div>
+        <div style="margin-bottom:12px;"><b>Style:</b> ${order.style}</div>
+        <div style="margin-bottom:12px;"><b>Amount:</b> ₹${order.amount || 489}</div>
+        <div style="margin-bottom:12px;"><b>Status:</b> ${order.status || 'pending'}</div>
+        <div style="margin-bottom:12px;"><b>Order ID:</b> ${order.orderId || ''}</div>
+        <div style="margin-bottom:12px;"><b>Date:</b> ${order.timestamp ? new Date(order.timestamp).toLocaleString() : ''}</div>
+        ${order.notes ? `<div style='margin-bottom:12px;'><b>Notes:</b> ${order.notes}</div>` : ''}
+      `;
+      modal.style.display = 'block';
+    }
+
+    window.hideOrderDetail = function() {
+      const modal = document.getElementById('orderDetailModal');
+      if (modal) modal.style.display = 'none';
     }
 
     // Mark order as paid
@@ -689,11 +727,7 @@
       loadOrders();
     }
 
-    // Auto-apply filters on input
-    document.getElementById('filterSearch').addEventListener('input', applyFilters);
-    document.getElementById('filterStatus').addEventListener('change', applyFilters);
-    document.getElementById('filterStyle').addEventListener('change', applyFilters);
-    document.getElementById('filterDate').addEventListener('change', applyFilters);
+    // Remove local filter listeners and actions (not supported with API data)
 
     // Initialize
     loadOrders();

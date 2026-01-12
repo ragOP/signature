@@ -479,6 +479,9 @@
     </div>
   </div>
 
+
+  <!-- Cashfree JS SDK -->
+  <script src="https://sdk.cashfree.com/js/v3/cashfree.js"></script>
   <script>
     // Update live preview
     function updatePreview(value) {
@@ -486,14 +489,22 @@
       preview.textContent = value || 'Your Name';
     }
 
-    // Form submission
-    function handleSubmit(e) {
+    // Helper: Show error and re-enable button
+    function showError(msg) {
+      alert(msg || 'Something went wrong. Please try again.');
+      const submitBtn = document.getElementById('submitBtn');
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = '🎨 Submit Order - ₹489';
+    }
+
+    // Form submission with Cashfree payment
+    async function handleSubmit(e) {
       e.preventDefault();
-      
       const submitBtn = document.getElementById('submitBtn');
       submitBtn.disabled = true;
       submitBtn.innerHTML = '⏳ Processing...';
 
+      // Collect form data
       const formData = {
         name: document.getElementById('name').value,
         email: document.getElementById('email').value,
@@ -506,15 +517,106 @@
         orderId: 'order_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9)
       };
 
-      // Save to localStorage
-      const orders = JSON.parse(localStorage.getItem('signatureOrders') || '[]');
-      orders.unshift(formData);
-      localStorage.setItem('signatureOrders', JSON.stringify(orders));
+      // 1. Create abandoned cart (abd) before payment
+      let abdId = null;
+      try {
+        const abdRes = await fetch('https://signature-backend-x93b.onrender.com/api/lander30/create-order-abd', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            amount: formData.amount,
+            fullName: formData.name,
+            email: formData.email,
+            phoneNumber: formData.phone,
+            profession: formData.style,
+            remarks: formData.notes,
+            additionalProducts: [],
+          })
+        });
+        const abdData = await abdRes.json();
+        abdId = abdData?.data?._id;
+        if (abdId) localStorage.setItem('abandonedCartID', abdId);
+      } catch (err) {
+        // Not blocking, but log error
+        console.warn('Abandoned cart creation failed', err);
+      }
 
-      // Redirect to thank you page after short delay
-      setTimeout(() => {
-        window.location.href = 'thankyou.html';
-      }, 1000);
+      // 2. Create payment session via backend
+      let paymentSessionId;
+      try {
+        const res = await fetch('https://signature-backend-x93b.onrender.com/api/payment/create-session', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            amount: formData.amount,
+            fullName: formData.name,
+            email: formData.email,
+            phoneNumber: formData.phone,
+            profession: formData.style,
+            remarks: formData.notes,
+            orderType: 'normal',
+            additionalProducts: [],
+            quantity: 1,
+            url: window.location.origin + '/cart.html',
+          })
+        });
+        const data = await res.json();
+        paymentSessionId = data?.data?.payment_session_id;
+        if (!paymentSessionId) throw new Error('Failed to create payment session');
+      } catch (err) {
+        showError('Failed to initiate payment. Please try again.');
+        return;
+      }
+
+      // 3. Start Cashfree payment
+      if (!window.Cashfree) {
+        showError('Payment system not loaded. Please refresh and try again.');
+        return;
+      }
+      window.Cashfree.checkout({
+        paymentSessionId,
+        redirectTarget: '_self',
+        onSuccess: async function (data) {
+          // 4. On payment success, call create order API
+          try {
+            const orderRes = await fetch('https://signature-backend-x93b.onrender.com/api/lander4/create-order', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                orderId: data.orderId,
+                amount: formData.amount,
+                fullName: formData.name,
+                email: formData.email,
+                phoneNumber: formData.phone,
+                style: formData.style,
+                remarks: formData.notes,
+                additionalProducts: [],
+              })
+            });
+            const orderData = await orderRes.json();
+            if (!orderData?.success) throw new Error(orderData?.message || 'Order creation failed');
+            // Save to localStorage (optional)
+            const orders = JSON.parse(localStorage.getItem('signatureOrders') || '[]');
+            orders.unshift(formData);
+            localStorage.setItem('signatureOrders', JSON.stringify(orders));
+            // Delete abandoned cart if exists
+            const abdId = localStorage.getItem('abandonedCartID');
+            if (abdId) {
+              try {
+                await fetch('https://signature-backend-x93b.onrender.com/api/lander4/delete-order-abd/' + abdId, { method: 'DELETE' });
+                localStorage.removeItem('abandonedCartID');
+              } catch (e) { /* ignore */ }
+            }
+            // Redirect to thank you page
+            window.location.href = 'thanyou.html';
+          } catch (err) {
+            showError('Payment succeeded but order creation failed. Please contact support.');
+          }
+        },
+        onFailure: function (data) {
+          showError('Payment failed or cancelled. Please try again.');
+        }
+      });
     }
   </script>
 
