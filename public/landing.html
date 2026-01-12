@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Great+Vibes&display=swap" rel="stylesheet">
-  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script src="https://sdk.cashfree.com/js/v3/cashfree.js"></script>
   <style>
     :root {
       --pink-light: #ff6b9d;
@@ -2162,129 +2162,106 @@
   </div>
 
   <script>
-    // Razorpay Key
-    const RAZORPAY_KEY = 'rzp_live_R7bGPSVSrUgQuV';
+    // Cashfree Configuration (SANDBOX/TEST - NOT FOR PRODUCTION)
+    // WARNING: Storing secret keys in frontend is NOT secure. Use backend for production.
+    const CASHFREE_CLIENT_ID = 'TEST104297566cd3a0c2604ada0b77595297401';
+    const CASHFREE_SECRET_KEY = 'cfsk_ma_test_5c6c0bf8a658d1cbf46f7b49f2bc2e1e_3e06a1c6';
+    const CASHFREE_URL = 'https://sandbox.cashfree.com/pg';
+    const CASHFREE_MODE = 'sandbox'; // Change to 'production' for live
 
-    // Header scroll effect
-    window.addEventListener('scroll', function() {
-      const header = document.getElementById('header');
-      if (window.scrollY > 50) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
+    // Initialize Cashfree
+    const cashfree = Cashfree({ mode: CASHFREE_MODE });
+
+    // Generate unique order ID
+    function generateOrderId() {
+      return 'order_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    }
+
+    // Create Cashfree Order
+    async function createCashfreeOrder(formData) {
+      const orderId = generateOrderId();
+      
+      const orderPayload = {
+        order_id: orderId,
+        order_amount: 489,
+        order_currency: 'INR',
+        customer_details: {
+          customer_id: 'customer_' + Date.now(),
+          customer_name: formData.name,
+          customer_email: formData.email,
+          customer_phone: formData.phone.replace(/\D/g, '')
+        },
+        order_meta: {
+          return_url: window.location.href + '?order_id=' + orderId,
+          notify_url: ''
+        },
+        order_note: `Style: ${formData.style}, Notes: ${formData.notes || 'None'}`
+      };
+
+      try {
+        const response = await fetch(CASHFREE_URL + '/orders', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-client-id': CASHFREE_CLIENT_ID,
+            'x-client-secret': CASHFREE_SECRET_KEY,
+            'x-api-version': '2023-08-01'
+          },
+          body: JSON.stringify(orderPayload)
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.message || 'Failed to create order');
+        }
+
+        const orderData = await response.json();
+        return orderData;
+      } catch (error) {
+        console.error('Order creation error:', error);
+        throw error;
       }
-    });
-
-    // Mobile menu toggle
-    function toggleMobileMenu() {
-      const menu = document.getElementById('mobileMenu');
-      menu.classList.toggle('active');
     }
 
-    function closeMobileMenu() {
-      const menu = document.getElementById('mobileMenu');
-      menu.classList.remove('active');
-    }
+    // Cashfree Payment Handler
+    async function initiatePayment(formData) {
+      try {
+        // Show loading state
+        const submitBtn = document.getElementById('submitBtn');
+        submitBtn.innerHTML = '<span style="display:inline-block;animation:spin 1s linear infinite;">⏳</span> Processing...';
 
-    // Style selector
-    function setStyle(btn, style) {
-      document.querySelectorAll('.style-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-    }
+        // Create order
+        const order = await createCashfreeOrder(formData);
+        
+        if (!order.payment_session_id) {
+          throw new Error('Failed to get payment session');
+        }
 
-    // Modal functions
-    function openModal() {
-      document.getElementById('modalOverlay').classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
+        // Store form data temporarily for after payment
+        sessionStorage.setItem('pendingOrder', JSON.stringify({
+          ...formData,
+          orderId: order.order_id,
+          amount: 489,
+          timestamp: new Date().toISOString()
+        }));
 
-    function closeModal() {
-      document.getElementById('modalOverlay').classList.remove('active');
-      document.body.style.overflow = '';
-    }
+        // Configure checkout options
+        const checkoutOptions = {
+          paymentSessionId: order.payment_session_id,
+          redirectTarget: '_modal'
+        };
 
-    // Close modal on overlay click
-    document.getElementById('modalOverlay').addEventListener('click', function(e) {
-      if (e.target === this) {
-        closeModal();
-      }
-    });
-
-    // Close modal on Escape key
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') {
-        closeModal();
-      }
-    });
-
-    // Live preview update
-    function updatePreview(value) {
-      const preview = document.getElementById('livePreview');
-      const heroSignature = document.getElementById('heroSignature');
-      const displayName = value.trim() || 'Your Name';
-      preview.textContent = displayName;
-      heroSignature.textContent = displayName;
-    }
-
-    // Razorpay Payment Handler
-    function initiatePayment(formData) {
-      const options = {
-        key: RAZORPAY_KEY,
-        amount: 48900, // Amount in paise (₹489 * 100)
-        currency: 'INR',
-        name: 'Easy Soul Logo',
-        description: 'Custom Designer Signature Package',
-        image: '',
-        handler: function(response) {
-          // Payment successful
-          const orderData = {
-            ...formData,
-            paymentId: response.razorpay_payment_id,
-            status: 'paid',
-            amount: 489,
-            timestamp: new Date().toISOString()
-          };
-
-          // Store in localStorage
-          const orders = JSON.parse(localStorage.getItem('signatureOrders') || '[]');
-          orders.unshift(orderData);
-          localStorage.setItem('signatureOrders', JSON.stringify(orders));
-
-          // Show success message
-          document.getElementById('formSection').style.display = 'none';
-          document.getElementById('successMessage').classList.add('active');
-
-          // Reset form after delay
-          setTimeout(() => {
-            document.getElementById('checkoutForm').reset();
-            document.getElementById('formSection').style.display = 'block';
-            document.getElementById('successMessage').classList.remove('active');
-            document.getElementById('livePreview').textContent = 'Your Name';
-            document.getElementById('heroSignature').textContent = 'Your Name';
-            document.getElementById('submitBtn').disabled = false;
-            closeModal();
-          }, 4000);
-        },
-        prefill: {
-          name: formData.name,
-          email: formData.email,
-          contact: formData.phone.replace(/\D/g, '')
-        },
-        notes: {
-          style: formData.style,
-          notes: formData.notes
-        },
-        theme: {
-          color: '#a855f7'
-        },
-        modal: {
-          ondismiss: function() {
-            document.getElementById('submitBtn').disabled = false;
+        // Open Cashfree checkout
+        cashfree.checkout(checkoutOptions).then(function(result) {
+          if (result.error) {
+            // Payment failed
+            console.error('Payment error:', result.error);
             
-            // Store as pending order
             const orderData = {
               ...formData,
-              status: 'pending',
+              orderId: order.order_id,
+              status: 'failed',
+              error: result.error.message,
               amount: 489,
               timestamp: new Date().toISOString()
             };
@@ -2292,31 +2269,93 @@
             const orders = JSON.parse(localStorage.getItem('signatureOrders') || '[]');
             orders.unshift(orderData);
             localStorage.setItem('signatureOrders', JSON.stringify(orders));
+
+            alert('Payment failed: ' + result.error.message);
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '✨ Claim My Signature - ₹489';
           }
-        }
-      };
+          
+          if (result.redirect) {
+            // Payment is being processed
+            console.log('Payment redirect');
+          }
+          
+          if (result.paymentDetails) {
+            // Payment completed
+            const orderData = {
+              ...formData,
+              orderId: order.order_id,
+              paymentId: result.paymentDetails.paymentId || result.paymentDetails.cf_payment_id,
+              status: 'paid',
+              amount: 489,
+              timestamp: new Date().toISOString()
+            };
 
-      const rzp = new Razorpay(options);
-      rzp.on('payment.failed', function(response) {
+            const orders = JSON.parse(localStorage.getItem('signatureOrders') || '[]');
+            orders.unshift(orderData);
+            localStorage.setItem('signatureOrders', JSON.stringify(orders));
+
+            // Show success message
+            document.getElementById('formSection').style.display = 'none';
+            document.getElementById('successMessage').classList.add('active');
+
+            // Reset form after delay
+            setTimeout(() => {
+              document.getElementById('checkoutForm').reset();
+              document.getElementById('formSection').style.display = 'block';
+              document.getElementById('successMessage').classList.remove('active');
+              document.getElementById('livePreview').textContent = 'Your Name';
+              document.getElementById('heroSignature').textContent = 'Your Name';
+              submitBtn.disabled = false;
+              submitBtn.innerHTML = '✨ Claim My Signature - ₹489';
+              closeModal();
+            }, 4000);
+          }
+        }).catch(function(error) {
+          console.error('Checkout error:', error);
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = '✨ Claim My Signature - ₹489';
+          alert('Payment error. Please try again.');
+        });
+
+      } catch (error) {
+        console.error('Payment initiation error:', error);
         document.getElementById('submitBtn').disabled = false;
-        
-        // Store as failed order
-        const orderData = {
-          ...formData,
-          status: 'failed',
-          error: response.error.description,
-          amount: 489,
-          timestamp: new Date().toISOString()
-        };
-
-        const orders = JSON.parse(localStorage.getItem('signatureOrders') || '[]');
-        orders.unshift(orderData);
-        localStorage.setItem('signatureOrders', JSON.stringify(orders));
-
-        alert('Payment failed: ' + response.error.description);
-      });
-      rzp.open();
+        document.getElementById('submitBtn').innerHTML = '✨ Claim My Signature - ₹489';
+        alert('Error: ' + error.message);
+      }
     }
+
+    // Check for payment return
+    function checkPaymentReturn() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const orderId = urlParams.get('order_id');
+      
+      if (orderId) {
+        const pendingOrder = sessionStorage.getItem('pendingOrder');
+        if (pendingOrder) {
+          const orderData = JSON.parse(pendingOrder);
+          orderData.status = 'paid';
+          
+          const orders = JSON.parse(localStorage.getItem('signatureOrders') || '[]');
+          // Check if order already exists
+          if (!orders.find(o => o.orderId === orderId)) {
+            orders.unshift(orderData);
+            localStorage.setItem('signatureOrders', JSON.stringify(orders));
+          }
+          sessionStorage.removeItem('pendingOrder');
+        }
+        
+        // Clean URL
+        window.history.replaceState({}, document.title, window.location.pathname);
+        
+        // Show success
+        alert('Payment successful! Thank you for your order.');
+      }
+    }
+
+    // Run on page load
+    checkPaymentReturn();
 
     // Form submission
     function handleSubmit(e) {
@@ -2333,7 +2372,7 @@
       // Disable submit button
       document.getElementById('submitBtn').disabled = true;
 
-      // Initiate Razorpay payment
+      // Initiate Cashfree payment
       initiatePayment(formData);
     }
 
