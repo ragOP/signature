@@ -2162,6 +2162,24 @@
   </div>
 
   <script>
+    // Modal Functions
+    function openModal() {
+      document.getElementById('modalOverlay').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      document.getElementById('modalOverlay').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // Close modal on overlay click
+    document.getElementById('modalOverlay').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeModal();
+      }
+    });
+
     // Cashfree Configuration (SANDBOX/TEST - NOT FOR PRODUCTION)
     // WARNING: Storing secret keys in frontend is NOT secure. Use backend for production.
     const CASHFREE_CLIENT_ID = 'TEST104297566cd3a0c2604ada0b77595297401';
