@@ -568,55 +568,76 @@
         return;
       }
 
-      // 3. Start Cashfree payment
-      if (!window.Cashfree) {
-        showError('Payment system not loaded. Please refresh and try again.');
-        return;
-      }
-      window.Cashfree.checkout({
-        paymentSessionId,
-        redirect: false, // Use popup/modal
-        onSuccess: async function (data) {
-          // 4. On payment success, call create order API
-          try {
-            const orderRes = await fetch('https://signature-backend-x93b.onrender.com/api/lander4/create-order', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                orderId: data.orderId,
-                amount: formData.amount,
-                fullName: formData.name,
-                email: formData.email,
-                phoneNumber: formData.phone,
-                style: formData.style,
-                remarks: formData.notes,
-                additionalProducts: [],
-              })
-            });
-            const orderData = await orderRes.json();
-            if (!orderData?.success) throw new Error(orderData?.message || 'Order creation failed');
-            // Save to localStorage (optional)
-            const orders = JSON.parse(localStorage.getItem('signatureOrders') || '[]');
-            orders.unshift(formData);
-            localStorage.setItem('signatureOrders', JSON.stringify(orders));
-            // Delete abandoned cart if exists
-            const abdId = localStorage.getItem('abandonedCartID');
-            if (abdId) {
+      // 3. Start Cashfree payment (ensure SDK is loaded and method exists)
+      function startCashfreeCheckout() {
+        if (window.Cashfree && typeof window.Cashfree.checkout === 'function') {
+          window.Cashfree.checkout({
+            paymentSessionId,
+            redirect: false, // Use popup/modal
+            onSuccess: async function (data) {
+              // 4. On payment success, call create order API
               try {
-                await fetch('https://signature-backend-x93b.onrender.com/api/lander4/delete-order-abd/' + abdId, { method: 'DELETE' });
-                localStorage.removeItem('abandonedCartID');
-              } catch (e) { /* ignore */ }
+                const orderRes = await fetch('https://signature-backend-x93b.onrender.com/api/lander4/create-order', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({
+                    orderId: data.orderId,
+                    amount: formData.amount,
+                    fullName: formData.name,
+                    email: formData.email,
+                    phoneNumber: formData.phone,
+                    style: formData.style,
+                    remarks: formData.notes,
+                    additionalProducts: [],
+                  })
+                });
+                const orderData = await orderRes.json();
+                if (!orderData?.success) throw new Error(orderData?.message || 'Order creation failed');
+                // Save to localStorage (optional)
+                const orders = JSON.parse(localStorage.getItem('signatureOrders') || '[]');
+                orders.unshift(formData);
+                localStorage.setItem('signatureOrders', JSON.stringify(orders));
+                // Delete abandoned cart if exists
+                const abdId = localStorage.getItem('abandonedCartID');
+                if (abdId) {
+                  try {
+                    await fetch('https://signature-backend-x93b.onrender.com/api/lander4/delete-order-abd/' + abdId, { method: 'DELETE' });
+                    localStorage.removeItem('abandonedCartID');
+                  } catch (e) { /* ignore */ }
+                }
+                // Redirect to thank you page
+                window.location.href = 'thanyou.html';
+              } catch (err) {
+                showError('Payment succeeded but order creation failed. Please contact support.');
+              }
+            },
+            onFailure: function (data) {
+              showError('Payment failed or cancelled. Please try again.');
             }
-            // Redirect to thank you page
-            window.location.href = 'thanyou.html';
-          } catch (err) {
-            showError('Payment succeeded but order creation failed. Please contact support.');
-          }
-        },
-        onFailure: function (data) {
-          showError('Payment failed or cancelled. Please try again.');
+          });
+        } else {
+          showError('Cashfree SDK not loaded or checkout method missing. Please refresh and try again.');
         }
-      });
+      }
+
+      // Wait for SDK if not loaded yet
+      if (!window.Cashfree || typeof window.Cashfree.checkout !== 'function') {
+        var sdkCheckInterval = setInterval(function() {
+          if (window.Cashfree && typeof window.Cashfree.checkout === 'function') {
+            clearInterval(sdkCheckInterval);
+            startCashfreeCheckout();
+          }
+        }, 200);
+        // Timeout after 5 seconds
+        setTimeout(function() {
+          clearInterval(sdkCheckInterval);
+          if (!window.Cashfree || typeof window.Cashfree.checkout !== 'function') {
+            showError('Cashfree SDK failed to load. Please refresh and try again.');
+          }
+        }, 5000);
+      } else {
+        startCashfreeCheckout();
+      }
     }
   </script>
 
