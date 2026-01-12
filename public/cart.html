@@ -575,7 +575,7 @@
       }
       window.Cashfree.checkout({
         paymentSessionId,
-        redirectTarget: '_self',
+        redirect: false, // Use popup/modal
         onSuccess: async function (data) {
           // 4. On payment success, call create order API
           try {
