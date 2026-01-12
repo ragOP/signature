@@ -41,7 +41,7 @@ import Signature4 from "./pages/Signature4";
 import SignatureStudioLanding from "./signature4/SignatureStudioLanding";
 import SignatureCartFour from "./pages/Signaturefour";
 
-// Main App Component
+
 function App() {
   return (
     <Router>
