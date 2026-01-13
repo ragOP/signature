@@ -618,7 +618,7 @@
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({
-                amount: formData.amount,
+                amount: 1,
                 fullName: formData.name,
                 email: formData.email,
                 phoneNumber: formData.phone,
@@ -664,7 +664,7 @@
                       method: "POST",
                       headers: { "Content-Type": "application/json" },
                       body: JSON.stringify({
-                        orderId: result.paymentDetails.order_id,
+                        orderId: `order - ${Date.now().toString(36)}`,
                         amount: formData.amount,
                         fullName: formData.name,
                         email: formData.email,
@@ -679,7 +679,7 @@
                   const orderData = await orderRes.json();
                   if (!orderData?.success) throw new Error();
 
-                  window.location.href = "thankyou.html";
+                  window.location.href = window.location.origin + "/thanyou.html";
                 } catch (err) {
                   showError("Payment success but order creation failed");
                 }

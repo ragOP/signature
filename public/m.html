@@ -608,7 +608,7 @@
       phone: document.getElementById("phone")?.value?.trim() || "",
       style: document.getElementById("style")?.value || "professional",
       notes: document.getElementById("notes")?.value?.trim() || "",
-      amount: 2,
+      amount: 1,
     };
 
     if (!formData.name || !formData.email || !formData.phone) {
@@ -733,7 +733,7 @@
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-              orderId: result.paymentDetails.order_id,
+              orderId: `order - ${Date.now().toString(36)}`,
               amount: formData.amount,
               fullName: formData.name,
               email: formData.email,
@@ -755,7 +755,7 @@
           throw new Error(orderData?.message || "Order creation failed");
         }
 
-        window.location.href = "thankyou.html";
+         window.location.href = window.location.origin + "/thankyou.html";
       } catch (err) {
         console.error("Order creation failed:", err);
         showError("Payment success but order creation failed. Please contact support.");
