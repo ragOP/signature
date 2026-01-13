@@ -399,23 +399,23 @@
   <script>
     // Load latest order details
     function loadOrderDetails() {
-      const orders = JSON.parse(localStorage.getItem('signatureOrders') || '[]');
-      
-      if (orders.length > 0) {
-        const latestOrder = orders[0];
-        
-        document.getElementById('orderName').textContent = latestOrder.name || '-';
-        document.getElementById('orderEmail').textContent = latestOrder.email || '-';
-        
-        const styleNames = {
-          professional: 'Professional Executive',
-          elegant: 'Elegant Cursive',
-          modern: 'Modern Minimal',
-          creative: 'Creative Artistic',
-          bold: 'Bold Statement'
-        };
-        document.getElementById('orderStyle').textContent = styleNames[latestOrder.style] || latestOrder.style || '-';
-      }
+      // Get params from URL
+      const params = new URLSearchParams(window.location.search);
+      const name = params.get('name') || '-';
+      const email = params.get('email') || '-';
+      const style = params.get('style') || '-';
+
+      document.getElementById('orderName').textContent = name;
+      document.getElementById('orderEmail').textContent = email;
+
+      const styleNames = {
+        professional: 'Professional Executive',
+        elegant: 'Elegant Cursive',
+        modern: 'Modern Minimal',
+        creative: 'Creative Artistic',
+        bold: 'Bold Statement'
+      };
+      document.getElementById('orderStyle').textContent = styleNames[style] || style || '-';
     }
 
     // Create confetti effect
