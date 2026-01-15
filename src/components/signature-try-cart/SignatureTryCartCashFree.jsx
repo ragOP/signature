@@ -294,7 +294,7 @@ function SignatureNewCartCashFree() {
           originalAmount: subtotal,
           orderType: "normal",
           quantity: 1,
-          url: `${window.location.origin}/signature-new-order-confirmation`,
+          url: `${window.location.origin}/signature-try-order-confirmation`,
         },
         {
           headers: {

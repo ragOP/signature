@@ -31,6 +31,8 @@ import NewCart from "./pages/new/NewCart";
 import SignatureCartCashFree from "./pages/SignatureCartCashFree";
 import SignatureOrderConfirmationCashfree from "./pages/SignatureOrderConfirmationCashFree";
 import SignatureNewAbondentReport from "./pages/new/SignatureNewAbondentReport";
+import SignatureTryAbondentReport from "./components/signature-try/SignatureTryAbondentReport";
+
 import SignatureNewAbondentReportv2 from "./pages/new/Sigv2";
 import SignatureNewRecord from "./pages/new/SignatureNewRecord";
 import SignatureNewOrderConfirmationPage from "./pages/new/SignatureNewOrderConfirmationPage";
@@ -38,6 +40,7 @@ import SignatureNewCartCashFree from "./components/signature-new-cart/SignatureN
 import SignatureTryCartCashFree from "./components/signature-try-cart/SignatureTryCartCashFree";
 import SignatureNewCartCashFreeV2 from "./components/signature-new-cart-v2/SignatureNewCartCashFree";
 import SignatureNewOrderConfirmationCashfree from "./pages/new/SignatureNewOrderConfirmationCashfree";
+import SignatureTryOrderConfirmationCashfree from "./components/signature-try/SignatureTryOrderConfirmationCashfree";
 import Signature4 from "./pages/Signature4";
 import SignatureStudioLanding from "./signature4/SignatureStudioLanding";
 import SignatureCartFour from "./pages/Signaturefour";
@@ -139,6 +142,10 @@ function App() {
             element={<SignatureNewOrderConfirmationCashfree />}
           />
               <Route
+            path="/signature-try-order-confirmation"
+            element={<SignatureTryOrderConfirmationCashfree />}
+          />
+              <Route
             path="/signature-new-order-confirmationV2"
             element={<SignatureNewOrderConfirmationCashfree />}
           />
@@ -151,6 +158,10 @@ function App() {
           <Route
             path="/signature-new-abondent-report"
             element={<SignatureNewAbondentReport />}
+          />
+              <Route
+            path="/signature-try-abondent-report"
+            element={<SignatureTryAbondentReport />}
           />
            <Route
             path="/signature-new-abondent-reportv2"
