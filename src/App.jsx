@@ -31,7 +31,7 @@ import NewCart from "./pages/new/NewCart";
 import SignatureCartCashFree from "./pages/SignatureCartCashFree";
 import SignatureOrderConfirmationCashfree from "./pages/SignatureOrderConfirmationCashFree";
 import SignatureNewAbondentReport from "./pages/new/SignatureNewAbondentReport";
-import SignatureTryAbondentReport from "./components/signature-try/SignatureTryAbondentReport";
+import SignatureTryAbondentReport from "./components/signature-try/SignTryAbd";
 
 import SignatureNewAbondentReportv2 from "./pages/new/Sigv2";
 import SignatureNewRecord from "./pages/new/SignatureNewRecord";

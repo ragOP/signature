@@ -387,7 +387,7 @@ const doPayment = async () => {
           })
         );
 
-        navigate("/signature-new-order-confirmation", {
+        navigate("/signature-try-order-confirmation", {
           state: {
             orderId: data.orderId,
             amount: total,
