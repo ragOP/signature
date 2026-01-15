@@ -35,6 +35,7 @@ import SignatureTryAbondentReport from "./components/signature-try/SignTryAbd";
 
 import SignatureNewAbondentReportv2 from "./pages/new/Sigv2";
 import SignatureNewRecord from "./pages/new/SignatureNewRecord";
+import SignatureTryRecord from "./components/signature-try/SignatureTryRecord";
 import SignatureNewOrderConfirmationPage from "./pages/new/SignatureNewOrderConfirmationPage";
 import SignatureNewCartCashFree from "./components/signature-new-cart/SignatureNewCartCashFree";
 import SignatureTryCartCashFree from "./components/signature-try-cart/SignatureTryCartCashFree";
@@ -110,7 +111,7 @@ function App() {
 
             <Route
             path="/signature-try-record"
-            element={<SignatureNewRecord />}
+            element={<SignatureTryRecord />}
           />
              <Route
             path="/signature-new-recordv2"
