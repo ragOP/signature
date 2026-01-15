@@ -104,6 +104,11 @@ function App() {
             path="/signature-new-record"
             element={<SignatureNewRecord />}
           />
+
+            <Route
+            path="/signature-try-record"
+            element={<SignatureNewRecord />}
+          />
              <Route
             path="/signature-new-recordv2"
             element={<SignatureNewRecord />}

@@ -226,7 +226,7 @@ function SignatureNewCartCashFree() {
 
       // Create abandoned cart first
       const abandonedCartRes = await axios.post(
-        `${BACKEND_URL}/api/api/lander90/create-order-abd`,
+        `${BACKEND_URL}/api/lander90/create-order-abd`,
         {
           amount: total,
           // amount: 2,
