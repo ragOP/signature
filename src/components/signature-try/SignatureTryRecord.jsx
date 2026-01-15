@@ -41,7 +41,7 @@ const SignatureNewRecord = () => {
   const fetchOrders = async () => {
     try {
       const response = await fetch(
-        `${BACKEND_URL}/api/lander/90/get-orders`
+        `${BACKEND_URL}/api/lander90/get-orders`
       );
       const result = await response.json();
 
