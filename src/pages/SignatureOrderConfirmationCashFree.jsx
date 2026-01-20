@@ -62,105 +62,8 @@ const SignatureOrderConfirmationCashfree = () => {
     }
 
     // Start verification process
-    verifyPaymentAndCreateOrder();
-  }, [orderId, navigate]);
-
-  // Robust payment verification and order creation
-  const verifyPaymentAndCreateOrder = async () => {
-    const maxAttempts = 5;
-    const retryDelay = 2000; // 2 seconds
-
-    if (verificationAttempts >= maxAttempts) {
-      setOrderStatus("failed");
-      setErrorMessage(
-        "Maximum verification attempts reached. Please contact support."
-      );
-      toast.error("Payment verification failed after multiple attempts.");
-      return;
-    }
-
-    try {
-      setOrderStatus("verifying");
-      setVerificationAttempts((prev) => prev + 1);
-
-      console.log(
-        `Verifying payment for order: ${orderId} (Attempt ${
-          verificationAttempts + 1
-        })`
-      );
-
-      // Step 1: Verify payment status with Cashfree
-      const paymentVerificationResponse = await axios.get(
-        `${BACKEND_URL}/api/payment/details/${orderId}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
-          },
-          timeout: 15000, // 15 second timeout
-        }
-      );
-
-      console.log(
-        "Payment verification response:",
-        paymentVerificationResponse.data
-      );
-
-      const paymentData = paymentVerificationResponse?.data?.data?.[0];
-
-      // Validate payment data
-      if (!paymentData) {
-        throw new Error("No payment data received from server");
-      }
-
-      // Check payment status
-      if (paymentData.payment_status === "SUCCESS") {
-        console.log("Payment verified successfully");
-
-        // Step 2: Create order in database
-        await createOrderInDatabase();
-      } else if (paymentData.order_status === "ACTIVE") {
-        // Payment is still pending, retry after delay
-        console.log("Payment still pending, retrying...");
-        setTimeout(() => {
-          verifyPaymentAndCreateOrder();
-        }, retryDelay);
-      } else if (paymentData.order_status === "EXPIRED") {
-        throw new Error("Payment session has expired. Please try again.");
-      } else {
-        throw new Error(
-          `Payment not successful. Status: ${paymentData.order_status}`
-        );
-      }
-    } catch (error) {
-      console.error("Payment verification error:", error);
-
-      // Handle different types of errors
-      if (error.code === "ECONNABORTED" || error.message.includes("timeout")) {
-        setErrorMessage("Connection timeout. Retrying...");
-        setTimeout(() => {
-          verifyPaymentAndCreateOrder();
-        }, retryDelay);
-      } else if (error.response?.status === 404) {
-        setErrorMessage("Order not found. Please contact support.");
-        setOrderStatus("failed");
-      } else if (error.response?.status === 401) {
-        setErrorMessage("Authentication failed. Please login again.");
-        setOrderStatus("failed");
-        toast.error("Session expired. Please login again.");
-        setTimeout(() => navigate("/signature-cart"), 2000);
-      } else if (error.response?.status >= 500) {
-        setErrorMessage("Server error. Retrying...");
-        setTimeout(() => {
-          verifyPaymentAndCreateOrder();
-        }, retryDelay * 2);
-      } else {
-        setErrorMessage(error.message || "Payment verification failed");
-        setOrderStatus("failed");
-        toast.error("Payment verification failed. Please contact support.");
-      }
-    }
-  };
+    createOrderInDatabase();
+  }, [orderId]);
 
   // Create order in database
   const createOrderInDatabase = async () => {
@@ -245,7 +148,6 @@ const SignatureOrderConfirmationCashfree = () => {
     setVerificationAttempts(0);
     setErrorMessage("");
     setRetryCount((prev) => prev + 1);
-    verifyPaymentAndCreateOrder();
     setTimeout(() => setIsRetrying(false), 1000);
   };
 
@@ -437,7 +339,7 @@ const SignatureOrderConfirmationCashfree = () => {
                       Amount Paid
                     </p>
                     <p className="text-gray-800 font-semibold">
-                      ₹{amount || "N/A"}
+                      ₹{storedOrderData?.amount || "N/A"}
                     </p>
                   </div>
                   <div className="space-y-2">
@@ -445,7 +347,7 @@ const SignatureOrderConfirmationCashfree = () => {
                       Payment Method
                     </p>
                     <p className="text-gray-800 font-primary">
-                      {paymentMethod || "Cashfree"}
+                      {"Cashfree"}
                     </p>
                   </div>
                   <div className="space-y-2">

@@ -86,7 +86,7 @@ const SignatureNewOrderConfirmationCashfree = () => {
     if (verificationAttempts >= maxAttempts) {
       setOrderStatus("failed");
       setErrorMessage(
-        "Maximum verification attempts reached. Please contact support."
+        "Maximum verification attempts reached. Please contact support.",
       );
       toast.error("Payment verification failed after multiple attempts.");
       return;
@@ -99,36 +99,36 @@ const SignatureNewOrderConfirmationCashfree = () => {
       console.log(
         `Verifying payment for order: ${orderId} (Attempt ${
           verificationAttempts + 1
-        })`
+        })`,
       );
-const orderPayload = {
-  ...(storedOrderData || {}),
-  orderId: orderId,
-  amount: amount,
-  fullName: storedOrderData?.fullName,
-  email: storedOrderData?.email,
-  phoneNumber: storedOrderData?.phoneNumber,
-  profession: storedOrderData?.profession,
-  remarks: storedOrderData?.remarks,
-  additionalProducts: storedOrderData?.additionalProducts,
-};
+      const orderPayload = {
+        ...(storedOrderData || {}),
+        orderId: orderId,
+        amount: amount,
+        fullName: storedOrderData?.fullName,
+        email: storedOrderData?.email,
+        phoneNumber: storedOrderData?.phoneNumber,
+        profession: storedOrderData?.profession,
+        remarks: storedOrderData?.remarks,
+        additionalProducts: storedOrderData?.additionalProducts,
+      };
 
       // Step 1: Verify payment status with Cashfree
       const paymentVerificationResponse = await axios.post(
-      `${BACKEND_URL}/api/signature/rag-v2/create-order`,
-          orderPayload,
+        `${BACKEND_URL}/api/signature/rag-v2/create-order`,
+        orderPayload,
         {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
           },
           timeout: 15000, // 15 second timeout
-        }
+        },
       );
 
       console.log(
         "Payment verification response:",
-        paymentVerificationResponse.data
+        paymentVerificationResponse.data,
       );
 
       const paymentData = paymentVerificationResponse?.data?.data?.[0];
@@ -154,7 +154,7 @@ const orderPayload = {
         throw new Error("Payment session has expired. Please try again.");
       } else {
         throw new Error(
-          `Payment not successful. Status: ${paymentData.order_status}`
+          `Payment not successful. Status: ${paymentData.order_status}`,
         );
       }
     } catch (error) {
@@ -217,7 +217,7 @@ const orderPayload = {
             Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
           },
           timeout: 20000, // 20 second timeout
-        }
+        },
       );
 
       console.log("Order creation response:", orderResponse.data);
@@ -232,14 +232,14 @@ const orderPayload = {
 
         // Clear abandoned cart if exists
         await axios.delete(
-          `${BACKEND_URL}/api/signature/rag-v2/delete-order-abd/${abandonedCartID}`
+          `${BACKEND_URL}/api/signature/rag-v2/delete-order-abd/${abandonedCartID}`,
         );
 
         // Clear abandoned cart ID
         // localStorage.removeItem("abandonedCartID");
       } else {
         throw new Error(
-          orderResponse?.data?.message || "Failed to create order"
+          orderResponse?.data?.message || "Failed to create order",
         );
       }
     } catch (error) {
@@ -254,11 +254,11 @@ const orderPayload = {
         setOrderStatus("failed");
       } else {
         setErrorMessage(
-          "Order creation failed. Payment was successful but order could not be created."
+          "Order creation failed. Payment was successful but order could not be created.",
         );
         setOrderStatus("failed");
         toast.error(
-          "Order creation failed. Please contact support with your payment details."
+          "Order creation failed. Please contact support with your payment details.",
         );
       }
     }
