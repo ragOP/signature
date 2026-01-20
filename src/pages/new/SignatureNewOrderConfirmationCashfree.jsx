@@ -49,7 +49,7 @@ const SignatureNewOrderConfirmationCashfree = () => {
 
   // Get order ID from URL params or location state
   const orderIdFromParams = searchParams.get("orderId");
-  const orderIdFromState = location.state?.orderId;
+  const orderIdFromState = Math.random().toString(36).substring(2, 10).toUpperCase();
   const orderId = orderIdFromParams || orderIdFromState;
 
   // Get other data from location state or localStorage
@@ -76,7 +76,7 @@ const SignatureNewOrderConfirmationCashfree = () => {
 
     // Start verification process
     createOrderInDatabase();
-  }, [orderId]);
+  }, []);
 
   // Create order in database
   const createOrderInDatabase = async () => {
@@ -90,7 +90,7 @@ const SignatureNewOrderConfirmationCashfree = () => {
         ...(storedOrderData || {}),
 
         orderId: orderId,
-        amount: amount,
+        amount:  storedOrderData?.amount || 489,
         fullName: storedOrderData?.fullName,
         email: storedOrderData?.email,
         phoneNumber: storedOrderData?.phoneNumber,
@@ -100,7 +100,7 @@ const SignatureNewOrderConfirmationCashfree = () => {
       };
 
       const orderResponse = await axios.post(
-        `${BACKEND_URL}/api/lander4/create-order`,
+        `${BACKEND_URL}/api/signature/rag-v2/create-order`,
         orderPayload,
         {
           headers: {
