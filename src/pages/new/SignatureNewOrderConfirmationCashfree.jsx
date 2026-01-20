@@ -104,7 +104,7 @@ const SignatureNewOrderConfirmationCashfree = () => {
 
       // Step 1: Verify payment status with Cashfree
       const paymentVerificationResponse = await axios.get(
-        `${BACKEND_URL}/api/payment/details/${orderId}`,
+      `${BACKEND_URL}/api/signature/rag-v2/create-order`,
         {
           headers: {
             "Content-Type": "application/json",
