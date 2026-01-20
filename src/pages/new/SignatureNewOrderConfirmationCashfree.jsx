@@ -101,6 +101,17 @@ const SignatureNewOrderConfirmationCashfree = () => {
           verificationAttempts + 1
         })`
       );
+const orderPayload = {
+  ...(storedOrderData || {}),
+  orderId: orderId,
+  amount: amount,
+  fullName: storedOrderData?.fullName,
+  email: storedOrderData?.email,
+  phoneNumber: storedOrderData?.phoneNumber,
+  profession: storedOrderData?.profession,
+  remarks: storedOrderData?.remarks,
+  additionalProducts: storedOrderData?.additionalProducts,
+};
 
       // Step 1: Verify payment status with Cashfree
       const paymentVerificationResponse = await axios.post(
