@@ -482,7 +482,7 @@
         </div>
         <div class="summary-total">
           <span>Total</span>
-          <span class="amount">₹2 <span class="price-badge">90% OFF</span></span>
+          <span class="amount">₹489 <span class="price-badge">90% OFF</span></span>
         </div>
       </div>
 
@@ -555,7 +555,7 @@
           </div>
 
           <button type="submit" class="submit-btn" id="submitBtn">
-            ✦ Pay ₹2 & Get My Signature
+            ✦ Pay ₹489 & Get My Signature
           </button>
         </form>
       </div>
@@ -613,7 +613,7 @@
         submitBtn.disabled = isLoading;
         submitBtn.innerHTML = isLoading
           ? (text || "⏳ Processing...")
-          : "✦ Pay ₹2 & Get My Signature";
+          : "✦ Pay ₹489 & Get My Signature";
       }
 
       function showError(msg) {
@@ -657,7 +657,7 @@
           phone: document.getElementById("phone")?.value?.trim() || "",
           style: document.getElementById("style")?.value || "classic",
           notes: document.getElementById("notes")?.value?.trim() || "",
-          amount: 49, // keep your backend amount
+          amount: 1, // keep your backend amount
         };
 
         if (!formData.name || !formData.email || !formData.phone) {
