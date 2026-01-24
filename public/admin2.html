@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Orders Record</title>
+    <style>
+      body { font-family: Arial, sans-serif; margin: 16px; }
+      .row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 10px; }
+      button, select, input { padding: 6px 10px; }
+      table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+      th, td { border: 1px solid #ddd; padding: 8px; font-size: 14px; }
+      th { background: #f4f4f4; text-align: left; }
+      .tabs button { border: 1px solid #ddd; background: #fff; cursor: pointer; }
+      .tabs button.active { background: #eee; }
+      .muted { color: #666; font-size: 13px; }
+      .hidden { display: none; }
+    </style>
+  </head>
+  <body>
+    <h3 style="margin:0 0 10px;">Orders</h3>
+
+    <div class="row tabs">
+      <button id="tab-record" class="active" type="button">Record</button>
+      <button id="tab-abandoned" type="button">Abandoned</button>
+      <span class="muted" id="status">Idle</span>
+    </div>
+
+    <div class="row">
+      <label>
+        Range:
+        <select id="range">
+          <option value="today">Today</option>
+          <option value="yesterday">Yesterday</option>
+          <option value="week">Last 7 Days</option>
+          <option value="month">Last 30 Days</option>
+          <option value="custom">Custom</option>
+          <option value="all">All</option>
+        </select>
+      </label>
+
+      <label id="customWrap" class="hidden">
+        From: <input id="fromDate" type="date" />
+      </label>
+      <label id="customWrap2" class="hidden">
+        To: <input id="toDate" type="date" />
+      </label>
+
+      <button id="refresh" type="button">Refresh</button>
+      <button id="download" type="button">Download CSV</button>
+    </div>
+
+    <div class="row">
+      <label>
+        Search:
+        <input id="q" type="text" placeholder="name / email / phone / orderId" />
+      </label>
+      <span class="muted" id="count"></span>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Order ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Amount</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+
+    <script>
+      // ✅ endpoints
+      const ENDPOINT_RECORD = "https://signature-backend-x93b.onrender.com/api/lander30/get-orders";
+      const ENDPOINT_ABANDONED = "https://signature-backend-x93b.onrender.com/api/lander30/get-orders-abd";
+
+      // state
+      let activeTab = "record"; // record | abandoned
+      let rawRows = [];
+      let filteredRows = [];
+
+      const el = (id) => document.getElementById(id);
+      const statusEl = el("status");
+      const tbody = el("tbody");
+
+      // tabs
+      el("tab-record").onclick = () => setTab("record");
+      el("tab-abandoned").onclick = () => setTab("abandoned");
+
+      function setTab(tab) {
+        activeTab = tab;
+        el("tab-record").classList.toggle("active", tab === "record");
+        el("tab-abandoned").classList.toggle("active", tab === "abandoned");
+        fetchAndRender();
+      }
+
+      // range UI
+      el("range").addEventListener("change", () => {
+        const isCustom = el("range").value === "custom";
+        el("customWrap").classList.toggle("hidden", !isCustom);
+        el("customWrap2").classList.toggle("hidden", !isCustom);
+        applyFiltersAndRender();
+      });
+
+      el("fromDate").addEventListener("change", applyFiltersAndRender);
+      el("toDate").addEventListener("change", applyFiltersAndRender);
+      el("q").addEventListener("input", applyFiltersAndRender);
+
+      el("refresh").onclick = fetchAndRender;
+      el("download").onclick = () => downloadCSV(filteredRows);
+
+      // helpers
+      function setStatus(msg) { statusEl.textContent = msg; }
+
+      function safeText(v) {
+        if (v === null || v === undefined) return "";
+        return String(v);
+      }
+
+      function parseOrderDate(row) {
+        // your API has orderDate; fallback createdAt
+        const d = row.orderDate || row.createdAt || row.updatedAt;
+        const dt = d ? new Date(d) : null;
+        return dt && !isNaN(dt) ? dt : null;
+      }
+
+      function formatLocal(dt) {
+        // local time display (your browser timezone)
+        return dt ? dt.toLocaleString() : "";
+      }
+
+      function startOfDayLocal(d) {
+        return new Date(d.getFullYear(), d.getMonth(), d.getDate(), 0, 0, 0, 0);
+      }
+
+      function endOfDayLocal(d) {
+        return new Date(d.getFullYear(), d.getMonth(), d.getDate(), 23, 59, 59, 999);
+      }
+
+      function getRangeBounds() {
+        const r = el("range").value;
+        const now = new Date();
+
+        if (r === "all") return { from: null, to: null };
+
+        if (r === "today") {
+          return { from: startOfDayLocal(now), to: endOfDayLocal(now) };
+        }
+
+        if (r === "yesterday") {
+          const y = new Date(now);
+          y.setDate(now.getDate() - 1);
+          return { from: startOfDayLocal(y), to: endOfDayLocal(y) };
+        }
+
+        if (r === "week") {
+          const from = new Date(now);
+          from.setDate(now.getDate() - 6); // include today => 7 days total
+          return { from: startOfDayLocal(from), to: endOfDayLocal(now) };
+        }
+
+        if (r === "month") {
+          const from = new Date(now);
+          from.setDate(now.getDate() - 29); // include today => 30 days
+          return { from: startOfDayLocal(from), to: endOfDayLocal(now) };
+        }
+
+        if (r === "custom") {
+          const fd = el("fromDate").value ? new Date(el("fromDate").value + "T00:00:00") : null;
+          const td = el("toDate").value ? new Date(el("toDate").value + "T00:00:00") : null;
+
+          // if only one side is set, treat other as open-ended
+          const from = fd ? startOfDayLocal(fd) : null;
+          const to = td ? endOfDayLocal(td) : null;
+          return { from, to };
+        }
+
+        return { from: null, to: null };
+      }
+
+      function matchesSearch(row, q) {
+        if (!q) return true;
+        q = q.toLowerCase();
+        const hay = [
+          row.orderId,
+          row.fullName,
+          row.email,
+          row.phoneNumber,
+          row._id
+        ].map(safeText).join(" ").toLowerCase();
+        return hay.includes(q);
+      }
+
+      function applyFiltersAndRender() {
+        const { from, to } = getRangeBounds();
+        const q = el("q").value.trim();
+
+        filteredRows = rawRows
+          .map((r) => ({ ...r, __dt: parseOrderDate(r) }))
+          .filter((r) => {
+            if (!r.__dt) return false;
+            if (from && r.__dt < from) return false;
+            if (to && r.__dt > to) return false;
+            return matchesSearch(r, q);
+          })
+          .sort((a, b) => (b.__dt - a.__dt));
+
+        renderTable(filteredRows);
+        el("count").textContent = `Showing ${filteredRows.length} / ${rawRows.length}`;
+      }
+
+      function renderTable(rows) {
+        tbody.innerHTML = "";
+        if (!rows.length) {
+          const tr = document.createElement("tr");
+          const td = document.createElement("td");
+          td.colSpan = 6;
+          td.textContent = "No records found.";
+          tr.appendChild(td);
+          tbody.appendChild(tr);
+          return;
+        }
+
+        for (const r of rows) {
+          const tr = document.createElement("tr");
+
+          const dt = r.__dt || parseOrderDate(r);
+          const cells = [
+            formatLocal(dt),
+            safeText(r.orderId),
+            safeText(r.fullName),
+            safeText(r.email),
+            safeText(r.phoneNumber),
+            safeText(r.amount),
+          ];
+
+          for (const c of cells) {
+            const td = document.createElement("td");
+            td.textContent = c;
+            tr.appendChild(td);
+          }
+          tbody.appendChild(tr);
+        }
+      }
+
+      async function fetchAndRender() {
+        try {
+          setStatus("Loading...");
+          const url = activeTab === "record" ? ENDPOINT_RECORD : ENDPOINT_ABANDONED;
+
+          const res = await fetch(url, { method: "GET" });
+          if (!res.ok) throw new Error("HTTP " + res.status);
+
+          const json = await res.json();
+          rawRows = Array.isArray(json?.data) ? json.data : [];
+          setStatus(`Loaded: ${rawRows.length}`);
+
+          applyFiltersAndRender();
+        } catch (e) {
+          console.error(e);
+          rawRows = [];
+          filteredRows = [];
+          renderTable([]);
+          el("count").textContent = "";
+          setStatus("Error loading data");
+        }
+      }
+
+      function csvEscape(v) {
+        const s = safeText(v);
+        if (/[",\n]/.test(s)) return `"${s.replace(/"/g, '""')}"`;
+        return s;
+      }
+
+      function downloadCSV(rows) {
+        const tabName = activeTab === "record" ? "record" : "abandoned";
+        const header = ["date", "orderId", "fullName", "email", "phoneNumber", "amount"];
+
+        const lines = [header.join(",")];
+        for (const r of rows) {
+          const dt = r.__dt || parseOrderDate(r);
+          const line = [
+            formatLocal(dt),
+            r.orderId,
+            r.fullName,
+            r.email,
+            r.phoneNumber,
+            r.amount,
+          ].map(csvEscape).join(",");
+          lines.push(line);
+        }
+
+        const blob = new Blob([lines.join("\n")], { type: "text/csv;charset=utf-8" });
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = `orders-${tabName}-${new Date().toISOString().slice(0,10)}.csv`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+      }
+
+      // init
+      (function init() {
+        // default range today
+        el("range").value = "today";
+
+        // set custom defaults
+        const now = new Date();
+        const yyyy = now.getFullYear();
+        const mm = String(now.getMonth() + 1).padStart(2, "0");
+        const dd = String(now.getDate()).padStart(2, "0");
+        el("fromDate").value = `${yyyy}-${mm}-${dd}`;
+        el("toDate").value = `${yyyy}-${mm}-${dd}`;
+
+        fetchAndRender();
+      })();
+    </script>
+  </body>
+</html>
