@@ -1,0 +1,1487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Executive Signature Studio | Premium Signature Design for Professionals</title>
+    <meta name="description" content="Transform your signature into a powerful business asset. Trusted by 10,000+ executives, CEOs, and professionals worldwide.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg: #0a0a0a;
+            --color-surface: #111111;
+            --color-surface-elevated: #1a1a1a;
+            --color-border: #2a2a2a;
+            --color-text: #ffffff;
+            --color-text-secondary: #a0a0a0;
+            --color-text-muted: #666666;
+            --color-accent: #c9a962;
+            --color-accent-hover: #d4b670;
+            --font-display: 'Cormorant Garamond', serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Minimal grain texture */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            opacity: 0.02;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1.5rem 2rem;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        header.scrolled {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom-color: var(--color-border);
+            padding: 1rem 2rem;
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--color-text);
+            letter-spacing: 0.05em;
+        }
+
+        .logo span {
+            color: var(--color-accent);
+        }
+
+        .nav-cta {
+            padding: 0.75rem 2rem;
+            background: transparent;
+            border: 1px solid var(--color-accent);
+            color: var(--color-accent);
+            font-size: 0.875rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .nav-cta:hover {
+            background: var(--color-accent);
+            color: var(--color-bg);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding: 8rem 0 6rem;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-content {
+            max-width: 560px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.5rem 1rem;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--color-text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .hero-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--color-accent);
+            border-radius: 50%;
+        }
+
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 400;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero h1 em {
+            font-style: italic;
+            color: var(--color-accent);
+        }
+
+        .hero-description {
+            font-size: 1.125rem;
+            color: var(--color-text-secondary);
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.25rem 2.5rem;
+            background: var(--color-accent);
+            color: var(--color-bg);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.875rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .hero-cta:hover {
+            background: var(--color-accent-hover);
+            transform: translateY(-2px);
+        }
+
+        .hero-cta svg {
+            width: 20px;
+            height: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .hero-cta:hover svg {
+            transform: translateX(4px);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 3rem;
+            margin-top: 3rem;
+            padding-top: 3rem;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .stat {
+            text-align: left;
+        }
+
+        .stat-value {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--color-text);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 0.5rem;
+        }
+
+        .hero-visual {
+            position: relative;
+        }
+
+        .hero-image-container {
+            position: relative;
+            border: 1px solid var(--color-border);
+            overflow: hidden;
+        }
+
+        .hero-image-container img {
+            width: 100%;
+            display: block;
+            filter: grayscale(20%);
+        }
+
+        .hero-image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+        }
+
+        .verified-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(201, 169, 98, 0.1);
+            border: 1px solid var(--color-accent);
+            font-size: 0.75rem;
+            color: var(--color-accent);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        /* Clients Section */
+        .clients {
+            padding: 4rem 0;
+            border-top: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .clients-label {
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 2rem;
+        }
+
+        .clients-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .client-logo {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            color: var(--color-text-muted);
+            opacity: 0.5;
+            transition: opacity 0.3s ease;
+        }
+
+        .client-logo:hover {
+            opacity: 1;
+        }
+
+        /* Section styles */
+        section {
+            padding: 6rem 0;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 4rem;
+        }
+
+        .section-label {
+            display: inline-block;
+            font-size: 0.75rem;
+            color: var(--color-accent);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 400;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.125rem;
+            color: var(--color-text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Product Definition */
+        .product-definition {
+            background: var(--color-surface);
+            border-top: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .definition-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+        }
+
+        .definition-item {
+            padding: 3rem;
+            border-right: 1px solid var(--color-border);
+            text-align: center;
+        }
+
+        .definition-item:last-child {
+            border-right: none;
+        }
+
+        .definition-icon {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--color-accent);
+            color: var(--color-accent);
+        }
+
+        .definition-title {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .definition-text {
+            font-size: 0.875rem;
+            color: var(--color-text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Process Section */
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .process-step {
+            position: relative;
+            padding: 2rem;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            transition: all 0.3s ease;
+        }
+
+        .process-step:hover {
+            border-color: var(--color-accent);
+            transform: translateY(-4px);
+        }
+
+        .step-number {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            font-weight: 600;
+            color: var(--color-accent);
+            opacity: 0.3;
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+
+        .step-title {
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .step-description {
+            font-size: 0.875rem;
+            color: var(--color-text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Transformation Section */
+        .transformation {
+            background: var(--color-surface);
+            border-top: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .transformation-grid {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .transformation-card {
+            padding: 3rem;
+            border: 1px solid var(--color-border);
+            text-align: center;
+        }
+
+        .transformation-label {
+            font-size: 0.75rem;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 2rem;
+        }
+
+        .before-signature {
+            font-family: 'Comic Sans MS', cursive;
+            font-size: 2rem;
+            color: var(--color-text-muted);
+            opacity: 0.5;
+            transform: rotate(-3deg);
+        }
+
+        .after-signature {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            font-style: italic;
+            color: var(--color-accent);
+            text-shadow: 0 0 30px rgba(201, 169, 98, 0.3);
+            animation: signatureShine 3s ease-in-out infinite;
+        }
+
+        @keyframes signatureShine {
+            0%, 100% { text-shadow: 0 0 30px rgba(201, 169, 98, 0.3); }
+            50% { text-shadow: 0 0 50px rgba(201, 169, 98, 0.5), 0 0 80px rgba(201, 169, 98, 0.2); }
+        }
+
+        .transformation-arrow {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .arrow-line {
+            width: 60px;
+            height: 1px;
+            background: var(--color-accent);
+        }
+
+        .arrow-text {
+            font-size: 0.625rem;
+            color: var(--color-accent);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+        }
+
+        /* Use Cases */
+        .use-cases-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .use-case {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 2rem;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            transition: all 0.3s ease;
+        }
+
+        .use-case:hover {
+            border-color: var(--color-accent);
+        }
+
+        .use-case-icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(201, 169, 98, 0.1);
+            color: var(--color-accent);
+            flex-shrink: 0;
+        }
+
+        .use-case-content h4 {
+            font-family: var(--font-display);
+            font-size: 1.125rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .use-case-content p {
+            font-size: 0.875rem;
+            color: var(--color-text-secondary);
+        }
+
+        /* Styles Section */
+        .styles-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .style-card {
+            padding: 2.5rem 1.5rem;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .style-card:hover {
+            border-color: var(--color-accent);
+            transform: translateY(-4px);
+        }
+
+        .style-preview {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-text);
+        }
+
+        .style-card:nth-child(1) .style-preview { font-family: 'Times New Roman', serif; font-style: italic; }
+        .style-card:nth-child(2) .style-preview { font-family: var(--font-body); font-weight: 300; letter-spacing: 0.1em; }
+        .style-card:nth-child(3) .style-preview { font-family: var(--font-display); font-weight: 700; }
+        .style-card:nth-child(4) .style-preview { font-family: 'Brush Script MT', cursive; }
+
+        .style-name {
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+
+        .style-desc {
+            font-size: 0.75rem;
+            color: var(--color-text-muted);
+        }
+
+        /* Pricing Section */
+        .pricing {
+            background: var(--color-surface);
+            border-top: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .pricing-card {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 4rem;
+            background: var(--color-bg);
+            border: 1px solid var(--color-accent);
+            text-align: center;
+        }
+
+        .pricing-badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: var(--color-accent);
+            color: var(--color-bg);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-title {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .pricing-amount {
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .price-current {
+            font-family: var(--font-display);
+            font-size: 4rem;
+            font-weight: 600;
+            color: var(--color-text);
+        }
+
+        .price-original {
+            font-size: 1.25rem;
+            color: var(--color-text-muted);
+            text-decoration: line-through;
+        }
+
+        .pricing-note {
+            font-size: 0.875rem;
+            color: var(--color-accent);
+            margin-bottom: 2rem;
+        }
+
+        .pricing-features {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 2.5rem;
+            padding: 2rem 0;
+            border-top: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .pricing-features li {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem 0;
+            font-size: 0.9375rem;
+            color: var(--color-text-secondary);
+        }
+
+        .pricing-features li svg {
+            width: 20px;
+            height: 20px;
+            color: var(--color-accent);
+            flex-shrink: 0;
+        }
+
+        .pricing-cta {
+            display: block;
+            width: 100%;
+            padding: 1.25rem;
+            background: var(--color-accent);
+            color: var(--color-bg);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.875rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .pricing-cta:hover {
+            background: var(--color-accent-hover);
+        }
+
+        /* Testimonials */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .testimonial {
+            padding: 2.5rem;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+        }
+
+        .testimonial-text {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--color-text-secondary);
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 48px;
+            height: 48px;
+            background: var(--color-accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            color: var(--color-bg);
+        }
+
+        .author-info h5 {
+            font-size: 0.9375rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .author-info span {
+            font-size: 0.75rem;
+            color: var(--color-text-muted);
+        }
+
+        /* Guarantee */
+        .guarantee {
+            text-align: center;
+            background: var(--color-surface);
+            border-top: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .guarantee-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--color-accent);
+            color: var(--color-accent);
+        }
+
+        .guarantee-title {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .guarantee-text {
+            font-size: 1.125rem;
+            color: var(--color-text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* FAQ */
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 1.5rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: none;
+            border: none;
+            color: var(--color-text);
+            font-family: var(--font-display);
+            font-size: 1.125rem;
+            text-align: left;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .faq-question:hover {
+            color: var(--color-accent);
+        }
+
+        .faq-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-answer p {
+            padding-bottom: 1.5rem;
+            color: var(--color-text-secondary);
+            line-height: 1.7;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+        }
+
+        /* Final CTA */
+        .final-cta {
+            text-align: center;
+            padding: 8rem 0;
+        }
+
+        .final-cta h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 1.5rem;
+        }
+
+        .final-cta p {
+            font-size: 1.125rem;
+            color: var(--color-text-secondary);
+            margin-bottom: 2.5rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .final-cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.25rem 3rem;
+            background: var(--color-accent);
+            color: var(--color-bg);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.875rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .final-cta-btn:hover {
+            background: var(--color-accent-hover);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 0;
+            border-top: 1px solid var(--color-border);
+            text-align: center;
+        }
+
+        .footer-text {
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+        }
+
+        /* Reveal Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .hero-visual {
+                order: -1;
+            }
+
+            .definition-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .definition-item {
+                border-right: none;
+                border-bottom: 1px solid var(--color-border);
+            }
+
+            .definition-item:last-child {
+                border-bottom: none;
+            }
+
+            .process-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .transformation-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .transformation-arrow {
+                transform: rotate(90deg);
+            }
+
+            .styles-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 1rem;
+            }
+
+            .hero {
+                min-height: auto;
+                padding: 6rem 0 4rem;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .process-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .use-cases-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .styles-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-card {
+                padding: 2rem;
+            }
+
+            section {
+                padding: 4rem 0;
+            }
+
+            .clients-logos {
+                gap: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <nav class="container">
+            <div class="logo">Executive<span>.</span>Signature</div>
+            <a href="cart.html" class="nav-cta">Get Started</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content reveal">
+                    <div class="hero-badge">Trusted by Fortune 500 Executives</div>
+                    <h1>Your Signature Is Your <em>Personal Brand</em></h1>
+                    <p class="hero-description">
+                        In boardrooms and business dealings, first impressions matter. 
+                        Transform your signature from an afterthought into a powerful symbol 
+                        of your professional identity.
+                    </p>
+                    <a href="cart.html" class="hero-cta">
+                        Begin Your Transformation
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </a>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <div class="stat-value">10,000+</div>
+                            <div class="stat-label">Executives Served</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">24hrs</div>
+                            <div class="stat-label">Delivery Time</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">100%</div>
+                            <div class="stat-label">Satisfaction Rate</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual reveal">
+                    <div class="hero-image-container">
+                        <img src="assets/hero-transformations.webp" alt="Signature Transformations">
+                        <div class="hero-image-overlay">
+                            <div class="verified-badge">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                Verified Transformations
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Clients Section -->
+    <section class="clients">
+        <div class="container">
+            <p class="clients-label">Trusted by professionals from</p>
+            <div class="clients-logos">
+                <span class="client-logo">McKinsey & Co.</span>
+                <span class="client-logo">Goldman Sachs</span>
+                <span class="client-logo">Deloitte</span>
+                <span class="client-logo">JP Morgan</span>
+                <span class="client-logo">Boston Consulting</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Definition -->
+    <section class="product-definition reveal">
+        <div class="container">
+            <div class="definition-grid">
+                <div class="definition-item">
+                    <div class="definition-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                        </svg>
+                    </div>
+                    <h3 class="definition-title">Human Crafted</h3>
+                    <p class="definition-text">No AI. No templates. Each signature is meticulously designed by professional calligraphers with 15+ years of experience.</p>
+                </div>
+                <div class="definition-item">
+                    <div class="definition-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="definition-title">24-Hour Delivery</h3>
+                    <p class="definition-text">Time is your most valuable asset. Receive your complete signature package within 24 hours of order confirmation.</p>
+                </div>
+                <div class="definition-item">
+                    <div class="definition-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
+                    </div>
+                    <h3 class="definition-title">Unlimited Revisions</h3>
+                    <p class="definition-text">Your satisfaction is non-negotiable. Request unlimited refinements until your signature perfectly represents you.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process reveal">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">The Process</span>
+                <h2 class="section-title">Four Steps to Your Executive Signature</h2>
+                <p class="section-subtitle">A streamlined process designed for busy professionals</p>
+            </div>
+            <div class="process-grid">
+                <div class="process-step">
+                    <div class="step-number">01</div>
+                    <h4 class="step-title">Submit Details</h4>
+                    <p class="step-description">Share your name and any stylistic preferences. Takes less than 2 minutes.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">02</div>
+                    <h4 class="step-title">Expert Design</h4>
+                    <p class="step-description">Our calligraphers create 3 unique signature concepts tailored to your persona.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">03</div>
+                    <h4 class="step-title">Select & Refine</h4>
+                    <p class="step-description">Choose your favorite and request any adjustments until it's perfect.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">04</div>
+                    <h4 class="step-title">Master It</h4>
+                    <p class="step-description">Receive practice guides and video tutorials to perfect your new signature.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Transformation Section -->
+    <section class="transformation reveal">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">The Difference</span>
+                <h2 class="section-title">From Ordinary to Extraordinary</h2>
+            </div>
+            <div class="transformation-grid">
+                <div class="transformation-card">
+                    <div class="transformation-label">Before</div>
+                    <div class="before-signature">John Smith</div>
+                </div>
+                <div class="transformation-arrow">
+                    <div class="arrow-line"></div>
+                    <span class="arrow-text">Transformation</span>
+                    <div class="arrow-line"></div>
+                </div>
+                <div class="transformation-card">
+                    <div class="transformation-label">After</div>
+                    <div class="after-signature">John Smith</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases -->
+    <section class="use-cases reveal">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Applications</span>
+                <h2 class="section-title">Where Your Signature Makes an Impact</h2>
+            </div>
+            <div class="use-cases-grid">
+                <div class="use-case">
+                    <div class="use-case-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                    </div>
+                    <div class="use-case-content">
+                        <h4>Contract Signing</h4>
+                        <p>Command respect in every legal document</p>
+                    </div>
+                </div>
+                <div class="use-case">
+                    <div class="use-case-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    <div class="use-case-content">
+                        <h4>Email Signatures</h4>
+                        <p>Stand out in every professional correspondence</p>
+                    </div>
+                </div>
+                <div class="use-case">
+                    <div class="use-case-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" />
+                        </svg>
+                    </div>
+                    <div class="use-case-content">
+                        <h4>Business Cards</h4>
+                        <p>Leave a lasting impression at every meeting</p>
+                    </div>
+                </div>
+                <div class="use-case">
+                    <div class="use-case-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <div class="use-case-content">
+                        <h4>Checks & Banking</h4>
+                        <p>Secure and distinctive financial transactions</p>
+                    </div>
+                </div>
+                <div class="use-case">
+                    <div class="use-case-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                        </svg>
+                    </div>
+                    <div class="use-case-content">
+                        <h4>Book Authoring</h4>
+                        <p>Perfect for publications and media appearances</p>
+                    </div>
+                </div>
+                <div class="use-case">
+                    <div class="use-case-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    <div class="use-case-content">
+                        <h4>Executive Memos</h4>
+                        <p>Add authority to internal communications</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Styles Section -->
+    <section class="styles reveal">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Style Options</span>
+                <h2 class="section-title">Find Your Professional Aesthetic</h2>
+            </div>
+            <div class="styles-grid">
+                <div class="style-card">
+                    <div class="style-preview">Classic</div>
+                    <div class="style-name">Traditional</div>
+                    <div class="style-desc">Timeless elegance</div>
+                </div>
+                <div class="style-card">
+                    <div class="style-preview">MODERN</div>
+                    <div class="style-name">Contemporary</div>
+                    <div class="style-desc">Clean & minimal</div>
+                </div>
+                <div class="style-card">
+                    <div class="style-preview">Executive</div>
+                    <div class="style-name">Authoritative</div>
+                    <div class="style-desc">Bold & commanding</div>
+                </div>
+                <div class="style-card">
+                    <div class="style-preview">Artistic</div>
+                    <div class="style-name">Creative</div>
+                    <div class="style-desc">Distinctive flair</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing reveal">
+        <div class="container">
+            <div class="pricing-card">
+                <div class="pricing-badge">Limited Availability</div>
+                <h3 class="pricing-title">Executive Signature Package</h3>
+                <div class="pricing-amount">
+                    <span class="price-current">₹489</span>
+                    <span class="price-original">₹4,999</span>
+                </div>
+                <p class="pricing-note">90% OFF — Only 7 spots remaining this week</p>
+                <ul class="pricing-features">
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        3 Unique Signature Designs
+                    </li>
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        HD Digital Files (PNG, SVG, PDF)
+                    </li>
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        Video Tutorial for Perfecting Your Signature
+                    </li>
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        Practice Sheets for Muscle Memory
+                    </li>
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        Unlimited Revisions Until Perfect
+                    </li>
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        24-Hour Express Delivery
+                    </li>
+                </ul>
+                <a href="cart.html" class="pricing-cta">Claim Your Spot Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials reveal">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">Testimonials</span>
+                <h2 class="section-title">What Professionals Say</h2>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial">
+                    <p class="testimonial-text">"As a managing partner, my signature appears on every major contract. This investment elevated my professional presence instantly."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">RK</div>
+                        <div class="author-info">
+                            <h5>Rajesh Kumar</h5>
+                            <span>Managing Partner, Law Firm</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-text">"The attention to detail was remarkable. They captured the exact balance of authority and approachability I was looking for."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">PS</div>
+                        <div class="author-info">
+                            <h5>Priya Sharma</h5>
+                            <span>CFO, Tech Startup</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-text">"Worth every rupee. My new signature commands respect in boardrooms. The practice tutorials made mastering it effortless."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">AM</div>
+                        <div class="author-info">
+                            <h5>Arun Mehta</h5>
+                            <span>Director, Investment Bank</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guarantee -->
+    <section class="guarantee reveal">
+        <div class="container">
+            <div class="guarantee-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+            </div>
+            <h2 class="guarantee-title">100% Satisfaction Guarantee</h2>
+            <p class="guarantee-text">Not completely satisfied? We'll redesign your signature at no additional cost until it perfectly represents your professional identity.</p>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq reveal">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">FAQ</span>
+                <h2 class="section-title">Questions Executives Ask</h2>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        How quickly will I receive my signature designs?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>You'll receive your 3 unique signature concepts within 24 hours of order confirmation. Revisions are typically completed within 12 hours.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Is this actually hand-designed or AI-generated?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>100% human-crafted. Our team of professional calligraphers with 15+ years of experience designs each signature individually. No AI, no templates.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        What if I'm not satisfied with the designs?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>We offer unlimited revisions until you're completely satisfied. If we can't meet your expectations, we'll provide a full refund—no questions asked.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Will I be able to replicate the signature consistently?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Absolutely. We provide detailed video tutorials and practice sheets specifically designed to help you master your new signature with muscle memory.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        What file formats do I receive?
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>You'll receive high-resolution PNG (transparent background), SVG (scalable vector), and PDF formats—perfect for digital and print use across all platforms.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta reveal">
+        <div class="container">
+            <h2>Ready to Elevate Your Professional Identity?</h2>
+            <p>Join 10,000+ executives who've transformed their signature into a powerful business asset.</p>
+            <a href="cart.html" class="final-cta-btn">
+                Begin Your Transformation
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p class="footer-text">© 2024 Executive Signature Studio. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Sticky header
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            header.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Reveal animations
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        reveals.forEach(el => observer.observe(el));
+
+        // FAQ accordion
+        document.querySelectorAll('.faq-question').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const item = btn.parentElement;
+                const isActive = item.classList.contains('active');
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+                if (!isActive) item.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
