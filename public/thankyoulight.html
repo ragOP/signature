@@ -1,319 +1,437 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Thank you for your order - Easy Soul Logo">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Thank you for your order - Easy Soul Logo" />
   <title>Thank You - Easy Soul Logo</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Great+Vibes&display=swap" rel="stylesheet">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Great+Vibes&display=swap" rel="stylesheet" />
+
   <style>
-    :root {
-      --pink-light: #ff6b9d;
-      --pink: #ec4899;
-      --pink-dark: #be185d;
-      --blue-light: #60a5fa;
-      --blue: #3b82f6;
-      --blue-dark: #1d4ed8;
-      --purple: #a855f7;
-      --bg-dark: #0f0a1a;
-      --bg-card: rgba(255, 255, 255, 0.05);
-      --text-primary: #ffffff;
-      --text-secondary: rgba(255, 255, 255, 0.7);
-      --text-muted: rgba(255, 255, 255, 0.5);
-      --gradient-main: linear-gradient(135deg, var(--blue) 0%, var(--purple) 50%, var(--pink) 100%);
-      --gradient-cta: linear-gradient(135deg, var(--pink) 0%, var(--purple) 50%, var(--blue) 100%);
-      --gradient-bg: linear-gradient(180deg, #0f0a1a 0%, #1a0a2e 50%, #0a1628 100%);
-      --shadow-glow: 0 0 40px rgba(168, 85, 247, 0.3);
-      --radius: 16px;
-      --green: #22c55e;
+    /* ===== Signature Studio (Warm Cream + Gold) THEME ADAPTED ===== */
+    :root{
+      --color-cream: #fffbf5;
+      --color-warm-light: #fdf6ed;
+      --color-warm-beige: #f5ebe0;
+
+      --color-accent-gold: #c9a227;
+      --color-accent-bronze: #a67c52;
+
+      --color-text: #2d2a26;
+      --color-text-muted: #5c5651;
+
+      --color-success: #2e7d32;
+
+      --gradient-gold: linear-gradient(135deg, #c9a227 0%, #dab43a 50%, #c9a227 100%);
+      --bg-page: linear-gradient(145deg, #fffbf5 0%, #fef3e2 50%, #fde8c8 100%);
+
+      --radius: 18px;
+      --shadow-soft: 0 14px 45px rgba(45, 42, 38, 0.08);
+      --shadow-gold: 0 10px 40px rgba(201, 162, 39, 0.25);
+
+      --font-body: "Poppins", -apple-system, system-ui, sans-serif;
+      --font-script: "Great Vibes", cursive;
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
 
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: var(--gradient-bg);
-      color: var(--text-primary);
+    body{
+      font-family: var(--font-body);
+      background: var(--bg-page);
+      background-attachment: fixed;
+      color: var(--color-text);
       line-height: 1.6;
       min-height: 100vh;
-      display: flex;
+      display:flex;
       flex-direction: column;
     }
 
-    /* Header */
-    .header {
+    /* ===== Header ===== */
+    .header{
       padding: 16px;
-      background: rgba(15, 10, 26, 0.9);
+      background: rgba(255, 251, 245, 0.92);
       backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      border-bottom: 1px solid rgba(201, 162, 39, 0.14);
+      position: sticky;
+      top: 0;
+      z-index: 20;
     }
 
-    .header-content {
-      max-width: 600px;
+    .header-content{
+      max-width: 680px;
       margin: 0 auto;
-      text-align: center;
-    }
-
-    .logo {
-      font-size: 1.4rem;
-      font-weight: 700;
-      background: var(--gradient-main);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      text-decoration: none;
-    }
-
-    /* Main Content */
-    .thankyou-container {
-      flex: 1;
-      display: flex;
-      align-items: center;
+      display:flex;
       justify-content: center;
-      padding: 40px 16px;
+      align-items:center;
+      text-align:center;
+      padding: 4px 0;
     }
 
-    .thankyou-content {
-      max-width: 500px;
-      text-align: center;
-    }
-
-    /* Success Icon */
-    .success-icon {
-      width: 100px;
-      height: 100px;
-      background: linear-gradient(135deg, var(--green), #16a34a);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 3rem;
-      margin: 0 auto 30px;
-      animation: bounce 0.6s ease-out;
-      box-shadow: 0 0 60px rgba(34, 197, 94, 0.4);
-    }
-
-    @keyframes bounce {
-      0% { transform: scale(0); }
-      50% { transform: scale(1.2); }
-      100% { transform: scale(1); }
-    }
-
-    .thankyou-title {
-      font-size: 2rem;
+    .logo{
+      font-size: 1.35rem;
       font-weight: 800;
-      margin-bottom: 12px;
-      background: var(--gradient-main);
+      background: var(--gradient-gold);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-decoration:none;
+      letter-spacing: 0.2px;
+      white-space: nowrap;
+    }
+
+    /* ===== Main Content ===== */
+    .thankyou-container{
+      flex: 1;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding: 40px 16px 70px;
+    }
+
+    .thankyou-content{
+      width: 100%;
+      max-width: 560px;
+      text-align:center;
+    }
+
+    /* ===== Success Icon (Luxury style) ===== */
+    .success-icon{
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size: 2.6rem;
+      margin: 0 auto 22px;
+      background: linear-gradient(135deg, rgba(46,125,50,0.20) 0%, rgba(46,125,50,0.08) 100%);
+      border: 1px solid rgba(46,125,50,0.30);
+      box-shadow: 0 0 0 6px rgba(46,125,50,0.08), 0 22px 55px rgba(45,42,38,0.10);
+      animation: pop 0.55s ease-out;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .success-icon::before{
+      content:"";
+      position:absolute;
+      inset:-40%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.55), transparent 60%);
+      transform: rotate(15deg);
+      opacity: 0.8;
+      pointer-events:none;
+    }
+
+    @keyframes pop{
+      0%{transform: scale(0.5); opacity: 0;}
+      60%{transform: scale(1.06); opacity: 1;}
+      100%{transform: scale(1); opacity: 1;}
+    }
+
+    .success-check{
+      font-weight: 900;
+      color: var(--color-success);
+      transform: translateY(-1px);
+    }
+
+    /* ===== Title + Subtitle ===== */
+    .thankyou-title{
+      font-size: clamp(1.9rem, 4vw, 2.6rem);
+      font-weight: 900;
+      margin-bottom: 10px;
+      color: var(--color-text);
+    }
+
+    .thankyou-title .gold{
+      background: var(--gradient-gold);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
 
-    .thankyou-subtitle {
-      font-size: 1.1rem;
-      color: var(--text-secondary);
-      margin-bottom: 30px;
+    .thankyou-subtitle{
+      font-size: 1.02rem;
+      color: var(--color-text-muted);
+      margin: 0 auto 22px;
+      max-width: 46ch;
     }
 
-    /* Order Details */
-    .order-details {
-      background: var(--bg-card);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: var(--radius);
-      padding: 24px;
-      margin-bottom: 30px;
-      text-align: left;
+    /* ===== Signature Preview Card ===== */
+    .signature-card{
+      background: linear-gradient(145deg, #faf6f0 0%, #f5ebe0 100%);
+      border: 2px dashed rgba(201, 162, 39, 0.28);
+      border-radius: 14px;
+      padding: 22px 18px;
+      box-shadow: 0 10px 30px rgba(45,42,38,.06);
+      margin-bottom: 18px;
     }
 
-    .order-details-title {
-      font-size: 1rem;
-      font-weight: 600;
-      margin-bottom: 16px;
-      text-align: center;
-    }
-
-    .order-detail-row {
-      display: flex;
-      justify-content: space-between;
-      padding: 10px 0;
-      font-size: 0.9rem;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .order-detail-row:last-child {
-      border-bottom: none;
-    }
-
-    .order-detail-label {
-      color: var(--text-muted);
-    }
-
-    .order-detail-value {
-      color: var(--text-primary);
-      font-weight: 500;
-    }
-
-    /* What's Next */
-    .whats-next {
-      background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(236, 72, 153, 0.1) 100%);
-      border: 1px solid rgba(168, 85, 247, 0.3);
-      border-radius: var(--radius);
-      padding: 24px;
-      margin-bottom: 30px;
-    }
-
-    .whats-next-title {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 16px;
-    }
-
-    .timeline {
-      text-align: left;
-    }
-
-    .timeline-item {
-      display: flex;
-      gap: 14px;
-      margin-bottom: 16px;
-    }
-
-    .timeline-item:last-child {
-      margin-bottom: 0;
-    }
-
-    .timeline-icon {
-      width: 36px;
-      height: 36px;
-      background: var(--gradient-main);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.9rem;
-      flex-shrink: 0;
-    }
-
-    .timeline-content h4 {
-      font-size: 0.95rem;
-      font-weight: 600;
-      margin-bottom: 2px;
-    }
-
-    .timeline-content p {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-
-    /* Buttons */
-    .action-buttons {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .primary-btn {
-      display: inline-block;
-      padding: 16px 32px;
-      background: var(--gradient-cta);
-      border: none;
-      border-radius: 50px;
-      color: white;
-      font-size: 1rem;
-      font-weight: 700;
-      cursor: pointer;
-      text-decoration: none;
-      transition: all 0.3s;
-    }
-
-    .primary-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 15px 40px rgba(168, 85, 247, 0.4);
-    }
-
-    .secondary-btn {
-      display: inline-block;
-      padding: 14px 28px;
-      background: var(--bg-card);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 50px;
-      color: white;
-      font-size: 0.95rem;
-      font-weight: 600;
-      cursor: pointer;
-      text-decoration: none;
-      transition: all 0.3s;
-    }
-
-    .secondary-btn:hover {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: rgba(255, 255, 255, 0.3);
-    }
-
-    /* Contact Info */
-    .contact-info {
-      margin-top: 30px;
-      padding: 20px;
-      background: var(--bg-card);
-      border-radius: var(--radius);
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-    }
-
-    .contact-info p {
+    .signature-label{
+      font-size: 0.75rem;
+      color: var(--color-text-muted);
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
       margin-bottom: 8px;
     }
 
-    .contact-info a {
-      color: var(--purple);
-      text-decoration: none;
+    .signature-value{
+      font-family: var(--font-script);
+      font-size: clamp(2.2rem, 7vw, 3.3rem);
+      color: var(--color-text);
+      opacity: 0.92;
+      line-height: 1.05;
+      padding: 2px 0 6px;
+      min-height: 56px;
     }
 
-    .contact-info a:hover {
-      text-decoration: underline;
+    /* ===== Order Details ===== */
+    .order-details{
+      background: rgba(255, 251, 245, 0.92);
+      border: 1px solid rgba(201, 162, 39, 0.18);
+      border-radius: var(--radius);
+      padding: 22px;
+      margin-bottom: 18px;
+      text-align: left;
+      box-shadow: var(--shadow-soft);
     }
 
-    /* Confetti Animation */
-    .confetti {
+    .order-details-title{
+      font-size: 1rem;
+      font-weight: 900;
+      text-align:center;
+      margin-bottom: 14px;
+      color: var(--color-text);
+    }
+
+    .order-detail-row{
+      display:flex;
+      justify-content: space-between;
+      align-items:flex-start;
+      gap: 14px;
+      padding: 10px 0;
+      font-size: 0.92rem;
+      border-bottom: 1px solid rgba(201, 162, 39, 0.12);
+    }
+
+    .order-detail-row:last-child{ border-bottom:none; }
+
+    .order-detail-label{
+      color: var(--color-text-muted);
+      font-weight: 700;
+      min-width: 90px;
+    }
+
+    .order-detail-value{
+      color: var(--color-text);
+      font-weight: 700;
+      text-align:right;
+      word-break: break-word;
+    }
+
+    .status-pill{
+      display: inline-flex;
+      align-items:center;
+      gap: 8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(46,125,50,0.10);
+      border: 1px solid rgba(46,125,50,0.20);
+      color: var(--color-success);
+      font-weight: 900;
+      font-size: 0.85rem;
+      white-space: nowrap;
+    }
+
+    /* ===== What's Next ===== */
+    .whats-next{
+      background: rgba(255, 251, 245, 0.92);
+      border: 1px solid rgba(201, 162, 39, 0.18);
+      border-radius: var(--radius);
+      padding: 22px;
+      margin-bottom: 18px;
+      box-shadow: var(--shadow-soft);
+      text-align:left;
+    }
+
+    .whats-next-title{
+      font-size: 1.05rem;
+      font-weight: 900;
+      margin-bottom: 14px;
+      color: var(--color-text);
+      text-align:center;
+    }
+
+    .timeline{
+      display:flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .timeline-item{
+      display:flex;
+      gap: 12px;
+      align-items:flex-start;
+    }
+
+    .timeline-icon{
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-shrink: 0;
+      background: rgba(201, 162, 39, 0.14);
+      border: 1px solid rgba(201, 162, 39, 0.26);
+      color: var(--color-accent-gold);
+      font-weight: 900;
+    }
+
+    .timeline-content h4{
+      font-size: 0.95rem;
+      font-weight: 900;
+      margin-bottom: 2px;
+      color: var(--color-text);
+    }
+
+    .timeline-content p{
+      font-size: 0.86rem;
+      color: var(--color-text-muted);
+    }
+
+    /* ===== Buttons ===== */
+    .action-buttons{
+      display:flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 8px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .primary-btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width: 100%;
+      max-width: 360px;
+      padding: 16px 28px;
+      background: var(--gradient-gold);
+      border: none;
+      border-radius: 999px;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 900;
+      cursor: pointer;
+      text-decoration:none;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-gold);
+    }
+
+    .primary-btn::before{
+      content:"";
+      position:absolute;
+      top:0;
+      left:-100%;
+      width:100%;
+      height:100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.32), transparent);
+      animation: shimmer 2.7s infinite;
+    }
+
+    @keyframes shimmer{
+      0%{left:-100%;}
+      100%{left:100%;}
+    }
+
+    .primary-btn:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 16px 55px rgba(201, 162, 39, 0.35);
+    }
+
+    .primary-btn:active{ transform: scale(0.985); }
+
+    .secondary-btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width: 100%;
+      max-width: 360px;
+      padding: 14px 24px;
+      background: rgba(255, 251, 245, 0.75);
+      border: 1px solid rgba(201, 162, 39, 0.16);
+      border-radius: 999px;
+      color: var(--color-text);
+      font-size: 0.95rem;
+      font-weight: 800;
+      cursor: pointer;
+      text-decoration:none;
+      transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+      box-shadow: 0 10px 28px rgba(45,42,38,.06);
+    }
+
+    .secondary-btn:hover{
+      background: rgba(255, 251, 245, 0.92);
+      border-color: rgba(201, 162, 39, 0.26);
+      transform: translateY(-1px);
+    }
+
+    /* ===== Contact Info ===== */
+    .contact-info{
+      margin-top: 18px;
+      padding: 18px;
+      background: rgba(255, 251, 245, 0.90);
+      border: 1px solid rgba(201, 162, 39, 0.14);
+      border-radius: var(--radius);
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+      box-shadow: 0 10px 28px rgba(45,42,38,.06);
+      text-align:left;
+    }
+
+    .contact-info p{ margin-bottom: 8px; }
+    .contact-info p:last-child{ margin-bottom: 0; }
+
+    .contact-info a{
+      color: var(--color-accent-gold);
+      text-decoration:none;
+      font-weight: 800;
+    }
+
+    .contact-info a:hover{ text-decoration: underline; }
+
+    /* ===== Confetti ===== */
+    .confetti{
       position: fixed;
       width: 10px;
       height: 10px;
-      background: var(--pink);
+      background: var(--color-accent-gold);
       animation: fall 3s linear forwards;
-      pointer-events: none;
+      pointer-events:none;
+      z-index: 50;
     }
 
-    @keyframes fall {
-      0% {
-        transform: translateY(-100vh) rotate(0deg);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(100vh) rotate(720deg);
-        opacity: 0;
-      }
+    @keyframes fall{
+      0%{ transform: translateY(-100vh) rotate(0deg); opacity:1; }
+      100%{ transform: translateY(100vh) rotate(720deg); opacity:0; }
     }
 
-    @media (min-width: 768px) {
-      .thankyou-title {
-        font-size: 2.5rem;
-      }
-
-      .action-buttons {
-        flex-direction: row;
-        justify-content: center;
-      }
+    @media (min-width: 768px){
+      .thankyou-container{ padding: 60px 16px 80px; }
+      .action-buttons{ flex-direction: row; }
+      .primary-btn, .secondary-btn{ width: auto; min-width: 240px; }
+      .contact-info{ text-align:center; }
     }
   </style>
 </head>
-<body>
 
+<body>
   <!-- Header -->
   <header class="header">
     <div class="header-content">
@@ -324,59 +442,71 @@
   <!-- Thank You Content -->
   <div class="thankyou-container">
     <div class="thankyou-content">
-      <div class="success-icon">✓</div>
-      
-      <h1 class="thankyou-title">🎉 Order Received!</h1>
-      <p class="thankyou-subtitle">Thank you for choosing Easy Soul Logo. We're excited to create your perfect signature!</p>
+      <div class="success-icon"><span class="success-check">✓</span></div>
 
-      <!-- Order Details -->
+      <h1 class="thankyou-title"><span class="gold">Order Confirmed</span> 🎉</h1>
+      <p class="thankyou-subtitle">
+        Thank you for choosing Easy Soul Logo. Your request is locked in — we’ll start crafting your signature right away.
+      </p>
+
+      <!-- Signature Preview -->
+      <div class="signature-card">
+        <div class="signature-label">Your Signature Preview</div>
+        <div class="signature-value" id="signaturePreview">Your Name</div>
+      </div>
+
+      <!-- Order Details (NO PRICING) -->
       <div class="order-details" id="orderDetails">
-        <div class="order-details-title">📋 Order Details</div>
+        <div class="order-details-title">📋 Your Details</div>
+
         <div class="order-detail-row">
           <span class="order-detail-label">Name</span>
           <span class="order-detail-value" id="orderName">-</span>
         </div>
+
         <div class="order-detail-row">
           <span class="order-detail-label">Email</span>
           <span class="order-detail-value" id="orderEmail">-</span>
         </div>
+
         <div class="order-detail-row">
           <span class="order-detail-label">Style</span>
           <span class="order-detail-value" id="orderStyle">-</span>
         </div>
-        <div class="order-detail-row">
-          <span class="order-detail-label">Amount</span>
-          <span class="order-detail-value">₹489</span>
-        </div>
+
         <div class="order-detail-row">
           <span class="order-detail-label">Status</span>
-          <span class="order-detail-value" style="color: var(--green);">✓ Order Placed</span>
+          <span class="order-detail-value">
+            <span class="status-pill">✓ Order Placed</span>
+          </span>
         </div>
       </div>
 
-      <!-- What's Next -->
+      <!-- What's Next (Updated content) -->
       <div class="whats-next">
         <div class="whats-next-title">🚀 What Happens Next?</div>
         <div class="timeline">
           <div class="timeline-item">
             <div class="timeline-icon">1</div>
             <div class="timeline-content">
-              <h4>Order Confirmation</h4>
-              <p>You'll receive an email with order details shortly</p>
+              <h4>Confirmation</h4>
+              <p>We’ll send you an email/WhatsApp confirmation with your submitted details.</p>
             </div>
           </div>
+
           <div class="timeline-item">
             <div class="timeline-icon">2</div>
             <div class="timeline-content">
-              <h4>Design Process</h4>
-              <p>Our designers will craft 3 unique signatures for you</p>
+              <h4>Design & Craft</h4>
+              <p>Our designer creates multiple signature options based on your selected style.</p>
             </div>
           </div>
+
           <div class="timeline-item">
             <div class="timeline-icon">3</div>
             <div class="timeline-content">
               <h4>Delivery</h4>
-              <p>Complete package delivered to your email in 24-48 hours</p>
+              <p>You’ll receive your complete package within <strong>24–48 hours</strong> on your email.</p>
             </div>
           </div>
         </div>
@@ -391,58 +521,63 @@
       <!-- Contact Info -->
       <div class="contact-info">
         <p><strong>Need help?</strong></p>
-        <p>If you have any questions, feel free to contact us at <a href="mailto:support@easysoullogo.com">support@easysoullogo.com</a></p>
+        <p>
+          Email us at
+          <a href="mailto:support@easysoullogo.com">support@easysoullogo.com</a>
+          and we’ll reply quickly.
+        </p>
       </div>
     </div>
   </div>
 
   <script>
-    // Load latest order details
+    // Load latest order details + signature preview
     function loadOrderDetails() {
-      // Get params from URL
       const params = new URLSearchParams(window.location.search);
-      const name = params.get('name') || '-';
-      const email = params.get('email') || '-';
-      const style = params.get('style') || '-';
+      const name = params.get("name") || "-";
+      const email = params.get("email") || "-";
+      const style = params.get("style") || "-";
 
-      document.getElementById('orderName').textContent = name;
-      document.getElementById('orderEmail').textContent = email;
+      document.getElementById("orderName").textContent = name;
+      document.getElementById("orderEmail").textContent = email;
+
+      // signature preview (script font)
+      document.getElementById("signaturePreview").textContent = name && name !== "-" ? name : "Your Name";
 
       const styleNames = {
-        professional: 'Professional Executive',
-        elegant: 'Elegant Cursive',
-        modern: 'Modern Minimal',
-        creative: 'Creative Artistic',
-        bold: 'Bold Statement'
+        professional: "Professional Executive",
+        elegant: "Elegant Cursive",
+        modern: "Modern Minimal",
+        creative: "Creative Artistic",
+        bold: "Bold Statement"
       };
-      document.getElementById('orderStyle').textContent = styleNames[style] || style || '-';
+
+      document.getElementById("orderStyle").textContent = styleNames[style] || style || "-";
     }
 
-    // Create confetti effect
+    // Confetti effect (gold palette)
     function createConfetti() {
-      const colors = ['#ec4899', '#a855f7', '#3b82f6', '#22c55e', '#fbbf24'];
-      
-      for (let i = 0; i < 50; i++) {
+      const colors = ["#c9a227", "#dab43a", "#a67c52", "#2e7d32", "#fffbf5"];
+
+      for (let i = 0; i < 46; i++) {
         setTimeout(() => {
-          const confetti = document.createElement('div');
-          confetti.className = 'confetti';
-          confetti.style.left = Math.random() * 100 + 'vw';
+          const confetti = document.createElement("div");
+          confetti.className = "confetti";
+          confetti.style.left = Math.random() * 100 + "vw";
           confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
-          confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
-          confetti.style.width = (Math.random() * 10 + 5) + 'px';
+          confetti.style.animationDuration = (Math.random() * 2 + 2) + "s";
+          confetti.style.width = (Math.random() * 10 + 6) + "px";
           confetti.style.height = confetti.style.width;
-          confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+          confetti.style.borderRadius = Math.random() > 0.5 ? "50%" : "0";
           document.body.appendChild(confetti);
-          
+
           setTimeout(() => confetti.remove(), 5000);
-        }, i * 50);
+        }, i * 55);
       }
     }
 
-    // Initialize
     loadOrderDetails();
     createConfetti();
   </script>
-
 </body>
 </html>
