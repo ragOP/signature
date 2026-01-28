@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Thank you for your order - Easy Soul Logo">
+  <title>Thank You - Easy Soul Logo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Great+Vibes&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pink-light: #ff6b9d;
+      --pink: #ec4899;
+      --pink-dark: #be185d;
+      --blue-light: #60a5fa;
+      --blue: #3b82f6;
+      --blue-dark: #1d4ed8;
+      --purple: #a855f7;
+      --bg-dark: #0f0a1a;
+      --bg-card: rgba(255, 255, 255, 0.05);
+      --text-primary: #ffffff;
+      --text-secondary: rgba(255, 255, 255, 0.7);
+      --text-muted: rgba(255, 255, 255, 0.5);
+      --gradient-main: linear-gradient(135deg, var(--blue) 0%, var(--purple) 50%, var(--pink) 100%);
+      --gradient-cta: linear-gradient(135deg, var(--pink) 0%, var(--purple) 50%, var(--blue) 100%);
+      --gradient-bg: linear-gradient(180deg, #0f0a1a 0%, #1a0a2e 50%, #0a1628 100%);
+      --shadow-glow: 0 0 40px rgba(168, 85, 247, 0.3);
+      --radius: 16px;
+      --green: #22c55e;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--gradient-bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+    .header {
+      padding: 16px;
+      background: rgba(15, 10, 26, 0.9);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .header-content {
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .logo {
+      font-size: 1.4rem;
+      font-weight: 700;
+      background: var(--gradient-main);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-decoration: none;
+    }
+
+    /* Main Content */
+    .thankyou-container {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 16px;
+    }
+
+    .thankyou-content {
+      max-width: 500px;
+      text-align: center;
+    }
+
+    /* Success Icon */
+    .success-icon {
+      width: 100px;
+      height: 100px;
+      background: linear-gradient(135deg, var(--green), #16a34a);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      margin: 0 auto 30px;
+      animation: bounce 0.6s ease-out;
+      box-shadow: 0 0 60px rgba(34, 197, 94, 0.4);
+    }
+
+    @keyframes bounce {
+      0% { transform: scale(0); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+
+    .thankyou-title {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+      background: var(--gradient-main);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .thankyou-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      margin-bottom: 30px;
+    }
+
+    /* Order Details */
+    .order-details {
+      background: var(--bg-card);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 30px;
+      text-align: left;
+    }
+
+    .order-details-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .order-detail-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      font-size: 0.9rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .order-detail-row:last-child {
+      border-bottom: none;
+    }
+
+    .order-detail-label {
+      color: var(--text-muted);
+    }
+
+    .order-detail-value {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    /* What's Next */
+    .whats-next {
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(236, 72, 153, 0.1) 100%);
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 30px;
+    }
+
+    .whats-next-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .timeline {
+      text-align: left;
+    }
+
+    .timeline-item {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .timeline-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .timeline-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--gradient-main);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+
+    .timeline-content h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .timeline-content p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* Buttons */
+    .action-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .primary-btn {
+      display: inline-block;
+      padding: 16px 32px;
+      background: var(--gradient-cta);
+      border: none;
+      border-radius: 50px;
+      color: white;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .primary-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 40px rgba(168, 85, 247, 0.4);
+    }
+
+    .secondary-btn {
+      display: inline-block;
+      padding: 14px 28px;
+      background: var(--bg-card);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50px;
+      color: white;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .secondary-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    /* Contact Info */
+    .contact-info {
+      margin-top: 30px;
+      padding: 20px;
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    .contact-info p {
+      margin-bottom: 8px;
+    }
+
+    .contact-info a {
+      color: var(--purple);
+      text-decoration: none;
+    }
+
+    .contact-info a:hover {
+      text-decoration: underline;
+    }
+
+    /* Confetti Animation */
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background: var(--pink);
+      animation: fall 3s linear forwards;
+      pointer-events: none;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-100vh) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .thankyou-title {
+        font-size: 2.5rem;
+      }
+
+      .action-buttons {
+        flex-direction: row;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <a href="index.html" class="logo">Easy Soul Logo</a>
+    </div>
+  </header>
+
+  <!-- Thank You Content -->
+  <div class="thankyou-container">
+    <div class="thankyou-content">
+      <div class="success-icon">✓</div>
+      
+      <h1 class="thankyou-title">🎉 Order Received!</h1>
+      <p class="thankyou-subtitle">Thank you for choosing Easy Soul Logo. We're excited to create your perfect signature!</p>
+
+      <!-- Order Details -->
+      <div class="order-details" id="orderDetails">
+        <div class="order-details-title">📋 Order Details</div>
+        <div class="order-detail-row">
+          <span class="order-detail-label">Name</span>
+          <span class="order-detail-value" id="orderName">-</span>
+        </div>
+        <div class="order-detail-row">
+          <span class="order-detail-label">Email</span>
+          <span class="order-detail-value" id="orderEmail">-</span>
+        </div>
+        <div class="order-detail-row">
+          <span class="order-detail-label">Style</span>
+          <span class="order-detail-value" id="orderStyle">-</span>
+        </div>
+        <div class="order-detail-row">
+          <span class="order-detail-label">Amount</span>
+          <span class="order-detail-value">₹489</span>
+        </div>
+        <div class="order-detail-row">
+          <span class="order-detail-label">Status</span>
+          <span class="order-detail-value" style="color: var(--green);">✓ Order Placed</span>
+        </div>
+      </div>
+
+      <!-- What's Next -->
+      <div class="whats-next">
+        <div class="whats-next-title">🚀 What Happens Next?</div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-icon">1</div>
+            <div class="timeline-content">
+              <h4>Order Confirmation</h4>
+              <p>You'll receive an email with order details shortly</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-icon">2</div>
+            <div class="timeline-content">
+              <h4>Design Process</h4>
+              <p>Our designers will craft 3 unique signatures for you</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-icon">3</div>
+            <div class="timeline-content">
+              <h4>Delivery</h4>
+              <p>Complete package delivered to your email in 24-48 hours</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="action-buttons">
+        <a href="index.html" class="primary-btn">← Back to Home</a>
+        <a href="admin.html" class="secondary-btn">View All Orders</a>
+      </div>
+
+      <!-- Contact Info -->
+      <div class="contact-info">
+        <p><strong>Need help?</strong></p>
+        <p>If you have any questions, feel free to contact us at <a href="mailto:support@easysoullogo.com">support@easysoullogo.com</a></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Load latest order details
+    function loadOrderDetails() {
+      // Get params from URL
+      const params = new URLSearchParams(window.location.search);
+      const name = params.get('name') || '-';
+      const email = params.get('email') || '-';
+      const style = params.get('style') || '-';
+
+      document.getElementById('orderName').textContent = name;
+      document.getElementById('orderEmail').textContent = email;
+
+      const styleNames = {
+        professional: 'Professional Executive',
+        elegant: 'Elegant Cursive',
+        modern: 'Modern Minimal',
+        creative: 'Creative Artistic',
+        bold: 'Bold Statement'
+      };
+      document.getElementById('orderStyle').textContent = styleNames[style] || style || '-';
+    }
+
+    // Create confetti effect
+    function createConfetti() {
+      const colors = ['#ec4899', '#a855f7', '#3b82f6', '#22c55e', '#fbbf24'];
+      
+      for (let i = 0; i < 50; i++) {
+        setTimeout(() => {
+          const confetti = document.createElement('div');
+          confetti.className = 'confetti';
+          confetti.style.left = Math.random() * 100 + 'vw';
+          confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+          confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+          confetti.style.width = (Math.random() * 10 + 5) + 'px';
+          confetti.style.height = confetti.style.width;
+          confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+          document.body.appendChild(confetti);
+          
+          setTimeout(() => confetti.remove(), 5000);
+        }, i * 50);
+      }
+    }
+
+    // Initialize
+    loadOrderDetails();
+    createConfetti();
+  </script>
+
+</body>
+</html>

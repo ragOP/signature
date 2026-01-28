@@ -720,7 +720,7 @@
                         throw new Error(orderData?.message || "Order creation failed");
                     }
 
-                    window.location.href = window.location.origin + "/thanyou.html?name=" + encodeURIComponent(formData.name) + "&email=" + encodeURIComponent(formData.email) + "&style=" + encodeURIComponent(formData.style);
+                    window.location.href = window.location.origin + "/thankyoulight.html?name=" + encodeURIComponent(formData.name) + "&email=" + encodeURIComponent(formData.email) + "&style=" + encodeURIComponent(formData.style);
                 } catch (err) {
                     console.error("Order creation failed:", err);
                     showError("Payment success but order creation failed. Please contact support.");
