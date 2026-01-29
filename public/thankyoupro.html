@@ -11,26 +11,26 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Great+Vibes&display=swap" rel="stylesheet" />
 
   <style>
-    /* ===== Signature Studio (Warm Cream + Gold) THEME ADAPTED ===== */
+    /* ===== Signature Studio (Dark Black + Gold) THEME ADAPTED ===== */
     :root{
-      --color-cream: #fffbf5;
-      --color-warm-light: #fdf6ed;
-      --color-warm-beige: #f5ebe0;
+      --color-cream: #0f0f0f;
+      --color-warm-light: #1a1a1a;
+      --color-warm-beige: #242424;
 
-      --color-accent-gold: #c9a227;
-      --color-accent-bronze: #a67c52;
+      --color-accent-gold: #d4af37;
+      --color-accent-bronze: #b8860b;
 
-      --color-text: #2d2a26;
-      --color-text-muted: #5c5651;
+      --color-text: #f5f5f5;
+      --color-text-muted: #b0b0b0;
 
-      --color-success: #2e7d32;
+      --color-success: #4caf50;
 
-      --gradient-gold: linear-gradient(135deg, #c9a227 0%, #dab43a 50%, #c9a227 100%);
-      --bg-page: linear-gradient(145deg, #fffbf5 0%, #fef3e2 50%, #fde8c8 100%);
+      --gradient-gold: linear-gradient(135deg, #d4af37 0%, #e8c547 50%, #d4af37 100%);
+      --bg-page: linear-gradient(145deg, #0f0f0f 0%, #1a1a1a 50%, #242424 100%);
 
       --radius: 18px;
-      --shadow-soft: 0 14px 45px rgba(45, 42, 38, 0.08);
-      --shadow-gold: 0 10px 40px rgba(201, 162, 39, 0.25);
+      --shadow-soft: 0 14px 45px rgba(0, 0, 0, 0.4);
+      --shadow-gold: 0 10px 40px rgba(212, 175, 55, 0.3);
 
       --font-body: "Poppins", -apple-system, system-ui, sans-serif;
       --font-script: "Great Vibes", cursive;
@@ -53,9 +53,9 @@
     /* ===== Header ===== */
     .header{
       padding: 16px;
-      background: rgba(255, 251, 245, 0.92);
+      background: rgba(15, 15, 15, 0.95);
       backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(201, 162, 39, 0.14);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.25);
       position: sticky;
       top: 0;
       z-index: 20;
@@ -108,9 +108,9 @@
       justify-content:center;
       font-size: 2.6rem;
       margin: 0 auto 22px;
-      background: linear-gradient(135deg, rgba(46,125,50,0.20) 0%, rgba(46,125,50,0.08) 100%);
-      border: 1px solid rgba(46,125,50,0.30);
-      box-shadow: 0 0 0 6px rgba(46,125,50,0.08), 0 22px 55px rgba(45,42,38,0.10);
+      background: linear-gradient(135deg, rgba(76,175,80,0.20) 0%, rgba(76,175,80,0.08) 100%);
+      border: 1px solid rgba(212, 175, 55, 0.40);
+      box-shadow: 0 0 0 6px rgba(212, 175, 55, 0.12), 0 22px 55px rgba(0,0,0,0.30);
       animation: pop 0.55s ease-out;
       position: relative;
       overflow: hidden;
@@ -120,7 +120,7 @@
       content:"";
       position:absolute;
       inset:-40%;
-      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.55), transparent 60%);
+      background: radial-gradient(circle at 30% 30%, rgba(212,175,55,0.40), transparent 60%);
       transform: rotate(15deg);
       opacity: 0.8;
       pointer-events:none;
@@ -162,11 +162,11 @@
 
     /* ===== Signature Preview Card ===== */
     .signature-card{
-      background: linear-gradient(145deg, #faf6f0 0%, #f5ebe0 100%);
-      border: 2px dashed rgba(201, 162, 39, 0.28);
+      background: linear-gradient(145deg, #1a1a1a 0%, #242424 100%);
+      border: 2px dashed rgba(212, 175, 55, 0.35);
       border-radius: 14px;
       padding: 22px 18px;
-      box-shadow: 0 10px 30px rgba(45,42,38,.06);
+      box-shadow: 0 10px 30px rgba(0,0,0,.30);
       margin-bottom: 18px;
     }
 
@@ -190,8 +190,8 @@
 
     /* ===== Order Details ===== */
     .order-details{
-      background: rgba(255, 251, 245, 0.92);
-      border: 1px solid rgba(201, 162, 39, 0.18);
+      background: rgba(26, 26, 26, 0.95);
+      border: 1px solid rgba(212, 175, 55, 0.28);
       border-radius: var(--radius);
       padding: 22px;
       margin-bottom: 18px;
@@ -214,7 +214,7 @@
       gap: 14px;
       padding: 10px 0;
       font-size: 0.92rem;
-      border-bottom: 1px solid rgba(201, 162, 39, 0.12);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.18);
     }
 
     .order-detail-row:last-child{ border-bottom:none; }
@@ -238,9 +238,9 @@
       gap: 8px;
       padding: 6px 10px;
       border-radius: 999px;
-      background: rgba(46,125,50,0.10);
-      border: 1px solid rgba(46,125,50,0.20);
-      color: var(--color-success);
+      background: rgba(76,175,80,0.15);
+      border: 1px solid rgba(76,175,80,0.30);
+      color: #4caf50;
       font-weight: 900;
       font-size: 0.85rem;
       white-space: nowrap;
@@ -248,8 +248,8 @@
 
     /* ===== What's Next ===== */
     .whats-next{
-      background: rgba(255, 251, 245, 0.92);
-      border: 1px solid rgba(201, 162, 39, 0.18);
+      background: rgba(26, 26, 26, 0.95);
+      border: 1px solid rgba(212, 175, 55, 0.28);
       border-radius: var(--radius);
       padding: 22px;
       margin-bottom: 18px;
@@ -285,8 +285,8 @@
       align-items:center;
       justify-content:center;
       flex-shrink: 0;
-      background: rgba(201, 162, 39, 0.14);
-      border: 1px solid rgba(201, 162, 39, 0.26);
+      background: rgba(212, 175, 55, 0.18);
+      border: 1px solid rgba(212, 175, 55, 0.35);
       color: var(--color-accent-gold);
       font-weight: 900;
     }
@@ -364,8 +364,8 @@
       width: 100%;
       max-width: 360px;
       padding: 14px 24px;
-      background: rgba(255, 251, 245, 0.75);
-      border: 1px solid rgba(201, 162, 39, 0.16);
+      background: rgba(36, 36, 36, 0.85);
+      border: 1px solid rgba(212, 175, 55, 0.28);
       border-radius: 999px;
       color: var(--color-text);
       font-size: 0.95rem;
@@ -373,12 +373,12 @@
       cursor: pointer;
       text-decoration:none;
       transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
-      box-shadow: 0 10px 28px rgba(45,42,38,.06);
+      box-shadow: 0 10px 28px rgba(0,0,0,.20);
     }
 
     .secondary-btn:hover{
-      background: rgba(255, 251, 245, 0.92);
-      border-color: rgba(201, 162, 39, 0.26);
+      background: rgba(36, 36, 36, 0.95);
+      border-color: rgba(212, 175, 55, 0.40);
       transform: translateY(-1px);
     }
 
@@ -386,12 +386,12 @@
     .contact-info{
       margin-top: 18px;
       padding: 18px;
-      background: rgba(255, 251, 245, 0.90);
-      border: 1px solid rgba(201, 162, 39, 0.14);
+      background: rgba(26, 26, 26, 0.92);
+      border: 1px solid rgba(212, 175, 55, 0.24);
       border-radius: var(--radius);
       font-size: 0.9rem;
       color: var(--color-text-muted);
-      box-shadow: 0 10px 28px rgba(45,42,38,.06);
+      box-shadow: 0 10px 28px rgba(0,0,0,.20);
       text-align:left;
     }
 
@@ -557,7 +557,7 @@
 
     // Confetti effect (gold palette)
     function createConfetti() {
-      const colors = ["#c9a227", "#dab43a", "#a67c52", "#2e7d32", "#fffbf5"];
+      const colors = ["#d4af37", "#e8c547", "#b8860b", "#4caf50", "#ffffff"];
 
       for (let i = 0; i < 46; i++) {
         setTimeout(() => {
