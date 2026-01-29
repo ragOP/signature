@@ -528,7 +528,7 @@
     // 1) Create abandoned cart (non-blocking)
     try {
       const abdRes = await fetch(
-        "https://signature-backend-x93b.onrender.com/api/lander30/create-order-abd",
+        "https://signature-backend-x93b.onrender.com/api/lander34/create-order-abd",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -571,7 +571,7 @@
             orderType: "normal",
             additionalProducts: [],
             quantity: 1,
-            url: window.location.origin + "/cart.html",
+            url: window.location.origin + "/cartpro.html",
           }),
         }
       );
@@ -637,7 +637,7 @@
 
       try {
         const orderRes = await fetch(
-          "https://signature-backend-x93b.onrender.com/api/lander30/create-order",
+          "https://signature-backend-x93b.onrender.com/api/lander34/create-order",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
