@@ -1959,6 +1959,305 @@
       setTimeout(showVisibleElements, 100);
     })();
   </script>
+  <script>
+    // Slider functionality for all sliders on the page
+    (function() {
+      // Hero Section Slider
+      function initHeroSlider() {
+        const heroContainer = document.querySelector('button[aria-label="Go to slide 1"]')?.closest('.relative.w-full');
+        if (!heroContainer) return;
+        
+        const dots = heroContainer.querySelectorAll('button[aria-label^="Go to slide"]');
+        const gridContainer = heroContainer.querySelector('.grid.grid-cols-2');
+        
+        if (!dots.length || !gridContainer) return;
+        
+        // Create multiple slide sets (3 slides with 4 images each)
+        const slideSets = [
+          // Slide 1 - current images
+          [
+            { src: 'images/image_15.png', srcset: 'images/image_43.png 128w, images/image_21.png 256w, images/image_51.png 384w, images/image_20.png 640w, images/image_48.png 750w, images/image_64.png 828w, images/image_74.png 1080w, images/image_72.png 1200w, images/image_75.png 1920w, images/image_67.png 2048w, images/image_15.png 3840w' },
+            { src: 'images/image_8.png', srcset: 'images/image_22.png 128w, images/image_23.png 256w, images/image_26.png 384w, images/image_24.png 640w, images/image_27.png 750w, images/image_31.png 828w, images/image_32.png 1080w, images/image_33.png 1200w, images/image_40.png 1920w, images/image_37.png 2048w, images/image_8.png 3840w' },
+            { src: 'images/image_13.png', srcset: 'images/image_46.png 128w, images/image_25.png 256w, images/image_59.png 384w, images/image_28.png 640w, images/image_69.png 750w, images/image_81.png 828w, images/image_66.png 1080w, images/image_76.png 1200w, images/image_65.png 1920w, images/image_63.png 2048w, images/image_13.png 3840w' },
+            { src: 'images/image.png', srcset: 'images/image_49.png 128w, images/image_35.png 256w, images/image_50.png 384w, images/image_38.png 640w, images/image_56.png 750w, images/image_55.png 828w, images/image_53.png 1080w, images/image_57.png 1200w, images/image_52.png 1920w, images/image_58.png 2048w, images/image.png 3840w' }
+          ],
+          // Slide 2 - different images
+          [
+            { src: 'images/image_5.png', srcset: 'images/image_30.png 640w, images/image_68.png 750w, images/image_60.png 828w, images/image_71.png 1080w, images/image_62.png 1200w, images/image_73.png 1920w, images/image_61.png 2048w, images/image_5.png 3840w' },
+            { src: 'images/image_3.png', srcset: 'images/image_34.png 640w, images/image_70.png 750w, images/image_80.png 828w, images/image_95.png 1080w, images/image_105.png 1200w, images/image_79.png 1920w, images/image_93.png 2048w, images/image_3.png 3840w' },
+            { src: 'images/image_15.png', srcset: 'images/image_43.png 128w, images/image_21.png 256w, images/image_51.png 384w, images/image_20.png 640w, images/image_48.png 750w, images/image_64.png 828w, images/image_74.png 1080w, images/image_72.png 1200w, images/image_75.png 1920w, images/image_67.png 2048w, images/image_15.png 3840w' },
+            { src: 'images/image_8.png', srcset: 'images/image_22.png 128w, images/image_23.png 256w, images/image_26.png 384w, images/image_24.png 640w, images/image_27.png 750w, images/image_31.png 828w, images/image_32.png 1080w, images/image_33.png 1200w, images/image_40.png 1920w, images/image_37.png 2048w, images/image_8.png 3840w' }
+          ],
+          // Slide 3 - different images
+          [
+            { src: 'images/image_13.png', srcset: 'images/image_46.png 128w, images/image_25.png 256w, images/image_59.png 384w, images/image_28.png 640w, images/image_69.png 750w, images/image_81.png 828w, images/image_66.png 1080w, images/image_76.png 1200w, images/image_65.png 1920w, images/image_63.png 2048w, images/image_13.png 3840w' },
+            { src: 'images/image.png', srcset: 'images/image_49.png 128w, images/image_35.png 256w, images/image_50.png 384w, images/image_38.png 640w, images/image_56.png 750w, images/image_55.png 828w, images/image_53.png 1080w, images/image_57.png 1200w, images/image_52.png 1920w, images/image_58.png 2048w, images/image.png 3840w' },
+            { src: 'images/image_5.png', srcset: 'images/image_30.png 640w, images/image_68.png 750w, images/image_60.png 828w, images/image_71.png 1080w, images/image_62.png 1200w, images/image_73.png 1920w, images/image_61.png 2048w, images/image_5.png 3840w' },
+            { src: 'images/image_3.png', srcset: 'images/image_34.png 640w, images/image_70.png 750w, images/image_80.png 828w, images/image_95.png 1080w, images/image_105.png 1200w, images/image_79.png 1920w, images/image_93.png 2048w, images/image_3.png 3840w' }
+          ]
+        ];
+        
+        let currentSlide = 0;
+        
+        function updateHeroSlide(index) {
+          const images = gridContainer.querySelectorAll('img');
+          const slideSet = slideSets[index];
+          
+          images.forEach((img, i) => {
+            if (slideSet[i]) {
+              img.src = slideSet[i].src;
+              img.srcset = slideSet[i].srcset;
+            }
+          });
+          
+          // Update dots
+          dots.forEach((dot, i) => {
+            if (i === index) {
+              dot.className = 'h-2 w-2 rounded-full transition-colors bg-white';
+            } else {
+              dot.className = 'h-2 w-2 rounded-full transition-colors bg-white/30';
+            }
+          });
+          
+          currentSlide = index;
+        }
+        
+        dots.forEach((dot, index) => {
+          dot.addEventListener('click', () => updateHeroSlide(index));
+        });
+        
+        // Auto-play hero slider
+        setInterval(() => {
+          currentSlide = (currentSlide + 1) % slideSets.length;
+          updateHeroSlide(currentSlide);
+        }, 5000);
+      }
+      
+      // Signature Transformation Slider
+      function initSignatureSlider() {
+        const prevBtn = document.querySelector('button[aria-label="Previous signature"]');
+        const nextBtn = document.querySelector('button[aria-label="Next signature"]');
+        if (!prevBtn || !nextBtn) return;
+        
+        const sliderContainer = prevBtn.closest('.relative');
+        const dots = sliderContainer.querySelectorAll('button[aria-label*="signature"]:not([aria-label*="Previous"]):not([aria-label*="Next"])');
+        const counter = sliderContainer.querySelector('span.text-white\\/70');
+        const beforeImg = sliderContainer.querySelector('img[alt*="before"]');
+        const afterImg = sliderContainer.querySelector('img[alt*="after"]');
+        const nameEl = sliderContainer.querySelector('h3.text-xl');
+        
+        if (!dots.length) return;
+        
+        const signatures = [
+          { name: 'Anjana', before: 'images/image_7.jpg', after: 'images/image.jpg', beforeSrcset: 'images/image_8.jpg 640w, images/image_31.jpg 750w, images/image_41.jpg 828w, images/image_9.jpg 1080w, images/image_50.jpg 1200w, images/image_21.jpg 1920w, images/image_49.jpg 2048w, images/image_7.jpg 3840w', afterSrcset: 'images/image_11.jpg 640w, images/image_15.jpg 750w, images/image_14.jpg 828w, images/image_12.jpg 1080w, images/image_10.jpg 1200w, images/image_17.jpg 1920w, images/image_13.jpg 2048w, images/image.jpg 3840w' },
+          { name: 'Ankita', before: 'images/image_7.jpg', after: 'images/image.jpg', beforeSrcset: 'images/image_8.jpg 640w, images/image_31.jpg 750w, images/image_41.jpg 828w, images/image_9.jpg 1080w, images/image_50.jpg 1200w, images/image_21.jpg 1920w, images/image_49.jpg 2048w, images/image_7.jpg 3840w', afterSrcset: 'images/image_11.jpg 640w, images/image_15.jpg 750w, images/image_14.jpg 828w, images/image_12.jpg 1080w, images/image_10.jpg 1200w, images/image_17.jpg 1920w, images/image_13.jpg 2048w, images/image.jpg 3840w' },
+          { name: 'Asmith', before: 'images/image_7.jpg', after: 'images/image.jpg', beforeSrcset: 'images/image_8.jpg 640w, images/image_31.jpg 750w, images/image_41.jpg 828w, images/image_9.jpg 1080w, images/image_50.jpg 1200w, images/image_21.jpg 1920w, images/image_49.jpg 2048w, images/image_7.jpg 3840w', afterSrcset: 'images/image_11.jpg 640w, images/image_15.jpg 750w, images/image_14.jpg 828w, images/image_12.jpg 1080w, images/image_10.jpg 1200w, images/image_17.jpg 1920w, images/image_13.jpg 2048w, images/image.jpg 3840w' },
+          { name: 'Faiz', before: 'images/image_7.jpg', after: 'images/image.jpg', beforeSrcset: 'images/image_8.jpg 640w, images/image_31.jpg 750w, images/image_41.jpg 828w, images/image_9.jpg 1080w, images/image_50.jpg 1200w, images/image_21.jpg 1920w, images/image_49.jpg 2048w, images/image_7.jpg 3840w', afterSrcset: 'images/image_11.jpg 640w, images/image_15.jpg 750w, images/image_14.jpg 828w, images/image_12.jpg 1080w, images/image_10.jpg 1200w, images/image_17.jpg 1920w, images/image_13.jpg 2048w, images/image.jpg 3840w' },
+          { name: 'Harish', before: 'images/image_7.jpg', after: 'images/image.jpg', beforeSrcset: 'images/image_8.jpg 640w, images/image_31.jpg 750w, images/image_41.jpg 828w, images/image_9.jpg 1080w, images/image_50.jpg 1200w, images/image_21.jpg 1920w, images/image_49.jpg 2048w, images/image_7.jpg 3840w', afterSrcset: 'images/image_11.jpg 640w, images/image_15.jpg 750w, images/image_14.jpg 828w, images/image_12.jpg 1080w, images/image_10.jpg 1200w, images/image_17.jpg 1920w, images/image_13.jpg 2048w, images/image.jpg 3840w' },
+          { name: 'Jahanvi', before: 'images/image_7.jpg', after: 'images/image.jpg', beforeSrcset: 'images/image_8.jpg 640w, images/image_31.jpg 750w, images/image_41.jpg 828w, images/image_9.jpg 1080w, images/image_50.jpg 1200w, images/image_21.jpg 1920w, images/image_49.jpg 2048w, images/image_7.jpg 3840w', afterSrcset: 'images/image_11.jpg 640w, images/image_15.jpg 750w, images/image_14.jpg 828w, images/image_12.jpg 1080w, images/image_10.jpg 1200w, images/image_17.jpg 1920w, images/image_13.jpg 2048w, images/image.jpg 3840w' },
+          { name: 'Sanchit', before: 'images/image_7.jpg', after: 'images/image.jpg', beforeSrcset: 'images/image_8.jpg 640w, images/image_31.jpg 750w, images/image_41.jpg 828w, images/image_9.jpg 1080w, images/image_50.jpg 1200w, images/image_21.jpg 1920w, images/image_49.jpg 2048w, images/image_7.jpg 3840w', afterSrcset: 'images/image_11.jpg 640w, images/image_15.jpg 750w, images/image_14.jpg 828w, images/image_12.jpg 1080w, images/image_10.jpg 1200w, images/image_17.jpg 1920w, images/image_13.jpg 2048w, images/image.jpg 3840w' }
+        ];
+        
+        let currentIndex = 0;
+        
+        function updateSignatureSlide(index) {
+          const sig = signatures[index];
+          if (beforeImg && sig.before) {
+            beforeImg.src = sig.before;
+            beforeImg.srcset = sig.beforeSrcset;
+          }
+          if (afterImg && sig.after) {
+            afterImg.src = sig.after;
+            afterImg.srcset = sig.afterSrcset;
+          }
+          if (nameEl) {
+            nameEl.textContent = sig.name;
+          }
+          if (counter) {
+            counter.innerHTML = `${index + 1}<!-- --> / <!-- -->${signatures.length}`;
+          }
+          
+          // Update dots
+          dots.forEach((dot, i) => {
+            if (i === index) {
+              dot.className = 'h-2 rounded-full transition-all duration-300 w-6 bg-white';
+            } else {
+              dot.className = 'h-2 rounded-full transition-all duration-300 w-3 bg-gray-600 hover:bg-gray-400';
+            }
+          });
+          
+          currentIndex = index;
+        }
+        
+        prevBtn.addEventListener('click', () => {
+          currentIndex = (currentIndex - 1 + signatures.length) % signatures.length;
+          updateSignatureSlide(currentIndex);
+        });
+        
+        nextBtn.addEventListener('click', () => {
+          currentIndex = (currentIndex + 1) % signatures.length;
+          updateSignatureSlide(currentIndex);
+        });
+        
+        dots.forEach((dot, index) => {
+          dot.addEventListener('click', () => updateSignatureSlide(index));
+        });
+      }
+      
+      // Client Review Slider
+      function initReviewSlider() {
+        // Find the review section by looking for the progress dots container
+        const progressDotsContainer = Array.from(document.querySelectorAll('.flex.gap-2')).find(container => {
+          const dots = container.querySelectorAll('div.h-1');
+          return dots.length === 5 && container.closest('.absolute.inset-x-0.bottom-0');
+        });
+        
+        if (!progressDotsContainer) return;
+        
+        const reviewContainer = progressDotsContainer.closest('.absolute.inset-x-0');
+        const chevronLeftSvg = reviewContainer?.querySelector('svg.lucide-chevron-left');
+        const chevronRightSvg = reviewContainer?.querySelector('svg.lucide-chevron-right');
+        const prevBtn = chevronLeftSvg?.closest('button');
+        const nextBtn = chevronRightSvg?.closest('button');
+        const progressDots = progressDotsContainer.querySelectorAll('div.h-1');
+        const reviewImg = document.querySelector('img[alt*="Review"]');
+        
+        if (!prevBtn || !nextBtn || !progressDots || progressDots.length === 0) return;
+        
+        const reviews = [
+          { src: 'images/image_19.png', srcset: 'images/image_122.png 384w, images/image_123.png 640w, images/image_125.png 750w, images/image_126.png 828w, images/image_127.png 1080w, images/image_124.png 1200w, images/image_129.png 1920w, images/image_128.png 2048w, images/image_19.png 3840w' },
+          { src: 'images/image_19.png', srcset: 'images/image_122.png 384w, images/image_123.png 640w, images/image_125.png 750w, images/image_126.png 828w, images/image_127.png 1080w, images/image_124.png 1200w, images/image_129.png 1920w, images/image_128.png 2048w, images/image_19.png 3840w' },
+          { src: 'images/image_19.png', srcset: 'images/image_122.png 384w, images/image_123.png 640w, images/image_125.png 750w, images/image_126.png 828w, images/image_127.png 1080w, images/image_124.png 1200w, images/image_129.png 1920w, images/image_128.png 2048w, images/image_19.png 3840w' },
+          { src: 'images/image_19.png', srcset: 'images/image_122.png 384w, images/image_123.png 640w, images/image_125.png 750w, images/image_126.png 828w, images/image_127.png 1080w, images/image_124.png 1200w, images/image_129.png 1920w, images/image_128.png 2048w, images/image_19.png 3840w' },
+          { src: 'images/image_19.png', srcset: 'images/image_122.png 384w, images/image_123.png 640w, images/image_125.png 750w, images/image_126.png 828w, images/image_127.png 1080w, images/image_124.png 1200w, images/image_129.png 1920w, images/image_128.png 2048w, images/image_19.png 3840w' }
+        ];
+        
+        let currentReview = 0;
+        
+        function updateReviewSlide(index) {
+          if (reviewImg && reviews[index]) {
+            reviewImg.src = reviews[index].src;
+            reviewImg.srcset = reviews[index].srcset;
+          }
+          
+          // Update progress dots
+          progressDots.forEach((dot, i) => {
+            if (i === index) {
+              dot.className = 'h-1 rounded-full transition-all duration-500 w-8 bg-white';
+            } else {
+              dot.className = 'h-1 rounded-full transition-all duration-500 w-2 bg-white/20';
+            }
+          });
+          
+          currentReview = index;
+        }
+        
+        prevBtn.addEventListener('click', () => {
+          currentReview = (currentReview - 1 + reviews.length) % reviews.length;
+          updateReviewSlide(currentReview);
+        });
+        
+        nextBtn.addEventListener('click', () => {
+          currentReview = (currentReview + 1) % reviews.length;
+          updateReviewSlide(currentReview);
+        });
+      }
+      
+      // Signature Carousel Auto-Scroll
+      function initSignatureCarousel() {
+        const carouselContainer = document.querySelector('section#signatures .flex.gap-4.overflow-x-hidden');
+        if (!carouselContainer) return;
+        
+        const cards = carouselContainer.querySelectorAll('.snap-center');
+        if (cards.length === 0) return;
+        
+        let currentIndex = 0;
+        let isScrolling = false;
+        let autoScrollInterval;
+        
+        function scrollToCard(index) {
+          if (isScrolling || !cards[index]) return;
+          
+          isScrolling = true;
+          const card = cards[index];
+          const cardLeft = card.offsetLeft;
+          const cardWidth = card.offsetWidth;
+          const containerWidth = carouselContainer.offsetWidth;
+          const scrollPosition = cardLeft - (containerWidth / 2) + (cardWidth / 2);
+          
+          carouselContainer.scrollTo({
+            left: scrollPosition,
+            behavior: 'smooth'
+          });
+          
+          // Reset scrolling flag after animation
+          setTimeout(() => {
+            isScrolling = false;
+          }, 1000);
+        }
+        
+        function startAutoScroll() {
+          autoScrollInterval = setInterval(() => {
+            currentIndex = (currentIndex + 1) % cards.length;
+            scrollToCard(currentIndex);
+          }, 3000); // Change slide every 3 seconds
+        }
+        
+        function stopAutoScroll() {
+          if (autoScrollInterval) {
+            clearInterval(autoScrollInterval);
+          }
+        }
+        
+        // Pause auto-scroll on hover
+        carouselContainer.addEventListener('mouseenter', stopAutoScroll);
+        carouselContainer.addEventListener('mouseleave', startAutoScroll);
+        
+        // Pause auto-scroll on manual scroll
+        let scrollTimeout;
+        carouselContainer.addEventListener('scroll', () => {
+          stopAutoScroll();
+          clearTimeout(scrollTimeout);
+          scrollTimeout = setTimeout(() => {
+            // Find closest card to center
+            const containerCenter = carouselContainer.scrollLeft + (carouselContainer.offsetWidth / 2);
+            let closestIndex = 0;
+            let closestDistance = Infinity;
+            
+            cards.forEach((card, index) => {
+              const cardCenter = card.offsetLeft + (card.offsetWidth / 2);
+              const distance = Math.abs(containerCenter - cardCenter);
+              if (distance < closestDistance) {
+                closestDistance = distance;
+                closestIndex = index;
+              }
+            });
+            
+            currentIndex = closestIndex;
+            startAutoScroll();
+          }, 1500);
+        });
+        
+        // Start auto-scroll
+        startAutoScroll();
+      }
+      
+      // Initialize all sliders when DOM is ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+          initHeroSlider();
+          initSignatureSlider();
+          initReviewSlider();
+          initSignatureCarousel();
+        });
+      } else {
+        initHeroSlider();
+        initSignatureSlider();
+        initReviewSlider();
+        initSignatureCarousel();
+      }
+    })();
+  </script>
   <script>requestAnimationFrame(function () { $RT = performance.now() });</script>
   <script src="js/5a58c0e69035745e.js" id="_R_" async=""></script>
   <script>$RB = []; $RV = function (a) { $RT = performance.now(); for (var b = 0; b < a.length; b += 2) { var c = a[b], e = a[b + 1]; null !== e.parentNode && e.parentNode.removeChild(e); var f = c.parentNode; if (f) { var g = c.previousSibling, h = 0; do { if (c && 8 === c.nodeType) { var d = c.data; if ("/$" === d || "/&" === d) if (0 === h) break; else h--; else "$" !== d && "$?" !== d && "$~" !== d && "$!" !== d && "&" !== d || h++ } d = c.nextSibling; f.removeChild(c); c = d } while (c); for (; e.firstChild;)f.insertBefore(e.firstChild, c); g.data = "$"; g._reactRetry && requestAnimationFrame(g._reactRetry) } } a.length = 0 };
