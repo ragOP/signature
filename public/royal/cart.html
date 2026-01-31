@@ -30,22 +30,17 @@
         --text-muted: rgba(255, 255, 255, 0.5);
         --gradient-main: linear-gradient(
           135deg,
-          var(--blue) 0%,
-          var(--purple) 50%,
-          var(--pink) 100%
+          #60a5fa 0%,
+          #818cf8 50%,
+          #a78bfa 100%
         );
         --gradient-cta: linear-gradient(
           135deg,
-          var(--pink) 0%,
-          var(--purple) 50%,
-          var(--blue) 100%
+          #3b82f6 0%,
+          #6366f1 50%,
+          #8b5cf6 100%
         );
-        --gradient-bg: linear-gradient(
-          180deg,
-          #0f0a1a 0%,
-          #1a0a2e 50%,
-          #0a1628 100%
-        );
+        --gradient-bg: #000000;
         --shadow-glow: 0 0 40px rgba(168, 85, 247, 0.3);
         --radius: 16px;
         --green: #22c55e;
@@ -59,18 +54,44 @@
 
       body {
         font-family: "Poppins", sans-serif;
-        background: var(--gradient-bg);
+        background: #000000;
         color: var(--text-primary);
         line-height: 1.6;
         min-height: 100vh;
+        position: relative;
+        overflow-x: hidden;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: repeating-linear-gradient(
+          100deg,
+          transparent 0%,
+          transparent 7%,
+          rgba(59, 130, 246, 0.03) 10%,
+          rgba(99, 102, 241, 0.05) 15%,
+          rgba(147, 197, 253, 0.03) 20%,
+          rgba(196, 181, 253, 0.04) 25%,
+          rgba(59, 130, 246, 0.03) 30%,
+          transparent 33%
+        );
+        pointer-events: none;
+        z-index: 0;
       }
 
       /* Header */
       .header {
         padding: 16px;
-        background: rgba(15, 10, 26, 0.9);
+        background: rgba(0, 0, 0, 0.9);
         backdrop-filter: blur(20px);
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        position: relative;
+        z-index: 10;
       }
 
       .header-content {
@@ -110,6 +131,8 @@
         max-width: 500px;
         margin: 0 auto;
         padding: 30px 16px 50px;
+        position: relative;
+        z-index: 1;
       }
 
       .checkout-header {
@@ -134,11 +157,12 @@
 
       /* Order Summary */
       .order-summary {
-        background: var(--bg-card);
+        background: rgba(255, 255, 255, 0.03);
         border: 1px solid rgba(255, 255, 255, 0.1);
         border-radius: var(--radius);
         padding: 20px;
         margin-bottom: 24px;
+        backdrop-filter: blur(10px);
       }
 
       .summary-title {
@@ -193,14 +217,16 @@
       .live-preview-box {
         background: linear-gradient(
           135deg,
-          rgba(59, 130, 246, 0.1) 0%,
-          rgba(236, 72, 153, 0.1) 100%
+          rgba(59, 130, 246, 0.08) 0%,
+          rgba(99, 102, 241, 0.1) 50%,
+          rgba(147, 197, 253, 0.08) 100%
         );
-        border: 1px solid rgba(168, 85, 247, 0.3);
+        border: 1px solid rgba(99, 102, 241, 0.2);
         border-radius: 12px;
         padding: 20px;
         text-align: center;
         margin-bottom: 24px;
+        backdrop-filter: blur(10px);
       }
 
       .live-preview-label {
@@ -221,10 +247,11 @@
 
       /* Form */
       .checkout-form {
-        background: var(--bg-card);
+        background: rgba(255, 255, 255, 0.03);
         border: 1px solid rgba(255, 255, 255, 0.1);
         border-radius: var(--radius);
         padding: 24px;
+        backdrop-filter: blur(10px);
       }
 
       .form-title {
@@ -250,7 +277,7 @@
       .form-textarea {
         width: 100%;
         padding: 14px 16px;
-        background: rgba(255, 255, 255, 0.05);
+        background: rgba(255, 255, 255, 0.03);
         border: 1px solid rgba(255, 255, 255, 0.1);
         border-radius: 12px;
         color: white;
@@ -263,8 +290,8 @@
       .form-select:focus,
       .form-textarea:focus {
         outline: none;
-        border-color: var(--purple);
-        box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.1);
+        border-color: rgba(99, 102, 241, 0.5);
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
       }
 
       .form-input::placeholder,
@@ -329,7 +356,7 @@
 
       .submit-btn:hover {
         transform: translateY(-2px);
-        box-shadow: 0 15px 40px rgba(168, 85, 247, 0.4);
+        box-shadow: 0 15px 40px rgba(99, 102, 241, 0.4);
       }
 
       .submit-btn:active {
@@ -401,7 +428,7 @@
     <!-- Header -->
     <header class="header">
       <div class="header-content">
-        <a href="index.html" class="logo">Easy Soul Logo</a>
+        <a href="index.html" class="logo">Signature Studio</a>
         <a href="index.html" class="back-btn">← Back to Home</a>
       </div>
     </header>
@@ -433,10 +460,10 @@
       </div>
 
       <!-- Live Preview -->
-      <div class="live-preview-box">
+      <!-- <div class="live-preview-box">
         <div class="live-preview-label">✨ Live Signature Preview</div>
         <div class="live-preview-signature" id="livePreview">Your Name</div>
-      </div>
+      </div> -->
 
       <!-- Checkout Form -->
       <div class="checkout-form">
@@ -608,7 +635,7 @@
       phone: document.getElementById("phone")?.value?.trim() || "",
       style: document.getElementById("style")?.value || "professional",
       notes: document.getElementById("notes")?.value?.trim() || "",
-      amount: 49,
+      amount: 1,
     };
 
     if (!formData.name || !formData.email || !formData.phone) {
