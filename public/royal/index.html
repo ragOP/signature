@@ -605,7 +605,7 @@
               <div class="flex flex-col items-center xl:items-end" style="opacity:0;transform:translateY(10px)"><img
                   alt="Expert Rating" loading="lazy" width="180" height="50" decoding="async" data-nimg="1"
                   class="h-auto w-auto max-w-full object-contain mb-2 xl:-mb-8" style="color:transparent"
-                  src="images/RATING%20.png">
+                  src="https://theroyalsign.art/signatures/RATING%20.png">
                 <div class="text-center xl:text-right max-w-sm xl:max-w-[340px] mx-auto xl:ml-auto xl:mr-0">
                   <p
                     class="text-white/80 text-[10px] sm:text-[11px] xl:text-xs font-black tracking-[0.2em] xl:tracking-[0.25em] uppercase mb-4 leading-tight">
@@ -640,16 +640,16 @@
         <div class="container mx-auto px-4 max-w-6xl">
           <div class="relative bg-black border border-gray-800 rounded-3xl p-6 xl:p-8">
             <div class="text-center mb-8 xl:mb-12">
-              <div class="flex justify-center mb-4" style="opacity:0;transform:translateY(20px)">
+              <div class="flex justify-center mb-4" style="opacity:1;transform:translateY(0)">
                 <h2 class="sr-only">Signature Transformation Showcase</h2><img alt="Signature Transformation"
                   loading="lazy" width="600" height="150" decoding="async" data-nimg="1"
                   class="h-auto w-full max-w-[500px] xl:max-w-[700px]" style="color:transparent"
-                  srcset="images/image_54.png 1x, images/image_12.png 2x" src="images/image_12.png">
+                 src="./images/SIGNAUTRETRANSFORMATION.avif">
               </div>
               <p class="text-gray-400 text-lg xl:text-xl leading-relaxed max-w-3xl mx-auto">A refined, premium
                 signature—designed to elevate your presence.</p>
             </div>
-            <div class="relative" style="opacity:0;transform:translateY(20px)">
+            <div class="relative" style="opacity:1;transform:translateY(0)">
               <div class="grid grid-cols-1 xl:grid-cols-2 gap-6 xl:gap-8 mb-6">
                 <div class="relative">
                   <div class="relative bg-black border border-gray-800 rounded-xl p-4 h-full">
@@ -672,7 +672,7 @@
                         style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent"
                         sizes="100vw"
                         srcset="images/image_11.jpg 640w, images/image_15.jpg 750w, images/image_14.jpg 828w, images/image_12.jpg 1080w, images/image_10.jpg 1200w, images/image_17.jpg 1920w, images/image_13.jpg 2048w, images/image.jpg 3840w"
-                        src="images/image.jpg"></div>
+                        src="images/image.jpg"></div> 
                   </div>
                 </div>
               </div>
@@ -852,7 +852,7 @@
           <div class="text-center mb-16 lg:mb-24">
             <div
               class="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-white/5 border border-white/10 text-white/60 text-xs font-bold uppercase tracking-[0.2em] mb-6"
-              style="opacity:0;transform:translateY(10px)"><svg xmlns="http://www.w3.org/2000/svg" width="24"
+              style="opacity:1;transform:translateY(0)"><svg xmlns="http://www.w3.org/2000/svg" width="24"
                 height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                 stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-timer w-3.5 h-3.5"
                 aria-hidden="true">
@@ -860,14 +860,14 @@
                 <line x1="12" x2="15" y1="14" y2="11"></line>
                 <circle cx="12" cy="14" r="8"></circle>
               </svg>Quick Mastery Guide</div>
-            <div class="flex justify-center mb-6" style="opacity:0;transform:translateY(10px)">
+            <div class="flex justify-center mb-6" style="opacity:1;transform:translateY(0)">
               <h2 class="sr-only">Master Your New Professional Signature</h2><img alt="Practice New Signature"
                 loading="lazy" width="600" height="150" decoding="async" data-nimg="1"
                 class="h-auto w-full max-w-[500px] xl:max-w-[700px]" style="color:transparent"
                 srcset="images/image_121.png 1x, images/image_14.png 2x" src="images/image_14.png">
             </div>
             <p class="text-gray-400 text-lg md:text-xl font-light max-w-3xl mx-auto"
-              style="opacity:0;transform:translateY(10px)">Transitioning to your new identity is seamless. Follow our
+              style="opacity:1;transform:translateY(0)">Transitioning to your new identity is seamless. Follow our
               proven methodology to master your elegant new signature in record time.</p>
           </div>
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
@@ -883,7 +883,7 @@
                   style="isolation:isolate;transform:translate3d(0,0,0)"><img alt="Signature Practice Demonstration"
                     decoding="async" data-nimg="fill" class="object-cover opacity-90 transition-opacity duration-500"
                     style="position:absolute;height:100%;width:100%;left:0;top:0;right:0;bottom:0;color:transparent"
-                    src="images/PRACTICE.gif">
+                    src="./images/PRACTICE.gif">
                   <div class="absolute top-4 right-4 md:top-6 md:right-6 z-20">
                     <div
                       class="px-3 py-1 rounded-md bg-white/5 backdrop-blur-sm border border-white/10 text-[9px] font-bold text-white tracking-widest uppercase">
@@ -1855,6 +1855,108 @@
         originalWarn.apply(console, args);
       };
     }
+  </script>
+  <script>
+    // Animate elements with opacity:0 on scroll
+    (function() {
+      // Function to animate elements in
+      function animateElement(element) {
+        if (element.dataset.animated === 'true') return;
+        element.dataset.animated = 'true';
+        
+        // Get current style
+        const style = element.getAttribute('style') || '';
+        
+        // Extract transform if present
+        let initialTransform = '';
+        const transformMatch = style.match(/transform:\s*([^;]+)/);
+        if (transformMatch) {
+          initialTransform = transformMatch[1].trim();
+        }
+        
+        // Set transition
+        element.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
+        
+        // Ensure initial state is set
+        if (initialTransform) {
+          element.style.transform = initialTransform;
+        }
+        element.style.opacity = '0';
+        
+        // Force reflow to ensure initial state is applied
+        element.offsetHeight;
+        
+        // Trigger animation
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            element.style.opacity = '1';
+            // Reset transform - replace all translate and scale values
+            let finalTransform = initialTransform;
+            if (finalTransform) {
+              finalTransform = finalTransform.replace(/translateY\([^)]+\)/g, 'translateY(0)');
+              finalTransform = finalTransform.replace(/translateX\([^)]+\)/g, 'translateX(0)');
+              finalTransform = finalTransform.replace(/scale\([^)]+\)/g, 'scale(1)');
+              // Clean up any extra spaces
+              finalTransform = finalTransform.replace(/\s+/g, ' ').trim();
+            }
+            element.style.transform = finalTransform || 'translateY(0) translateX(0) scale(1)';
+          });
+        });
+      }
+      
+      // Create Intersection Observer
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            animateElement(entry.target);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      });
+      
+      // Find all elements with opacity:0 in inline styles
+      function initAnimations() {
+        const allElements = document.querySelectorAll('[style*="opacity:0"], [style*="opacity: 0"]');
+        allElements.forEach(element => {
+          const style = element.getAttribute('style') || '';
+          if (style.includes('opacity:0') || style.includes('opacity: 0')) {
+            observer.observe(element);
+          }
+        });
+      }
+      
+      // Initialize on DOM ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initAnimations);
+      } else {
+        initAnimations();
+      }
+      
+      // Also run after a short delay to catch dynamically loaded content
+      setTimeout(initAnimations, 500);
+      setTimeout(initAnimations, 1000);
+      
+      // Immediately show elements already in viewport
+      function showVisibleElements() {
+        const allElements = document.querySelectorAll('[style*="opacity:0"], [style*="opacity: 0"]');
+        allElements.forEach(element => {
+          const style = element.getAttribute('style') || '';
+          if ((style.includes('opacity:0') || style.includes('opacity: 0')) && !element.dataset.animated) {
+            const rect = element.getBoundingClientRect();
+            const isVisible = rect.top < window.innerHeight + 100 && rect.bottom > -100;
+            if (isVisible) {
+              animateElement(element);
+            }
+          }
+        });
+      }
+      
+      // Show visible elements immediately
+      setTimeout(showVisibleElements, 100);
+    })();
   </script>
   <script>requestAnimationFrame(function () { $RT = performance.now() });</script>
   <script src="js/5a58c0e69035745e.js" id="_R_" async=""></script>
