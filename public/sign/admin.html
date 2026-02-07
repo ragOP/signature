@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Admin Dashboard - The Signature Studio (Sign)">
+  <title>Admin Dashboard - Signature Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --pink-light: #ff6b9d;
+      --pink: #ec4899;
+      --pink-dark: #be185d;
+      --blue-light: #60a5fa;
+      --blue: #3b82f6;
+      --blue-dark: #1d4ed8;
+      --purple: #a855f7;
+      --bg-dark: #0f0a1a;
+      --bg-card: rgba(255, 255, 255, 0.05);
+      --text-primary: #ffffff;
+      --text-secondary: rgba(255, 255, 255, 0.7);
+      --text-muted: rgba(255, 255, 255, 0.5);
+      --gradient-main: linear-gradient(135deg, var(--blue) 0%, var(--purple) 50%, var(--pink) 100%);
+      --gradient-cta: linear-gradient(135deg, var(--pink) 0%, var(--purple) 50%, var(--blue) 100%);
+      --gradient-bg: linear-gradient(180deg, #0f0a1a 0%, #1a0a2e 50%, #0a1628 100%);
+      --shadow-glow: 0 0 40px rgba(168, 85, 247, 0.3);
+      --radius: 16px;
+      --green: #22c55e;
+      --red: #ef4444;
+      --yellow: #eab308;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--gradient-bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    .header {
+      position: sticky;
+      top: 0;
+      padding: 16px;
+      background: rgba(15, 10, 26, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      z-index: 100;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.4rem;
+      font-weight: 700;
+      background: var(--gradient-main);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-decoration: none;
+    }
+
+    .back-btn {
+      padding: 10px 20px;
+      background: var(--bg-card);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50px;
+      color: white;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .back-btn:hover {
+      background: var(--gradient-main);
+      border-color: transparent;
+    }
+
+    .admin-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px 16px;
+    }
+
+    .admin-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 24px;
+      background: var(--gradient-main);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .admin-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius);
+      padding: 20px;
+      text-align: center;
+    }
+
+    .stat-card-value {
+      font-size: 2rem;
+      font-weight: 700;
+      background: var(--gradient-main);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .stat-card-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .filters-container {
+      background: var(--bg-card);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+
+    .filters-title { font-size: 1rem; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+    .filters-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+    .filter-group { display: flex; flex-direction: column; gap: 6px; }
+    .filter-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+    .filter-input, .filter-select {
+      padding: 12px 14px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      color: white;
+      font-size: 0.9rem;
+      font-family: inherit;
+    }
+    .filter-input:focus, .filter-select:focus { outline: none; border-color: var(--purple); }
+    .filter-input::placeholder { color: var(--text-muted); }
+    .filter-actions { display: flex; gap: 10px; margin-top: 14px; }
+    .filter-btn {
+      flex: 1;
+      padding: 12px 16px;
+      border: none;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .filter-btn.primary { background: var(--gradient-cta); color: white; }
+    .filter-btn.secondary { background: rgba(255, 255, 255, 0.1); color: var(--text-secondary); }
+    .filter-btn:hover { transform: translateY(-1px); }
+
+    .orders-container {
+      background: var(--bg-card);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .orders-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .orders-title { font-size: 1rem; font-weight: 600; }
+    .orders-count {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.1);
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+
+    .orders-list { max-height: 600px; overflow-y: auto; }
+
+    .order-card {
+      padding: 18px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      transition: background 0.3s;
+    }
+
+    .order-card:hover { background: rgba(255, 255, 255, 0.02); }
+    .order-card:last-child { border-bottom: none; }
+
+    .order-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+
+    .order-name { font-size: 1.05rem; font-weight: 600; }
+    .order-status {
+      font-size: 0.7rem;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .order-status.paid { background: rgba(34, 197, 94, 0.2); color: var(--green); }
+    .order-status.pending { background: rgba(234, 179, 8, 0.2); color: var(--yellow); }
+    .order-status.failed { background: rgba(239, 68, 68, 0.2); color: var(--red); }
+
+    .order-details {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    .order-detail { display: flex; align-items: center; gap: 8px; }
+    .order-detail-icon { font-size: 1rem; }
+    .order-meta {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .order-notes {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-style: italic;
+      margin-top: 10px;
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 8px;
+    }
+
+    .no-orders {
+      padding: 60px 20px;
+      text-align: center;
+      color: var(--text-muted);
+    }
+
+    .no-orders-icon { font-size: 3rem; margin-bottom: 12px; }
+
+    @media (min-width: 768px) {
+      .admin-container { padding: 32px; }
+      .admin-stats { grid-template-columns: repeat(4, 1fr); }
+      .filters-grid { grid-template-columns: repeat(4, 1fr); }
+      .admin-title { font-size: 2.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-content">
+      <a href="index.html" class="logo">The Signature Studio</a>
+      <a href="index.html" class="back-btn">← Back to Site</a>
+    </div>
+  </header>
+
+  <div class="admin-container">
+    <h1 class="admin-title">📊 Orders Dashboard (Sign - lander77)</h1>
+
+    <div class="admin-stats">
+      <div class="stat-card">
+        <div class="stat-card-value" id="totalOrders">0</div>
+        <div class="stat-card-label">Total Orders</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-value" id="paidOrders">0</div>
+        <div class="stat-card-label">Paid</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-value" id="pendingOrders">0</div>
+        <div class="stat-card-label">Pending</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-value" id="totalRevenue">₹0</div>
+        <div class="stat-card-label">Revenue</div>
+      </div>
+    </div>
+
+    <div class="filters-container">
+      <div class="filters-title">🔍 Filters</div>
+      <div class="filters-grid">
+        <div class="filter-group">
+          <label class="filter-label">Search</label>
+          <input type="text" class="filter-input" id="filterSearch" placeholder="Name, email, phone...">
+        </div>
+        <div class="filter-group">
+          <label class="filter-label">Status</label>
+          <select class="filter-select" id="filterStatus">
+            <option value="">All Status</option>
+            <option value="paid">Paid</option>
+            <option value="pending">Pending</option>
+            <option value="failed">Failed</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label class="filter-label">Profession</label>
+          <select class="filter-select" id="filterStyle">
+            <option value="">All</option>
+            <option value="professional">Professional</option>
+            <option value="elegant">Elegant</option>
+            <option value="modern">Modern</option>
+            <option value="creative">Creative</option>
+            <option value="bold">Bold</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label class="filter-label">Date</label>
+          <select class="filter-select" id="filterDate">
+            <option value="">All Time</option>
+            <option value="today">Today</option>
+            <option value="week">This Week</option>
+            <option value="month">This Month</option>
+          </select>
+        </div>
+      </div>
+      <div class="filter-actions">
+        <button class="filter-btn primary" onclick="applyFilters()">Apply Filters</button>
+        <button class="filter-btn secondary" onclick="clearFilters()">Clear All</button>
+      </div>
+    </div>
+
+    <div class="orders-container">
+      <div class="orders-header">
+        <div class="orders-title">📋 Orders</div>
+        <div class="orders-count" id="ordersCount">0 orders</div>
+      </div>
+      <div class="orders-list" id="ordersList">
+        <div class="no-orders">
+          <div class="no-orders-icon">📭</div>
+          <p>No orders yet. Orders will appear here after customers complete checkout.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const API_URL = 'https://signature-backend-x93b.onrender.com/api/lander77/get-orders';
+    let allOrders = [];
+
+    async function loadOrders() {
+      try {
+        const res = await fetch(API_URL);
+        const result = await res.json();
+        if (result.success) {
+          allOrders = result.data || [];
+          displayOrders(allOrders);
+          updateStats(allOrders);
+        } else {
+          allOrders = [];
+          displayOrders([]);
+          updateStats([]);
+          alert('Failed to fetch orders from server.');
+        }
+      } catch (err) {
+        allOrders = [];
+        displayOrders([]);
+        updateStats([]);
+        alert('Error fetching orders: ' + err.message);
+      }
+    }
+
+    function updateStats(orders) {
+      const total = orders.length;
+      const paid = orders.filter(o => o.status === 'paid').length;
+      const pending = orders.filter(o => o.status === 'pending').length;
+      const revenue = orders.filter(o => o.status === 'paid').reduce((sum, o) => sum + (o.amount || 489), 0);
+
+      document.getElementById('totalOrders').textContent = total;
+      document.getElementById('paidOrders').textContent = paid;
+      document.getElementById('pendingOrders').textContent = pending;
+      document.getElementById('totalRevenue').textContent = '₹' + revenue.toLocaleString();
+    }
+
+    function displayOrders(orders) {
+      const container = document.getElementById('ordersList');
+      const countEl = document.getElementById('ordersCount');
+
+      countEl.textContent = `${orders.length} order${orders.length !== 1 ? 's' : ''}`;
+
+      if (orders.length === 0) {
+        container.innerHTML = `
+          <div class="no-orders">
+            <div class="no-orders-icon">📭</div>
+            <p>No orders found.</p>
+          </div>
+        `;
+        return;
+      }
+
+      const styleNames = {
+        professional: 'Professional Executive',
+        elegant: 'Elegant Cursive',
+        modern: 'Modern Minimal',
+        creative: 'Creative Artistic',
+        bold: 'Bold Statement'
+      };
+
+      container.innerHTML = orders.map((order) => {
+        const date = new Date(order.orderDate || order.timestamp);
+        const formattedDate = date.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+        const formattedTime = date.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
+        const statusClass = order.status || 'pending';
+        const styleName = styleNames[order.style] || order.profession || order.style || '-';
+
+        return `
+          <div class="order-card">
+            <div class="order-top">
+              <div class="order-name">${order.fullName || order.name || ''}</div>
+              <span class="order-status ${statusClass}">${statusClass}</span>
+            </div>
+            <div class="order-details">
+              <div class="order-detail">
+                <span class="order-detail-icon">📧</span>
+                <span>${order.email || ''}</span>
+              </div>
+              <div class="order-detail">
+                <span class="order-detail-icon">📱</span>
+                <span>${order.phoneNumber || order.phone || ''}</span>
+              </div>
+              <div class="order-detail">
+                <span class="order-detail-icon">🎨</span>
+                <span>${styleName}</span>
+              </div>
+              <div class="order-detail">
+                <span class="order-detail-icon">💰</span>
+                <span>₹${order.amount || 489}</span>
+              </div>
+            </div>
+            ${order.remarks || order.notes ? `<div class="order-notes">"${(order.remarks || order.notes).replace(/"/g, '&quot;')}"</div>` : ''}
+            <div class="order-meta">
+              <span>📅 ${formattedDate} at ${formattedTime}</span>
+              ${order.orderId ? `<span>ID: ${String(order.orderId).slice(-8)}</span>` : ''}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function applyFilters() {
+      const search = document.getElementById('filterSearch').value.toLowerCase();
+      const status = document.getElementById('filterStatus').value;
+      const style = document.getElementById('filterStyle').value;
+      const dateFilter = document.getElementById('filterDate').value;
+
+      let filtered = [...allOrders];
+
+      if (search) {
+        filtered = filtered.filter(o =>
+          (o.fullName || o.name || '').toLowerCase().includes(search) ||
+          (o.email || '').toLowerCase().includes(search) ||
+          (o.phoneNumber || o.phone || '').includes(search)
+        );
+      }
+
+      if (status) {
+        filtered = filtered.filter(o => (o.status || 'pending') === status);
+      }
+
+      if (style) {
+        filtered = filtered.filter(o => (o.style || o.profession || '') === style);
+      }
+
+      if (dateFilter) {
+        const now = new Date();
+        const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+        filtered = filtered.filter(o => {
+          const orderDate = new Date(o.orderDate || o.timestamp || 0);
+          switch (dateFilter) {
+            case 'today': return orderDate >= today;
+            case 'week':
+              const weekAgo = new Date(today);
+              weekAgo.setDate(weekAgo.getDate() - 7);
+              return orderDate >= weekAgo;
+            case 'month':
+              const monthAgo = new Date(today);
+              monthAgo.setMonth(monthAgo.getMonth() - 1);
+              return orderDate >= monthAgo;
+            default: return true;
+          }
+        });
+      }
+
+      displayOrders(filtered);
+      updateStats(filtered);
+    }
+
+    function clearFilters() {
+      document.getElementById('filterSearch').value = '';
+      document.getElementById('filterStatus').value = '';
+      document.getElementById('filterStyle').value = '';
+      document.getElementById('filterDate').value = '';
+      displayOrders(allOrders);
+      updateStats(allOrders);
+    }
+
+    loadOrders();
+  </script>
+
+</body>
+</html>
