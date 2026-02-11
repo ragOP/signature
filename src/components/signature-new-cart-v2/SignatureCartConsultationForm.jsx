@@ -27,7 +27,7 @@ const InputField = ({
             value={value}
             onChange={onChange}
             rows={rows || 4}
-            className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all duration-200 resize-none ${
+            className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all duration-200 resize-none text-gray-900 placeholder-gray-400 bg-white ${
               error ? "border-red-300 bg-red-50" : "border-gray-300"
             }`}
             placeholder={placeholder}
@@ -37,7 +37,7 @@ const InputField = ({
             type={type}
             value={value}
             onChange={onChange}
-            className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all duration-200 ${
+            className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent transition-all duration-200 text-gray-900 placeholder-gray-400 bg-white ${
               error ? "border-red-300 bg-red-50" : "border-gray-300"
             }`}
             placeholder={placeholder}
