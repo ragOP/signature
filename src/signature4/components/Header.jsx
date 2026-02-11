@@ -23,7 +23,7 @@ export default function Header({
                 <img
                   className="brandLogo"
                   src={logoSrc}
-                  alt="Signature Studio logo"
+                  alt="Signature Studio"
                   onError={() => setLogoSrc("")}
                 />
               ) : (
