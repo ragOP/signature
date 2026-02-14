@@ -29,16 +29,12 @@ function SignatureNewCartCashFree() {
   
   // Parse RAG coupon from URL parameters
   const urlParams = new URLSearchParams(location.search);
-  const ragCoupon = urlParams.get('rag30') !== null ? 'rag30' : 
-                   urlParams.get('rag60') !== null ? 'rag60' : 
-                   urlParams.get('rag75') !== null ? 'rag75' : null;
+  const ragCoupon = urlParams.get('rag95') !== null ? 'rag75' : null;
   
   // Get discount percentage based on coupon
   const getCouponDiscount = (coupon) => {
     switch(coupon) {
-      case 'rag30': return 30;
-      case 'rag60': return 60;
-      case 'rag75': return 75;
+      case 'rag95': return 95;
       default: return 0;
     }
   };
