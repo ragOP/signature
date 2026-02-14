@@ -26,19 +26,21 @@ function SignatureNewCartCashFree() {
   const navigate = useNavigate();
   const location = useLocation();
   const [creatingSession, setCreatingSession] = useState(false);
-  
+
   // Parse RAG coupon from URL parameters
   const urlParams = new URLSearchParams(location.search);
-  const ragCoupon = urlParams.get('rag95') !== null ? 'rag75' : null;
-  
+  const ragCoupon = urlParams.get("rag95") !== null ? "rag95" : null;
+
   // Get discount percentage based on coupon
   const getCouponDiscount = (coupon) => {
-    switch(coupon) {
-      case 'rag95': return 95;
-      default: return 0;
+    switch (coupon) {
+      case "rag95":
+        return 95;
+      default:
+        return 0;
     }
   };
-  
+
   const couponDiscountPercentage = getCouponDiscount(ragCoupon);
   const [cartItems, setCartItems] = useState([
     {
@@ -137,7 +139,7 @@ function SignatureNewCartCashFree() {
     setSelectedProducts((prev) =>
       prev.includes(productId)
         ? prev.filter((id) => id !== productId)
-        : [...prev, productId]
+        : [...prev, productId],
     );
   };
 
@@ -152,24 +154,24 @@ function SignatureNewCartCashFree() {
 
   // Calculate cart totals including selected additional products
   const selectedAdditionalProducts = additionalProducts.filter((product) =>
-    selectedProducts.includes(product.id)
+    selectedProducts.includes(product.id),
   );
 
   const cartSubtotal = cartItems.reduce(
     (sum, item) => sum + item.price * (item.quantity || 1),
-    0
+    0,
   );
   const cartTotalMrp = cartItems.reduce(
     (sum, item) => sum + item.originalPrice * (item.quantity || 1),
-    0
+    0,
   );
   const additionalSubtotal = selectedAdditionalProducts.reduce(
     (sum, product) => sum + product.price,
-    0
+    0,
   );
   const additionalTotalMrp = selectedAdditionalProducts.reduce(
     (sum, product) => sum + product.originalPrice,
-    0
+    0,
   );
   const totalMrp = cartTotalMrp + additionalTotalMrp;
   const subtotal = cartSubtotal + additionalSubtotal;
@@ -177,38 +179,41 @@ function SignatureNewCartCashFree() {
   const cartDiscount = cartItems.reduce(
     (sum, item) =>
       sum + (item.originalPrice - item.price) * (item.quantity || 1),
-    0
+    0,
   );
   const additionalDiscount = selectedAdditionalProducts.reduce(
     (sum, product) => sum + (product.originalPrice - product.price),
-    0
+    0,
   );
   const cartDiscountMrp = cartItems.reduce(
     (sum, item) =>
       sum + (item.originalPrice - item.price) * (item.quantity || 1),
-    0
+    0,
   );
   const additionalDiscountMrp = selectedAdditionalProducts.reduce(
     (sum, product) => sum + (product.originalPrice - product.price),
-    0
+    0,
   );
   const discountMrp = cartDiscountMrp + additionalDiscountMrp;
   const discount = cartDiscount + additionalDiscount;
 
   // Calculate RAG coupon discount
-  const couponDiscount = couponDiscountPercentage > 0 ? Math.round((subtotal * couponDiscountPercentage) / 100) : 0;
-  
+  const couponDiscount =
+    couponDiscountPercentage > 0
+      ? Math.round((subtotal * couponDiscountPercentage) / 100)
+      : 0;
+
   // Final total after applying coupon discount
   const total = subtotal - couponDiscount;
-  
+
   // Debug logging for coupon functionality
-  console.log('RAG Coupon Debug:', {
+  console.log("RAG Coupon Debug:", {
     ragCoupon,
     couponDiscountPercentage,
     subtotal,
     couponDiscount,
     total,
-    selectedAdditionalProducts: selectedAdditionalProducts.length
+    selectedAdditionalProducts: selectedAdditionalProducts.length,
   });
   // Create Payment Session
   const createPaymentSession = async () => {
@@ -232,7 +237,7 @@ function SignatureNewCartCashFree() {
           profession: consultationFormData?.profession,
           remarks: consultationFormData?.remarks,
           additionalProducts: selectedAdditionalProducts.map(
-            (product) => product.title
+            (product) => product.title,
           ),
           couponCode: ragCoupon,
           couponDiscount: couponDiscount,
@@ -243,7 +248,7 @@ function SignatureNewCartCashFree() {
             "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
           },
-        }
+        },
       );
 
       const abandonedCartID = abandonedCartRes.data.data._id;
@@ -263,12 +268,12 @@ function SignatureNewCartCashFree() {
           profession: consultationFormData?.profession,
           remarks: consultationFormData?.remarks,
           additionalProducts: selectedAdditionalProducts.map(
-            (product) => product.title
+            (product) => product.title,
           ),
           couponCode: ragCoupon,
           couponDiscount: couponDiscount,
           originalAmount: subtotal,
-        })
+        }),
       );
 
       // Create payment session
@@ -283,7 +288,7 @@ function SignatureNewCartCashFree() {
           profession: consultationFormData?.profession,
           remarks: consultationFormData?.remarks,
           additionalProducts: selectedAdditionalProducts.map(
-            (product) => product.title
+            (product) => product.title,
           ),
           couponCode: ragCoupon,
           couponDiscount: couponDiscount,
@@ -297,7 +302,7 @@ function SignatureNewCartCashFree() {
             "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("auth_token")}`,
           },
-        }
+        },
       );
 
       console.log("Payment session created:", apiResponse);
@@ -346,12 +351,12 @@ function SignatureNewCartCashFree() {
               profession: consultationFormData?.profession,
               remarks: consultationFormData?.remarks,
               additionalProducts: selectedAdditionalProducts.map(
-                (product) => product.title
+                (product) => product.title,
               ),
               couponCode: ragCoupon,
               couponDiscount: couponDiscount,
               originalAmount: subtotal,
-            })
+            }),
           );
 
           // Navigate to order confirmation page for verification
@@ -502,7 +507,8 @@ function SignatureNewCartCashFree() {
           {couponDiscount > 0 && (
             <div className="flex justify-between text-orange-600 bg-orange-50 px-3 py-2 rounded-lg border border-orange-200">
               <span className="font-semibold">
-                {ragCoupon?.toUpperCase()} Coupon ({couponDiscountPercentage}% OFF)
+                {ragCoupon?.toUpperCase()} Coupon ({couponDiscountPercentage}%
+                OFF)
               </span>
               <span className="font-bold">-₹{couponDiscount}</span>
             </div>
