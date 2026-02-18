@@ -49,6 +49,7 @@ import OrderConfirmation5 from "./pages/OrderConfirmation5";
 import AbondentRecord5 from "./pages/AbondentRecord5";
 import Record5 from "./pages/Record5";
 import SignatureTry from "./components/signature-try/SIgnatureTry";
+import SignaturePremium from "./pages/SignaturePremium";
 
 
 
@@ -87,6 +88,7 @@ function App() {
 
           <Route path="/" element={<Signature />} />
           <Route path="/signature" element={<Signature />} />
+          <Route path="/signature-premium" element={<SignaturePremium />} />
           <Route path="/signature-new" element={<SignatureNewRedesigned />} />
           <Route path="/signature-try" element={<SignatureTry />} />
             <Route path="/signature-new-v2" element={<SignatureNewRedesignedV2/>} />
