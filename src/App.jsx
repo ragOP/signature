@@ -51,6 +51,7 @@ import Record5 from "./pages/Record5";
 import SignatureTry from "./components/signature-try/SIgnatureTry";
 import SignaturePremium from "./pages/SignaturePremium";
 import SignatureModern from "./pages/SignatureModern";
+import LogsPage from "./pages/log";
 
 
 
@@ -172,6 +173,7 @@ function App() {
             path="/signature-new-abondent-reportv2"
             element={<SignatureNewAbondentReportv2 />}
           />
+          <Route path="/logs" element={<LogsPage />} />
         </Routes>
       </div>
     </Router>

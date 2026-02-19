@@ -78,6 +78,30 @@ const SignatureNewOrderConfirmationCashfree = () => {
     createOrderInDatabase();
   }, []);
 
+    useEffect(() => {
+    const logPath = async () => {
+      try {
+        const indianTime = new Date().toLocaleString("en-IN", {
+          timeZone: "Asia/Kolkata",
+        });
+        await fetch(`${BACKEND_URL}/api/log/log-path`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            path: "order",
+            timestamp: indianTime,
+          }),
+        });
+      } catch (error) {
+        console.error("Error logging path:", error);
+      }
+    };
+
+    logPath();
+  }, []);
+
   // Create order in database
   const createOrderInDatabase = async () => {
     try {

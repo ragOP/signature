@@ -8,8 +8,33 @@ import Testimonial from "./Testimonial";
 import LimitedSlot from "./LimitedSlot";
 import Footer from "./Footer";
 import CtaButton from "./CtaButton";
+import { useEffect } from "react";
+import { BACKEND_URL } from "../../utils/backendUrl";
 
 const SignatureNewRedesigned = () => {
+  useEffect(() => {
+    const logPath = async () => {
+      try {
+        const indianTime = new Date().toLocaleString("en-IN", {
+          timeZone: "Asia/Kolkata",
+        });
+        await fetch(`${BACKEND_URL}/api/log/log-path`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            path: "landing",
+            timestamp: indianTime,
+          }),
+        });
+      } catch (error) {
+        console.error("Error logging path:", error);
+      }
+    };
+
+    logPath();
+  }, []);
   return (
     <div className="min-h-screen bg-gradient-to-br from-yellow-50 via-amber-50 to-orange-50">
       <Navbar />
