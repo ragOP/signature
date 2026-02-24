@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Signature Studio — A Signature That Looks Like You Mean It</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&display=swap" rel="stylesheet" />
+  <style>
+    /* ========== RESET & VARIABLES ========== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #f8fafc;
+      color: #1e293b;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    .serif { font-family: 'Fraunces', Georgia, serif; }
+
+    /* Cool modern palette */
+    :root {
+      --ink: #0f172a;
+      --ink-muted: #475569;
+      --accent-blue: #3b82f6;
+      --accent-teal: #0d9488;
+      --accent-purple: #7c3aed;
+      --gradient-start: #e0f2fe;
+      --gradient-mid: #e0e7ff;
+      --gradient-end: #f0fdfa;
+      --glass-bg: rgba(255,255,255,0.72);
+      --glass-border: rgba(255,255,255,0.9);
+      --blob-1: rgba(59, 130, 246, 0.12);
+      --blob-2: rgba(124, 58, 237, 0.08);
+      --blob-3: rgba(13, 148, 136, 0.1);
+      --radius: 16px;
+      --radius-sm: 12px;
+      --shadow-soft: 0 4px 24px rgba(15, 23, 42, 0.06);
+      --shadow-lift: 0 12px 40px rgba(15, 23, 42, 0.08);
+      --tap-target: 44px;
+      --scene-dot-size: 8px;
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+    }
+
+    /* ========== NOISE LAYER ========== */
+    .noise {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* ========== PEN GIF BACKGROUND LAYERS (placeholders – replace with real GIF URLs) ========== */
+    /* PLACEHOLDER: Replace src with your pen-writing GIF URL. Use 2–3 different GIFs. */
+    .pen-bg {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      overflow: hidden;
+    }
+    .pen-bg-layer {
+      position: absolute;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      opacity: 0.08;
+      filter: blur(12px);
+      will-change: transform;
+      /* Lazy: use background-image set via JS or replace URL below */
+    }
+    .pen-bg-layer-1 {
+      width:  min(80vw, 420px); height: min(50vw, 280px);
+      top: 8%; left: 5%;
+      /* PLACEHOLDER PEN GIF 1 - e.g. pen-writing-loop.gif */
+      background-image: url('https://placehold.co/420x280/e0f2fe/64748b?text=Pen+GIF+1');
+    }
+    .pen-bg-layer-2 {
+      width:  min(70vw, 360px); height: min(45vw, 240px);
+      bottom: 15%; right: 8%;
+      opacity: 0.06;
+      filter: blur(14px);
+      /* PLACEHOLDER PEN GIF 2 */
+      background-image: url('https://placehold.co/360x240/e0e7ff/64748b?text=Pen+GIF+2');
+    }
+    .pen-bg-layer-3 {
+      width:  min(60vw, 300px); height: min(40vw, 200px);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0.06;
+      filter: blur(18px);
+      /* PLACEHOLDER PEN GIF 3 */
+      background-image: url('https://placehold.co/300x200/f0fdfa/64748b?text=Pen+GIF+3');
+    }
+
+    /* ========== GRADIENT BLOBS ========== */
+    .blobs {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    }
+    .blob {
+      position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.7;
+    }
+    .blob-1 { width:  clamp(200px, 40vw, 400px); height: clamp(200px, 40vw, 400px); background: var(--blob-1); top: -10%; right: -5%; }
+    .blob-2 { width:  clamp(180px, 35vw, 360px); height: clamp(180px, 35vw, 360px); background: var(--blob-2); bottom: -5%; left: -8%; }
+    .blob-3 { width:  clamp(160px, 30vw, 320px); height: clamp(160px, 30vw, 320px); background: var(--blob-3); top: 50%; left: 50%; transform: translate(-50%, -50%); }
+
+    /* ========== SCROLL CONTAINER ========== */
+    .journey {
+      position: relative; z-index: 1;
+      height: 100vh; height: 100dvh;
+      overflow-y: auto; overflow-x: hidden;
+      scroll-snap-type: y mandatory;
+      scroll-behavior: smooth;
+    }
+    .scene {
+      min-height: 100vh; min-height: 100dvh;
+      scroll-snap-align: start; scroll-snap-stop: normal;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      padding: max(env(safe-area-inset-top), 20px) max(env(safe-area-inset-right), 20px) max(env(safe-area-inset-bottom), 20px) max(env(safe-area-inset-left), 20px);
+      padding-bottom: calc(max(env(safe-area-inset-bottom), 20px) + 80px);
+    }
+
+    /* ========== PROGRESS DOTS ========== */
+    .progress-dots {
+      position: fixed; top: 50%; right: max(12px, env(safe-area-inset-right)); transform: translateY(-50%);
+      z-index: 10; display: flex; flex-direction: column; gap: 12px;
+    }
+    .progress-dots a {
+      width: var(--scene-dot-size); height: var(--scene-dot-size); border-radius: 50%;
+      background: #cbd5e1; transition: background 0.25s, transform 0.2s;
+      text-indent: -9999px; display: block;
+    }
+    .progress-dots a:hover { background: #94a3b8; transform: scale(1.2); }
+    .progress-dots a.active { background: var(--accent-teal); transform: scale(1.35); }
+    @media (max-width: 768px) {
+      .progress-dots {
+        top: auto; bottom: max(70px, calc(env(safe-area-inset-bottom) + 60px)); left: 50%; transform: translateX(-50%);
+        flex-direction: row;
+      }
+    }
+
+    /* ========== SCENE 1: IDENTITY SCANNER ========== */
+    .scene-1 { background: linear-gradient(165deg, var(--gradient-start) 0%, #f0f9ff 50%, var(--gradient-end) 100%); }
+    .scanner-ui {
+      max-width: 340px; width: 100%;
+      background: var(--glass-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border); border-radius: var(--radius);
+      box-shadow: var(--shadow-soft);
+      padding: 28px 24px;
+      text-align: center;
+    }
+    .scanner-line {
+      width: 100%; height: 2px; margin: 20px 0;
+      background: linear-gradient(90deg, transparent, var(--accent-teal), transparent);
+      opacity: 0.6;
+    }
+    .scanner-ink-svg {
+      position: absolute; left: 50%; top: 18%; transform: translateX(-50%);
+      width: 120px; height: 40px; opacity: 0.12; pointer-events: none;
+    }
+    .scanner-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink-muted); margin-bottom: 8px; }
+    .scanner-text { font-size: 1rem; color: var(--ink); margin-bottom: 16px; min-height: 1.4em; }
+    .scanner-progress-wrap { height: 4px; background: #e2e8f0; border-radius: 2px; overflow: hidden; margin: 16px 0 20px; }
+    .scanner-progress-bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent-teal), var(--accent-blue)); border-radius: 2px; transition: width 0.15s linear; }
+    .scanner-result { font-family: 'Fraunces', serif; font-size: 1.15rem; font-weight: 600; color: var(--ink); margin-bottom: 24px; display: none; }
+    .scanner-result.visible { display: block; animation: fadeIn 0.4s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      min-height: var(--tap-target); padding: 12px 24px;
+      background: linear-gradient(135deg, var(--accent-teal), #0f766e);
+      color: #fff; font-weight: 600; font-size: 1rem;
+      border: none; border-radius: var(--radius-sm);
+      cursor: pointer; text-decoration: none;
+      box-shadow: 0 4px 14px rgba(13, 148, 136, 0.35);
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative; overflow: hidden;
+    }
+    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(13, 148, 136, 0.4); }
+    .btn-primary:active { transform: scale(0.98); }
+    .btn-primary .ripple { position: absolute; border-radius: 50%; background: rgba(255,255,255,0.4); transform: scale(0); animation: ripple 0.5s ease-out; pointer-events: none; }
+    @keyframes ripple { to { transform: scale(4); opacity: 0; } }
+
+    /* ========== SCENE 2: PICK YOUR VIBE ========== */
+    .scene-2 { background: linear-gradient(160deg, #f0f9ff 0%, #e0e7ff 45%, #ecfdf5 100%); }
+    .scene-head { font-family: 'Fraunces', serif; font-size: clamp(1.5rem, 4.5vw, 2rem); font-weight: 600; text-align: center; margin-bottom: 8px; color: var(--ink); }
+    .scene-sub { font-size: 0.95rem; color: var(--ink-muted); text-align: center; margin-bottom: 24px; max-width: 320px; }
+    .vibe-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; max-width: 380px; width: 100%; margin-bottom: 24px; }
+    .vibe-card {
+      background: var(--glass-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border: 2px solid transparent; border-radius: var(--radius-sm);
+      padding: 16px 12px; text-align: center; cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      min-height: 100px;
+    }
+    .vibe-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lift); }
+    .vibe-card:active { transform: scale(0.98); }
+    .vibe-card.selected { border-color: var(--accent-teal); box-shadow: 0 0 0 1px var(--accent-teal); }
+    .vibe-card .vibe-title { font-weight: 600; font-size: 0.85rem; color: var(--ink); margin-bottom: 4px; }
+    .vibe-card .vibe-desc { font-size: 0.75rem; color: var(--ink-muted); }
+    .vibe-preview-img {
+      width: 100%; aspect-ratio: 2/1; border-radius: 8px; object-fit: cover; margin-bottom: 8px;
+      background: linear-gradient(135deg, #e2e8f0, #f1f5f9);
+    }
+    /* PLACEHOLDER: Replace with your vibe preview images */
+    .vibe-dynamic-copy { font-size: 0.9rem; color: var(--ink-muted); text-align: center; min-height: 2.4em; margin-bottom: 20px; }
+    @media (max-width: 400px) { .vibe-grid { grid-template-columns: 1fr; } }
+
+    /* ========== SCENE 3: BEFORE → AFTER ========== */
+    .scene-3 { background: linear-gradient(170deg, #ecfdf5 0%, #e0f2fe 50%, #f0f9ff 100%); }
+    .morph-wrap { max-width: 360px; width: 100%; margin-bottom: 24px; }
+    .morph-box {
+      background: var(--glass-bg); backdrop-filter: blur(12px); border: 1px solid var(--glass-border);
+      border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-soft);
+      position: relative; height: 140px;
+    }
+    .morph-before, .morph-after {
+      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+      padding: 16px;
+    }
+    .morph-before img, .morph-after img { max-height: 100%; max-width: 100%; object-fit: contain; }
+    .morph-after { clip-path: inset(0 0 0 50%); }
+    .morph-slider {
+      position: absolute; top: 0; bottom: 0; width: 4px; background: var(--accent-teal);
+      left: 50%; transform: translateX(-50%); cursor: ew-resize; z-index: 2;
+      border-radius: 2px;
+    }
+    .morph-slider::after {
+      content: ''; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+      width: 32px; height: 32px; background: #fff; border: 2px solid var(--accent-teal);
+      border-radius: 50%; box-shadow: var(--shadow-soft);
+    }
+    .morph-copy { font-family: 'Fraunces', serif; font-size: 0.95rem; color: var(--ink-muted); text-align: center; margin-bottom: 16px; font-style: italic; }
+    .carousel-wrap { width: 100%; max-width: 100%; overflow: hidden; }
+    .carousel { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 8px 0; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+    .carousel::-webkit-scrollbar { display: none; }
+    .carousel-item {
+      flex: 0 0 140px; scroll-snap-align: start;
+      border-radius: var(--radius-sm); overflow: hidden; background: #f1f5f9;
+      box-shadow: var(--shadow-soft); cursor: pointer; transition: transform 0.2s;
+    }
+    .carousel-item:hover { transform: scale(1.02); }
+    .carousel-item img { width: 100%; aspect-ratio: 1.2; object-fit: cover; display: block; }
+    /* PLACEHOLDER: 6 transformation images */
+    .carousel-label { font-size: 0.7rem; padding: 6px 8px; color: var(--ink-muted); text-align: center; }
+
+    /* ========== SCENE 4: BLUEPRINT VAULT ========== */
+    .scene-4 { background: linear-gradient(165deg, #e0e7ff 0%, #e0f2fe 50%, #f0fdf4 100%); }
+    .vault-ui { max-width: 360px; width: 100%; text-align: center; }
+    .vault-door {
+      background: linear-gradient(145deg, #1e293b 0%, #334155 100%);
+      border-radius: var(--radius); padding: 32px 24px; color: #f8fafc;
+      margin-bottom: 20px; box-shadow: 0 12px 40px rgba(15, 23, 42, 0.25);
+    }
+    .vault-door .serif { font-size: 1.35rem; margin-bottom: 8px; }
+    .vault-door p { font-size: 0.9rem; opacity: 0.85; margin-bottom: 20px; }
+    .btn-vault {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      min-height: var(--tap-target); padding: 12px 24px;
+      background: linear-gradient(135deg, var(--accent-purple), #5b21b6);
+      color: #fff; font-weight: 600; border: none; border-radius: var(--radius-sm);
+      cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-vault:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(124, 58, 237, 0.4); }
+    .vault-cards { display: none; gap: 12px; margin-top: 20px; }
+    .vault-cards.unlocked { display: grid; grid-template-columns: repeat(2, 1fr); animation: fadeIn 0.4s ease; }
+    .vault-card {
+      background: var(--glass-bg); backdrop-filter: blur(12px); border: 1px solid var(--glass-border);
+      border-radius: var(--radius-sm); padding: 16px; text-align: left; cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s; min-height: 90px;
+    }
+    .vault-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lift); }
+    .vault-card:active { transform: scale(0.98); }
+    .vault-card h4 { font-size: 0.9rem; color: var(--ink); margin-bottom: 4px; }
+    .vault-card p { font-size: 0.75rem; color: var(--ink-muted); }
+    /* PLACEHOLDER: 1 blueprint visual can go in .vault-door as bg or img */
+    .blueprint-visual { width: 80px; height: 80px; margin: 0 auto 12px; border-radius: 12px; background: linear-gradient(135deg, #c7d2fe, #a5f3fc); }
+    /* Replace with: url('your-blueprint-visual.png') */
+
+    /* Bottom sheet overlay */
+    .sheet-overlay { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.4); z-index: 20; opacity: 0; visibility: hidden; transition: opacity 0.25s, visibility 0.25s; }
+    .sheet-overlay.open { opacity: 1; visibility: visible; }
+    .sheet {
+      position: fixed; left: 0; right: 0; bottom: 0;
+      max-height: 70vh; background: #fff; border-radius: 20px 20px 0 0;
+      padding: 24px 20px max(env(safe-area-inset-bottom), 24px);
+      box-shadow: 0 -8px 32px rgba(15, 23, 42, 0.12);
+      z-index: 21; transform: translateY(100%); transition: transform 0.3s ease;
+    }
+    .sheet-overlay.open .sheet { transform: translateY(0); }
+    .sheet h3 { font-family: 'Fraunces', serif; font-size: 1.2rem; margin-bottom: 12px; color: var(--ink); }
+    .sheet p { font-size: 0.95rem; color: var(--ink-muted); line-height: 1.6; }
+    .sheet-close { margin-top: 16px; width: 100%; min-height: 44px; background: #e2e8f0; border: none; border-radius: var(--radius-sm); font-weight: 600; cursor: pointer; }
+
+    /* ========== SCENE 5: FINAL CTA ========== */
+    .scene-5 { background: linear-gradient(160deg, #f0f9ff 0%, #e0e7ff 40%, #ecfdf5 100%); padding-bottom: 100px; }
+    .stamp-wrap { position: relative; max-width: 340px; width: 100%; }
+    .stamp-effect {
+      position: absolute; left: 50%; top: -20px; transform: translateX(-50%) scale(0.8);
+      width: 100px; height: 100px; border: 4px solid var(--accent-teal);
+      border-radius: 50%; opacity: 0.25; animation: stampPulse 2s ease-in-out infinite;
+    }
+    @keyframes stampPulse { 0%, 100% { transform: translateX(-50%) scale(0.8); opacity: 0.2; } 50% { transform: translateX(-50%) scale(1); opacity: 0.35; } }
+    .receipt {
+      background: var(--glass-bg); backdrop-filter: blur(12px); border: 1px solid var(--glass-border);
+      border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow-soft);
+      margin-bottom: 24px; text-align: left;
+    }
+    .receipt h3 { font-family: 'Fraunces', serif; font-size: 1.2rem; margin-bottom: 16px; color: var(--ink); }
+    .receipt ul { list-style: none; }
+    .receipt li { padding: 10px 0; border-bottom: 1px solid #f1f5f9; font-size: 0.95rem; color: var(--ink); display: flex; align-items: center; gap: 10px; }
+    .receipt li:last-child { border-bottom: none; }
+    .receipt li::before { content: '✓'; color: var(--accent-teal); font-weight: 700; }
+    .risk-reducer { font-size: 0.85rem; color: var(--ink-muted); margin-top: 16px; }
+
+    /* Sticky CTA bar */
+    .sticky-cta-bar {
+      position: fixed; left: 0; right: 0; bottom: 0;
+      padding: 12px 20px max(env(safe-area-inset-bottom), 12px);
+      background: var(--glass-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      border-top: 1px solid var(--glass-border); z-index: 9;
+      transform: translateY(100%); transition: transform 0.3s ease;
+    }
+    .sticky-cta-bar.visible { transform: translateY(0); }
+    .sticky-cta-bar .btn-primary { width: 100%; max-width: 400px; margin: 0 auto; display: flex; }
+
+    /* ========== INK CURSOR (desktop only) ========== */
+    .ink-cursor { position: fixed; width: 8px; height: 8px; border-radius: 50%; background: var(--accent-teal); pointer-events: none; z-index: 9999; opacity: 0.35; mix-blend-mode: multiply; transform: translate(-50%, -50%); transition: transform 0.08s ease-out; }
+    @media (max-width: 1024px) { .ink-cursor { display: none; } }
+
+    /* ========== HOOK HEADLINE (global) ========== */
+    .hook { font-family: 'Fraunces', serif; font-size: clamp(1.4rem, 4vw, 1.85rem); font-weight: 600; color: var(--ink); text-align: center; line-height: 1.3; margin-bottom: 8px; }
+    .angle { font-size: 0.95rem; color: var(--ink-muted); text-align: center; max-width: 320px; margin: 0 auto 20px; }
+  </style>
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <div class="pen-bg" aria-hidden="true">
+    <div class="pen-bg-layer pen-bg-layer-1" data-parallax="0.03"></div>
+    <div class="pen-bg-layer pen-bg-layer-2" data-parallax="0.02"></div>
+    <div class="pen-bg-layer pen-bg-layer-3" data-parallax="0.015"></div>
+  </div>
+  <div class="blobs" aria-hidden="true">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <nav class="progress-dots" aria-label="Scene progress">
+    <a href="#scene-1" aria-label="Scene 1">1</a>
+    <a href="#scene-2" aria-label="Scene 2">2</a>
+    <a href="#scene-3" aria-label="Scene 3">3</a>
+    <a href="#scene-4" aria-label="Scene 4">4</a>
+    <a href="#scene-5" aria-label="Scene 5">5</a>
+  </nav>
+
+  <main class="journey" id="journey">
+    <!-- ========== SCENE 1: Identity Scanner ========== -->
+    <section class="scene scene-1" id="scene-1">
+      <div class="scanner-ink-svg" aria-hidden="true">
+        <svg viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 25 Q40 10 70 22 T120 20" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.5"/></svg>
+      </div>
+      <div class="scanner-ui">
+        <p class="scanner-label">Identity Scanner</p>
+        <p class="scanner-text" id="scanner-text">Scanning your signature presence…</p>
+        <div class="scanner-line"></div>
+        <div class="scanner-progress-wrap">
+          <div class="scanner-progress-bar" id="scanner-progress"></div>
+        </div>
+        <p class="scanner-result" id="scanner-result">Result: Your signature is currently underpowered.</p>
+        <a href="#scene-2" class="btn-primary" id="btn-upgrade">Upgrade My Signature →</a>
+      </div>
+      <p class="hook" style="margin-top:28px">A Signature That Looks Like You Mean It.</p>
+      <p class="angle">Readable enough to trust. Stylish enough to remember. Easy enough to repeat.</p>
+    </section>
+
+    <!-- ========== SCENE 2: Pick Your Vibe ========== -->
+    <section class="scene scene-2" id="scene-2">
+      <h2 class="scene-head">Pick Your Signature Vibe</h2>
+      <p class="scene-sub">Choose the style that fits you. We’ll match it.</p>
+      <p class="vibe-dynamic-copy" id="vibe-copy">Tap a card to preview.</p>
+      <div class="vibe-grid">
+        <div class="vibe-card selected" data-vibe="clean" role="button" tabindex="0">
+          <div class="vibe-preview-img-wrap">
+            <!-- PLACEHOLDER: Replace with your Clean Professional signature preview image -->
+            <img class="vibe-preview-img" src="https://placehold.co/320x160/e0f2fe/0d9488?text=Clean+Pro" alt="Clean Professional style" loading="lazy" />
+          </div>
+          <p class="vibe-title">Clean Professional</p>
+          <p class="vibe-desc">Classic, legible</p>
+        </div>
+        <div class="vibe-card" data-vibe="modern" role="button" tabindex="0">
+          <div class="vibe-preview-img-wrap">
+            <!-- PLACEHOLDER: Replace with your Modern Minimal signature preview image -->
+            <img class="vibe-preview-img" src="https://placehold.co/320x160/e0e7ff/7c3aed?text=Modern+Minimal" alt="Modern Minimal style" loading="lazy" />
+          </div>
+          <p class="vibe-title">Modern Minimal</p>
+          <p class="vibe-desc">Sleek, simple</p>
+        </div>
+        <div class="vibe-card" data-vibe="bold" role="button" tabindex="0">
+          <div class="vibe-preview-img-wrap">
+            <!-- PLACEHOLDER: Replace with your Bold Statement signature preview image -->
+            <img class="vibe-preview-img" src="https://placehold.co/320x160/ecfdf5/0f766e?text=Bold+Statement" alt="Bold Statement style" loading="lazy" />
+          </div>
+          <p class="vibe-title">Bold Statement</p>
+          <p class="vibe-desc">Confident, memorable</p>
+        </div>
+      </div>
+      <a href="#scene-3" class="btn-primary">Generate My Options →</a>
+    </section>
+
+    <!-- ========== SCENE 3: Before → After ========== -->
+    <section class="scene scene-3" id="scene-3">
+      <p class="morph-copy">A signature isn’t art. It’s authority in ink.</p>
+      <div class="morph-wrap">
+        <div class="morph-box" id="morph-box">
+          <div class="morph-before">
+            <!-- PLACEHOLDER: Replace with scribble / before image -->
+            <img src="https://placehold.co/300x120/f1f5f9/64748b?text=Scribble" alt="Before" id="morph-before-img" />
+          </div>
+          <div class="morph-after">
+            <!-- PLACEHOLDER: Replace with premium signature image -->
+            <img src="https://placehold.co/300x120/e0f2fe/0d9488?text=Premium+Signature" alt="After" id="morph-after-img" />
+          </div>
+          <div class="morph-slider" id="morph-slider" role="slider" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" tabindex="0"></div>
+        </div>
+      </div>
+      <div class="carousel-wrap">
+        <div class="carousel" id="transform-carousel" aria-label="Signature transformation examples">
+          <!-- PLACEHOLDER: Replace with your 6 transformation images -->
+          <div class="carousel-item"><img src="https://placehold.co/140x116/f1f5f9/64748b?text=1" alt="Transformation 1" loading="lazy" /><span class="carousel-label">Example 1</span></div>
+          <div class="carousel-item"><img src="https://placehold.co/140x116/f1f5f9/64748b?text=2" alt="Transformation 2" loading="lazy" /><span class="carousel-label">Example 2</span></div>
+          <div class="carousel-item"><img src="https://placehold.co/140x116/f1f5f9/64748b?text=3" alt="Transformation 3" loading="lazy" /><span class="carousel-label">Example 3</span></div>
+          <div class="carousel-item"><img src="https://placehold.co/140x116/f1f5f9/64748b?text=4" alt="Transformation 4" loading="lazy" /><span class="carousel-label">Example 4</span></div>
+          <div class="carousel-item"><img src="https://placehold.co/140x116/f1f5f9/64748b?text=5" alt="Transformation 5" loading="lazy" /><span class="carousel-label">Example 5</span></div>
+          <div class="carousel-item"><img src="https://placehold.co/140x116/f1f5f9/64748b?text=6" alt="Transformation 6" loading="lazy" /><span class="carousel-label">Example 6</span></div>
+        </div>
+      </div>
+      <a href="#scene-4" class="btn-primary" style="margin-top:16px">Continue →</a>
+    </section>
+
+    <!-- ========== SCENE 4: Blueprint Vault ========== -->
+    <section class="scene scene-4" id="scene-4">
+      <h2 class="scene-head">The Signature Blueprint™</h2>
+      <div class="vault-ui">
+        <div class="vault-door" id="vault-door">
+          <!-- PLACEHOLDER: Optional blueprint visual - replace or add img -->
+          <div class="blueprint-visual" aria-hidden="true"></div>
+          <p class="serif">Your guide to a signature that sticks.</p>
+          <p>Psychology, practice, placement, and consistency—all in one place.</p>
+          <button type="button" class="btn-vault" id="btn-unlock">Unlock Blueprint</button>
+        </div>
+        <div class="vault-cards" id="vault-cards">
+          <div class="vault-card" data-sheet="psychology" role="button" tabindex="0">
+            <h4>Signature Psychology</h4>
+            <p>Why your signature shapes how others see you.</p>
+          </div>
+          <div class="vault-card" data-sheet="practice" role="button" tabindex="0">
+            <h4>Practice Method</h4>
+            <p>The 2-minute technique to lock it in.</p>
+          </div>
+          <div class="vault-card" data-sheet="where" role="button" tabindex="0">
+            <h4>Where to Use It</h4>
+            <p>Legal, email, banking—when it matters.</p>
+          </div>
+          <div class="vault-card" data-sheet="consistency" role="button" tabindex="0">
+            <h4>Consistency System</h4>
+            <p>One signature, everywhere.</p>
+          </div>
+        </div>
+      </div>
+      <a href="#scene-5" class="btn-primary" style="margin-top:24px">See What’s Included →</a>
+    </section>
+
+    <!-- ========== SCENE 5: Final CTA ========== -->
+    <section class="scene scene-5" id="scene-5">
+      <div class="stamp-wrap">
+        <div class="stamp-effect" aria-hidden="true"></div>
+        <p class="hook">The Final Stamp</p>
+        <p class="angle" style="margin-bottom:20px">Everything you need. Delivered in 24–48 hours.</p>
+        <div class="receipt">
+          <h3>What’s included</h3>
+          <ul>
+            <li>3 Custom Signature Styles</li>
+            <li>PNG / SVG / PDF</li>
+            <li>24–48 hour email delivery</li>
+            <li>Signature Blueprint™ included</li>
+          </ul>
+          <p class="risk-reducer">Designed to be easy to repeat. Delivered fast.</p>
+        </div>
+        <a href="/signature-cart" class="btn-primary" id="btn-final">Create My Signature →</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Sticky CTA bar (visible after scroll) -->
+  <div class="sticky-cta-bar" id="sticky-cta">
+    <a href="/signature-cart" class="btn-primary">Create My Signature →</a>
+  </div>
+
+  <!-- Bottom sheets for Blueprint cards -->
+  <div class="sheet-overlay" id="sheet-overlay" aria-hidden="true">
+    <div class="sheet" id="sheet">
+      <h3 id="sheet-title">Title</h3>
+      <p id="sheet-body">Content.</p>
+      <button type="button" class="sheet-close" id="sheet-close">Close</button>
+    </div>
+  </div>
+
+  <!-- Ink cursor (desktop) -->
+  <div class="ink-cursor" id="ink-cursor" aria-hidden="true"></div>
+
+  <script>
+(function () {
+  'use strict';
+
+  var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ----- Scene progress dots
+  var journey = document.getElementById('journey');
+  var dots = document.querySelectorAll('.progress-dots a');
+  function updateDots() {
+    var scrollTop = journey.scrollTop;
+    var scenes = document.querySelectorAll('.scene');
+    var index = 0;
+    var mid = window.innerHeight * 0.5;
+    scenes.forEach(function (s, i) {
+      var rect = s.getBoundingClientRect();
+      if (rect.top <= mid && rect.bottom > mid) index = i;
+    });
+    dots.forEach(function (d, i) { d.classList.toggle('active', i === index); });
+  }
+  journey.addEventListener('scroll', updateDots);
+  updateDots();
+
+  // ----- Scene 1: Scanner
+  var scannerText = document.getElementById('scanner-text');
+  var scannerProgress = document.getElementById('scanner-progress');
+  var scannerResult = document.getElementById('scanner-result');
+  var btnUpgrade = document.getElementById('btn-upgrade');
+  if (scannerText && scannerProgress && scannerResult) {
+    var done = false;
+    function runScan() {
+      if (done) return;
+      done = true;
+      var start = Date.now();
+      var duration = 2000;
+      function tick() {
+        var elapsed = Date.now() - start;
+        var p = Math.min(1, elapsed / duration);
+        scannerProgress.style.width = (p * 100) + '%';
+        if (p >= 1) {
+          scannerText.textContent = 'Analysis complete.';
+          scannerResult.classList.add('visible');
+          return;
+        }
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+    if (!prefersReducedMotion) {
+      setTimeout(runScan, 400);
+    } else {
+      scannerProgress.style.width = '100%';
+      scannerText.textContent = 'Analysis complete.';
+      scannerResult.classList.add('visible');
+    }
+  }
+  function addRipple(btn, e) {
+    var r = document.createElement('span'); r.className = 'ripple';
+    var rect = btn.getBoundingClientRect();
+    var size = Math.max(rect.width, rect.height);
+    r.style.width = r.style.height = size + 'px';
+    r.style.left = (e.clientX - rect.left - size / 2) + 'px';
+    r.style.top = (e.clientY - rect.top - size / 2) + 'px';
+    btn.appendChild(r);
+    setTimeout(function () { r.remove(); }, 500);
+  }
+  document.querySelectorAll('.btn-primary').forEach(function (btn) {
+    btn.addEventListener('click', function (e) { addRipple(this, e); });
+  });
+
+  // ----- Scene 2: Vibe selector
+  var vibeCopy = document.getElementById('vibe-copy');
+  var vibeCards = document.querySelectorAll('.vibe-card');
+  var vibeCopyText = {
+    clean: 'Clean, legible, and professional—ideal for contracts and formal use.',
+    modern: 'Minimal and contemporary—clear and memorable without fuss.',
+    bold: 'Confident and distinctive—makes an impression every time.'
+  };
+  vibeCards.forEach(function (card) {
+    var vibe = card.getAttribute('data-vibe');
+    function select() {
+      vibeCards.forEach(function (c) { c.classList.remove('selected'); });
+      card.classList.add('selected');
+      if (vibeCopy && vibeCopyText[vibe]) vibeCopy.textContent = vibeCopyText[vibe];
+    }
+    card.addEventListener('click', select);
+    card.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); select(); } });
+  });
+  if (vibeCopy && vibeCopyText.clean) vibeCopy.textContent = vibeCopyText.clean;
+
+  // ----- Scene 3: Morph slider
+  var morphBox = document.getElementById('morph-box');
+  var morphSlider = document.getElementById('morph-slider');
+  var morphAfter = morphBox ? morphBox.querySelector('.morph-after') : null;
+  if (morphBox && morphSlider && morphAfter) {
+    var sliderValue = 50;
+    function setSlider(p) {
+      sliderValue = Math.max(0, Math.min(100, p));
+      morphAfter.style.clipPath = 'inset(0 0 0 ' + sliderValue + '%)';
+      morphSlider.style.left = sliderValue + '%';
+      morphSlider.style.transform = 'translateX(-50%)';
+      morphSlider.setAttribute('aria-valuenow', Math.round(sliderValue));
+    }
+    var dragging = false;
+    function onMove(clientX) {
+      if (!morphBox) return;
+      var rect = morphBox.getBoundingClientRect();
+      setSlider(((clientX - rect.left) / rect.width) * 100);
+    }
+    morphSlider.addEventListener('mousedown', function () { dragging = true; });
+    morphSlider.addEventListener('touchstart', function () { dragging = true; }, { passive: true });
+    document.addEventListener('mousemove', function (e) { if (dragging) onMove(e.clientX); });
+    document.addEventListener('touchmove', function (e) { if (dragging && e.touches[0]) onMove(e.touches[0].clientX); }, { passive: true });
+    document.addEventListener('mouseup', function () { dragging = false; });
+    document.addEventListener('touchend', function () { dragging = false; });
+    morphBox.addEventListener('click', function (e) {
+      if (e.target === morphSlider) return;
+      var rect = morphBox.getBoundingClientRect();
+      setSlider(((e.clientX - rect.left) / rect.width) * 100);
+    });
+    setSlider(50);
+  }
+
+  // ----- Scene 4: Vault unlock + sheets
+  var vaultDoor = document.getElementById('vault-door');
+  var vaultCards = document.getElementById('vault-cards');
+  var btnUnlock = document.getElementById('btn-unlock');
+  if (btnUnlock && vaultCards) {
+    btnUnlock.addEventListener('click', function () {
+      vaultCards.classList.add('unlocked');
+      btnUnlock.style.display = 'none';
+    });
+  }
+  var overlay = document.getElementById('sheet-overlay');
+  var sheet = document.getElementById('sheet');
+  var sheetTitle = document.getElementById('sheet-title');
+  var sheetBody = document.getElementById('sheet-body');
+  var sheetClose = document.getElementById('sheet-close');
+  var sheetContent = {
+    psychology: { title: 'Signature Psychology', body: 'Your signature is a tiny moment of identity. People form quick judgments from it—confidence, clarity, consistency. A considered signature signals that you pay attention to detail and care how you’re perceived.' },
+    practice: { title: 'Practice Method', body: 'Spend two minutes a day writing your new signature exactly the same way. Same size, same slant, same flourishes. Muscle memory does the rest. Within a few weeks it becomes automatic.' },
+    where: { title: 'Where to Use It', body: 'Use your signature consistently on legal documents, bank forms, email sign-offs, and contracts. One recognizable mark builds trust and reduces friction.' },
+    consistency: { title: 'Consistency System', body: 'Keep one “primary” version for formal use and use the same style everywhere. Avoid switching between casual scribble and formal signature—pick one and stick with it.' }
+  };
+  function openSheet(id) {
+    var c = sheetContent[id];
+    if (!c || !sheetTitle || !sheetBody || !overlay) return;
+    sheetTitle.textContent = c.title;
+    sheetBody.textContent = c.body;
+    overlay.classList.add('open');
+    overlay.setAttribute('aria-hidden', 'false');
+  }
+  function closeSheet() {
+    if (overlay) {
+      overlay.classList.remove('open');
+      overlay.setAttribute('aria-hidden', 'true');
+    }
+  }
+  document.querySelectorAll('.vault-card').forEach(function (card) {
+    var id = card.getAttribute('data-sheet');
+    if (!id) return;
+    card.addEventListener('click', function () { openSheet(id); });
+    card.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openSheet(id); } });
+  });
+  if (sheetClose) sheetClose.addEventListener('click', closeSheet);
+  if (overlay) overlay.addEventListener('click', function (e) { if (e.target === overlay) closeSheet(); });
+
+  // ----- Sticky CTA
+  var stickyCta = document.getElementById('sticky-cta');
+  if (stickyCta) {
+    journey.addEventListener('scroll', function () {
+      var scene5 = document.getElementById('scene-5');
+      if (!scene5) return;
+          var rect = scene5.getBoundingClientRect();
+          stickyCta.classList.toggle('visible', rect.top < window.innerHeight * 0.6);
+        });
+  }
+
+  // ----- Parallax for pen layers
+  if (!prefersReducedMotion) {
+    journey.addEventListener('scroll', function () {
+      var scrollTop = journey.scrollTop;
+      document.querySelectorAll('.pen-bg-layer').forEach(function (layer) {
+        var factor = parseFloat(layer.getAttribute('data-parallax')) || 0.02;
+        var y = scrollTop * factor;
+        if (layer.classList.contains('pen-bg-layer-3')) {
+          layer.style.transform = 'translate(-50%, calc(-50% + ' + y + 'px))';
+        } else {
+          layer.style.transform = 'translateY(' + y + 'px)';
+        }
+      });
+    });
+  }
+
+  // ----- Optional: Lazy-load pen GIF backgrounds after idle (replace URLs in CSS or here)
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(function () {
+      document.querySelectorAll('.pen-bg-layer').forEach(function (el) {
+        var bg = el.style.backgroundImage || getComputedStyle(el).backgroundImage;
+        if (bg && bg.indexOf('placehold.co') !== -1) return; // keep placeholders until you set real URLs
+        // Example: el.style.backgroundImage = "url('/pen-writing-1.gif')";
+      });
+    }, { timeout: 1500 });
+  }
+})();
+  </script>
+</body>
+</html>
