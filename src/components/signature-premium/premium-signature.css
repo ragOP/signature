@@ -8,6 +8,7 @@
   --premium-text: #1a1a1a;
   --premium-text-muted: #555555;
   --premium-gradient-apricot: linear-gradient(135deg, #FBCEB1 0%, #fde4d4 50%, #FBCEB1 100%);
+  --premium-gradient-yellow: linear-gradient(135deg, #FBCEB1 0%, #fde4d4 50%, #FBCEB1 100%);
   --premium-bg-page: linear-gradient(145deg, #ffffff 0%, #fef9f6 50%, #FBCEB1 100%);
   --premium-shadow-soft: 0 14px 45px rgba(251, 206, 177, 0.15);
   --premium-shadow-apricot: 0 10px 40px rgba(251, 206, 177, 0.3);
@@ -31,6 +32,8 @@
 /* Premium Gradient Text */
 .premium-gradient-text {
   background: var(--premium-gradient-yellow);
+  background-size: 200% auto;
+  background-position: 0% center;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
