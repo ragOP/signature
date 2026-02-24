@@ -78,6 +78,8 @@ const ImportanceSection = () => {
                         src={img}
                         alt={`Signature proof ${idx + 1}`}
                         className="w-full h-full object-contain p-2"
+                        loading={idx < 2 ? "eager" : "lazy"}
+                        decoding="async"
                         onError={(e) => {
                           const fallbacks = ['/signature-1.png', '/signature-2.png', '/signature-3.png', '/signature-4.png'];
                           e.target.src = fallbacks[idx] || '/signature-1.png';

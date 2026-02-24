@@ -27,6 +27,24 @@ const SignaturePremium = () => {
     };
   }, []);
 
+  // Preload critical images so they appear fast
+  useEffect(() => {
+    const urls = ['/signature-hero.webp', '/signature-1.png', '/past-proof-1.png'];
+    urls.forEach((href) => {
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'image';
+      link.href = href;
+      document.head.appendChild(link);
+    });
+    return () => {
+      urls.forEach((href) => {
+        const link = document.querySelector(`link[rel="preload"][href="${href}"]`);
+        if (link) link.remove();
+      });
+    };
+  }, []);
+
   const handleGetStarted = () => {
     window.location.href = '/signature-cart';
   };

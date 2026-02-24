@@ -36,10 +36,13 @@ const PremiumHero = () => {
 
           <div className="mb-12 md:mb-16 max-w-4xl mx-auto px-4 animate-fade-in-delay">
             <div className="relative rounded-3xl overflow-hidden border-2 border-[rgba(251,206,177,0.25)] shadow-xl bg-white/80 backdrop-blur-sm">
-              <img 
-                src="/signature-hero.webp" 
-                alt="Premium Signature Design" 
+              <img
+                src="/signature-hero.webp"
+                alt="Premium Signature Design"
                 className="w-full h-auto object-cover"
+                loading="eager"
+                fetchPriority="high"
+                decoding="async"
                 onError={(e) => {
                   e.target.src = "/assets_task_01k22vfckxfrwvajxyg1zn9s5t_1754590211_img_0.webp";
                 }}

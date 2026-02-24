@@ -43,6 +43,8 @@ const PremiumWorkSection = () => {
               src={signatureExamples[currentIndex].src}
               alt={signatureExamples[currentIndex].alt}
               className="w-full h-auto object-contain bg-[#FBCEB1] p-8 md:p-12"
+              loading="eager"
+              decoding="async"
               onError={(e) => {
                 const fallbacks = ["/sign-1.jpg", "/sign-2.jpg", "/sign-3.jpg"];
                 e.target.src = fallbacks[currentIndex % fallbacks.length];
@@ -107,6 +109,8 @@ const PremiumWorkSection = () => {
                   src={example.src}
                   alt={example.alt}
                   className="w-full h-full object-contain"
+                  loading={index < 3 ? "eager" : "lazy"}
+                  decoding="async"
                   onError={(e) => {
                     const fallbacks = ["/sign-1.jpg", "/sign-2.jpg", "/sign-3.jpg", "/sign-4.jpg", "/sign-5.jpg", "/sign-6.jpg"];
                     e.target.src = fallbacks[index] || "/sign-1.jpg";

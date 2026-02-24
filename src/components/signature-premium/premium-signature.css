@@ -96,33 +96,33 @@ body[data-premium-page="true"] .App {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Scoped so App.css .animate-fade-in doesn't override */
+/* Fast appearance – minimal delay so content and images show quickly */
 .signature-premium-page .animate-fade-in {
-  animation: premium-fade-in 0.4s ease-out forwards;
+  animation: premium-fade-in 0.2s ease-out forwards;
 }
 
 .signature-premium-page .animate-fade-in-delay {
-  animation: premium-fade-in 0.4s ease-out 0.05s forwards;
+  animation: premium-fade-in 0.2s ease-out 0.02s forwards;
 }
 
 .signature-premium-page .animate-fade-in-delay-2 {
-  animation: premium-fade-in 0.4s ease-out 0.1s forwards;
+  animation: premium-fade-in 0.2s ease-out 0.04s forwards;
 }
 
 .signature-premium-page .animate-slide-up {
-  animation: premium-slide-up 0.4s ease-out forwards;
+  animation: premium-slide-up 0.2s ease-out forwards;
 }
 
 .signature-premium-page .animate-slide-up-delay-1 {
-  animation: premium-slide-up 0.4s ease-out 0.05s forwards;
+  animation: premium-slide-up 0.2s ease-out 0.02s forwards;
 }
 
 .signature-premium-page .animate-slide-up-delay-2 {
-  animation: premium-slide-up 0.4s ease-out 0.1s forwards;
+  animation: premium-slide-up 0.2s ease-out 0.04s forwards;
 }
 
 .signature-premium-page .animate-slide-up-delay-3 {
-  animation: premium-slide-up 0.4s ease-out 0.15s forwards;
+  animation: premium-slide-up 0.2s ease-out 0.06s forwards;
 }
 
 /* Premium scrollbar - only when inside premium page */
@@ -180,11 +180,7 @@ body[data-premium-page="true"] .App {
   box-shadow: var(--premium-shadow-apricot);
 }
 
-/* Sections: help browser skip painting when off-screen (faster scroll) */
-.signature-premium-page section {
-  content-visibility: auto;
-  contain-intrinsic-size: auto 400px;
-}
+/* No content-visibility so all sections and images paint immediately and feel fast */
 
 /* ========== Mobile & performance: less paint, no heavy blur/animations ========== */
 @media (max-width: 768px) {

@@ -89,6 +89,8 @@ const GuidePreviewSection = () => {
                   src="/past-proof-5.png"
                   alt="Signature Guide Preview"
                   className="w-full h-auto object-contain rounded-lg shadow-lg border-2 border-[rgba(251,206,177,0.2)]"
+                  loading="lazy"
+                  decoding="async"
                   onError={(e) => { e.target.src = "/signature-hero.webp"; }}
                 />
                 <div className="absolute -top-4 -right-4 bg-[linear-gradient(135deg,#FBCEB1,#fde4d4)] rounded-full p-3 shadow-md">

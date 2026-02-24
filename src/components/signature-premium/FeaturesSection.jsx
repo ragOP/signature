@@ -87,6 +87,8 @@ const FeaturesSection = () => {
                 src="/past-proof-1.png"
                 alt="Signature Guide Preview"
                 className="max-w-full max-h-full object-contain rounded-lg shadow-lg"
+                loading="eager"
+                decoding="async"
                 onError={(e) => { e.target.src = "/signature-hero.webp"; }}
               />
             </div>
