@@ -52,6 +52,7 @@ import SignatureTry from "./components/signature-try/SIgnatureTry";
 import SignaturePremium from "./pages/SignaturePremium";
 import SignatureIntelligence from "./pages/SignatureIntelligence";
 import SignatureModern from "./pages/SignatureModern";
+import SignatureStudio from "./pages/SignatureStudio";
 import LogsPage from "./pages/log";
 
 
@@ -94,6 +95,7 @@ function App() {
           <Route path="/signature-premium" element={<SignaturePremium />} />
           <Route path="/signature-intelligence" element={<SignatureIntelligence />} />
           <Route path="/signature-modern" element={<SignatureModern />} />
+          <Route path="/signature-studio" element={<SignatureStudio />} />
           <Route path="/signature-new" element={<SignatureNewRedesigned />} />
           <Route path="/signature-try" element={<SignatureTry />} />
             <Route path="/signature-new-v2" element={<SignatureNewRedesignedV2/>} />
