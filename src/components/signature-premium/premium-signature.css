@@ -1,4 +1,5 @@
-/* Premium Signature Page Styles - Light White Theme (Warm Cream + Gold) */
+/* Premium Signature Page Styles - Light White Theme (Warm Cream + Gold)
+   All selectors scoped under .signature-premium-page to avoid conflicts with App.css / Tailwind */
 
 :root {
   --premium-apricot: #FBCEB1;
@@ -17,143 +18,145 @@
 
 .signature-premium-page {
   overflow-x: hidden;
-  /* Solid fallback so no blue/violet flash on mobile while gradient paints */
   background-color: #fef9f6;
   background-image: var(--premium-bg-page);
   background-attachment: scroll;
   font-family: 'Poppins', -apple-system, system-ui, sans-serif;
   color: var(--premium-text);
   min-height: 100vh;
+  /* Smoother fast scroll: let browser handle scroll without smooth animation */
+  scroll-behavior: auto;
 }
 
-/* Premium Hero Background - Light */
-.premium-hero-bg {
+.signature-premium-page .premium-hero-bg {
   background: linear-gradient(145deg, #ffffff 0%, #fef9f6 40%, #FBCEB1 100%);
   position: relative;
 }
 
-/* Premium Gradient Text */
-.premium-gradient-text {
+.signature-premium-page .premium-gradient-text {
   background: var(--premium-gradient-yellow);
   background-size: 200% auto;
   background-position: 0% center;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: shimmer-text 3s linear infinite;
+  animation: premium-shimmer-text 3s linear infinite;
 }
 
-@keyframes shimmer-text {
-  to {
-    background-position: 200% center;
-  }
+@keyframes premium-shimmer-text {
+  to { background-position: 200% center; }
 }
 
-/* Premium Animations */
-@keyframes float-slow {
+@keyframes premium-float-slow {
   0%, 100% { transform: translate(0, 0) scale(1); }
   33% { transform: translate(30px, -50px) scale(1.1); }
   66% { transform: translate(-20px, 20px) scale(0.95); }
 }
 
-@keyframes float-medium {
+@keyframes premium-float-medium {
   0%, 100% { transform: translate(0, 0) scale(1); }
   50% { transform: translate(-40px, 30px) scale(1.05); }
 }
 
-.animate-float-slow {
-  animation: float-slow 15s ease-in-out infinite;
+.signature-premium-page .animate-float-slow {
+  animation: premium-float-slow 15s ease-in-out infinite;
 }
 
-.animate-float-medium {
-  animation: float-medium 12s ease-in-out infinite;
+.signature-premium-page .animate-float-medium {
+  animation: premium-float-medium 12s ease-in-out infinite;
 }
 
-@keyframes shimmer {
+@keyframes premium-shimmer {
   0% { transform: translateX(-100%) skewX(-12deg); }
   100% { transform: translateX(200%) skewX(-12deg); }
 }
 
-.animate-shimmer {
-  animation: shimmer 8s infinite;
+.signature-premium-page .animate-shimmer {
+  animation: premium-shimmer 8s infinite;
 }
 
-@keyframes fade-in {
+@keyframes premium-fade-in {
   from { opacity: 0; }
   to { opacity: 1; }
 }
 
-.animate-fade-in {
-  animation: fade-in 1s ease-in;
-}
-
-.animate-fade-in-delay {
-  animation: fade-in 1s ease-in 0.3s both;
-}
-
-.animate-fade-in-delay-2 {
-  animation: fade-in 1s ease-in 0.6s both;
-}
-
-@keyframes slide-up {
+@keyframes premium-slide-up {
   from { opacity: 0; transform: translateY(40px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-.animate-slide-up { animation: slide-up 1s ease-out; }
-.animate-slide-up-delay-1 { animation: slide-up 1s ease-out 0.2s both; }
-.animate-slide-up-delay-2 { animation: slide-up 1s ease-out 0.4s both; }
-.animate-slide-up-delay-3 { animation: slide-up 1s ease-out 0.6s both; }
-
-html {
-  scroll-behavior: smooth;
+/* Scoped so App.css .animate-fade-in doesn't override */
+.signature-premium-page .animate-fade-in {
+  animation: premium-fade-in 0.4s ease-out forwards;
 }
 
-/* Premium Custom Scrollbar - Light */
-::-webkit-scrollbar {
+.signature-premium-page .animate-fade-in-delay {
+  animation: premium-fade-in 0.4s ease-out 0.05s forwards;
+}
+
+.signature-premium-page .animate-fade-in-delay-2 {
+  animation: premium-fade-in 0.4s ease-out 0.1s forwards;
+}
+
+.signature-premium-page .animate-slide-up {
+  animation: premium-slide-up 0.4s ease-out forwards;
+}
+
+.signature-premium-page .animate-slide-up-delay-1 {
+  animation: premium-slide-up 0.4s ease-out 0.05s forwards;
+}
+
+.signature-premium-page .animate-slide-up-delay-2 {
+  animation: premium-slide-up 0.4s ease-out 0.1s forwards;
+}
+
+.signature-premium-page .animate-slide-up-delay-3 {
+  animation: premium-slide-up 0.4s ease-out 0.15s forwards;
+}
+
+/* Premium scrollbar - only when inside premium page */
+.signature-premium-page::-webkit-scrollbar {
   width: 12px;
 }
 
-::-webkit-scrollbar-track {
+.signature-premium-page::-webkit-scrollbar-track {
   background: var(--premium-light);
 }
 
-::-webkit-scrollbar-thumb {
+.signature-premium-page::-webkit-scrollbar-thumb {
   background: var(--premium-gradient-apricot);
   border-radius: 6px;
   border: 2px solid var(--premium-light);
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, #fde4d4 0%, #FBCEB1 100%);
-}
-
-/* Glass morphism effect - Light */
-.backdrop-blur-xl {
+.signature-premium-page .backdrop-blur-xl {
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
 }
 
-.bg-clip-text {
+.signature-premium-page .backdrop-blur-sm {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.signature-premium-page .bg-clip-text {
   -webkit-background-clip: text;
   background-clip: text;
 }
 
-.group:hover .group-hover\:rotate-12 {
+.signature-premium-page .group:hover .group-hover\:rotate-12 {
   transform: rotate(12deg);
 }
 
-/* Premium Section Backgrounds - Apricot */
-.premium-section-bg {
+.signature-premium-page .premium-section-bg {
   background: linear-gradient(180deg, #ffffff 0%, #fef9f6 50%, #FBCEB1 100%);
 }
 
-.premium-section-bg-light {
+.signature-premium-page .premium-section-bg-light {
   background: linear-gradient(180deg, #fef9f6 0%, #FBCEB1 100%);
 }
 
-/* Premium Card Styles - Light */
-.premium-card {
+.signature-premium-page .premium-card {
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(20px);
   border: 1px solid var(--premium-border);
@@ -161,28 +164,49 @@ html {
   transition: all 0.3s ease;
 }
 
-.premium-card:hover {
+.signature-premium-page .premium-card:hover {
   border-color: rgba(251, 206, 177, 0.8);
   box-shadow: var(--premium-shadow-apricot);
 }
 
-/* Responsive - mobile: no staggered delays, solid background, better performance */
+/* Sections: help browser skip painting when off-screen (faster scroll) */
+.signature-premium-page section {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 400px;
+}
+
+/* ========== Mobile & performance: less paint, no heavy blur/animations ========== */
 @media (max-width: 768px) {
   .signature-premium-page {
-    background-attachment: scroll;
     background-color: #fef9f6;
   }
 
-  .animate-float-slow,
-  .animate-float-medium {
-    animation-duration: 20s;
-  }
-
-  .premium-hero-bg {
+  .signature-premium-page .premium-hero-bg {
     min-height: 100vh;
   }
 
-  /* Stop one-by-one loading: show content immediately on mobile */
+  /* Disable decorative blurs and float/shimmer animations - huge scroll/load win */
+  .signature-premium-page .animate-float-slow,
+  .signature-premium-page .animate-float-medium,
+  .signature-premium-page .animate-shimmer {
+    animation: none !important;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .signature-premium-page [class*="blur-3xl"] {
+    display: none !important;
+  }
+
+  /* Remove backdrop-blur on mobile (very expensive when scrolling) */
+  .signature-premium-page .backdrop-blur-xl,
+  .signature-premium-page .backdrop-blur-sm {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background-color: rgba(255, 255, 255, 0.98) !important;
+  }
+
+  /* Show content immediately, minimal animation */
   .signature-premium-page .animate-fade-in,
   .signature-premium-page .animate-fade-in-delay,
   .signature-premium-page .animate-fade-in-delay-2,
@@ -190,37 +214,38 @@ html {
   .signature-premium-page .animate-slide-up-delay-1,
   .signature-premium-page .animate-slide-up-delay-2,
   .signature-premium-page .animate-slide-up-delay-3 {
-    animation-duration: 0.35s;
-    animation-delay: 0s;
+    animation-duration: 0.2s !important;
+    animation-delay: 0s !important;
+  }
+
+  .signature-premium-page .premium-gradient-text {
+    animation: none;
   }
 }
 
-/* Premium Text Colors - Light theme */
-.text-premium-apricot {
+.signature-premium-page .text-premium-apricot {
   color: var(--premium-apricot);
 }
 
-.text-premium-muted {
+.signature-premium-page .text-premium-muted {
   color: var(--premium-text-muted);
 }
 
-/* Premium Button Styles */
-.premium-button {
+.signature-premium-page .premium-button {
   background: var(--premium-gradient-apricot);
   box-shadow: var(--premium-shadow-apricot);
   transition: all 0.3s ease;
 }
 
-.premium-button:hover {
+.signature-premium-page .premium-button:hover {
   box-shadow: 0 15px 40px rgba(251, 206, 177, 0.5);
   transform: translateY(-2px);
 }
 
-/* Premium Border Styles */
-.premium-border {
+.signature-premium-page .premium-border {
   border: 1px solid var(--premium-border);
 }
 
-.premium-border-apricot {
+.signature-premium-page .premium-border-apricot {
   border: 1px solid rgba(251, 206, 177, 0.8);
 }
