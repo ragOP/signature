@@ -50,6 +50,7 @@ import AbondentRecord5 from "./pages/AbondentRecord5";
 import Record5 from "./pages/Record5";
 import SignatureTry from "./components/signature-try/SIgnatureTry";
 import SignaturePremium from "./pages/SignaturePremium";
+import SignatureIntelligence from "./pages/SignatureIntelligence";
 import SignatureModern from "./pages/SignatureModern";
 import LogsPage from "./pages/log";
 
@@ -91,6 +92,7 @@ function App() {
           <Route path="/" element={<Signature />} />
           <Route path="/signature" element={<Signature />} />
           <Route path="/signature-premium" element={<SignaturePremium />} />
+          <Route path="/signature-intelligence" element={<SignatureIntelligence />} />
           <Route path="/signature-modern" element={<SignatureModern />} />
           <Route path="/signature-new" element={<SignatureNewRedesigned />} />
           <Route path="/signature-try" element={<SignatureTry />} />
