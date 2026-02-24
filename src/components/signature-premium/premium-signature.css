@@ -17,10 +17,13 @@
 
 .signature-premium-page {
   overflow-x: hidden;
-  background: var(--premium-bg-page);
-  background-attachment: fixed;
+  /* Solid fallback so no blue/violet flash on mobile while gradient paints */
+  background-color: #fef9f6;
+  background-image: var(--premium-bg-page);
+  background-attachment: scroll;
   font-family: 'Poppins', -apple-system, system-ui, sans-serif;
   color: var(--premium-text);
+  min-height: 100vh;
 }
 
 /* Premium Hero Background - Light */
@@ -163,14 +166,32 @@ html {
   box-shadow: var(--premium-shadow-apricot);
 }
 
-/* Responsive */
+/* Responsive - mobile: no staggered delays, solid background, better performance */
 @media (max-width: 768px) {
+  .signature-premium-page {
+    background-attachment: scroll;
+    background-color: #fef9f6;
+  }
+
   .animate-float-slow,
   .animate-float-medium {
     animation-duration: 20s;
   }
+
   .premium-hero-bg {
     min-height: 100vh;
+  }
+
+  /* Stop one-by-one loading: show content immediately on mobile */
+  .signature-premium-page .animate-fade-in,
+  .signature-premium-page .animate-fade-in-delay,
+  .signature-premium-page .animate-fade-in-delay-2,
+  .signature-premium-page .animate-slide-up,
+  .signature-premium-page .animate-slide-up-delay-1,
+  .signature-premium-page .animate-slide-up-delay-2,
+  .signature-premium-page .animate-slide-up-delay-3 {
+    animation-duration: 0.35s;
+    animation-delay: 0s;
   }
 }
 
