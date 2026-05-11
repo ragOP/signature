@@ -15,7 +15,7 @@ const Footer = () => {
                 ₹4,999
               </span>
               <span className="text-xl lg:text-2xl font-bold text-gray-800">
-                ₹489
+                ₹449
               </span>
             </div>
             <div className="flex items-center space-x-1">
