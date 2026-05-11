@@ -16,7 +16,8 @@ const SignatureCTA = ({
     setIsClicked(true);
     setTimeout(() => setIsClicked(false), 200);
     // Navigate to signature cart
-    navigate("/signature-cart-cashfree", { state: { scrollToTop: true } });
+    // navigate("/signature-cart-cashfree", { state: { scrollToTop: true } });
+   window.location.href = "https://superprofile.bio/vp/custom-digital-signature?checkout=true";
   };
 
   const isSmall = size === "small";

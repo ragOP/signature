@@ -272,7 +272,11 @@ const BeforeAfter = () => {
               brand with a custom signature design
             </p>
             <button
-              onClick={() => navigate("/signature-new-cart-supabase")}
+              // onClick={() => navigate("/signature-new-cart-supabase")}
+              onClick={() =>
+  (window.location.href =
+    "https://superprofile.bio/vp/custom-digital-signature?checkout=true")
+}
               className="bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
             >
               Start Your Transformation

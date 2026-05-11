@@ -276,7 +276,11 @@ const SignatureHeroRedesigned = () => {
                 </div>
 
                 <button
-                  onClick={() => navigate("/signature-new-cart-supabase")}
+                  // onClick={() => navigate("/signature-new-cart-supabase")}
+                  onClick={() =>
+  (window.location.href =
+    "https://superprofile.bio/vp/custom-digital-signature?checkout=true")
+}
                   className="w-full bg-gradient-to-r from-yellow-500 to-amber-500 hover:from-yellow-600 hover:to-amber-600 text-white font-bold py-3 px-6 rounded-xl shadow-2xl hover:shadow-yellow-500/25 transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2 group"
                 >
                   <Crown className="w-5 h-5" />

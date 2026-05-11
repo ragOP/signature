@@ -16,7 +16,8 @@ const CtaButton = ({
   const handleClick = () => {
     setIsClicked(true);
     setTimeout(() => setIsClicked(false), 200);
-    navigate("/signature-new-cart-supabase", { state: { scrollToTop: true } });
+    // navigate("/signature-new-cart-supabase", { state: { scrollToTop: true } });
+   window.location.href = "https://superprofile.bio/vp/custom-digital-signature?checkout=true";
   };
 
   const isSmall = size === "small";

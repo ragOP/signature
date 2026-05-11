@@ -6,7 +6,8 @@ const LimitedSlot = () => {
   const navigate = useNavigate();
 
   const handleCTAClick = () => {
-    navigate("/signature-new-cart-supabase", { state: { scrollToTop: true } });
+    // navigate("/signature-new-cart-supabase", { state: { scrollToTop: true } });
+    window.location.href = "https://superprofile.bio/vp/custom-digital-signature?checkout=true";
   };
 
   const finalBenefits = [
