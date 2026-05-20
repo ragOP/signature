@@ -9,27 +9,27 @@ export default function About() {
         id: "about-company",
         title: "About Us",
         content: (
-         <div className="space-y-4">
-  <p>
-    <strong>TheSignatureStudio</strong> is a digital product platform operated by 
-    <strong> ASTRASOUL DIGITAL LLP</strong>. It focuses on creating 
-    personalized and creative digital products designed to provide customers 
-    with unique and meaningful experiences.
-  </p>
+          <div className="space-y-4">
+            <p>
+              <strong>TheSignatureStudio</strong> is a digital product platform operated by
+              <strong> SPEKLIO MEDIA PRIVATE LIMITED</strong>. It focuses on creating
+              personalized and creative digital products designed to provide customers
+              with unique and meaningful experiences.
+            </p>
 
-  <p>
-    At TheSignatureStudio, we specialize in delivering high-quality customized 
-    digital creations that combine creativity, design, and modern technology. 
-    Our goal is to provide customers with beautifully crafted digital products 
-    that are easy to access and enjoyable to use.
-  </p>
+            <p>
+              At TheSignatureStudio, we specialize in delivering high-quality customized
+              digital creations that combine creativity, design, and modern technology.
+              Our goal is to provide customers with beautifully crafted digital products
+              that are easy to access and enjoyable to use.
+            </p>
 
-  <p>
-    As part of ASTRASOUL DIGITAL LLP, we are committed to maintaining 
-    high standards of quality, customer satisfaction, and innovation while 
-    delivering reliable digital services to customers across India.
-  </p>
-</div>
+            <p>
+              As part of SPEKLIO MEDIA PRIVATE LIMITED, we are committed to maintaining
+              high standards of quality, customer satisfaction, and innovation while
+              delivering reliable digital services to customers across India.
+            </p>
+          </div>
         )
       },
 
@@ -59,7 +59,7 @@ export default function About() {
           <div className="space-y-4">
             <ul className="list-disc pl-6 space-y-2">
               <li>
-                <strong>Company Name:</strong> ASTRASOUL DIGITAL LLP
+                <strong>Company Name:</strong> SPEKLIO MEDIA PRIVATE LIMITED
               </li>
 
               <li>
@@ -96,7 +96,7 @@ export default function About() {
                   className="underline"
                   href="mailto:orders@thesignaturestudio.in"
                 >
-                 orders@thesignaturestudio.in
+                  orders@thesignaturestudio.in
                 </a>
               </li>
 
@@ -128,7 +128,7 @@ export default function About() {
           </div>
 
           <h1 className="mt-4 text-3xl sm:text-5xl font-extrabold tracking-tight text-brand-900">
-            About Us • ASTRASOUL DIGITAL LLP
+            About Us •SPEKLIO MEDIA PRIVATE LIMITED
           </h1>
 
           <p className="mt-3 text-slate-600 max-w-2xl">
@@ -183,7 +183,7 @@ export default function About() {
             {/* Footer note */}
             <div className="mt-12 rounded-2xl bg-gradient-to-r from-brand-50 to-pink-50 p-5 border border-pink-100">
               <p className="text-sm text-white-700">
-                <strong>ASTRASOUL DIGITAL LLP</strong> operates in
+                <strong>SPEKLIO MEDIA PRIVATE LIMITED</strong> operates in
                 compliance with applicable Indian laws and regulations.
               </p>
 
@@ -201,7 +201,7 @@ export default function About() {
           {/* Bottom Footer */}
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="text-slate-600 text-sm">
-              © {new Date().getFullYear()} ASTRASOUL DIGITAL LLP. All
+              © {new Date().getFullYear()} SPEKLIO MEDIA PRIVATE LIMITED. All
               Rights Reserved.
             </div>
 
