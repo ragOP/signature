@@ -5,18 +5,18 @@ import { useMemo } from "react";
 export default function Contact() {
   const sections = useMemo(
     () => [
-     
+
       {
         id: "support-policy",
         title: "Contact",
         content: (
           <div className="space-y-4">
-           
+
             <ul className="list-disc pl-6 space-y-2">
-               <li><strong>Company Name:</strong> ASTRASOUL DIGITAL LLP</li>
-               <li><strong>Address :</strong>C-910, CID Colony, Mahanagar Lucknow, Uttar Pradesh 226006</li>
-               <li><strong>GST No :</strong>09ABRCS9008B1Z3</li>
-               <li><strong>Phone :</strong>9198050093</li>
+              <li><strong>Company Name:</strong>SPEKLIO MEDIA PRIVATE LIMITED</li>
+              <li><strong>Address :</strong>C-910, CID Colony, Mahanagar Lucknow, Uttar Pradesh 226006</li>
+              <li><strong>GST No :</strong>09ABRCS9008B1Z3</li>
+              <li><strong>Phone :</strong>9198050093</li>
               <li><strong>Email Support:</strong> <a className="underline" href="mailto:orders@thesignaturestudio.in">orders@thesignaturestudio.in</a></li>
               <li><strong>Working Hours:</strong> Monday–Saturday, 10:00 AM – 6:00 PM (IST)</li>
               <li><strong>Response Time:</strong> We respond to all inquiries within 24 hours. Urgent issues are prioritised..</li>
@@ -86,7 +86,7 @@ export default function Contact() {
             {/* Footer note */}
             <div className="mt-12 rounded-2xl bg-black from-brand-50 to-pink-50 p-5 border border-pink-100">
               <p className="text-sm text-white-700">
-                <strong>Note:</strong> By using our website, you agree to these policies.  
+                <strong>Note:</strong> By using our website, you agree to these policies.
                 If you have questions,{" "}
                 <a className="underline" href="mailto:orders@thesignaturestudio.in">contact us</a>.
               </p>
